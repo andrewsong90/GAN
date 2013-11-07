@@ -1,0 +1,2 @@
+module Alums::RegistrationsHelper
+end
