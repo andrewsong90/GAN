@@ -1,0 +1,2 @@
+module Friends::RegistrationsHelper
+end

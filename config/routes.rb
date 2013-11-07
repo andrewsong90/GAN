@@ -1,4 +1,5 @@
 GAN::Application.routes.draw do
+  devise_for :friends, :controllers => {:registrations => "friends/registrations"}
   devise_for :alums, :controllers => {:registrations => "alums/registrations"}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
