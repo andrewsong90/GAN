@@ -1,8 +1,15 @@
 GAN::Application.routes.draw do
+  
+  get "users/sign_up" => 'users#sign_up', as: :new_user_signup
+  get "users/sign_in" => 'users#sign_in', as: :new_user_session
+
+  get "/main" => 'opportunities#main', as: :main
+
   devise_for :friends, :controllers => {:registrations => "friends/registrations"}
   devise_for :alums, :controllers => {:registrations => "alums/registrations"}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+
 
   # You can have the root of your site routed with "root"
   root 'opportunities#welcome'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131107063355) do
+ActiveRecord::Schema.define(version: 20131108220105) do
 
   create_table "alums", force: true do |t|
     t.datetime "created_at"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20131107063355) do
     t.string   "last_sign_in_ip"
     t.string   "fname"
     t.string   "lname"
+    t.string   "a"
   end
 
   add_index "alums", ["email"], name: "index_alums_on_email", unique: true
@@ -59,6 +60,11 @@ ActiveRecord::Schema.define(version: 20131107063355) do
   add_index "friends", ["reset_password_token"], name: "index_friends_on_reset_password_token", unique: true
 
   create_table "opportunities", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
