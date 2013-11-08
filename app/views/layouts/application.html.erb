@@ -7,9 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+	<strong>Need to Change</strong>
 	<% if user_signed_in? %>
-		Logged in!
+		Logged in! 
 		<strong><%= current_user.class.name %></strong> <%= current_user.fname %> <%= current_user.lname %>
 		<% if current_user.class.name =="Alum" %>
 			<%= link_to "Logout", destroy_alum_session_path, method: :delete %>	
