@@ -3,6 +3,8 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
+  <%= @type %>
+
   <div><%= f.label :email %><br />
   <%= f.email_field :email, :autofocus => true %></div>
 
@@ -11,6 +13,12 @@
 
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.label :fname %><br />
+  <%= f.text_field :fname %></div>
+
+
+  <% f.hidden_field :type, :value => @type %>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>

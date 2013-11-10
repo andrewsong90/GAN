@@ -7,21 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<strong>Need to Change</strong>
 	<% if user_signed_in? %>
 		Logged in! 
 		<strong><%= current_user.class.name %></strong> <%= current_user.fname %> <%= current_user.lname %>
-		<% if current_user.class.name =="Alum" %>
-			<%= link_to "Logout", destroy_alum_session_path, method: :delete %>	
-		<% else %>
-			<%= link_to "Logout", destroy_friend_session_path, method: :delete %>
-		<% end %>
+	
+		<%= link_to "Logout", destroy_user_session_path, method: :delete %>
+
 		
 		
 
 	<% else %>
 		<%= link_to "Sign Up", new_user_signup_path %> |
-		<%= link_to "Log in as Alum", new_alum_session_path %>
+		<%= link_to "Log in", new_user_session_path %>
 		<!-- TODO: Integrate with friend authorization-->
 	<% end %>
 
