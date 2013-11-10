@@ -3,16 +3,19 @@ GAN::Application.routes.draw do
   get "registrations/new"
 
   devise_scope :user do
-    get '/users/aregister' => 'users/registrations#new', :type => 'Alum', as: :new_alum_registration
-    get '/users/fregister' => 'users/registrations#new', :type => 'Friend', as: :new_friend_registration
+    get '/friend/register' => 'users/registrations#new', :type => 'Friend', as: :new_friend_registration
+    get '/alum/register' => 'users/registrations#new', :type => 'Alum', as: :new_alum_registration
+    
+    get '/' => 'devise/sessions#new'
   end
 
   # get '/users/aregister' => 'users/registrations#new', :type => 'Alum', as: :new_alum_registration
   # get '/users/fregister' => 'users/registrations#new', :type => 'Friend', as: :new_friend_registration
 
-  
   devise_for :users, :controllers => {:registrations => 'users/registrations'}
   
+  resources :opportunities
+
   get '/users/signup' => 'users#sign_up', as: :new_user_signup
   get "/main" => 'opportunities#main', as: :main
 
@@ -21,7 +24,7 @@ GAN::Application.routes.draw do
 
 
   # You can have the root of your site routed with "root"
-  root 'opportunities#welcome'
+  # root 'devise/sessions#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

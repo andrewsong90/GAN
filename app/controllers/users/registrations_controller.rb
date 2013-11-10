@@ -1,6 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
-	before_filter :configure_permitted_params
+	before_filter :configure_permitted_params, :only => ["create","update"]
 
 	def new
 		@type=params[:type]
@@ -11,7 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 		build_resource(sign_up_params)
 		
 		#This is for subclasses
-		resource.type=params[:type]
+		resource.type=params[:user][:type]
 		
 		if resource.save
       		yield resource if block_given?
@@ -28,19 +28,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
       		clean_up_passwords resource
       		respond_with resource
     	end
-	#	super
 	end
 
 	protected
 
 	def configure_permitted_params
-		if params[:type]="Alum"
-			logger.debug("ALUM SANITIZER")
-			devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation, :fname,:type)}
+	
+		if params[:user][:type]=="Alum"
+			devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname, :classyear, :type)}
+			devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname)}
 		else
-			logger.debug("Friend SANITIZER")
-			devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation, :type)}
+			devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname, :type)}
+			devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname)}
 		end
 	end
-
 end
