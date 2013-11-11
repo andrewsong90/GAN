@@ -11,9 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131109014222) do
+ActiveRecord::Schema.define(version: 20131111020216) do
 
   create_table "alums", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "applications", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "opportunity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -24,6 +31,24 @@ ActiveRecord::Schema.define(version: 20131109014222) do
   end
 
   create_table "opportunities", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.text     "description"
+    t.string   "location"
+    t.string   "job_type"
+    t.string   "company"
+    t.string   "time"
+  end
+
+  create_table "opportunities_skills", force: true do |t|
+    t.integer "opportunity_id"
+    t.integer "skill_id"
+  end
+
+  create_table "skills", force: true do |t|
+    t.string   "skill"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,9 +70,15 @@ ActiveRecord::Schema.define(version: 20131109014222) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "type"
+    t.string   "phone"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "users_skills", force: true do |t|
+    t.integer "user_id"
+    t.integer "skill_id"
+  end
 
 end

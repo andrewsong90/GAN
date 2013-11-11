@@ -14,7 +14,10 @@ GAN::Application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => 'users/registrations'}
   
-  resources :opportunities
+  resources :opportunities do
+    resources :applications
+  end
+  
 
   get '/users/signup' => 'users#sign_up', as: :new_user_signup
   get "/main" => 'opportunities#main', as: :main
