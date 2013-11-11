@@ -1,0 +1,23 @@
+<%= form_for(@opportunity) do |f| %>
+
+  	<div><%= f.label "Title" %>
+  	<%= f.text_field :title %></div>
+
+  	<div><%= f.label "Company" %>
+  	<%= f.text_field :company %></div>
+
+ 	<div><%= f.label "Type" %>
+  	<%= f.text_field :job_type %></div>
+
+  	<div><%= f.label "Job Description" %>
+  	<%= f.text_area :description %></div>
+
+	<div><%= f.label "Location" %>
+  	<%= f.text_field :location %></div>
+
+  	<div><%= f.label "time" %>
+  	<%= f.text_field :time %></div>  	
+
+  	
+	<%= f.submit %>
+<% end %>

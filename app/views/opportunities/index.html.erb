@@ -1,0 +1,8 @@
+<h3>Opportunities</h3>
+
+<% @opportunities.each do |f| %>
+	<%= f.title %><br>
+	<%= f.job_type %><br>
+	<%= f.location %><br>
+	<%= link_to "View", opportunity_path(f), :class => "btn btn-info" %>
+<% end %>

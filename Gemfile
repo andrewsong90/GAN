@@ -27,6 +27,8 @@ gem 'turbolinks'
 
 gem 'twitter-bootstrap-rails'
 
+gem 'figaro'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 

@@ -1,18 +1,33 @@
 GAN::Application.routes.draw do
   
-  get "users/sign_up" => 'users#sign_up', as: :new_user_signup
-  get "users/sign_in" => 'users#sign_in', as: :new_user_session
+  get "registrations/new"
 
+  devise_scope :user do
+    get '/friend/register' => 'users/registrations#new', :type => 'Friend', as: :new_friend_registration
+    get '/alum/register' => 'users/registrations#new', :type => 'Alum', as: :new_alum_registration
+    
+    get '/' => 'devise/sessions#new'
+  end
+
+  # get '/users/aregister' => 'users/registrations#new', :type => 'Alum', as: :new_alum_registration
+  # get '/users/fregister' => 'users/registrations#new', :type => 'Friend', as: :new_friend_registration
+
+  devise_for :users, :controllers => {:registrations => 'users/registrations'}
+  
+  resources :opportunities do
+    resources :applications
+  end
+  
+
+  get '/users/signup' => 'users#sign_up', as: :new_user_signup
   get "/main" => 'opportunities#main', as: :main
 
-  devise_for :friends, :controllers => {:registrations => "friends/registrations"}
-  devise_for :alums, :controllers => {:registrations => "alums/registrations"}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
 
   # You can have the root of your site routed with "root"
-  root 'opportunities#welcome'
+  # root 'devise/sessions#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

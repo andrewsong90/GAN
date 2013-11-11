@@ -1,0 +1,13 @@
+<div><%= @opportunity.title %></div>
+<div><%= @opportunity.company %></div>
+<div><%= @opportunity.job_type %></div>
+<div><%= @opportunity.location %></div>
+<div><%= @opportunity.description %></div>
+
+<% owner=@opportunity.user %>
+<p>This opportunity was offered by</p>
+
+<div><%= "#{owner.fname} #{owner.lname}" %></div>
+<div><%= owner.classyear%></div>
+
+<%= link_to "Apply", new_opportunity_application_path(@opportunity), :class =>"btn btn-info" %>
