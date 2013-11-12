@@ -1,0 +1,8 @@
+
+<strong><%= @user.fname%> <%= @user.lname %></strong> has just submitted an application<br>
+for <%= @opportunity.title %> offered by <%= @opportunity.user.fname %> <%= @opportunity.user.lname %><br><br>
+
+Below is a message <%= @user.fname %> has attached:<br>
+<p>
+	<%= @application.message %>
+</p>
