@@ -7,4 +7,12 @@ class ApplicationController < ActionController::Base
   	main_path	
   end
 
+  protected
+
+  def authenticate_user
+		if !user_signed_in?
+			flash[:notice] = "Please log in to use the service!"
+			redirect_to root_path
+		end
+	end
 end

@@ -1,13 +1,30 @@
-<div><%= @opportunity.title %></div>
-<div><%= @opportunity.company %></div>
-<div><%= @opportunity.job_type %></div>
-<div><%= @opportunity.location %></div>
-<div><%= @opportunity.description %></div>
+<p class="section-header">Title</p>
+<div><%= @opportunity.title %></div><br>
+<p class="section-header">Company</p>
+<div><%= @opportunity.company %></div><br>
+<p class="section-header">Type</p>
+<div><%= @opportunity.job_type %></div><br>
 
-<% owner=@opportunity.user %>
-<p>This opportunity was offered by</p>
+<p class="section-header">Skills & Expertise</p>
+<% @skills.each do |skill| %>
+	<div><i class="icon-ok"></i>&nbsp;<%= skill.skill %></div>
+<% end %>
 
-<div><%= "#{owner.fname} #{owner.lname}" %></div>
-<div><%= owner.classyear%></div>
+<br>
 
+<p class="section-header">Location</p>
+<div><%= @opportunity.location %></div><br>
+<p class="section-header">Description</p>
+<div><%= @opportunity.description %></div><br>
+
+<% owner = @opportunity.user %>
+
+<br><br>
+<p class="section-header">This opportunity was offered by</p>
+
+<p><i class="icon-user"></i>&nbsp;<%= owner.full_name %></p>
+<p><i class="icon-briefcase"></i>&nbsp;Class of <%= owner.classyear%></p>
+<br>
 <%= link_to "Apply", new_opportunity_application_path(@opportunity), :class =>"btn btn-info" %>
+<%= link_to "Back", opportunities_path, :class =>"btn btn-info" %>
+<%= link_to "Edit", edit_opportunity_path(@opportunity), :class =>"btn btn-info" %>

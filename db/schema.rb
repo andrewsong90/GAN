@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131111212955) do
+ActiveRecord::Schema.define(version: 20131112182831) do
 
   create_table "alums", force: true do |t|
     t.datetime "created_at"
@@ -79,13 +79,28 @@ ActiveRecord::Schema.define(version: 20131111212955) do
     t.string   "time"
   end
 
-  create_table "opportunities_skills", force: true do |t|
-    t.integer "opportunity_id"
-    t.integer "skill_id"
+  create_table "opportunity_skills", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "opportunity_id"
+    t.integer  "skill_id"
   end
 
   create_table "skills", force: true do |t|
     t.string   "skill"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_skills", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "skill_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -112,10 +127,5 @@ ActiveRecord::Schema.define(version: 20131111212955) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-
-  create_table "users_skills", force: true do |t|
-    t.integer "user_id"
-    t.integer "skill_id"
-  end
 
 end

@@ -6,7 +6,7 @@ GAN::Application.routes.draw do
     get '/friend/register' => 'users/registrations#new', :type => 'Friend', as: :new_friend_registration
     get '/alum/register' => 'users/registrations#new', :type => 'Alum', as: :new_alum_registration
     
-    get '/' => 'devise/sessions#new'
+    get '/' => 'devise/sessions#new', as: :root
   end
 
   # get '/users/aregister' => 'users/registrations#new', :type => 'Alum', as: :new_alum_registration
@@ -19,6 +19,8 @@ GAN::Application.routes.draw do
   end
   
 
+  get '/about' => 'opportunities#about', as: :about
+  get '/account' => 'users#account', as: :my_account
   get '/users/signup' => 'users#sign_up', as: :new_user_signup
   get "/main" => 'opportunities#main', as: :main
 

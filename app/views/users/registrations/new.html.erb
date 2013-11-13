@@ -18,7 +18,17 @@
   <div><%= f.label "Last Name" %>
   <%= f.text_field :lname %></div>
 
-  <%= @type == "Alum" %>
+  <div><%= f.label "Skills", :class => "section-header" %>
+    <% counter = 0 %>  
+    <% @skills.each do |s|%>
+      <%= s.skill %>
+      <%= check_box_tag 'skills[]', s.id %>
+      <% if ((counter +=1) % 4) == 0 %>
+        <br>
+      <% end %>
+    <% end %>
+  </div>
+
   <% if @type == "Alum" %>
   	<div><%= f.label "Class Year" %>
   	<%= f.number_field :classyear %></div>

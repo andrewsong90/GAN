@@ -1,5 +1,7 @@
 class OpportunitiesController < ApplicationController
 
+	before_filter :authenticate_user, :except => [:about, :welcome]
+
 	def welcome
 		
 	end
@@ -12,7 +14,10 @@ class OpportunitiesController < ApplicationController
 		# logger.debug("SESSION_ID: #{session[:session_id].inspect}")	
 		# #logger.debug("cookies: #{cookies.inspect}")
 		# #logger.debug("friend_SESSION: #{friend_session.inspect}")
+	end
 
+	def about
+		
 	end
 
 	def index
@@ -21,28 +26,50 @@ class OpportunitiesController < ApplicationController
 
 	def show
 		@opportunity = Opportunity.find(params[:id])
-		logger.debug("Owner #{@opportunity.user}")
+		@skills = []
+		@opportunity.opportunity_skills.each do |set|
+			@skills.append(Skill.find(set.skill_id))
+		end
 	end
 
 
 
 	def new
 		@opportunity=Opportunity.new
+		@skills=Skill.all
 	end
 
 	def create
 		opportunity=current_user.opportunities.build(opportunity_params)
+
 		if opportunity.save
+
+			permitted_params=skill_params
+			permitted_params[:skills].each do |skill|
+				opportunity.opportunity_skills.create(:skill_id => skill)
+			end
+			
 			flash[:notice] = "Opportunity Created!"
-			redirect_to main_path
+			redirect_to opportunities_path
 		else
 			flash[:notice] = "Something went Wrong!"
 			redirect_to new_opportunity_path
 		end
+
 	end
+
+	#TODO : Still need to do edit part
 
 	def edit
 		@opportunity = Opportunity.find(params[:id])	
+		@skills=Skill.all
+
+		if current_user.is_owner?(@opportunity)
+			render :action => "edit"
+		else
+			redirect_to opportunity_path(@opportunity)
+		end
+	
 	end
 
 	def update
@@ -60,4 +87,8 @@ class OpportunitiesController < ApplicationController
 		params.require(:opportunity).permit(:title,:location,:description,:job_type,:company,:time)
 	end
 
+	def skill_params
+		params.permit(:skills => [])
+	end
+	
 end

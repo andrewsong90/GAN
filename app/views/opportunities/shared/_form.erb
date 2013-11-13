@@ -1,21 +1,41 @@
 <%= form_for(@opportunity) do |f| %>
 
-  	<div><%= f.label "Title" %>
+  	<div><%= f.label "Title", :class => "section-header" %>
   	<%= f.text_field :title %></div>
-
-  	<div><%= f.label "Company" %>
+    
+    <br>
+  	
+    <div><%= f.label "Company", :class => "section-header" %>
   	<%= f.text_field :company %></div>
+    
+    <br>
+ 	  
+    <div><%= f.label "Type", :class => "section-header" %>
+  	<%= f.collection_select :job_type, Type.all, :name, :name, prompt: true %></div>
 
- 	<div><%= f.label "Type" %>
-  	<%= f.text_field :job_type %></div>
+    <br>
 
-  	<div><%= f.label "Job Description" %>
-  	<%= f.text_area :description %></div>
+  	<div><%= f.label "Job Description", :class => "section-header" %>
+  	<%= f.text_area :description, :class => "span6", :rows => "6", :placeholder => "Enter Job Description here" %></div>
 
-	<div><%= f.label "Location" %>
+    <br>
+
+    <div><%= f.label "Skills", :class => "section-header" %>
+    <% counter = 0 %>  
+    <% @skills.each do |s|%>
+      <%= s.skill %>
+      <%= check_box_tag 'skills[]', s.id %>
+      <% if ((counter +=1) % 4) == 0 %>
+        <br>
+      <% end %>
+    <% end %>
+  </div>
+
+    <br>
+	 <div><%= f.label "Location", :class => "section-header" %>
   	<%= f.text_field :location %></div>
 
-  	<div><%= f.label "time" %>
+  	<div><%= f.label "time", :class => "section-header" %>
   	<%= f.text_field :time %></div>  	
 
   	

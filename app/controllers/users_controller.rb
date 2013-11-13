@@ -8,4 +8,9 @@ class UsersController < ApplicationController
 	def sign_in
 		
 	end
+
+	def account
+		
+	end
+
 end

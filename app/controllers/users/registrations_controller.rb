@@ -4,19 +4,31 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 	def new
 		@type=params[:type]
+		@skills=Skill.all
 		super
 	end
 
 	def create
+
+
+
 		build_resource(sign_up_params)
 		
 		#This is for subclasses
 		resource.type=params[:user][:type]
-		
+
 		if resource.save
 			UserMailer.welcome_email(resource).deliver
       		yield resource if block_given?
       		if resource.active_for_authentication?
+
+      			permitted_params=skill_params
+				permitted_params[:skills].each do |skill|
+					resource.user_skills.create(:skill_id => skill)
+				end
+
+
+
         		set_flash_message :notice, :signed_up if is_flashing_format?
         		sign_up(resource_name, resource)
         		respond_with resource, :location => after_sign_up_path_for(resource)
@@ -42,5 +54,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 			devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname, :type)}
 			devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname)}
 		end
+	end
+
+	def skill_params
+		params.permit(:skills => [])
 	end
 end

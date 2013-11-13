@@ -1,0 +1,14 @@
+<h2 class="header">Profile for <%= current_user.full_name%></h2>
+
+<span class="section-header">E-mail: </span>
+<%= current_user.email %><br><br>
+
+<span class="section-header">Class: </span>
+class of <%= current_user.classyear %><br><br>
+
+<span class="section-header">Skills: </span><br>
+<% current_user.user_skills.each do |userskill| %>
+	<i class="icon-ok"></i>&nbsp;<%= Skill.find(userskill.skill_id).skill %><br>
+<% end %>
+<br><br>
+<%= link_to "Edit Profile", edit_user_registration_path, :class => "btn btn-primary" %>
