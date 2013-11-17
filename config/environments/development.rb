@@ -38,6 +38,7 @@ GAN::Application.configure do
     :password => ENV["GMAIL_PASSWORD"]
   }
 
+  Paperclip.options[:command_path]="/usr/local/bin"
 
 
   # Debug mode disables concatenation and preprocessing of assets.

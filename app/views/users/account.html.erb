@@ -1,5 +1,8 @@
 <h2 class="header">Profile for <%= current_user.full_name%></h2>
 
+<span class="section-header">Profile Picture </span><br>
+<%= image_tag current_user.avatar.url(:medium) %><br><br>
+
 <span class="section-header">E-mail: </span>
 <%= current_user.email %><br><br>
 

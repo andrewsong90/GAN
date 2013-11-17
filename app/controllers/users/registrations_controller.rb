@@ -10,8 +10,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 	def create
 
-
-
 		build_resource(sign_up_params)
 		
 		#This is for subclasses
@@ -26,8 +24,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 				permitted_params[:skills].each do |skill|
 					resource.user_skills.create(:skill_id => skill)
 				end
-
-
 
         		set_flash_message :notice, :signed_up if is_flashing_format?
         		sign_up(resource_name, resource)
@@ -48,8 +44,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	def configure_permitted_params
 	
 		if params[:user][:type]=="Alum"
-			devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname, :classyear, :type)}
-			devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname)}
+			devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname, :classyear, :type, :avatar)}
+			devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname, :avatar)}
 		else
 			devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname, :type)}
 			devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname)}
