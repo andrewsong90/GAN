@@ -31,9 +31,6 @@ gem 'figaro'
 # For attaching pictures
 gem 'paperclip'
 
-# For intensive text-search
-gem 'sunspot_rails'
-
 gem "capistrano", '~> 2.15.5'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

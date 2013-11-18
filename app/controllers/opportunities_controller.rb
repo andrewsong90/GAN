@@ -21,10 +21,7 @@ class OpportunitiesController < ApplicationController
 	end
 
 	def index
-		@search = Opportunity.search do
-			fulltext params[:search]
-		end
-		@opportunities=@search.results
+		@opportunities=Opportunity.all
 	end
 
 	def show

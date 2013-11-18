@@ -1,28 +1,42 @@
-<h2>Sign in</h2>
+<h1 class="text-align-center">Welcome to Gann Alumni Network!</h1>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %>
-  <%= f.email_field :email, :autofocus => true %></div>
+<br>
 
-  <div><%= f.label :password %>
-  <%= f.password_field :password %></div>
+<h3 class="text-align-center italics">Connect with other Gann Alumni</h3>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me, :class=>"custom-form" %> <%= f.label :remember_me, :class=>"custom-form" %>
-    </div>
-  <% end -%>
+<br>
 
-  <br>
-  	<div>
-  		<%= f.submit "Sign in", :class =>"btn btn-info" %> 
-  		<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  			<%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-		<% end -%>
-	</div>
-<% end %>
+<div class="row">
+  <div class="span4 offset1">
+    <img src="/assets/gann.jpg" alt="gann"/>
+  </div>
 
-<strong>Or</strong>
+  <div class="span3 offset2">
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <div><%= f.label :email %>
+      <%= f.email_field :email, :autofocus => true %></div>
 
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-	<%= link_to "Sign Up", new_user_signup_path, :class =>"btn btn-info" %>
-<% end -%>
+      <div><%= f.label :password %>
+      <%= f.password_field :password %></div>
+
+      <% if devise_mapping.rememberable? -%>
+        <div><%= f.check_box :remember_me, :class=>"custom-form" %> <%= f.label :remember_me, :class=>"custom-form" %>
+        </div>
+      <% end -%>
+
+      <br>
+      	<div>
+      		<%= f.submit "Sign in", :class =>"btn btn-info" %> 
+      		<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+      			<%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+    		<% end -%>
+    	</div>
+    <% end %>
+
+    <strong>Here for the first time?</strong>
+
+    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+    	<%= link_to "Register", new_user_signup_path %>
+    <% end -%>
+  </div>
+</div>
