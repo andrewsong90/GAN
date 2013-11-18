@@ -78,8 +78,8 @@ GAN::Application.configure do
     :port => 587,
     :domain => "gannacademy.org",
     :authentication => :plain,
-    :user_name => "gann_mail",
-    :password => "R1pley123"
+    :user_name => 
+    :password => 
   }
 
 
