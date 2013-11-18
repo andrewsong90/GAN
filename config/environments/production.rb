@@ -78,8 +78,8 @@ GAN::Application.configure do
     :port => 587,
     :domain => "gannacademy.org",
     :authentication => :plain,
-    :user_name => 
-    :password => 
+    :user_name => ENV["MAILER_USERNAME"] 
+    :password => ENV["MAILER_PASSWORD"]
   }
 
 
