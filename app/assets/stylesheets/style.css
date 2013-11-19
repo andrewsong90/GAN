@@ -7,6 +7,30 @@
 	color: #ffffff;
 }
 
+/* Override bootstrap to customize navbar*/
+
+.navbar .brand{
+	text-shadow: none;
+	font-weight: 700;
+	font-family: Georgia;
+	font-size: 18px;
+	color: #ffffff;
+}
+
+.navbar .nav > li > a{
+	text-shadow: none;
+	color: #ffffff;
+}
+
+.navbar-inner{
+	background-color: #3d3d3d;
+	background-image: none;
+}
+
+.navbar-hcenter{
+	line-height: 40px;
+}
+
 /*Fonts configuration*/
 
 .section-header{

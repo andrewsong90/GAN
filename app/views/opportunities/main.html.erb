@@ -1,7 +1,14 @@
-<h2>Now You can use the service!</h2>
+<h2>Search Opportunities</h2>
 
-<%= link_to "Create Opportunities", new_opportunity_path, :class => "btn btn-info" %>
-<%= link_to "View All", opportunities_path, :class => "btn btn-primary" %>
+<%= form_tag opportunities_path, method: :get do %>
+	<p>
+		<%= text_field_tag :query, params[:query] %>
+		<%= submit_tag "Search", name:nil %>
+	</p>
+<% end %>
+
+<%= link_to "Create", new_opportunity_path, :class => "btn pull-right" %><br><br>	
+<%= link_to "View All", opportunities_path, :class => "btn btn-primary pull-right" %>
 
 
 

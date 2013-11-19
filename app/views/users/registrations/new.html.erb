@@ -3,22 +3,22 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :Photo %>
+  <div><%= f.label :Photo, :class => "section-header" %>
   <%= f.file_field :avatar %></div>  
 
-  <div><%= f.label :email %>
+  <div><%= f.label :email, :class => "section-header" %>
   <%= f.email_field :email, :autofocus => true %></div>
 
-  <div><%= f.label :password %>
+  <div><%= f.label :password, :class => "section-header" %>
   <%= f.password_field :password %></div>
 
-  <div><%= f.label :password_confirmation %>
+  <div><%= f.label :password_confirmation, :class => "section-header" %>
   <%= f.password_field :password_confirmation %></div>
 
-  <div><%= f.label "First Name" %>
+  <div><%= f.label "First Name", :class => "section-header" %>
   <%= f.text_field :fname %></div>
 
-  <div><%= f.label "Last Name" %>
+  <div><%= f.label "Last Name", :class => "section-header" %>
   <%= f.text_field :lname %></div>
 
   <div><%= f.label "Skills", :class => "section-header" %>
@@ -32,14 +32,14 @@
     <% end %>
   </div>
 
+<br>
   <% if @type == "Alum" %>
-  	<div><%= f.label "Class Year" %>
+  	<div><%= f.label "Class Year", :class => "section-header" %>
   	<%= f.number_field :classyear %></div>
   <% end %>
 
   <%= f.hidden_field :type, :value => @type %>
 
-  <div><%= f.submit "Sign up" %></div>
+  <div><%= f.submit "Sign up", :class => "btn btn-info" %></div>
 <% end %>
 
-<%= render "users/shared/links" %>

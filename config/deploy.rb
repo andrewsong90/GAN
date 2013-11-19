@@ -1,5 +1,6 @@
 set :application, "gann"
 set :repository,  "https://github.com/andrewsong90/GAN.git"
+set :branch, "master"
 
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
@@ -30,11 +31,21 @@ namespace :deploy do
 		#run "gem install bundler"
 	end
 
-	# desc "Migrate Database"
-	# task :migrate do
-	# 	run "cd #{deploy_to}/current; bundle exec rake db:migrate RAILS_ENV=#{default_stage}"
-	# end
+	desc "Symlink shared configs and folders on each release."
+	task :symlink_shared do
+		run "ln -nfs #{shared_path}/config/application.yml #{release_path}/config/application.yml"
+	end
+
+	desc "Set environment_variables"
+	task :default_vars do
+		run "export PATH=#{deploy_to}/bin:$PATH"
+		run "export GEM_HOME=#{deploy_to}/gems"
+		run "export RUBYLIB=#{deploy_to}/lib"
+	end
 end
+
+after 'deploy:update_code', 'deploy:symlink_shared'
+after 'deploy:restart', 'deploy:default_vars'
 
 # after "deploy", "deploy:migrate"
 

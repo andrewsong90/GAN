@@ -44,8 +44,7 @@ group :doc do
 end
 
 group :development do
-	gem 'sunspot_solr'
-	gem 'sqlite3'
+	gem 'pg', '~> 0.15.1'
 end
 
 group :production do

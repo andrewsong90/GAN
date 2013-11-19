@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131113173228) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "alums", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -31,8 +34,8 @@ ActiveRecord::Schema.define(version: 20131113173228) do
     t.string   "a"
   end
 
-  add_index "alums", ["email"], name: "index_alums_on_email", unique: true
-  add_index "alums", ["reset_password_token"], name: "index_alums_on_reset_password_token", unique: true
+  add_index "alums", ["email"], name: "index_alums_on_email", unique: true, using: :btree
+  add_index "alums", ["reset_password_token"], name: "index_alums_on_reset_password_token", unique: true, using: :btree
 
   create_table "applications", force: true do |t|
     t.integer  "user_id"
@@ -64,8 +67,8 @@ ActiveRecord::Schema.define(version: 20131113173228) do
     t.string   "lname"
   end
 
-  add_index "friends", ["email"], name: "index_friends_on_email", unique: true
-  add_index "friends", ["reset_password_token"], name: "index_friends_on_reset_password_token", unique: true
+  add_index "friends", ["email"], name: "index_friends_on_email", unique: true, using: :btree
+  add_index "friends", ["reset_password_token"], name: "index_friends_on_reset_password_token", unique: true, using: :btree
 
   create_table "opportunities", force: true do |t|
     t.integer  "user_id"
@@ -129,7 +132,7 @@ ActiveRecord::Schema.define(version: 20131113173228) do
     t.datetime "avatar_updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
