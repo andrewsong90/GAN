@@ -30,13 +30,13 @@ namespace :deploy do
 		#run "gem install bundler"
 	end
 
-	desc "Migrate Database"
-	task :migrate do
-		run "cd #{deploy_to}/current; bundle exec rake db:migrate RAILS_ENV=#{default_stage}"
-	end
+	# desc "Migrate Database"
+	# task :migrate do
+	# 	run "cd #{deploy_to}/current; bundle exec rake db:migrate RAILS_ENV=#{default_stage}"
+	# end
 end
 
-after "deploy", "deploy:migrate"
+# after "deploy", "deploy:migrate"
 
 
 # if you want to clean up old releases on each deploy uncomment this:
