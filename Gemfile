@@ -33,8 +33,7 @@ gem 'paperclip'
 
 gem "capistrano", '~> 2.15.5'
 
-gem 'mysql2'
-gem 'thinking-sphinx'
+gem 'pg_search'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'

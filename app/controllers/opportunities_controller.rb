@@ -21,7 +21,9 @@ class OpportunitiesController < ApplicationController
 	end
 
 	def index
-		@opportunities=Opportunity.all
+		logger.debug("INDEX CALLED")
+		@opportunities = Opportunity.text_search(params[:query])
+		# @opportunities=Opportunity.all
 	end
 
 	def show
