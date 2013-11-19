@@ -9,8 +9,8 @@ set :deploy_to, "/home/gannacademy/webapps/gann"
 set :default_stage, "production"
 
 set :default_environment, {
-	"PATH" => "#{deploy_to}/bin:$PATH"
-	"GEM_HOME" => "#{deploy_to}/gems"
+	"PATH" => "#{deploy_to}/bin:$PATH",
+	"GEM_HOME" => "#{deploy_to}/gems",
 	"RUBYLIB" => "#{deploy_to}/lib"
 }
 
