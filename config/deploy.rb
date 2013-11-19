@@ -19,10 +19,10 @@ namespace :deploy do
 	desc "Restarting nginx"
 	task :restart do
 		run "#{deploy_to}/bin/restart"
-		#run "cd #{deploy_to}"
-		#run "export GEM_HOME=$PWD/gems"
-		#run "export RUBYLIB=$PWD/lib"
-		#run "export PATH=$PWD/bin:$PATH"
+		run "cd #{deploy_to}"
+		run "export GEM_HOME=$PWD/gems"
+		run "export RUBYLIB=$PWD/lib"
+		run "export PATH=$PWD/bin:$PATH"
 		#run "gem install bundler"
 	end
 end
