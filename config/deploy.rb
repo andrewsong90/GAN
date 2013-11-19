@@ -6,6 +6,14 @@ set :scm, :git # You can set :scm explicitly or Capistrano will make an intellig
 
 set :deploy_to, "/home/gannacademy/webapps/gann"
 
+set :default_stage, "production"
+
+set :default_environment, {
+	"PATH" => "#{deploy_to}/bin:$PATH"
+	"GEM_HOME" => "#{deploy_to}/gems"
+	"RUBYLIB" => "#{deploy_to}/lib"
+}
+
 role :web, "web430.webfaction.com"                          # Your HTTP server, Apache/etc
 role :app, "web430.webfaction.com"                          # This may be the same as your `Web` server
 role :db,  "web430.webfaction.com", :primary => true # This is where Rails migrations will run
@@ -19,13 +27,16 @@ namespace :deploy do
 	desc "Restarting nginx"
 	task :restart do
 		run "#{deploy_to}/bin/restart"
-		run "cd #{deploy_to}"
-		run "export GEM_HOME=$PWD/gems"
-		run "export RUBYLIB=$PWD/lib"
-		run "export PATH=$PWD/bin:$PATH"
 		#run "gem install bundler"
 	end
+
+	desc "Migrate Database"
+	task :migrate do
+		run "cd #{deploy_to}/current; bundle exec rake db:migrate RAILS_ENV=#{default_stage}"
+	end
 end
+
+after "deploy", "deploy:migrate"
 
 
 # if you want to clean up old releases on each deploy uncomment this:
