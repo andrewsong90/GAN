@@ -6,7 +6,4 @@ class Opportunity < ActiveRecord::Base
 	belongs_to :user
 	has_many :applications
 
-	searchable do
-		text :title, :description
-	end
 end
