@@ -5,6 +5,8 @@ set :branch, "master"
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
+set :keep_releases, 5
+
 set :deploy_to, "/home/gannacademy/webapps/gann"
 
 set :default_stage, "production"
@@ -33,7 +35,8 @@ namespace :deploy do
 
 	desc "Symlink shared configs and folders on each release."
 	task :symlink_shared do
-		run "ln -nfs #{shared_path}/config/application.yml #{release_path}/config/application.yml"
+		#run "ln -nfs #{shared_path}/config/application.yml #{release_path}/config/application.yml"
+		run "cp -f #{shared_path}/config/application.yml #{release_path}/config/application.yml"
 	end
 
 	desc "Set environment_variables"
