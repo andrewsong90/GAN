@@ -21,9 +21,13 @@ class OpportunitiesController < ApplicationController
 	end
 
 	def index
-		logger.debug("INDEX CALLED")
 		@opportunities = Opportunity.text_search(params[:query])
-		# @opportunities=Opportunity.all
+
+		#Render CSV and html view
+		respond_to do |format|
+			format.html
+			format.csv { render text: @opportunities.to_csv }
+		end
 	end
 
 	def show
