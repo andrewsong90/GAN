@@ -35,8 +35,8 @@ namespace :deploy do
 
 	desc "Symlink shared configs and folders on each release."
 	task :symlink_shared do
-		#run "ln -nfs #{shared_path}/config/application.yml #{release_path}/config/application.yml"
-		run "cp -f #{shared_path}/config/application.yml #{release_path}/config/application.yml"
+		run "ln -nfs #{shared_path}/application.yml #{release_path}/config/application.yml"
+		#run "cp -f #{shared_path}/config/application.yml #{release_path}/config/application.yml"
 	end
 
 	desc "Set environment_variables"
