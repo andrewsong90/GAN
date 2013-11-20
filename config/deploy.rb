@@ -10,9 +10,9 @@ set :deploy_to, "/home/gannacademy/webapps/gann"
 set :default_stage, "production"
 
 set :default_environment, {
-	"PATH" => "#{deploy_to}/bin:$PATH",
-	"GEM_HOME" => "#{deploy_to}/gems",
-	"RUBYLIB" => "#{deploy_to}/lib"
+	:PATH => "#{deploy_to}/bin:$PATH",
+	:GEM_HOME => "#{deploy_to}/gems",
+	:RUBYLIB => "#{deploy_to}/lib"
 }
 
 role :web, "web430.webfaction.com"                          # Your HTTP server, Apache/etc
@@ -45,7 +45,6 @@ namespace :deploy do
 end
 
 after 'deploy:update_code', 'deploy:symlink_shared'
-after 'deploy:restart', 'deploy:default_vars'
 
 # after "deploy", "deploy:migrate"
 
