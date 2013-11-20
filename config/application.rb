@@ -6,7 +6,15 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-ENV.update YAML.load(File.read(File.expand_path('../application.yml',__FILE__)))
+#ENV.update YAML.load(File.read(File.expand_path('../application.yml',__FILE__)))
+
+config.before_configuration do 
+
+    env_file=File.join(Rails.root,'config','application.yml')
+    YAML.load(File.open(env_file)).each do |key,value|
+        ENV[key.to_s] = value
+    end if File.exists?(env_file)
+end
 
 module GAN
   class Application < Rails::Application
