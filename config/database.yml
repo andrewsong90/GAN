@@ -26,5 +26,5 @@ production:
   adapter: postgresql
   database: gann
   host: localhost
-  username: ENV["PG_USERNAME"]
-  password: ENV["PG_PASSWORD"]
+  username: <%= ENV["PG_USERNAME"] %>
+  password: <%= ENV["PG_PASSWORD"] %>
