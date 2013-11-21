@@ -14,6 +14,8 @@ class OpportunitiesController < ApplicationController
 		# logger.debug("SESSION_ID: #{session[:session_id].inspect}")	
 		# #logger.debug("cookies: #{cookies.inspect}")
 		# #logger.debug("friend_SESSION: #{friend_session.inspect}")
+
+		
 	end
 
 	def about

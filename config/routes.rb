@@ -24,6 +24,8 @@ GAN::Application.routes.draw do
   get '/users/signup' => 'users#sign_up', as: :new_user_signup
   get "/main" => 'opportunities#main', as: :main
 
+  post '/import' => "userdbs#import", as: :import_users
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
