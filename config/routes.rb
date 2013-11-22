@@ -1,6 +1,11 @@
 GAN::Application.routes.draw do
   
-  get "registrations/new"
+  devise_for :admins
+
+  resources :opportunities do
+    resources :applications
+  end
+  
 
   devise_scope :user do
     get '/friend/register' => 'users/registrations#new', :type => 'Friend', as: :new_friend_registration
@@ -14,15 +19,13 @@ GAN::Application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => 'users/registrations'}
   
-  resources :opportunities do
-    resources :applications
-  end
   
 
   get '/about' => 'opportunities#about', as: :about
   get '/account' => 'users#account', as: :my_account
   get '/users/signup' => 'users#sign_up', as: :new_user_signup
   get "/main" => 'opportunities#main', as: :main
+  get "/admin/main" => 'admins#main', as: :admin_main
 
   post '/import' => "userdbs#import", as: :import_users
 

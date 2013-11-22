@@ -4,12 +4,18 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def after_sign_in_path_for(resource)
-  	main_path	
+    if resource.type=="Admin"
+      admin_main_path
+    else
+  	   main_path	
+    end
   end
 
   protected
 
+  #User authentication
   def authenticate_user
+    logger.debug("FLASH AUTHENTICATE #{flash.inspect}")
 		if !user_signed_in?
 			flash[:notice] = "Please log in to use the service!"
 			redirect_to root_path

@@ -1,0 +1,12 @@
+<h2>WELCOME ADMIN</h2>
+
+<h3>Import Users</h3>
+<%= form_tag import_users_path, multipart: true do %>
+	<%= file_field_tag :file %>
+	<%= submit_tag "Import" %>
+<% end %>
+
+<p>
+	Download:
+	<%= link_to "CSV", opportunities_path(format: "csv") %>
+</p>

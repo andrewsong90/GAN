@@ -6,5 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Skill.create([{skill: 'Finance'},{skill: 'Programming'},{skill: 'Documents'},{skill: 'Communication'},{skill: 'Marketing'}, {skill: 'Chemical Engineering'},{skill: 'Computer Graphics'},{skill: 'Spanish'}, {skill: 'Economics'}, {skill: 'Cooking'}, {skill: 'Photoshop'}, {skill: 'Biological Engineering'}, {skill: 'Big Data'}, {skill: 'Web Development'}])
-Type.create([{name: 'Full-Time'},{name: 'Part-Time'},{name: 'Internship'},{name: "Mentorship"}])
+
+Skill.where(:skill => "Finance").first_or_create
+Skill.create(:skill => "Programming")
+
+#Skill.create([{skill: 'Finance'},{skill: 'Programming'},{skill: 'Documents'},{skill: 'Communication'},{skill: 'Marketing'}, {skill: 'Chemical Engineering'},{skill: 'Computer Graphics'},{skill: 'Spanish'}, {skill: 'Economics'}, {skill: 'Cooking'}, {skill: 'Photoshop'}, {skill: 'Biological Engineering'}, {skill: 'Big Data'}, {skill: 'Web Development'}])
+#Type.create([{name: 'Full-Time'},{name: 'Part-Time'},{name: 'Internship'},{name: "Mentorship"}])
+#Admin.create(:email => "admin@gannacademy.org",:password => "111111")
+#User.create(:email => "admin@gannacademy.org",:password => "111111", :type => "Admin")

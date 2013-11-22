@@ -1,6 +1,6 @@
 class OpportunitiesController < ApplicationController
 
-	before_filter :authenticate_user, :except => [:about, :welcome]
+#	before_filter :authenticate_user, :except => [:about, :welcome]
 
 	def welcome
 		
@@ -23,6 +23,7 @@ class OpportunitiesController < ApplicationController
 	end
 
 	def index
+		logger.debug("FFFLLASSH #{flash.inspect}")
 		@opportunities = Opportunity.text_search(params[:query])
 
 		#Render CSV and html view
@@ -34,10 +35,11 @@ class OpportunitiesController < ApplicationController
 
 	def show
 		@opportunity = Opportunity.find(params[:id])
-		@skills = []
-		@opportunity.opportunity_skills.each do |set|
-			@skills.append(Skill.find(set.skill_id))
-		end
+		# @skills = []
+		# @opportunity.opportunity_skills.each do |set|
+		# 	@skills.append(Skill.find(set.skill_id))
+		# end
+		@skills=@opportunity.skills
 	end
 
 
@@ -73,18 +75,23 @@ class OpportunitiesController < ApplicationController
 		@skills=Skill.all
 
 		if current_user.is_owner?(@opportunity)
-			render :action => "edit"
+			respond_to do |format|
+				format.html
+			end
 		else
+			flash[:error] = "You are not the owner!"
 			redirect_to opportunity_path(@opportunity)
 		end
 	
 	end
 
 	def update
-		opportunity = Opportunity.find(params[:id])
-		if opportunity.update(opportunity_params)
-			redirect_to main_path
+		@opportunity = Opportunity.find(params[:id])
+		if @opportunity.update(opportunity_params)
+			flash[:notice]="Opportunity successfully updated"
+			redirect_to opportunity_path(@opportunity)
 		else
+			flash[:error]="Sorry, the update was not successful"
 			redirect_to edit_opportunity_path
 		end
 	end

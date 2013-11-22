@@ -1,4 +1,9 @@
+<h2>Connect</h2>
+
 <%= @opportunity.title %>
-<strong><%= @opportunity.user.fname %> <%= @opportunity.user.lname %></strong>
+<br>
+<br>
+
+<strong><%= @opportunity.user.full_name %></strong>
 
 <%= render 'applications/shared/form' %>

@@ -6,6 +6,10 @@ class Opportunity < ActiveRecord::Base
 	belongs_to :user
 	has_many :applications
 
+	#Validation
+	validates_presence_of :title, :message => "Title cannot be blank"
+	validates_presence_of :company, :message => "Company cannot be blank"
+
 	include PgSearch
 	pg_search_scope :search, against: [:title, :description]
 

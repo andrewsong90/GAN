@@ -1,5 +1,6 @@
 <%= form_for(@opportunity) do |f| %>
-
+  
+<%= render 'opportunities/shared/error_messages', object: @opportunity %>
   	<div><%= f.label "Title", :class => "section-header" %>
   	<%= f.text_field :title %></div>
     

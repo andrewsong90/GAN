@@ -11,6 +11,9 @@
     <img src="/assets/gann.jpg" alt="gann"/>
   </div>
 
+  <!-- TODO: Take a look at this message -->
+  <%= devise_error_messages! %>
+
   <div class="span3 offset2">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
       <div><%= f.label :email %>
