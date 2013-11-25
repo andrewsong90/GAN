@@ -35,6 +35,12 @@
 	background-color: #edecec;
 }
 
+.alert{
+	width: 600px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
 
 
 /* Override bootstrap to customize navbar*/
@@ -47,7 +53,7 @@
 	color: #ffffff;
 }
 
-.navbar .nav > li > a{
+.navbar .nav > li > a, .nav > a{
 	text-shadow: none;
 	color: #ffffff;
 }
@@ -60,6 +66,7 @@
 .navbar-hcenter{
 	line-height: 40px;
 }
+
 
 /*Fonts configuration*/
 

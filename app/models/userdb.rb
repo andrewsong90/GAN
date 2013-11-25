@@ -1,9 +1,9 @@
 class Userdb < ActiveRecord::Base
 
 	#Importing CSV data
-	#TODO: col_sep is instable => it might be specific to a file
+	#:col_sep => "\t" for tab-separated file
 	def self.import(file)
-		CSV.foreach(file.path, headers: true, :col_sep => "\t") do |row|
+		CSV.foreach(file.path, headers: true) do |row|
 			user_record = find_by_id(row["id"]) || new
 			
 			raw_params = row.to_hash.slice("fname","lname","classyear","parent_email")
@@ -21,7 +21,6 @@ class Userdb < ActiveRecord::Base
 			true
 		else
 			false
-
 		end
 	end
 end

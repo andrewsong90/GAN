@@ -5,8 +5,11 @@ class ConfirmationsController < Devise::ConfirmationsController
 	def update
 		with_unconfirmed_confirmable do
 			if @confirmable.has_no_password?
+				
+				#Update password
 				@confirmable.attempt_set_password(params[:user])
-				@confirmable.update_attributes(:avatar => params[:user][:avatar])
+				#Update rest of the info
+				@confirmable.update_attributes(:avatar => params[:user][:avatar],:phone => params[:user][:phone])
 				if @confirmable.valid?
 					do_confirm
 				else
@@ -46,7 +49,7 @@ class ConfirmationsController < Devise::ConfirmationsController
 	protected
 
 	def configure_permitted_params
-		params.require(:user).permit(:avatar)
+		params.require(:user).permit(:avatar,:phone)
 	end
 
 	def with_unconfirmed_confirmable

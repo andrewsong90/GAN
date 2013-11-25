@@ -20,12 +20,12 @@
 
 					<div class="nav pull-right navbar-hcenter">
 						<% if user_signed_in? %>
-							<i class="icon-user"></i>&nbsp;
+							
 							Welcome! <strong><%= current_user.full_name %></strong> (<%= current_user.class.name %>)
 							&nbsp;|&nbsp;
-							<%= link_to "My account", my_account_path %>
+							<i class="icon-user"></i>&nbsp;&nbsp;<%= link_to "My account", my_account_path %>
 							&nbsp;|&nbsp;
-							<%= link_to "My opportunities", my_opportunities_path %>
+							<i class="icon-briefcase"></i>&nbsp;&nbsp;<%= link_to "My opportunities", my_opportunities_path %>
 							&nbsp;|&nbsp;
 							<i class="icon-signout"></i>&nbsp;
 							<%= link_to "Logout", destroy_user_session_path, method: :delete %>
@@ -36,13 +36,15 @@
 		</div>
 	</div>
 
+<% flash.each do |name,msg| %>
+	<div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+		<a class="close" data-dismiss="alert">x</a>
+		<%= msg %>
+	</div>
+<% end%>
+
 <div class="container box_shadow box_radius box_padding sky_background">
-	<% flash.each do |name,msg| %>
-		<div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-			<a class="close" data-dismiss="alert">x</a>
-			<%= msg %>
-		</div>
-	<% end%>
+	
 	<%= yield %>
 </div>
 

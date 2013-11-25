@@ -33,8 +33,4 @@ Type.where(:name => "Unpaid Intern").first_or_create!
 Type.where(:name => "Mentorship").first_or_create!
 
 
-
-#Skill.create([{skill: 'Finance'},{skill: 'Programming'},{skill: 'Documents'},{skill: 'Communication'},{skill: 'Marketing'}, {skill: 'Chemical Engineering'},{skill: 'Computer Graphics'},{skill: 'Spanish'}, {skill: 'Economics'}, {skill: 'Cooking'}, {skill: 'Photoshop'}, {skill: 'Biological Engineering'}, {skill: 'Big Data'}, {skill: 'Web Development'}])
-#Type.create([{name: 'Full-Time'},{name: 'Part-Time'},{name: 'Internship'},{name: "Mentorship"}])
-admin=User.where(:email => "admin@gannacademy.org", :type => "Admin").first_or_create!(:password => "R1pley123")
-admin.update(:confirmed_at => Time.now)
+admin=User.where(:email => "admin@gannacademy.org", :type => "Admin").first_or_create!(:password => "111111", :confirmed_at => Time.now)
