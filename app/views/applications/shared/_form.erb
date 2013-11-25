@@ -1,9 +1,9 @@
 <%= form_for([@opportunity, @application]) do |f| %>
 
-  	<div><%= f.label "Send message!" %>
+  	<div><%= f.label "Send message to #{@opportunity.user.full_name}", :class => "section-header" %><br>
   	<%= f.text_area :message, :rows => "6", :class => "span6" %></div>
 
     <div><%= f.hidden_field :opportunity_id, :value => @opportunity.id %>
 	  	
-	<%= f.submit "Connect" %>
+	<%= f.submit "Connect", :class => "btn" %>
 <% end %>

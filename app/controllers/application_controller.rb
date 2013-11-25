@@ -13,6 +13,19 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  #Helper method for defining the main link
+  def home_path
+    if user_signed_in?
+      if admin_signed_in?
+        admin_main_path
+      else #If Alum or friend
+        main_path
+      end
+    else #If not logged in
+      root_path
+    end
+  end
+
   #User authentication
   def authenticate_user
 		if !user_signed_in?
@@ -26,6 +39,10 @@ class ApplicationController < ActionController::Base
     user_signed_in? && (current_user.type=="Alum")  
   end
 
+  def admin_signed_in?
+    user_signed_in? && (current_user.type="Admin")
+  end
+
   #Check whether the current user can apply to the opportunity or not
   def can_apply?(opportunity)
 
@@ -36,5 +53,5 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :alum_signed_in?, :can_apply?
+  helper_method :alum_signed_in?, :can_apply?, :home_path
 end

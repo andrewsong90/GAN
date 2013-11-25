@@ -19,7 +19,7 @@ class ApplicationsController < ApplicationController
 		application = current_user.applications.build(application_params)
 		if application.save
 			UserMailer.submission_email(current_user,application).deliver
-			flash[:notice] = "Application Created!"
+			flash[:notice] = "Connection requested! Please check your inbox!"
 			redirect_to main_path
 		else
 			flash[:notice] = "Something went Wrong!"
@@ -32,17 +32,4 @@ class ApplicationsController < ApplicationController
 	def application_params
 		params.require(:application).permit(:message,:opportunity_id)
 	end
-
-	# def can_apply?
-
-	# 	opportunity = Opportunity.find(params[:opportunity_id])
-
-	# 	if alum_signed_in? 
-	# 		&& !current_user.is_owner?(opportunity)
-	# 		&& !current_user.applied?(opportunity)
-	# 		true
-	# 	else
-	# 		false
-	# 	end
-	# end
 end

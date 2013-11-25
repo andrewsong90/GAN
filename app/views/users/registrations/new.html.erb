@@ -3,7 +3,7 @@
   <h3>Step 1: Alum Authentication</h3>
   <p>
     To ensure the security of the system, we are doing basic alumni authentication!<br>
-    Your parent's email(the address they used while you were in school) and your graduation year will be used.<br>
+    Your parent's email (the address they used while you were in school) and your graduation year will be used.<br>
   </p>
 
 <% else %>
@@ -26,25 +26,25 @@
   <% end %>-->
  
 
-  <div><%= f.label :email, :class => "section-header" %>
+  <div><%= f.label :email, :class => "section-header" %><br>
   <%= f.email_field :email, :autofocus => true %>
   </div>
 
 
-  <div><%= f.label "First Name", :class => "section-header" %>
+  <div><%= f.label "First Name", :class => "section-header" %><br>
   <%= f.text_field :fname %></div>
 
-  <div><%= f.label "Last Name", :class => "section-header" %>
+  <div><%= f.label "Last Name", :class => "section-header" %><br>
   <%= f.text_field :lname %></div>
 
   <br>
 
   <% if @type == "Alum" %>
 
-    <div><%= f.label "Parent Email", :class => "section-header" %>
+    <div><%= f.label "Parent Email", :class => "section-header" %><br>
     <%= f.email_field :parent_email %></div>  
 
-  	<div><%= f.label "Class Year", :class => "section-header" %>
+  	<div><%= f.label "Class Year", :class => "section-header" %><br>
   	 <%= f.number_field :classyear %></div>
   
   <% end %>

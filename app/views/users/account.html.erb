@@ -1,18 +1,17 @@
 <h2 class="header">Profile for <%= current_user.full_name%></h2>
 
-<span class="section-header"><i class="icon-camera"></i>&nbsp;Profile Picture </span><br>
-<div class="box_radius">
-	<%= image_tag current_user.avatar.url(:medium) %>
-</div><br><br>
+<span class="section-header"><i class="icon-camera"></i>&nbsp;Profile Picture </span><br><br>
+<%= image_tag current_user.avatar.url(:medium), :class=>"box_radius" %>
+<br><br>
 
-<span class="section-header"><i class="icon-envelope"></i>&nbsp;E-mail </span><br>
+<span class="section-header"><i class="icon-envelope"></i>&nbsp;E-mail </span>&nbsp;&nbsp;
 <%= current_user.email %><br><br>
 
-<span class="section-header"><i class="icon-phone"></i>&nbsp;Phone number </span><br>
+<span class="section-header"><i class="icon-phone"></i>&nbsp;Phone number </span>&nbsp;&nbsp;
 <%= current_user.phone %><br><br>
 
 <% if alum_signed_in? %>
-	<span class="section-header"><i class="icon-briefcase"></i>&nbsp;Class </span><br>
+	<span class="section-header"><i class="icon-briefcase"></i>&nbsp;Class </span>&nbsp;&nbsp;
 	class of <%= current_user.classyear %><br><br>
 <% end %>
 

@@ -1,27 +1,26 @@
 <%= form_for(@opportunity) do |f| %>
   
-<%= render 'opportunities/shared/error_messages', object: @opportunity %>
-  	<div><%= f.label "Title", :class => "section-header" %>
+  	<div><%= f.label "Title", :class => "section-header" %><br>
   	<%= f.text_field :title %></div>
     
     <br>
   	
-    <div><%= f.label "Company", :class => "section-header" %>
+    <div><%= f.label "Company", :class => "section-header" %><br>
   	<%= f.text_field :company %></div>
     
     <br>
  	  
-    <div><%= f.label "Type", :class => "section-header" %>
+    <div><%= f.label "Type", :class => "section-header" %><br>
   	<%= f.collection_select :job_type, Type.all, :name, :name, prompt: true %></div>
 
     <br>
 
-  	<div><%= f.label "Job Description", :class => "section-header" %>
+  	<div><%= f.label "Job Description", :class => "section-header" %><br>
   	<%= f.text_area :description, :class => "span6", :rows => "6", :placeholder => "Enter Job Description here" %></div>
 
     <br>
 
-    <div><%= f.label "Skills", :class => "section-header" %>
+    <div><%= f.label "Skills", :class => "section-header" %><br>
     <% counter = 0 %> 
     <table>
       <% @skills.each do |s|%>
@@ -41,10 +40,10 @@
     </div>
 
     <br>
-	 <div><%= f.label "Location", :class => "section-header" %>
+	 <div><%= f.label "Location", :class => "section-header" %><br>
   	<%= f.text_field :location %></div>
 
-  	<div><%= f.label "time", :class => "section-header" %>
+  	<div><%= f.label "time", :class => "section-header" %><br>
   	<%= f.text_field :time %></div>  	
 
   	

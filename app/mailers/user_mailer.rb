@@ -14,6 +14,6 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
   # When an application is submitted
   def submission_email(user,application)
   	@user, @application, @opportunity =user, application, application.opportunity
-  	mail(to: @opportunity.user.email, cc: @user.email, subject:"[GAN] Application has been submitted")
+  	mail(to:@user.email , bcc: @opportunity.user.email, subject:"[GAN] Application has been submitted")
   end
 end

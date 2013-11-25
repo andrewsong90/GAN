@@ -1,9 +1,12 @@
-<h2>Connect</h2>
+<h2>Make Connection</h2>
 
-<%= @opportunity.title %>
-<br>
+<p class="section-header">Title</p>
+<div><%= @opportunity.title %></div><br>
+<p class="section-header">Company</p>
+<div><%= @opportunity.company %></div><br>
+<p class="section-header">Type</p>
+<div><%= @opportunity.job_type %></div><br>
 <br>
 
-<strong><%= @opportunity.user.full_name %></strong>
 
 <%= render 'applications/shared/form' %>

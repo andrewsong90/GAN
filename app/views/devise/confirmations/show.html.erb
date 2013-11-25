@@ -3,27 +3,27 @@
     Please type in the rest of information! 
   </p>
 
-<br><br>
+<br>
 
 <%= form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {:method => 'patch'}, :id => 'activation-form' do |f| %>
 	<fieldset>
 		<legend>Account activation <%= resource.full_name %></legend>
 
 	<% if @requires_password %>
-		<p><%= f.label :password, "Choose a Password:", :class => "section-header"%>
+		<p><%= f.label :password, "Password", :class => "section-header"%><br>
 		 <%= f.password_field :password, :autofocus => true %></p>
 		 
-		<p><%= f.label :password_confirmation, "Password Confirmation:", :class => "section-header" %>
+		<p><%= f.label :password_confirmation, "Password Confirmation ", :class => "section-header" %><br>
 		 <%= f.password_field :password_confirmation %></p>
 	<% end %>
 
-	<div><%= f.label :Phone, :class => "section-header" %>
+	<div><%= f.label :Phone, :class => "section-header" %><br>
   	<%= f.text_field :phone %></div> 
 
-	<div><%= f.label :Photo, :class => "section-header" %>
-  	<%= f.file_field :avatar %></div> 
+	<div><%= f.label :Photo, :class => "section-header" %><br>
+  	<%= f.file_field :avatar %></div><br>
 
 	<%= hidden_field_tag :confirmation_token,@confirmation_token %>
-	<p><%= f.submit "Activate" %></p>
+	<p><%= f.submit "Activate", :class => "btn btn-primary" %></p>
 	</fieldset>
 <% end %>
