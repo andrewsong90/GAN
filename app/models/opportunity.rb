@@ -1,21 +1,21 @@
 class Opportunity < ActiveRecord::Base
 
 	has_many :opportunity_skills
-	has_many :skills, :through => :opportunity_skills
+	has_many :skills, :through => :opportunity_skills, dependent: :destroy
 
 	belongs_to :user
-	has_many :applications
+	has_many :applications, dependent: :destroy
 
 	#Validation
 	validates_presence_of :title, :message => "Title cannot be blank"
 	validates_presence_of :company, :message => "Company cannot be blank"
 
+	#Configuration for database search
 	include PgSearch
 	pg_search_scope :search, against: [:title, :description]
 
 	#Database Search
 	def self.text_search(query)
-		logger.debug("QUuery #{query}")
 		if query.present?
 			search(query)
 		else

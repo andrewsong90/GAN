@@ -14,4 +14,14 @@ class Userdb < ActiveRecord::Base
 			user_record.save!
 		end
 	end
+
+	# Does the record exist in the database?
+	def self.compare_alum_db(params)
+		if self.where(:parent_email =>params[:user][:parent_email], :classyear => params[:user][:classyear]).first
+			true
+		else
+			false
+
+		end
+	end
 end

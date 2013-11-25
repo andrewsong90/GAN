@@ -3,9 +3,18 @@
 <%= form_tag opportunities_path, method: :get do %>
 	<p>
 		<%= text_field_tag :query, params[:query] %>
-		<%= submit_tag "Search", name:nil %>
+		<%= submit_tag "Search", name:nil, :class =>"btn btn-info" %>
 	</p>
 <% end %>
 
-<%= link_to "Create", new_opportunity_path, :class => "btn pull-right" %><br><br>	
-<%= link_to "View All", opportunities_path, :class => "btn btn-primary pull-right" %>
+<br><br>
+
+<div class="pull-right">
+	Want to create a new opportunity?
+	<%= link_to "Create", new_opportunity_path, :class => "btn " %><br><br>	
+</div>
+<br><br><br>
+<div class="pull-right">
+	Want to view all the opportunities?
+	<%= link_to "View All", opportunities_path, :class => "btn btn-primary" %>
+</div>

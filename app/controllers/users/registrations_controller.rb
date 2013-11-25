@@ -9,33 +9,37 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	end
 
 	def create
+		#If database authentiation fails
+		if params[:user][:type] == "Alum" && !Userdb.compare_alum_db(params)
+				flash[:error] = "Our database does not have your record. Please try again!"
+				session[:previous]=params[:user]
+				redirect_to :back
+		else
+		#database authentication success!
 
-		build_resource(sign_up_params)
-		
-		#This is for subclasses
-		resource.type=params[:user][:type]
+			# Clear the session if previous authentication failed.
+			session[:previous]=nil
 
-		if resource.save
-			UserMailer.welcome_email(resource).deliver
-      		yield resource if block_given?
-      		if resource.active_for_authentication?
+			build_resource(sign_up_params)
+			resource.type=params[:user][:type]
 
-      			permitted_params=skill_params
-				permitted_params[:skills].each do |skill|
-					resource.user_skills.create(:skill_id => skill)
-				end
+			if resource.save
+	      		yield resource if block_given?
+	      		if resource.active_for_authentication?
 
-        		set_flash_message :notice, :signed_up if is_flashing_format?
-        		sign_up(resource_name, resource)
-        		respond_with resource, :location => after_sign_up_path_for(resource)
-      		else
-        		set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
-        		expire_data_after_sign_in!
-        		respond_with resource, :location => after_inactive_sign_up_path_for(resource)
-      		end
-    	else
-      		clean_up_passwords resource
-      		respond_with resource
+
+	        		set_flash_message :notice, :signed_up if is_flashing_format?
+	        		sign_up(resource_name, resource)
+	        		respond_with resource, :location => after_sign_up_path_for(resource)
+	      		else
+	        		set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
+	        		expire_data_after_sign_in!
+	        		respond_with resource, :location => after_inactive_sign_up_path_for(resource)
+	      		end
+	    	else
+	      		clean_up_passwords resource
+	      		respond_with resource
+	    	end
     	end
 	end
 
@@ -44,7 +48,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	def configure_permitted_params
 	
 		if params[:user][:type]=="Alum"
-			devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname, :classyear, :type, :avatar)}
+			devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation,:fname,:lname, :classyear, :type, :parent_email)}
 			devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname, :avatar)}
 		else
 			devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname, :type)}

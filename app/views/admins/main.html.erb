@@ -1,4 +1,4 @@
-<h2>WELCOME ADMIN</h2>
+<h2>Welcome Admin!!</h2>
 
 <h3>Import Users</h3>
 <%= form_tag import_users_path, multipart: true do %>
@@ -6,6 +6,9 @@
 	<%= submit_tag "Import" %>
 <% end %>
 
+<br>
+
+<h3>Export Opportunities</h3>
 <p>
 	Download:
 	<%= link_to "CSV", opportunities_path(format: "csv") %>

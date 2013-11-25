@@ -7,6 +7,36 @@
 	color: #ffffff;
 }
 
+.width50{
+	width: 300px;
+}
+
+/* Override rest of the bootstrap*/
+.box_shadow{
+	-moz-box-shadow: 5px 5px 5px 1px #000000;
+	-webkit-box-shadow: 5px 5px 5px 1px #000000;
+	box-shadow: 5px 5px 5px 1px #000000;
+}
+
+.box_radius{
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.box_padding{
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 30px;
+	padding-bottom: 60px;
+}
+
+.sky_background{
+	background-color: #edecec;
+}
+
+
+
 /* Override bootstrap to customize navbar*/
 
 .navbar .brand{
@@ -37,6 +67,7 @@
 	font-weight: 700;
 	font-family: Georgia;
 	font-size: 18px;
+	display: inline-block;
 }
 
 .text-align-center{

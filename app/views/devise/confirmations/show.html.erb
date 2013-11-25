@@ -1,0 +1,24 @@
+<h2>Account Activation</h2>
+
+<%= form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {:method => 'patch'}, :id => 'activation-form' do |f| %>
+	<fieldset>
+		<legend>Account activation <%= resource.full_name %></legend>
+
+	<% if @requires_password %>
+		<p><%= f.label :password, "Choose a Password:", :class => "section-header"%>
+		 <%= f.password_field :password, :autofocus => true %></p>
+		 
+		<p><%= f.label :password_confirmation, "Password Confirmation:", :class => "section-header" %>
+		 <%= f.password_field :password_confirmation %></p>
+	<% end %>
+
+	<p><%= f.label :lname, "Last Name", :class => "section-header"%>
+		 <%= f.text_field :lname %></p>
+
+	<div><%= f.label :Photo, :class => "section-header" %>
+  	<%= f.file_field :avatar %></div> 
+
+	<%= hidden_field_tag :confirmation_token,@confirmation_token %>
+	<p><%= f.submit "Activate" %></p>
+	</fieldset>
+<% end %>

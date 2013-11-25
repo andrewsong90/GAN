@@ -14,19 +14,24 @@ GAN::Application.routes.draw do
     get '/' => 'devise/sessions#new', as: :root
   end
 
-  # get '/users/aregister' => 'users/registrations#new', :type => 'Alum', as: :new_alum_registration
-  # get '/users/fregister' => 'users/registrations#new', :type => 'Friend', as: :new_friend_registration
-
-  devise_for :users, :controllers => {:registrations => 'users/registrations'}
+  as :user do
+    patch '/users/confirmation' => 'confirmations#update', :via => :patch, :as => :update_user_confirmation
+  end
   
+  devise_for :users, :controllers => {:registrations => 'users/registrations', :confirmations => "confirmations"}
   
-
+  get '/contact' => 'opportunities#contact', as: :contact
   get '/about' => 'opportunities#about', as: :about
+  
   get '/account' => 'users#account', as: :my_account
+  get '/my_opportunities' => 'opportunities#my_index', as: :my_opportunities
   get '/users/signup' => 'users#sign_up', as: :new_user_signup
+
+  #The main page after sign in
   get "/main" => 'opportunities#main', as: :main
   get "/admin/main" => 'admins#main', as: :admin_main
 
+  #Path for importing CSV files
   post '/import' => "userdbs#import", as: :import_users
 
   # The priority is based upon order of creation: first created -> highest priority.

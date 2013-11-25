@@ -23,8 +23,19 @@
 <p class="section-header">This opportunity was offered by</p>
 
 <p><i class="icon-user"></i>&nbsp;<%= owner.full_name %></p>
-<p><i class="icon-briefcase"></i>&nbsp;Class of <%= owner.classyear%></p>
+
+<% if alum_signed_in? %>
+	<p><i class="icon-briefcase"></i>&nbsp;Class of <%= owner.classyear%></p>
+<% end %>
+
 <br>
-<%= link_to "Apply", new_opportunity_application_path(@opportunity), :class =>"btn btn-info" %>
+
+<% if can_apply?(@opportunity) %>
+	<%= link_to "Apply", new_opportunity_application_path(@opportunity), :class =>"btn btn-info" %>
+<% end %>
+
 <%= link_to "Back", opportunities_path, :class =>"btn btn-info" %>
-<%= link_to "Edit", edit_opportunity_path(@opportunity), :class =>"btn btn-info" %>
+
+<% if current_user.is_owner?(@opportunity) %>
+	<%= link_to "Edit", edit_opportunity_path(@opportunity), :class =>"btn btn-info" %>
+<% end %>

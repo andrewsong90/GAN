@@ -1,0 +1,51 @@
+
+<% if alum_signed_in? %>
+<h3>Opportunities applied for</h3>
+
+<div>
+	<table class="table table-striped">
+		<tr>
+			<th>Title</th>
+			<th>Company</th>
+			<th>Type</th>
+			<th>Location</th>
+			<th></th>
+		</tr>
+
+		<% @applied_opportunities.each do |f| %>
+			<tr>
+				<td><%= f.title %></td>
+				<td><%= f.company %></td>
+				<td><%= f.job_type %></td>
+				<td><%= f.location %></td>
+				<td><%= link_to "View", opportunity_path(f), :class => "btn btn-info" %></td>
+			</tr>
+		<% end %>	
+	</table>
+</div>
+
+<% end %>
+
+<h3>Opportunities created</h3>
+
+<div>
+	<table class="table table-striped">
+		<tr>
+			<th>Title</th>
+			<th>Company</th>
+			<th>Type</th>
+			<th>Location</th>
+			<th></th>
+		</tr>
+
+		<% @created_opportunities.each do |f| %>
+			<tr>
+				<td><%= f.title %></td>
+				<td><%= f.company %></td>
+				<td><%= f.job_type %></td>
+				<td><%= f.location %></td>
+				<td><%= link_to "View", opportunity_path(f), :class => "btn btn-info" %></td>
+			</tr>
+		<% end %>	
+	</table>
+</div>

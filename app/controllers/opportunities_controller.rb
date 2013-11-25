@@ -1,29 +1,23 @@
 class OpportunitiesController < ApplicationController
 
-#	before_filter :authenticate_user, :except => [:about, :welcome]
+	before_filter :authenticate_user, :except => [:about, :welcome, :contact]
 
-	def welcome
-		
+	def welcome		
 	end
+
 
 	def main
-		# logger.debug("ALUM_SESSION: #{alum_session.inspect}")
-		# logger.debug("current_user: #{current_user.inspect}")
-		# logger.debug("CURRENT_USER_CLASS: #{current_user.class.name}")
-		# #logger.debug("SESSION: #{session.inspect}")
-		# logger.debug("SESSION_ID: #{session[:session_id].inspect}")	
-		# #logger.debug("cookies: #{cookies.inspect}")
-		# #logger.debug("friend_SESSION: #{friend_session.inspect}")
-
-		
 	end
 
-	def about
-		
+	# Static page "About"
+	def about	
+	end
+
+	# Static page "Contact"
+	def contact
 	end
 
 	def index
-		logger.debug("FFFLLASSH #{flash.inspect}")
 		@opportunities = Opportunity.text_search(params[:query])
 
 		#Render CSV and html view
@@ -33,13 +27,27 @@ class OpportunitiesController < ApplicationController
 		end
 	end
 
+	# Shows opportunities created and applied by current user
+	def my_index
+		@created_opportunities = current_user.opportunities.all
+		logger.debug("Created #{@created_opportunities}")
+		if alum_signed_in?
+			applications = current_user.applications.all
+			@applied_opportunities=[]
+			applications.each do |app|
+				@applied_opportunities.append(Opportunity.find(app.opportunity_id))
+			end
+		end
+		logger.debug("Applied #{@applied_opportunities}")
+	end
+
+	# Show opportunity
 	def show
 		@opportunity = Opportunity.find(params[:id])
-		# @skills = []
-		# @opportunity.opportunity_skills.each do |set|
-		# 	@skills.append(Skill.find(set.skill_id))
-		# end
 		@skills=@opportunity.skills
+		if current_user.applied?(@opportunity)
+			flash[:notice] = "You have already applied to this opportunity!"
+		end
 	end
 
 
@@ -67,8 +75,6 @@ class OpportunitiesController < ApplicationController
 		end
 
 	end
-
-	#TODO : Still need to do edit part
 
 	def edit
 		@opportunity = Opportunity.find(params[:id])	
@@ -98,10 +104,12 @@ class OpportunitiesController < ApplicationController
 
 	private
 
+	#Strong parameters for opportunities
 	def opportunity_params
 		params.require(:opportunity).permit(:title,:location,:description,:job_type,:company,:time)
 	end
 
+	#Strong parameters for skills
 	def skill_params
 		params.permit(:skills => [])
 	end

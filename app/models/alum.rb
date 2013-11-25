@@ -1,3 +1,3 @@
 class Alum < User
-
+	
 end

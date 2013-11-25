@@ -1,9 +1,18 @@
 class ApplicationsController < ApplicationController
 
+	before_filter :authenticate_user
+
 	# Create a new Application
 	def new
-		@application = Application.new
+		
 		@opportunity = Opportunity.find(params[:opportunity_id])
+		
+		if can_apply?(@opportunity)
+			@application = Application.new
+		else
+			flash[:error]="You cannot apply!"
+			redirect_to :back
+		end
 	end
 
 	def create
@@ -14,8 +23,7 @@ class ApplicationsController < ApplicationController
 			redirect_to main_path
 		else
 			flash[:notice] = "Something went Wrong!"
-			#TODO: redfine the path!
-			#redirect_to new_opportunity_path
+			redirect_to :back
 		end
 	end
 
@@ -24,4 +32,17 @@ class ApplicationsController < ApplicationController
 	def application_params
 		params.require(:application).permit(:message,:opportunity_id)
 	end
+
+	# def can_apply?
+
+	# 	opportunity = Opportunity.find(params[:opportunity_id])
+
+	# 	if alum_signed_in? 
+	# 		&& !current_user.is_owner?(opportunity)
+	# 		&& !current_user.applied?(opportunity)
+	# 		true
+	# 	else
+	# 		false
+	# 	end
+	# end
 end

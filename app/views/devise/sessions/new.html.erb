@@ -2,24 +2,23 @@
 
 <br>
 
-<h3 class="text-align-center italics">Connect with other Gann Alumni</h3>
+<h3 class="text-align-center italics">Connect with other Alumni</h3>
 
 <br>
 
 <div class="row">
   <div class="span4 offset1">
-    <img src="/assets/gann.jpg" alt="gann"/>
+    <img src="/assets/gann.jpg" class="box_radius" alt="gann"/>
   </div>
 
-  <!-- TODO: Take a look at this message -->
   <%= devise_error_messages! %>
 
   <div class="span3 offset2">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-      <div><%= f.label :email %>
+      <div><i class="icon-envelope"></i>&nbsp;<%= f.label :email, :class => "section-header" %>
       <%= f.email_field :email, :autofocus => true %></div>
 
-      <div><%= f.label :password %>
+      <div><i class="icon-key"></i>&nbsp;<%= f.label :password, :class => "section-header" %>
       <%= f.password_field :password %></div>
 
       <% if devise_mapping.rememberable? -%>

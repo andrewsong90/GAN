@@ -1,19 +1,35 @@
-<h2>Sign up</h2>
+<% if @type == "Alum" %>
+  <h2>Register as Alum for GAN</h2><br>
+  <h3>Step 1: Alum Authentication</h3>
+  <p>
+    To ensure the security of the system, we are doing basic alumni authentication!<br>
+    Your parent's email(the address they used while you were in school) and your graduation year will be used.<br>
+  </p>
 
+<% else %>
+  <h2>Register as Friend for GAN</h2><br>
+  <h3>Step 1: Friend Authentication</h3>
+  <p>
+    To ensure the security of the system, we are doing basic friend authentication!<br>
+    Your invitation code sent by one of the alum will be used (Not implemented for MVP)<br>
+  </p>
+<% end %>
+<br>
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
 
-  <div><%= f.label :Photo, :class => "section-header" %>
-  <%= f.file_field :avatar %></div>  
+
+  <!--<% if session[:previous]!=nil %>
+    <div><%= f.label :email, :class => "section-header" %>
+    <%= f.email_field :email, :value => session[:previous][:email], :autofocus => true %>
+    </div>
+
+  <% end %>-->
+ 
 
   <div><%= f.label :email, :class => "section-header" %>
-  <%= f.email_field :email, :autofocus => true %></div>
+  <%= f.email_field :email, :autofocus => true %>
+  </div>
 
-  <div><%= f.label :password, :class => "section-header" %>
-  <%= f.password_field :password %></div>
-
-  <div><%= f.label :password_confirmation, :class => "section-header" %>
-  <%= f.password_field :password_confirmation %></div>
 
   <div><%= f.label "First Name", :class => "section-header" %>
   <%= f.text_field :fname %></div>
@@ -21,21 +37,16 @@
   <div><%= f.label "Last Name", :class => "section-header" %>
   <%= f.text_field :lname %></div>
 
-  <div><%= f.label "Skills", :class => "section-header" %>
-    <% counter = 0 %>  
-    <% @skills.each do |s|%>
-      <%= s.skill %>
-      <%= check_box_tag 'skills[]', s.id %>
-      <% if ((counter +=1) % 4) == 0 %>
-        <br>
-      <% end %>
-    <% end %>
-  </div>
+  <br>
 
-<br>
   <% if @type == "Alum" %>
+
+    <div><%= f.label "Parent Email", :class => "section-header" %>
+    <%= f.email_field :parent_email %></div>  
+
   	<div><%= f.label "Class Year", :class => "section-header" %>
-  	<%= f.number_field :classyear %></div>
+  	 <%= f.number_field :classyear %></div>
+  
   <% end %>
 
   <%= f.hidden_field :type, :value => @type %>
