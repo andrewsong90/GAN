@@ -20,7 +20,7 @@ class ApplicationsController < ApplicationController
 		if application.save
 			UserMailer.submission_email(current_user,application).deliver
 			flash[:notice] = "Connection requested! Please check your inbox!"
-			redirect_to main_path
+			redirect_to opportunities_path
 		else
 			flash[:notice] = "Something went Wrong!"
 			redirect_to :back

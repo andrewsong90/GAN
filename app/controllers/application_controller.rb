@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     if resource.type=="Admin"
       admin_main_path
     else
-  	   main_path	
+  	   opportunities_path	
     end
   end
 
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
       if admin_signed_in?
         admin_main_path
       else #If Alum or friend
-        main_path
+        opportunities_path
       end
     else #If not logged in
       root_path
@@ -34,13 +34,20 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+  def authenticate_admin
+    if !admin_signed_in?
+      flash[:error] = "You are not the administrator!"
+      redirect_to opportunities_path
+    end
+  end
+
   #Check whether alumni is signed in
   def alum_signed_in?
     user_signed_in? && (current_user.type=="Alum")  
   end
 
   def admin_signed_in?
-    user_signed_in? && (current_user.type="Admin")
+    user_signed_in? && (current_user.type=="Admin")
   end
 
   #Check whether the current user can apply to the opportunity or not

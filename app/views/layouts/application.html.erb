@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<% if user_signed_in? %>
 	<div class="navbar">
 		<div class="navbar-inner">
 			<div class="container whitefont">
@@ -19,22 +19,24 @@
 					</ul>
 
 					<div class="nav pull-right navbar-hcenter">
-						<% if user_signed_in? %>
-							
-							Welcome! <strong><%= current_user.full_name %></strong> (<%= current_user.class.name %>)
-							&nbsp;|&nbsp;
-							<i class="icon-user"></i>&nbsp;&nbsp;<%= link_to "My account", my_account_path %>
-							&nbsp;|&nbsp;
-							<i class="icon-briefcase"></i>&nbsp;&nbsp;<%= link_to "My opportunities", my_opportunities_path %>
-							&nbsp;|&nbsp;
-							<i class="icon-signout"></i>&nbsp;
-							<%= link_to "Logout", destroy_user_session_path, method: :delete %>
-						<% end %>
+						Welcome! <strong><%= current_user.full_name %></strong> (<%= current_user.class.name %>)
+						&nbsp;|&nbsp;
+						<i class="icon-tasks"></i>&nbsp;&nbsp;<%= link_to "Opportunities", opportunities_path %>
+						&nbsp;|&nbsp;
+						<i class="icon-user"></i>&nbsp;&nbsp;<%= link_to "My account", my_account_path %>
+						&nbsp;|&nbsp;
+						<i class="icon-briefcase"></i>&nbsp;&nbsp;<%= link_to "My opportunities", my_opportunities_path %>
+						&nbsp;|&nbsp;
+						<i class="icon-signout"></i>&nbsp;
+						<%= link_to "Logout", destroy_user_session_path, method: :delete %>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+<% else %>
+	<div class="blank_block"></div>
+<% end %>
 
 <% flash.each do |name,msg| %>
 	<div class="alert alert-<%= name == :notice ? "success" : "error" %>">

@@ -38,16 +38,15 @@ class OpportunitiesController < ApplicationController
 				@applied_opportunities.append(Opportunity.find(app.opportunity_id))
 			end
 		end
-		logger.debug("Applied #{@applied_opportunities}")
 	end
 
 	# Show opportunity
 	def show
 		@opportunity = Opportunity.find(params[:id])
 		@skills=@opportunity.skills
-		if current_user.applied?(@opportunity)
-			flash[:notice] = "You have already applied to this opportunity!"
-		end
+		# if current_user.applied?(@opportunity)
+		# 	flash[:notice] = "You have already applied to this opportunity!"
+		# end
 	end
 
 

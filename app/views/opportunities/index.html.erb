@@ -2,10 +2,11 @@
 
 <%= form_tag opportunities_path, method: :get do %>
 	<p>
-		<%= text_field_tag :query, params[:query] %>
-		<%= submit_tag "Search", name:nil %>
+		<%= text_field_tag :query, params[:query], :placeholder => "Enter Keyword" %>
+		<%= submit_tag "Search", :class => "btn btn-primary" %>
 	</p>
 <% end %>
+
 
 <div>
 	<table class="table table-striped">
@@ -14,6 +15,7 @@
 			<th>Company</th>
 			<th>Type</th>
 			<th>Location</th>
+			<th>Offered by</th>
 			<th></th>
 		</tr>
 
@@ -23,14 +25,15 @@
 				<td><%= f.company %></td>
 				<td><%= f.job_type %></td>
 				<td><%= f.location %></td>
-				<td><%= link_to "View", opportunity_path(f), :class => "btn btn-info" %></td>
+				<td><%= f.user.full_name %></td>
+				<td><%= link_to "View", opportunity_path(f), :class => "btn btn-success" %></td>
 			</tr>
 		<% end %>	
 	</table>
 </div>
 <br>
 <div class="pull-right">
-	<%= link_to "Create Opportunities", new_opportunity_path, :class => "btn btn-primary" %>
+	<%= link_to "Post Opportunity", new_opportunity_path, :class => "btn btn-info" %>
 </div>
 
 
