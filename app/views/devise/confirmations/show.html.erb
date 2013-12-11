@@ -5,7 +5,7 @@
 
 <br>
 
-<%= form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {:method => 'patch'}, :id => 'activation-form' do |f| %>
+<%= form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {:method => 'patch', :id => "confirmation_form"} do |f| %>
 	<fieldset>
 		<legend>Account activation <%= resource.full_name %></legend>
 
@@ -23,7 +23,33 @@
 	<div><%= f.label :Photo, :class => "section-header" %><br>
   	<%= f.file_field :avatar %></div><br>
 
+  	<%= check_box_tag :license %>&nbsp;I agree to the terms of agreement&nbsp;
+  	<a class="btn btn-primary" id="licenseButton">View</a>
+  	
+  	<br>
+  	<br>
+
 	<%= hidden_field_tag :confirmation_token,@confirmation_token %>
 	<p><%= f.submit "Activate", :class => "btn btn-primary" %></p>
 	</fieldset>
 <% end %>
+
+<!-- Modal -->
+<div class="modal fade" id="licenseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+

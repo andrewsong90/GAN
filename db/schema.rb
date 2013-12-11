@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131123170533) do
+ActiveRecord::Schema.define(version: 20131209060333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,10 @@ ActiveRecord::Schema.define(version: 20131123170533) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "message"
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
   end
 
   create_table "customers", force: true do |t|
@@ -98,6 +102,12 @@ ActiveRecord::Schema.define(version: 20131123170533) do
     t.string   "job_type"
     t.string   "company"
     t.string   "time"
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "opportunity_skills", force: true do |t|
@@ -105,6 +115,14 @@ ActiveRecord::Schema.define(version: 20131123170533) do
     t.datetime "updated_at"
     t.integer  "opportunity_id"
     t.integer  "skill_id"
+  end
+
+  create_table "opportunity_times", force: true do |t|
+    t.string   "types"
+    t.string   "date"
+    t.integer  "opportunity_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "skills", force: true do |t|

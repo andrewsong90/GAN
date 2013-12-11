@@ -19,6 +19,11 @@
   	<%= f.text_area :description, :class => "span6", :rows => "6", :placeholder => "Enter Job Description here" %></div>
 
     <br>
+    
+    <div><%= f.label "Upload", :class => "section-header" %><br>
+    <%= f.file_field :upload %></div>
+
+    <br>
 
     <div><%= f.label "Skills", :class => "section-header" %><br>
     <% counter = 0 %> 
@@ -41,11 +46,33 @@
 
     <br>
 	 <div><%= f.label "Location", :class => "section-header" %><br>
-  	<%= f.text_field :location %></div>
+  
+  <%= f.text_field :location, :class => "controls", :id =>"pac-input", :placeholder => "Enter a Location" %>
+  <!-- <input id="pac-input" class="controls" type="text"
+        placeholder="Enter a location"> -->
+    <div id="type-selector" class="controls">
+      <input type="radio" name="type" id="changetype-all" checked="checked">
+      <!-- <label for="changetype-all">All</label> -->
+<!-- 
+      <input type="radio" name="type" id="changetype-establishment">
+      <label for="changetype-establishment">Establishments</label>
 
-  	<div><%= f.label "time", :class => "section-header" %><br>
-  	<%= f.text_field :time %></div>  	
+      <input type="radio" name="type" id="changetype-geocode">
+      <label for="changetype-geocode">Geocodes</label> -->
+    </div>
+
+    <div class="gmap">
+      <div id="map-canvas-new"></div>
+  	</div>
+    <br>
+    <div><%= f.label "time", :class => "section-header" %><br>
+   
+    <%= radio_button_tag(:time_type, "flexible") %>Flexible<br>
+    <%= radio_button_tag(:time_type,"range") %>Range<br></div>  
+  
+  	<div><%= text_field_tag 'time[]', nil, disabled: true, id: "opportunity_fromtime" %></div>
+    <div><%= text_field_tag 'time[]', nil, :id => "opportunity_totime", :disabled => true %></div>  	
 
   	
-	<%= f.submit %>
+	<%= f.submit "Post opportunity", :class => "btn btn-primary" %>
 <% end %>

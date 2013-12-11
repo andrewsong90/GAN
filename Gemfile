@@ -31,11 +31,31 @@ gem 'figaro'
 # For attaching pictures
 gem 'paperclip'
 
+# Jquery file uploader
+gem 'jquery-fileupload-rails'
+
+# Jquery UI
+gem 'jquery-ui-rails'
+
+#For deploying to the server
 gem "capistrano", '~> 2.15.5'
 
 #full-text search
 gem 'pg_search'
 
+#page-specific javascript
+#gem 'paloma'
+
+gem "devise_invitable"
+
+#Geocoder
+gem 'geocoder'
+
+#Passing data to JavaScript
+gem 'gon'
+
+#Binding of Jquery with Turbolinks
+gem 'jquery-turbolinks'
 
 gem 'simple_form'
 

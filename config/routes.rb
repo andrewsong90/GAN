@@ -34,6 +34,10 @@ GAN::Application.routes.draw do
   #Path for importing CSV files
   post '/import' => "userdbs#import", as: :import_users
 
+  get '/opportunities/:id/download', :controller => 'opportunities', :action =>'download', as: :download
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

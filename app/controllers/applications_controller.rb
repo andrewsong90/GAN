@@ -18,7 +18,7 @@ class ApplicationsController < ApplicationController
 	def create
 		application = current_user.applications.build(application_params)
 		if application.save
-			UserMailer.submission_email(current_user,application).deliver
+			# UserMailer.submission_email(current_user,application).deliver
 			flash[:notice] = "Connection requested! Please check your inbox!"
 			redirect_to opportunities_path
 		else
@@ -30,6 +30,6 @@ class ApplicationsController < ApplicationController
 	private
 
 	def application_params
-		params.require(:application).permit(:message,:opportunity_id)
+		params.require(:application).permit(:message,:opportunity_id,:upload)
 	end
 end

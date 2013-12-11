@@ -1,3 +1,8 @@
+<% content_for :head do %>
+	<title>GAN Opportunities</title>
+	<%= javascript_include_tag "opportunities/show" %>
+<% end %>
+
 <p class="section-header">Title</p>
 <div><%= @opportunity.title %></div><br>
 <p class="section-header">Company</p>
@@ -14,8 +19,27 @@
 
 <p class="section-header">Location</p>
 <div><%= @opportunity.location %></div><br>
+
+<div class="gmap">
+	<div id="map-canvas-show"></div>
+</div>
+
+<br>
+
 <p class="section-header">Description</p>
 <div><%= @opportunity.description %></div><br>
+
+<p class="section-header">Time</p>
+<% if @time.first.is_flexible? %>
+	<div>flexible</div><br>
+<% else %>
+	<div><strong>From</strong>&nbsp;<%= @time.first.date %></div><br>
+	<div><strong>To</strong>&nbsp;<%= @time.second.date %></div><br>
+<% end %>
+
+
+
+
 
 <% owner = @opportunity.user %>
 
@@ -24,11 +48,13 @@
 
 <p><i class="icon-user"></i>&nbsp;<%= owner.full_name %></p>
 
-<% if alum_signed_in? %>
+<% if owner.is_alum? %>
 	<p><i class="icon-briefcase"></i>&nbsp;Class of <%= owner.classyear%></p>
 <% end %>
 
 <br>
+
+<%= link_to "Download", download_path(@opportunity.id), :target => '_blank' %>
 
 <% if can_apply?(@opportunity) %>
 	<%= link_to "Connect", new_opportunity_application_path(@opportunity), :class =>"btn btn-info" %>

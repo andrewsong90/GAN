@@ -3,16 +3,45 @@ class Opportunity < ActiveRecord::Base
 	has_many :opportunity_skills
 	has_many :skills, :through => :opportunity_skills, dependent: :destroy
 
+	# Association with opportunity timea
+	has_many :opportunity_times
+
 	belongs_to :user
 	has_many :applications, dependent: :destroy
+
+	# Paperclip attachment configuration. Custom path for the uploaded files to ensure security (instead of making these public)
+	has_attached_file :upload,
+		:path => ":rails_root/uploads/:class/:id/:style.:extension",
+		:url => ":id/:style.:extension"
+
+	# Geocoder for storing location
+	geocoded_by :location
+	after_validation :geocode
 
 	#Validation
 	validates_presence_of :title, :message => "Title cannot be blank"
 	validates_presence_of :company, :message => "Company cannot be blank"
 
+	validates_attachment_size :upload, :less_than => 5.megabytes
+
+
 	#Configuration for database search
 	include PgSearch
 	pg_search_scope :search, against: [:title, :description]
+
+	# Create opportunity. Removed from the controller for clarity purpose
+	def self.create_opportunity(user_id,params)
+		o=Opportunity.new
+		o.user_id=user_id
+		logger.debug("PARAMS, #{params}")
+		o.title=params["opportunity"][:title]
+		o.location=params[:opportunity][:location]
+		o.description=params[:opportunity][:description]
+		o.upload=params[:opportunity][:upload]
+		o.company=params[:opportunity][:company]
+		o.job_type=params[:opportunity][:job_type]
+		return o
+	end
 
 	#Database Search
 	def self.text_search(query)

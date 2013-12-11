@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
   	opportunity.user_id == self.id
   end
 
+  def is_alum?
+    self.type == "Alum"
+  end
+
   # Check if the user applied to the opportunity
   def applied? (opportunity)
     applications = opportunity.applications.to_a

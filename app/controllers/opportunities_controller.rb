@@ -17,6 +17,16 @@ class OpportunitiesController < ApplicationController
 	def contact
 	end
 
+	# Downloading uplodaded file from the opportunity
+	def download
+		@opportunity=Opportunity.find(params[:id])
+
+		send_file @opportunity.upload.path,
+					:filename => @opportunity.upload_file_name,
+					:type => @opportunity.upload_content_type,
+					:disposition => 'attachment' # To show the pdf file in the page, change it to "inline"
+	end
+
 	def index
 		@opportunities = Opportunity.text_search(params[:query])
 
@@ -30,7 +40,6 @@ class OpportunitiesController < ApplicationController
 	# Shows opportunities created and applied by current user
 	def my_index
 		@created_opportunities = current_user.opportunities.all
-		logger.debug("Created #{@created_opportunities}")
 		if alum_signed_in?
 			applications = current_user.applications.all
 			@applied_opportunities=[]
@@ -44,9 +53,9 @@ class OpportunitiesController < ApplicationController
 	def show
 		@opportunity = Opportunity.find(params[:id])
 		@skills=@opportunity.skills
-		# if current_user.applied?(@opportunity)
-		# 	flash[:notice] = "You have already applied to this opportunity!"
-		# end
+		@time=@opportunity.opportunity_times
+		gon.latitude=@opportunity.latitude
+		gon.longitude=@opportunity.longitude
 	end
 
 
@@ -57,14 +66,18 @@ class OpportunitiesController < ApplicationController
 	end
 
 	def create
-		opportunity=current_user.opportunities.build(opportunity_params)
+	
+		opportunity=current_user.opportunities.build(opportunity_params[:opportunity])
 
 		if opportunity.save
 
-			permitted_params=skill_params
-			permitted_params[:skills].each do |skill|
+			# permitted_params=skill_params
+			skill_params[:skills].each do |skill|
 				opportunity.opportunity_skills.create(:skill_id => skill)
 			end
+
+			# Create time objects
+			OpportunityTime.createTime(opportunity.id, opportunity_params)
 			
 			flash[:notice] = "Opportunity Created!"
 			redirect_to opportunities_path
@@ -105,7 +118,7 @@ class OpportunitiesController < ApplicationController
 
 	#Strong parameters for opportunities
 	def opportunity_params
-		params.require(:opportunity).permit(:title,:location,:description,:job_type,:company,:time)
+		params.permit({opportunity: [:title,:location,:description,:job_type,:company,:upload, :latitude, :longitude]},:time_type,:time => [])
 	end
 
 	#Strong parameters for skills
