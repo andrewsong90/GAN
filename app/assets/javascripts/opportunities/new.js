@@ -7,6 +7,7 @@ $(document).ready(function(){
       onSelect: function(dateText, inst){
         start_date = new Date($(this).val());
       },
+      dateFormat: "yy-mm-dd",
       maxDate: RangeEnd(end_date)
     });
 
@@ -14,6 +15,7 @@ $(document).ready(function(){
       onSelect: function(dateText,inst){
         end_date= new Date($(this).val());
       },
+      dateFormat: "yy-mm-dd",
       minDate: simple() //RangeStart(start_date)
     });
 
@@ -58,8 +60,8 @@ function RangeStart(start){
 
 function initialize() {
   var mapOptions = {
-    center: new google.maps.LatLng(32, -74),
-    zoom: 13
+    center: new google.maps.LatLng(42.359184, -71.093544),
+    zoom: 14
   };
   var map = new google.maps.Map(document.getElementById('map-canvas-new'),
     mapOptions);

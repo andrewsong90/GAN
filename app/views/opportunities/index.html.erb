@@ -15,6 +15,7 @@
 			<th>Company</th>
 			<th>Type</th>
 			<th>Location</th>
+			<th>Offered Date</th>
 			<th>Offered by</th>
 			<th></th>
 		</tr>
@@ -25,6 +26,7 @@
 				<td><%= f.company %></td>
 				<td><%= f.job_type %></td>
 				<td><%= f.location %></td>
+				<td><%= f.created_at.strftime('%b. %e, %Y') %></td>
 				<td><%= f.user.full_name %></td>
 				<% if can_apply?(f) %>
 					<td><%= link_to "View & Connect", opportunity_path(f), :class => "btn btn-info" %></td>

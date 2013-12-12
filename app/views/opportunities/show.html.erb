@@ -27,14 +27,22 @@
 <br>
 
 <p class="section-header">Description</p>
-<div><%= @opportunity.description %></div><br>
+<div><%= @opportunity.description %></div>
+
+<% if @opportunity.upload.path != nil %>
+	<div><i class="icon-hand-right"></i>&nbsp;For more details, take a look at the attached file
+	<%= link_to "Download", download_path(@opportunity.id) %>
+</div>
+<% end %>
+<br>
+
 
 <p class="section-header">Time</p>
 <% if @time.first.is_flexible? %>
 	<div>flexible</div><br>
 <% else %>
-	<div><strong>From</strong>&nbsp;<%= @time.first.date %></div><br>
-	<div><strong>To</strong>&nbsp;<%= @time.second.date %></div><br>
+	<div><strong>From</strong>&nbsp;<%= @time.first.date.to_time.strftime('%b. %e, %Y (%a)') %></div><br>
+	<div><strong>To</strong>&nbsp;<%= @time.second.date.to_time.strftime('%b. %e, %Y (%a)') %></div><br>
 <% end %>
 
 
@@ -54,7 +62,6 @@
 
 <br>
 
-<%= link_to "Download", download_path(@opportunity.id), :target => '_blank' %>
 
 <% if can_apply?(@opportunity) %>
 	<%= link_to "Connect", new_opportunity_application_path(@opportunity), :class =>"btn btn-info" %>

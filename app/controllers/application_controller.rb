@@ -46,8 +46,14 @@ class ApplicationController < ActionController::Base
     user_signed_in? && (current_user.type=="Alum")  
   end
 
+  #Check whether admin is signed in
   def admin_signed_in?
     user_signed_in? && (current_user.type=="Admin")
+  end
+
+  #Check whether friend is signed in
+  def friend_signed_in?
+    user_signed_in? && (current_user.type=="Friend")    
   end
 
   #Check whether the current user can apply to the opportunity or not

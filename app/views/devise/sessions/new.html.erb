@@ -37,8 +37,11 @@
 
     <strong>Here for the first time?</strong>
 
+
+
     <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-    	<%= link_to "Register", new_user_signup_path %>
+    	<!-- <%= link_to "Register", new_user_signup_path %> -->
+      <%= link_to "Register", new_alum_registration_path %>
     <% end -%>
 
     <br><br>

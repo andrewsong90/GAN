@@ -10,8 +10,8 @@ en:
         header: "Send invitation"
         submit_button: "Send an invitation"
       edit:
-        header: "Set your password"
-        submit_button: "Set my password"
+        header: "Welcome to GAN! Please Sign Up"
+        submit_button: "Register"
     mailer:
       invitation_instructions:
         subject: 'Invitation instructions'

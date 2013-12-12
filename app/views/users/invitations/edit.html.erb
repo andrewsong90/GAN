@@ -1,0 +1,30 @@
+ <h2>Register as Friend for GAN</h2><br>
+  <!-- <h3>Step 1: Friend Authentication</h3> -->
+  <p>
+    Greetings! You have been invited to GAN by <strong><%= @inviter.full_name %></strong><br>
+    Please fill in the rest of information and complete the registration process!
+  </p>
+
+<%= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f| %>
+  <%= devise_error_messages! %>
+  <%= f.hidden_field :invitation_token %>
+  <%= f.hidden_field :type %>
+
+  <div><%= f.label "First Name", :class => "section-header" %><br>
+  <%= f.text_field :fname %></div>
+
+  <div><%= f.label "Last Name", :class => "section-header" %><br>
+  <%= f.text_field :lname %></div>
+
+  <div><%= f.label :Phone, :class => "section-header" %><br>
+    <%= f.text_field :phone %></div> 
+
+  <div><%= f.label :Photo, :class => "section-header" %><br>
+    <%= f.file_field :avatar %></div><br>
+
+
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+
+  <%= f.submit t("devise.invitations.edit.submit_button") %>
+<% end %>

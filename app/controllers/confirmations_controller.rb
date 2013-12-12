@@ -8,12 +8,12 @@ class ConfirmationsController < Devise::ConfirmationsController
 				
 				#Update password
 				@confirmable.attempt_set_password(params[:user])
-				#Update rest of the info
+				#Update rest of the Information
 				@confirmable.update_attributes(:avatar => params[:user][:avatar],:phone => params[:user][:phone])
 				if @confirmable.valid?
 					do_confirm
 				else
-					flash[:error] = "Information wrong!"
+					# flash[:error] = "Information wrong!"
 					do_show
 					@confirmable.errors.clear
 				end
@@ -65,6 +65,8 @@ class ConfirmationsController < Devise::ConfirmationsController
 		@confirmation_token = params[:confirmation_token]
 		@requires_password = true
 		self.resource = @confirmable
+		logger.debug("DO SHOW")
+		logger.debug("PARAMS #{params[:confirmation_token]}")
 		render 'devise/confirmations/show'
 	end
 

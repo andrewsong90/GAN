@@ -20,21 +20,33 @@ class OpportunitiesController < ApplicationController
 	# Downloading uplodaded file from the opportunity
 	def download
 		@opportunity=Opportunity.find(params[:id])
+		if @opportunity.upload.path == nil
+			flash[:error]= "No attachement exists!"
+			redirect_to opportunity_path(@opportunity)
+		else
+			send_file @opportunity.upload.path,
+				:filename => @opportunity.upload_file_name,
+				:type => @opportunity.upload_content_type,
+				:disposition => 'attachment' # To show the pdf file in the page, change it to "inline"
+		end				
 
-		send_file @opportunity.upload.path,
-					:filename => @opportunity.upload_file_name,
-					:type => @opportunity.upload_content_type,
-					:disposition => 'attachment' # To show the pdf file in the page, change it to "inline"
 	end
 
 	def index
-		@opportunities = Opportunity.text_search(params[:query])
+		if friend_signed_in?
+			opportunities = Opportunity.text_search(params[:query])
+			@opportunities = opportunities.select { |opportunity| opportunity.user.id == current_user.id }
+		else
 
-		#Render CSV and html view
-		respond_to do |format|
-			format.html
-			format.csv { render text: @opportunities.to_csv }
+			@opportunities = Opportunity.text_search(params[:query])
 		end
+		
+			#Render CSV and html view
+			respond_to do |format|
+				format.html
+				format.csv { render text: @opportunities.to_csv }
+			end
+		
 	end
 
 	# Shows opportunities created and applied by current user
@@ -54,11 +66,11 @@ class OpportunitiesController < ApplicationController
 		@opportunity = Opportunity.find(params[:id])
 		@skills=@opportunity.skills
 		@time=@opportunity.opportunity_times
+
+		# Google map coordiantes
 		gon.latitude=@opportunity.latitude
 		gon.longitude=@opportunity.longitude
 	end
-
-
 
 	def new
 		@opportunity=Opportunity.new

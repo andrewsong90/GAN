@@ -37,7 +37,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	        		respond_with resource, :location => after_inactive_sign_up_path_for(resource)
 	      		end
 	    	else
-	    		logger.debug("HERE?")
 	    		flash[:error] = "Wrong information"
 	      		redirect_to :back
 	    	end
