@@ -1,5 +1,7 @@
 class OpportunitiesController < ApplicationController
 
+	require 'will_paginate/array'
+
 	before_filter :authenticate_user, :except => [:about, :welcome, :contact]
 
 	def welcome		
@@ -39,6 +41,7 @@ class OpportunitiesController < ApplicationController
 		else
 
 			@opportunities = Opportunity.text_search(params[:query])
+			logger.debug("OPPOR #{@opportunities}")
 		end
 		
 			#Render CSV and html view

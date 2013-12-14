@@ -44,7 +44,7 @@ gem "capistrano", '~> 2.15.5'
 gem 'pg_search'
 
 #page-specific javascript
-#gem 'paloma'
+gem 'less-rails'
 
 gem "devise_invitable"
 
@@ -58,6 +58,10 @@ gem 'gon'
 gem 'jquery-turbolinks'
 
 gem 'simple_form'
+
+#Pagination of opportunities
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'

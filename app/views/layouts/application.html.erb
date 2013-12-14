@@ -8,7 +8,6 @@
 
   <%= yield :head %>
 
-  
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places" ></script>
 
 
@@ -23,7 +22,7 @@
 				<a href=<%= home_path %> class="brand">GAN</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><a href='<%= about_path %>'>About</a></li>
+						<li><a href='<%= about_path %>' class="whitefont">About</a></li>
 						<li><a href="<%= contact_path %>">Contact</a></li>
 					</ul>
 
@@ -58,6 +57,12 @@
 	
 	<%= yield %>
 </div>
+
+<% if user_signed_in? %>
+<div class="navbar navbar-fixed-bottom">
+	<p class="whitefont text-align-center"> Best viewed in Firefox and Chrome </p>
+</div>
+<% end %>
 
 </body>
 </html>

@@ -1,11 +1,20 @@
-<h3>Opportunities</h3><br>
+<h3>Welcome to GAN</h3><br>
 
 <%= form_tag opportunities_path, method: :get do %>
 	<p>
 		<%= text_field_tag :query, params[:query], :placeholder => "Enter Keyword" %>
-		<%= submit_tag "Search", :class => "btn btn-primary" %>
+		<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+			<i class="icon-search"></i>
+		<% end %>
+		<span class="pull-right">
+			<%= link_to new_opportunity_path, :class => "btn btn-success" do %>
+				<i class="icon-pencil"></i>&nbsp;Post
+			<% end %>
+		</span>
 	</p>
+
 <% end %>
+
 
 
 <div>
@@ -37,9 +46,11 @@
 		<% end %>	
 	</table>
 </div>
-<br>
-<div class="pull-right">
-	<%= link_to "Post Opportunity", new_opportunity_path, :class => "btn btn-info" %>
-</div>
+
+
+
+
+
+
 
 

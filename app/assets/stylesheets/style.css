@@ -46,36 +46,56 @@
 }
 
 
-
 /* Override bootstrap to customize navbar*/
+
 
 .navbar .brand{
 	text-shadow: none;
 	font-weight: 700;
 	font-family: Georgia;
-	font-size: 18px;
+	font-size: 30px;
 	color: #ffffff;
 }
 
 .navbar .nav > li > a:hover{
-	color: #ffffff;
+	color: #992135;
 	text-decoration: underline;
 }
 
-.navbar .nav > li > a, .nav > a{
-	text-shadow: none;
+.navbar .nav > li > a, .navbar .nav > li > a:hover{
+	font-size: 18px;
 	color: #ffffff;
 }
 
+.nav > a{
+	text-shadow: none;
+	font-size: 16px;
+	color: #992135;
+}
+
 .navbar-inner{
-	background-color: #3d3d3d;
+	padding-right: 0px;
+	background-color: #992135;
 	background-image: none;
 }
 
 .navbar-hcenter{
+	background-color: #C6930A;
+	padding-right: 15px;
+	padding-left: 15px;
 	line-height: 40px;
+	color: #992135;
+
+	-moz-border-bottom-left-radius: 13px;
+	-webkit-border-bottom-left-radius: 13px;
+	border-bottom-left-radius: 13px;
 }
 
+.navbar-fixed-bottom{
+	padding-top: 10pxr;
+	background-color: #992135;
+	height: 70px;
+}
 
 /*Fonts configuration*/
 
@@ -100,6 +120,10 @@
 	height: 100%;
 	margin: 0;
 	padding: 0;
+}
+
+body{
+	padding-bottom: 150px;
 }
 
 #map-canvas-new img, #map-canvas-show img {
