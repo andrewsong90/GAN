@@ -27,6 +27,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 gem 'twitter-bootstrap-rails'
+gem 'jasny_bootstrap_extension_rails'
 
 gem 'figaro'
 
