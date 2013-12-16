@@ -1,0 +1,10 @@
+<!-- TODO: Still need to find some clearer way -->
+
+<div class="nested-fields">
+	<div class="field" style="display: inline-block;">
+		<%= f.label "Upload", :class => "custom-form" %>
+		<%= f.file_field :avatar %>
+	</div>
+
+	<%= link_to_remove_association "remove", f %>
+</div>

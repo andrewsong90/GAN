@@ -3,6 +3,19 @@ var end_date;
 
 $(document).ready(function(){
 
+  $('#opportunity_files_help').popover({
+    content: "Upload documents for job descriptions (maximum of 3)"
+  });
+
+  $('#opportunity_time_help').popover({
+    content: "You have two options!<br><strong>Flexible:</strong> Make appointments later on<br><strong>Range:</strong> Select the available range for dates",
+    html: true
+  });
+
+  $('#uploads').on("change","input[type=file]",function(e){
+    alert("Fired by "+e.target.id);
+  });
+
   $("#opportunity_fromtime").datepicker({
       onSelect: function(dateText, inst){
         start_date = new Date($(this).val());

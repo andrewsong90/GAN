@@ -77,11 +77,25 @@ class OpportunitiesController < ApplicationController
 
 	def new
 		@opportunity=Opportunity.new
+		@opportunity.uploads.build
 		@skills=Skill.all
+
+		respond_to do |format|
+			format.html
+			format.js
+		end
+	end
+
+	def upload
+		@form=params[:form]
+		respond_to do |format|
+			format.js
+		end
 	end
 
 	def create
 	
+		logger.debug("OPPORTUITY #{opportunity_params}")
 		opportunity=current_user.opportunities.build(opportunity_params[:opportunity])
 
 		if opportunity.save
@@ -120,7 +134,7 @@ class OpportunitiesController < ApplicationController
 
 	def update
 		@opportunity = Opportunity.find(params[:id])
-		if @opportunity.update(opportunity_params)
+		if @opportunity.update(opportunity_params[:opportunity])
 			flash[:notice]="Opportunity successfully updated"
 			redirect_to opportunity_path(@opportunity)
 		else
@@ -133,7 +147,8 @@ class OpportunitiesController < ApplicationController
 
 	#Strong parameters for opportunities
 	def opportunity_params
-		params.permit({opportunity: [:title,:location,:description,:job_type,:company,:upload, :latitude, :longitude]},:time_type,:time => [])
+		params.permit(:time_type,:time => [],opportunity: [:title,:location,:description,:job_type,:company,:upload, :latitude, :longitude, uploads_attributes: [:id, :avatar, :_destroy]])
+		# ,:time_type,:time => []
 	end
 
 	#Strong parameters for skills

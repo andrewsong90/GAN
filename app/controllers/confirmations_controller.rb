@@ -8,6 +8,7 @@ class ConfirmationsController < Devise::ConfirmationsController
 				
 				#Update password
 				@confirmable.attempt_set_password(params[:user])
+			
 				#Update rest of the Information
 				@confirmable.update_attributes(:avatar => params[:user][:avatar],:phone => params[:user][:phone])
 				if @confirmable.valid?

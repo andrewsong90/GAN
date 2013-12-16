@@ -6,6 +6,7 @@ GAN::Application.routes.draw do
     resources :applications
   end
   
+  get '/opportunities/new/upload' => "opportunities#upload", as: :new_upload
 
   devise_scope :user do
     get '/friend/register' => 'users/registrations#new', :type => 'Friend', as: :new_friend_registration
@@ -25,7 +26,7 @@ GAN::Application.routes.draw do
   
   get '/account' => 'users#account', as: :my_account
   get '/my_opportunities' => 'opportunities#my_index', as: :my_opportunities
-  get '/users/signup' => 'users#sign_up', as: :new_user_signup
+#  get '/users/signup' => 'users#sign_up', as: :new_user_signup
 
   #The main page after sign in
   get "/main" => 'opportunities#main', as: :main

@@ -10,7 +10,8 @@
   <% end %>
 
   <div><%= f.label "Profile picture", :class => "section-header" %><br>
-  <%= f.file_field :avatar %></div><br>
+  <%= f.file_field :avatar, :value => f.object.avatar.url %>
+  <%= Upload.clarify_name(f.object.avatar.url) %></div><br>
 
   <div><%= f.label :password, :class=>"section-header" %> <br><i>(leave blank if you don't want to change it)</i><br />
   <%= f.password_field :password, :autocomplete => "off" %></div>

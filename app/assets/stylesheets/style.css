@@ -2,6 +2,11 @@
 	display: inline-block;
 }
 
+/* Mouse popover pointer*/
+
+.help{
+	cursor: help;
+}
 
 .whitefont{
 	color: #ffffff;

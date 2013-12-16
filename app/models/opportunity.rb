@@ -14,6 +14,12 @@ class Opportunity < ActiveRecord::Base
 		:path => ":rails_root/uploads/:class/:id/:style.:extension",
 		:url => ":id/:style.:extension"
 
+	# Multiple uploads
+	has_many :uploads
+	accepts_nested_attributes_for :uploads, :reject_if => :all_blank, :allow_destroy => true
+
+
+
 	# Geocoder for storing location
 	geocoded_by :location
 	after_validation :geocode
@@ -25,9 +31,42 @@ class Opportunity < ActiveRecord::Base
 	validates_attachment_size :upload, :less_than => 5.megabytes
 
 
+
 	#Configuration for database search
 	include PgSearch
 	pg_search_scope :search, against: [:title, :description]
+
+	def new_asset_attributes=(asset_attributes)
+		asset_attributes.each do |attributes|
+			
+			# asset_params = ActionController::Parameters.new 
+			# user_record.update_attributes(userdb_params.permit(:fname,:lname,:classyear,:parent_email))
+			# user_record.save!
+
+			logger.debug("I WAZ HERE")
+
+			uploads.build(attributes.permit(:avatar))
+		end
+	end
+
+	def existing_asset_attributes=(asset_attributes)
+		uploads.reject(&:new_record?).each do |asset|
+			attributes = asset_attributes[asset.id.to_s]
+			if attributes
+				asset.attributes = attributes
+			else
+				upload.delete(asset)
+			end
+		end
+	end
+
+	def save_uploads
+		logger.debug("AAAAAAAAAAAA")
+		uploads.each do |asset|
+			asset.save(false)
+		end
+	end 
+
 
 	# Create opportunity. Removed from the controller for clarity purpose
 	def self.create_opportunity(user_id,params)
