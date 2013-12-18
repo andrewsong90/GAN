@@ -15,8 +15,6 @@
 
 <% end %>
 
-
-
 <div>
 	<table class="table table-striped">
 		<tr>
@@ -46,6 +44,9 @@
 		<% end %>	
 	</table>
 </div>
+<br>
+
+<%= paginate @opportunities, :theme => 'twitter-bootstrap', :window => 2 %>
 
 
 

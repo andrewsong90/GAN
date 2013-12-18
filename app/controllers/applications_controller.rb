@@ -9,6 +9,7 @@ class ApplicationsController < ApplicationController
 		
 		if can_apply?(@opportunity)
 			@application = Application.new
+			@uploads = current_user.useruploads.all.to_a
 		else
 			flash[:error]="You cannot apply!"
 			redirect_to :back
@@ -18,7 +19,8 @@ class ApplicationsController < ApplicationController
 	def create
 		application = current_user.applications.build(application_params)
 		if application.save
-			# UserMailer.submission_email(current_user,application).deliver
+			#attachment_params
+			UserMailer.submission_email(current_user,application,params[:attachments]).deliver
 			flash[:notice] = "Connection requested! Please check your inbox!"
 			redirect_to opportunities_path
 		else
@@ -31,5 +33,9 @@ class ApplicationsController < ApplicationController
 
 	def application_params
 		params.require(:application).permit(:message,:opportunity_id,:upload)
+	end
+
+	def attachment_params
+		params.permit(:attachments => [])
 	end
 end

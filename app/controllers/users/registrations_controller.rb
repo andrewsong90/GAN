@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
-	before_filter :configure_permitted_params, :only => ["create","update"]
+	before_filter :registration_permitted_params, :only => :create
+	before_filter :update_permitted_params, :only => :update
 
 	def new
 		@type=params[:type]
@@ -43,17 +44,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
     	end
 	end
 
+	def edit
+		current_user.useruploads.build
+		super
+	end
+
+	def update
+		super		
+	end
+
 	protected
 
-	def configure_permitted_params
-	
+	def registration_permitted_params
 		if params[:user][:type]=="Alum"
 			devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation,:fname,:lname, :classyear, :type, :parent_email)}
-			devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname, :avatar)}
 		else
 			devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname, :type)}
-			devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :fname,:lname)}
 		end
+	end
+
+	def update_permitted_params
+		devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :current_password, :phone, :avatar, :fname,:lname, useruploads_attributes: [:id, :avatar, :_destroy])}
 	end
 
 	def skill_params

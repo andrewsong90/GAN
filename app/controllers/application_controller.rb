@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
     if alum_signed_in? && !current_user.is_owner?(opportunity) && !current_user.applied?(opportunity)
       true
     else
-      false
+      true #false 
     end
   end
 

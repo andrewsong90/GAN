@@ -19,9 +19,16 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
   end
 
   # When an application is submitted
-  def submission_email(user,application)
+  def submission_email(user,application,index_of_uploads)
   	@user, @application, @opportunity =user, application, application.opportunity
-  	mail(to: @user.email , bcc: @opportunity.user.email, subject:"[GAN] Application has been submitted")
+    
+
+    index_of_uploads.each do |index|
+      upload=Userupload.find(index)
+      attachments << (attachments[upload.avatar_file_name] = File.open(upload.avatar.path, 'rb'){|f| f.read })
+    end
+  	
+    mail(to: @user.email , bcc: @opportunity.user.email, subject:"[GAN] Application has been submitted")
   end
 
 end

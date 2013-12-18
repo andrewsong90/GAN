@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
   has_many :user_skills
   has_many :skills, :through => :user_skills
   
+  # Multiple uploads
+  has_many :useruploads
+  accepts_nested_attributes_for :useruploads, :reject_if => :all_blank, :allow_destroy => true
+
   # Check if the user created the opportunity
   def is_owner? (opportunity)
   	opportunity.user_id == self.id

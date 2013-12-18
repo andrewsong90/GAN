@@ -1,4 +1,19 @@
 <%= form_for @opportunity, :html => { :multipart => true } do |f| %>
+
+    <div><%= f.label "Logo", :class => "section-header" %><br>
+      <div class="fileinput fileinput-new" data-provides="fileinput">
+        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 250px; height: 250px;"></div>
+        <div>
+          <span class="btn btn-default btn-file">
+            <span class="fileinput-new">Select image</span>
+            <span class="fileinput-exists">Change</span>
+            <%= f.file_field :upload %>
+          </span>
+          <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+        </div>
+      </div>
+    </div>
+
   
   	<div><%= f.label "Title", :class => "section-header" %><br>
   	<%= f.text_field :title %></div>
@@ -17,26 +32,31 @@
 
   	<div><%= f.label "Job Description", :class => "section-header" %><br>
   	<%= f.text_area :description, :class => "span6", :rows => "6", :placeholder => "Enter Job Description here" %></div>
-
-    <br>
     
-    <div><%= f.label "Image", :class => "section-header" %><br>
-    <%= f.file_field :upload %></div>
-
     <br>
 
     <div><%= f.label "Files", :class => "section-header" %>
       &nbsp;<a id="opportunity_files_help" class="help"><i  class="icon icon-question-sign"></i></a><br>
+      <div class="btn btn-primary">
+            <%= link_to_add_association 'Add Uploads', f, :uploads %>
+      </div>
+
+      <br><br>
+      
       <div id="uploads">  
         <%= f.fields_for :uploads do |upload| %>
-          <%= render 'upload_fields', :f => upload %>
-          <%= Upload.clarify_name(upload.object.avatar.url) %>
-          <div class="btn btn-primary">
-            <%= link_to_add_association 'Add Uploads', f, :uploads %>
-          </div>  
+          
+          <% if !(@name=upload.object.avatar_file_name) %>
+            <%= render 'upload_fields', :f => upload %>
+          <% else %>
+            <%= render 'edit_fields', :f => upload %>
+          <% end %>
+          
+          <br>  
         <% end %>
+        
       </div>
-  </div>
+    </div>
 
   <br><br>
 
@@ -60,7 +80,9 @@
     </div>
 
     <br>
-	 <div><%= f.label "Location", :class => "section-header" %><br>
+	 <div><%= f.label "Location", :class => "section-header" %></div>
+
+   <br>
   
   <%= f.text_field :location, :class => "controls", :id =>"pac-input", :placeholder => "Enter a Location" %>
   <!-- <input id="pac-input" class="controls" type="text"
@@ -81,10 +103,12 @@
   	</div>
     <br>
     <div><%= f.label "time", :class => "section-header" %>
-      &nbsp;<a id="opportunity_time_help" class="help"><i  class="icon icon-question-sign"></i></a><br><br>
+      &nbsp;<a id="opportunity_time_help" class="help"><i  class="icon icon-question-sign"></i></a><br>
     <%= radio_button_tag(:time_type, "flexible") %>Flexible<br>
     <%= radio_button_tag(:time_type,"range") %>Range<br></div>  
   
+    <br>
+    
   	<div><%= text_field_tag 'time[]', nil, disabled: true, id: "opportunity_fromtime" %></div>
     <div><%= text_field_tag 'time[]', nil, :id => "opportunity_totime", :disabled => true %></div>  	
 

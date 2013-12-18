@@ -1,3 +1,8 @@
+<% content_for :head do %>
+  <title>GAN Opportunities</title>
+  <%= javascript_include_tag "users/registration" %>
+<% end %>
+
 <h2>Edit Profile</h2>
 
 <br>
@@ -10,8 +15,33 @@
   <% end %>
 
   <div><%= f.label "Profile picture", :class => "section-header" %><br>
-  <%= f.file_field :avatar, :value => f.object.avatar.url %>
-  <%= Upload.clarify_name(f.object.avatar.url) %></div><br>
+  <%= f.file_field :avatar %>
+  <%= f.object.avatar_file_name %></div><br>
+
+  <div><%= f.label "Resumes", :class => "section-header" %>
+    &nbsp;<a id="resume_help" class="help"><i  class="icon icon-question-sign"></i></a><br>
+    <div id="uploads">  
+      <%= f.fields_for :useruploads do |upload| %>
+        <% if !(@name=upload.object.avatar_file_name) %>
+          <%= render 'userupload_fields', :f => upload %>
+        <% else %>
+          <%= render 'edit_userupload_fields', :f => upload %>
+        <% end %>
+        <br>
+      <% end %>
+    
+      <div class="btn">
+        <%= link_to_add_association 'Add Uploads', f, :useruploads %>
+      </div>
+      
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <div><%= f.label :Phone, :class => "section-header" %><br>
+    <%= f.text_field :phone, :id => "phone", :placeholder => "XXX-XXX-XXXX" %></div> 
+
 
   <div><%= f.label :password, :class=>"section-header" %> <br><i>(leave blank if you don't want to change it)</i><br />
   <%= f.password_field :password, :autocomplete => "off" %></div>
@@ -22,14 +52,8 @@
   <div><%= f.label :current_password, :class=>"section-header" %><br> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></div>
 
+  
+
 
   <div><%= f.submit "Update", :class =>"btn" %></div>
 <% end %>
-
-<!--
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
-
-<%= link_to "Back", :back %>
--->

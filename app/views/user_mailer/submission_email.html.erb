@@ -1,8 +1,19 @@
+<h3> Dear <%= @opportunity.user.full_name %></h3>,
 
-<strong><%= @user.full_name %> (Class of <%= @user.classyear %>)</strong> wants to connect with <%= @opportunity.user.full_name %><br>
-on <%= @opportunity.title %><br><br>
+<strong><%= @user.full_name %></strong> (Class of <%= @user.classyear %>) wants to connect with you:<br>
 
-Below is a message <%= @user.fname %> has attached:<br>
+<h4>Title:</h4>&nbsp;<%= @opportunity.title %><br>
+<h4>Company:</h4>&nbsp;<%= @opportunity.company %><br>
+
+<br>
+
+Below is a message <strong><%= @user.full_name %></strong> has written:<br>
 <p>
 	<%= @application.message %>
 </p>
+
+Please check the attachments that <%= @user.fname %> has attached.
+
+Best,
+
+GAN (Gann Alumni Network) support team

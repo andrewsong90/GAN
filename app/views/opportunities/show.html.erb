@@ -3,7 +3,11 @@
 	<%= javascript_include_tag "opportunities/show" %>
 <% end %>
 
-<p class="section-header">Title</p>
+<%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius" %><br>
+
+<br>
+
+<p class="section-header">Title</p>	
 <div><%= @opportunity.title %></div><br>
 <p class="section-header">Company</p>
 <div><%= @opportunity.company %></div><br>
@@ -29,10 +33,14 @@
 <p class="section-header">Description</p>
 <div><%= @opportunity.description %></div>
 
-<% if @opportunity.upload.path != nil %>
-	<div><i class="icon-hand-right"></i>&nbsp;For more details, take a look at the attached file
-	<%= link_to "Download", download_path(@opportunity.id) %>
-</div>
+
+
+<% if @uploads != nil %>
+	<% @uploads.each do |u| %>
+		<div><i class="icon-hand-right"></i>&nbsp;For more details, take a look at the attached file
+			<%= link_to "Download",  u.avatar.url %>
+		</div>
+	<% end %>
 <% end %>
 <br>
 

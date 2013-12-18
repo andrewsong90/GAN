@@ -27,7 +27,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 gem 'twitter-bootstrap-rails'
-gem 'jasny_bootstrap_extension_rails'
 
 gem 'figaro'
 
@@ -62,9 +61,9 @@ gem 'jquery-turbolinks'
 
 gem 'simple_form'
 
-#Pagination of opportunities
-gem 'will_paginate'
-gem 'will_paginate-bootstrap'
+#Pagination
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'

@@ -2,7 +2,9 @@
 
 <br>
 <%= image_tag current_user.avatar.url(:medium), :class=>"box_radius" %>
+<%= current_user.avatar.url %>
 <br><br>
+
 
 <span class="section-header"><i class="icon-envelope"></i></span>&nbsp;&nbsp;
 <%= current_user.email %><br><br>
@@ -14,6 +16,16 @@
 	<span class="section-header"><i class="icon-briefcase"></i></span>&nbsp;&nbsp;
 	class of <%= current_user.classyear %><br><br>
 <% end %>
+
+<% if @uploads != nil %>
+	<% @uploads.each do |u| %>
+		<div><i class="icon-hand-right"></i>&nbsp;<%= u.avatar_file_name%> &nbsp;
+			<%= link_to "Download",  u.avatar.url %>
+		</div>
+	<% end %>
+<% end %>
+<br>
+
 
 <br><br>
 <%= link_to "Edit Account", edit_user_registration_path, :class => "btn btn-info" %>

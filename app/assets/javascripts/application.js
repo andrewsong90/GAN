@@ -18,6 +18,7 @@
 //= require jquery.ui.datepicker
 //= require twitter/bootstrap
 //= require cocoon
+//= require jasny-bootstrap
 
 //Disable turbolinks for now
 

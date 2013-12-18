@@ -1,7 +1,5 @@
 class OpportunitiesController < ApplicationController
 
-	require 'will_paginate/array'
-
 	before_filter :authenticate_user, :except => [:about, :welcome, :contact]
 
 	def welcome		
@@ -22,13 +20,15 @@ class OpportunitiesController < ApplicationController
 	# Downloading uplodaded file from the opportunity
 	def download
 		@opportunity=Opportunity.find(params[:id])
-		if @opportunity.upload.path == nil
+		uploads=@opportunity.uploads
+		if uploads == nil
 			flash[:error]= "No attachement exists!"
 			redirect_to opportunity_path(@opportunity)
 		else
-			send_file @opportunity.upload.path,
-				:filename => @opportunity.upload_file_name,
-				:type => @opportunity.upload_content_type,
+			upload=uploads.find(params[:upload_id])
+			send_file upload.avatar.path,
+				:filename => upload.avatar_file_name,
+				:type => upload.avatar_content_type,
 				:disposition => 'attachment' # To show the pdf file in the page, change it to "inline"
 		end				
 
@@ -37,11 +37,12 @@ class OpportunitiesController < ApplicationController
 	def index
 		if friend_signed_in?
 			opportunities = Opportunity.text_search(params[:query])
-			@opportunities = opportunities.select { |opportunity| opportunity.user.id == current_user.id }
+			filtered_opportunities = opportunities.select { |opportunity| opportunity.user.id == current_user.id }
+			
+			#TODO: Manually set the page limit?
+			@opportunities = Kaminari.paginate_array(filtered_opportunities).page(params[:page]).per(10)
 		else
-
-			@opportunities = Opportunity.text_search(params[:query])
-			logger.debug("OPPOR #{@opportunities}")
+			@opportunities = Opportunity.text_search(params[:query]).page params[:page]
 		end
 		
 			#Render CSV and html view
@@ -67,6 +68,7 @@ class OpportunitiesController < ApplicationController
 	# Show opportunity
 	def show
 		@opportunity = Opportunity.find(params[:id])
+		@uploads= @opportunity.uploads.all.to_a
 		@skills=@opportunity.skills
 		@time=@opportunity.opportunity_times
 
@@ -148,7 +150,6 @@ class OpportunitiesController < ApplicationController
 	#Strong parameters for opportunities
 	def opportunity_params
 		params.permit(:time_type,:time => [],opportunity: [:title,:location,:description,:job_type,:company,:upload, :latitude, :longitude, uploads_attributes: [:id, :avatar, :_destroy]])
-		# ,:time_type,:time => []
 	end
 
 	#Strong parameters for skills

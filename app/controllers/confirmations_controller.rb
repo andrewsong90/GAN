@@ -14,7 +14,6 @@ class ConfirmationsController < Devise::ConfirmationsController
 				if @confirmable.valid?
 					do_confirm
 				else
-					# flash[:error] = "Information wrong!"
 					do_show
 					@confirmable.errors.clear
 				end

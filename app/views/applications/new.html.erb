@@ -1,5 +1,9 @@
 <h2>Make Connection</h2>
 
+<%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius" %>
+
+<br><br>
+
 <p class="section-header">Title</p>
 <div><%= @opportunity.title %></div><br>
 <p class="section-header">Company</p>
@@ -8,5 +12,5 @@
 <div><%= @opportunity.job_type %></div><br>
 <br>
 
-
 <%= render 'applications/shared/form' %>
+
