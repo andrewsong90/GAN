@@ -22,7 +22,7 @@ module GAN
 
     # Precompile additional assets.
     # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-    config.assets.precompile += %w( *.png *.jpg *.JPG *.jpeg /opportunities/*.js /users/*.js )
+    config.assets.precompile += %w( *.png *.jpg *.JPG *.jpeg opportunities/*.js users/*.js )
 
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
