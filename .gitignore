@@ -17,3 +17,7 @@
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore all the attachments
+**/uploads
+**/user_uploads
