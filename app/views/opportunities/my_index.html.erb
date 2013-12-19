@@ -18,13 +18,13 @@
 				<td><%= f.company %></td>
 				<td><%= f.job_type %></td>
 				<td><%= f.location %></td>
-				<td><%= link_to "View", opportunity_path(f), :class => "btn btn-info" %></td>
+				<td><%= link_to "View", opportunity_path(f), :class => "btn btn-success" %></td>
 			</tr>
 		<% end %>	
 	</table>
 </div>
-
 <% end %>
+<br>
 
 <h3>Opportunities created</h3>
 
@@ -44,8 +44,13 @@
 				<td><%= f.company %></td>
 				<td><%= f.job_type %></td>
 				<td><%= f.location %></td>
-				<td><%= link_to "View", opportunity_path(f), :class => "btn btn-info" %></td>
+				<td><%= link_to "View", opportunity_path(f), :class => "btn btn-success" %></td>
 			</tr>
 		<% end %>	
 	</table>
+</div>
+<br>
+
+<div class="pull-right">
+	<%= paginate @created_opportunities, :theme => 'twitter-bootstrap', :window => 2 %>
 </div>

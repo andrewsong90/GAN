@@ -1,6 +1,29 @@
+/* Whole html page*/
+#holder{
+	min-height: 100%;
+	position: relative;
+}
+
+#body{
+	padding-bottom: 190px;
+}
+
+.footer_bar{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #992135;
+	height: 140px;
+}
+
 .custom-form {
 	display: inline-block;
 }
+
+/*body {
+	padding-bottom: 150px;
+}*/
 
 /* Mouse popover pointer*/
 
@@ -96,11 +119,7 @@
 	border-bottom-left-radius: 13px;
 }
 
-.footer_bar{
-	margin-top: 70px;
-	background-color: #992135;
-	height: 140px;
-}
+
 
 /*Fonts configuration*/
 
@@ -127,9 +146,6 @@
 	padding: 0;
 }
 
-body{
-	padding-bottom: 150px;
-}
 
 #map-canvas-new img, #map-canvas-show img {
 	max-width: none;

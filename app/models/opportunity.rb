@@ -29,7 +29,7 @@ class Opportunity < ActiveRecord::Base
 	validates_attachment_size :upload, :less_than => 1.megabytes
 
 	#Pagination
-	paginates_per 10
+	paginates_per 5
 
 	#Configuration for database search
 	include PgSearch

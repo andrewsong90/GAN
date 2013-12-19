@@ -36,7 +36,7 @@ GAN::Application.routes.draw do
   post '/import' => "userdbs#import", as: :import_users
 
   get '/opportunities/:id/download/:upload_id', :controller => 'opportunities', :action =>'download', as: :download
-  get '/users/:user_id/download/:id' => 'users#donwload', as: :user_attachment_download
+  get '/users/:user_id/download/:id' => 'users#download', as: :user_attachment_download
 
 
 

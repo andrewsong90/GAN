@@ -14,55 +14,61 @@
   <%= csrf_meta_tags %>
 
 </head>
-<body>
-<% if user_signed_in? %>
-	<div class="navbar">
-		<div class="navbar-inner">
-			<div class="container whitefont">
-				<a href=<%= home_path %> class="brand">GAN</a>
-				<div class="nav-collapse">
-					<ul class="nav">
-						<li><a href='<%= about_path %>' class="whitefont">About</a></li>
-						<li><a href="<%= contact_path %>">Contact</a></li>
-					</ul>
 
-					<div class="nav pull-right navbar-hcenter">
-						Welcome! <strong><%= current_user.full_name %></strong> (<%= current_user.class.name %>)
-						&nbsp;|&nbsp;
-						<i class="icon-tasks"></i>&nbsp;&nbsp;<%= link_to "Opportunities", opportunities_path %>
-						&nbsp;|&nbsp;
-						<i class="icon-user"></i>&nbsp;&nbsp;<%= link_to "My account", my_account_path %>
-						&nbsp;|&nbsp;
-						<i class="icon-briefcase"></i>&nbsp;&nbsp;<%= link_to "My opportunities", my_opportunities_path %>
-						&nbsp;|&nbsp;
-						<i class="icon-signout"></i>&nbsp;
-						<%= link_to "Logout", destroy_user_session_path, method: :delete %>
+
+<body>
+	<div id="holder">
+		<% if user_signed_in? %>
+			<div class="navbar">
+				<div class="navbar-inner">
+					<div class="container whitefont">
+						<a href=<%= home_path %> class="brand">GAN</a>
+						<div class="nav-collapse">
+							<ul class="nav">
+								<li><a href='<%= about_path %>' class="whitefont">About</a></li>
+								<li><a href="<%= contact_path %>">Contact</a></li>
+							</ul>
+
+							<div class="nav pull-right navbar-hcenter">
+								Welcome! <strong><%= current_user.full_name %></strong> (<%= current_user.class.name %>)
+								&nbsp;|&nbsp;
+								<i class="icon-tasks"></i>&nbsp;&nbsp;<%= link_to "Opportunities", opportunities_path %>
+								&nbsp;|&nbsp;
+								<i class="icon-user"></i>&nbsp;&nbsp;<%= link_to "My account", my_account_path %>
+								&nbsp;|&nbsp;
+								<i class="icon-briefcase"></i>&nbsp;&nbsp;<%= link_to "My opportunities", my_opportunities_path %>
+								&nbsp;|&nbsp;
+								<i class="icon-signout"></i>&nbsp;
+								<%= link_to "Logout", destroy_user_session_path, method: :delete %>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
+		<% else %>
+			<div class="blank_block"></div>
+		<% end %>
+
+	<div id="body">
+		<% flash.each do |name,msg| %>
+			<div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+				<a class="close" data-dismiss="alert">x</a>
+				<%= msg %>
+			</div>
+		<% end%>
+
+		<div class="container box_shadow box_radius box_padding sky_background">
+			
+			<%= yield %>
 		</div>
 	</div>
-<% else %>
-	<div class="blank_block"></div>
-<% end %>
 
-<% flash.each do |name,msg| %>
-	<div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-		<a class="close" data-dismiss="alert">x</a>
-		<%= msg %>
-	</div>
-<% end%>
+	<% if user_signed_in? %>
+		<div class="footer_bar"><br>
+			<p class="whitefont text-align-center"> Best viewed in Firefox and Chrome </p>
+		</div>
+	<% end %>
 
-<div class="container box_shadow box_radius box_padding sky_background">
-	
-	<%= yield %>
 </div>
-
-<% if user_signed_in? %>
-	<div class="footer_bar">
-		<p class="whitefont text-align-center"> Best viewed in Firefox and Chrome </p>
-	</div>
-<% end %>
-
 </body>
 </html>

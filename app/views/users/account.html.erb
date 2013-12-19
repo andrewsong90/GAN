@@ -1,8 +1,16 @@
-<h3 class="header"><%= current_user.full_name%></h3>
+<h3 class="header">
+	<%= current_user.full_name%>
+	<% if current_user.is_alum? %>
+		<span class="label label-primary">Alum</span>	
+	<% else %>
+		<span class="label label-info">Friend</span>	
+	<% end %>
+</h3>
+
+
 
 <br>
 <%= image_tag current_user.avatar.url(:medium), :class=>"box_radius" %>
-<%= current_user.avatar.url %>
 <br><br>
 
 
@@ -18,8 +26,11 @@
 <% end %>
 
 <% if @uploads != nil %>
+	<span class="section-header"><i class="icon-book"></i>&nbsp;Resume</span><br>
 	<% @uploads.each do |u| %>
-		<div><i class="icon-hand-right"></i>&nbsp;<%= u.avatar_file_name%> &nbsp;
+		<div>
+			&nbsp;&nbsp;
+			<i class="icon-hand-right"></i>&nbsp;<%= u.avatar_file_name%> &nbsp;
 			<%= link_to "Download",  u.avatar.url %>
 		</div>
 	<% end %>

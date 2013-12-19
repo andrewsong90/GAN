@@ -29,7 +29,7 @@ class OpportunitiesController < ApplicationController
 			send_file upload.avatar.path,
 				:filename => upload.avatar_file_name,
 				:type => upload.avatar_content_type,
-				:disposition => 'attachment' # To show the pdf file in the page, change it to "inline"
+				:disposition => 'inline' # To show the pdf file in the page, change it to "inline"
 		end				
 
 	end
@@ -40,7 +40,7 @@ class OpportunitiesController < ApplicationController
 			filtered_opportunities = opportunities.select { |opportunity| opportunity.user.id == current_user.id }
 			
 			#TODO: Manually set the page limit?
-			@opportunities = Kaminari.paginate_array(filtered_opportunities).page(params[:page]).per(10)
+			@opportunities = Kaminari.paginate_array(filtered_opportunities).page(params[:page]).per(5)
 		else
 			@opportunities = Opportunity.text_search(params[:query]).page params[:page]
 		end
@@ -55,7 +55,8 @@ class OpportunitiesController < ApplicationController
 
 	# Shows opportunities created and applied by current user
 	def my_index
-		@created_opportunities = current_user.opportunities.all
+		@created_opportunities = current_user.opportunities.page params[:page]
+		#@created_opportunities = Kaminari.paginate_array(created_opportunities).page(params[:page]).per(5)
 		if alum_signed_in?
 			applications = current_user.applications.all
 			@applied_opportunities=[]

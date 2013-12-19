@@ -3,25 +3,51 @@
 	<%= javascript_include_tag "opportunities/show" %>
 <% end %>
 
-<%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius" %><br>
-
 <br>
 
-<p class="section-header">Title</p>	
-<div><%= @opportunity.title %></div><br>
-<p class="section-header">Company</p>
-<div><%= @opportunity.company %></div><br>
-<p class="section-header">Type</p>
+<div class="page-header">
+	<h1>
+		<%= @opportunity.title %> 
+		<small> <%= @opportunity.company %></small>
+		
+		<% if can_apply? (@opportunity) %>
+			<span class="label label-warning">Not Connected</span>	
+		<% elsif current_user.is_owner? (@opportunity) %>
+			<span class="label label-info">Owner</span>	
+		<% else %>
+			<span class="label label-success">Connected</span>
+		<% end %>
+
+	</h1>
+</div>
+
+<%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius" %><br>
+
+<br><br>
+
+<!-- Commented out-->
+<% if false %>
+	<p class="section-header">
+		<%= @opportunity.title %>&nbsp;
+	</p>	
+
+	<p class="section-header"><i class="icon-briefcase"></i>&nbsp;Company</p>
+	<div><%= @opportunity.company %></div><br>
+<% end %>
+
+
+
+<p class="section-header"><i class="icon-user"></i>&nbsp;Type</p>
 <div><%= @opportunity.job_type %></div><br>
 
-<p class="section-header">Skills & Expertise</p>
+<p class="section-header"><i class="icon-book"></i>&nbsp;Skills & Expertise</p>
 <% @skills.each do |skill| %>
 	<div><i class="icon-ok"></i>&nbsp;<%= skill.skill %></div>
 <% end %>
 
 <br>
 
-<p class="section-header">Location</p>
+<p class="section-header"><i class="icon-location-arrow"></i>&nbsp;Location</p>
 <div><%= @opportunity.location %></div><br>
 
 <div class="gmap">
@@ -30,24 +56,24 @@
 
 <br>
 
-<p class="section-header">Description</p>
+<p class="section-header"><i class="icon-tasks"></i>&nbsp;Description</p>
 <div><%= @opportunity.description %></div>
 
 
-
 <% if @uploads != nil %>
+	<h5>For more details, please refer to the attached files</h5> 
 	<% @uploads.each do |u| %>
-		<div><i class="icon-hand-right"></i>&nbsp;For more details, take a look at the attached file
+		<div>&nbsp;&nbsp;<i class="icon-upload"></i>&nbsp;<%= u.avatar_file_name %>&nbsp;
 			<%= link_to "Download",  u.avatar.url %>
 		</div>
 	<% end %>
 <% end %>
-<br>
+<br><br>
 
 
-<p class="section-header">Time</p>
+<p class="section-header"><i class="icon-time"></i>&nbsp;Time</p>
 <% if @time.first.is_flexible? %>
-	<div>flexible</div><br>
+	<div><strong>Flexible</strong>&nbsp; Please make appointment on indivdual basis!</div><br>
 <% else %>
 	<div><strong>From</strong>&nbsp;<%= @time.first.date.to_time.strftime('%b. %e, %Y (%a)') %></div><br>
 	<div><strong>To</strong>&nbsp;<%= @time.second.date.to_time.strftime('%b. %e, %Y (%a)') %></div><br>

@@ -55,6 +55,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 	protected
 
+	def after_update_path_for(resource)
+		my_account_path
+	end
+
 	def registration_permitted_params
 		if params[:user][:type]=="Alum"
 			devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation,:fname,:lname, :classyear, :type, :parent_email)}

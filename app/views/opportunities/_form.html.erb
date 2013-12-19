@@ -14,7 +14,8 @@
       </div>
     </div>
 
-  
+    <br>
+
   	<div><%= f.label "Title", :class => "section-header" %><br>
   	<%= f.text_field :title %></div>
     
@@ -112,7 +113,8 @@
   	<div><%= text_field_tag 'time[]', nil, disabled: true, id: "opportunity_fromtime" %></div>
     <div><%= text_field_tag 'time[]', nil, :id => "opportunity_totime", :disabled => true %></div>  	
 
-  	
+  <br>
+
 	<%= f.submit "Post opportunity", :class => "btn btn-primary" %>
 <% end %>
 
