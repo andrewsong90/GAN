@@ -14,10 +14,10 @@
 
   <div class="span3 offset2">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-      <div><i class="icon-envelope"></i>&nbsp;<%= f.label :email, :class => "section-header" %>
+      <div><i class="fa fa-envelope"></i>&nbsp;<%= f.label :email, :class => "section-header" %>
       <%= f.email_field :email, :autofocus => true %></div>
 
-      <div><i class="icon-key"></i>&nbsp;<%= f.label :password, :class => "section-header" %>
+      <div><i class="fa fa-key"></i>&nbsp;<%= f.label :password, :class => "section-header" %>
       <%= f.password_field :password %></div>
 
       <% if devise_mapping.rememberable? -%>
@@ -45,8 +45,8 @@
     <br><br>
 
     <strong>Having trouble? Contact us</strong><br>
-    <i class="icon-phone"></i>&nbsp; 617-123-4567 (Office of Alumni)<br>
-    <i class="icon-envelope"></i>&nbsp; admin@gannacademy.org
+    <i class="fa fa-phone"></i>&nbsp; 617-123-4567 (Office of Alumni)<br>
+    <i class="fa fa-envelope"></i>&nbsp; admin@gannacademy.org
 
   </div>
 </div>

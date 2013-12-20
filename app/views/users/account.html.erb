@@ -14,19 +14,19 @@
 <br><br>
 
 
-<span class="section-header"><i class="icon-envelope"></i></span>&nbsp;&nbsp;
+<span class="section-header"><i class="fa fa-envelope"></i></span>&nbsp;&nbsp;
 <%= current_user.email %><br><br>
 
-<span class="section-header"><i class="icon-phone"></i></span>&nbsp;&nbsp;
+<span class="section-header"><i class="fa fa-phone"></i></span>&nbsp;&nbsp;
 <%= current_user.phone %><br><br>
 
 <% if alum_signed_in? %>
-	<span class="section-header"><i class="icon-briefcase"></i></span>&nbsp;&nbsp;
+	<span class="section-header"><i class="fa fa-briefcase"></i></span>&nbsp;&nbsp;
 	class of <%= current_user.classyear %><br><br>
 <% end %>
 
 <% if @uploads != nil %>
-	<span class="section-header"><i class="icon-book"></i>&nbsp;Resume</span><br>
+	<span class="section-header"><i class="fa fa-book"></i>&nbsp;Resume</span><br>
 	<% @uploads.each do |u| %>
 		<div>
 			&nbsp;&nbsp;

@@ -25,17 +25,17 @@
 
 <br><br>
 
-<p class="section-header"><i class="icon-user"></i>&nbsp;Type</p>
+<p class="section-header"><i class="fa fa-user"></i>&nbsp;Type</p>
 <div><%= @opportunity.job_type %></div><br>
 
-<p class="section-header"><i class="icon-book"></i>&nbsp;Skills & Expertise</p>
+<p class="section-header"><i class="fa fa-book"></i>&nbsp;Skills & Expertise</p>
 <% @skills.each do |skill| %>
 	<div><i class="icon-ok"></i>&nbsp;<%= skill.skill %></div>
 <% end %>
 
 <br>
 
-<p class="section-header"><i class="icon-location-arrow"></i>&nbsp;Location</p>
+<p class="section-header"><i class="fa fa-location-arrow"></i>&nbsp;Location</p>
 <div><%= @opportunity.location %></div><br>
 
 <div class="gmap">
@@ -44,14 +44,14 @@
 
 <br>
 
-<p class="section-header"><i class="icon-tasks"></i>&nbsp;Description</p>
+<p class="section-header"><i class="fa fa-tasks"></i>&nbsp;Description</p>
 <div><%= @opportunity.description %></div>
 
 
 <% if @uploads != nil %>
 	<h5>For more details, please refer to the attached files</h5> 
 	<% @uploads.each do |u| %>
-		<div>&nbsp;&nbsp;<i class="icon-upload"></i>&nbsp;<%= u.avatar_file_name %>&nbsp;
+		<div>&nbsp;&nbsp;<i class="fa fa-upload"></i>&nbsp;<%= u.avatar_file_name %>&nbsp;
 			<%= link_to "Download",  u.avatar.url %>
 		</div>
 	<% end %>
@@ -59,7 +59,7 @@
 <br><br>
 
 
-<p class="section-header"><i class="icon-time"></i>&nbsp;Time</p>
+<p class="section-header"><i class="fa fa-time"></i>&nbsp;Time</p>
 <% if @time.first.is_flexible? %>
 	<div><strong>Flexible</strong>&nbsp; Please make appointment on indivdual basis!</div><br>
 <% else %>
@@ -73,18 +73,18 @@
 <br><br>
 <p class="section-header">This opportunity was offered by</p>
 
-<p><i class="icon-user"></i>&nbsp;<%= owner.full_name %></p>
+<p><i class="fa fa-user"></i>&nbsp;<%= owner.full_name %></p>
 
 <% if owner.is_alum? %>
-	<p><i class="icon-briefcase"></i>&nbsp;Class of <%= owner.classyear%></p>
+	<p><i class="fa fa-briefcase"></i>&nbsp;Class of <%= owner.classyear%></p>
 <% end %>
 
 <br>
 
 <% if @sponsors.length != 0 %>
-	<p class="section-header"><i class="icon-group"></i>&nbsp;Sponsors</p><br>
+	<p class="section-header"><i class="fa fa-group"></i>&nbsp;Sponsors</p><br>
 	<% @sponsors.each do |sponsor| %>
-		&nbsp;&nbsp;&nbsp;<i class="icon-user"></i>&nbsp;<strong><%= sponsor.name %></strong> / <%= sponsor.position %> / <%= sponsor.company %><br>
+		&nbsp;&nbsp;&nbsp;<i class="fa fa-user"></i>&nbsp;<strong><%= sponsor.name %></strong> / <%= sponsor.position %> / <%= sponsor.company %><br>
 	<% end %>
 <% end %>
 

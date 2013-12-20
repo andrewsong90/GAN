@@ -24,6 +24,7 @@ module GAN
     # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
     config.assets.precompile += %w( *.png *.jpg *.JPG *.jpeg opportunities/*.js users/*.js )
 
+    config.assets.version = '1.0'
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.

@@ -8,8 +8,11 @@
 
   <%= yield :head %>
 
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places" ></script>
-
+  <% if Rails.env.production? %>
+  	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEzL5mEqr8OympwOHJi96cMDZOVZMreTk&v=3.exp&sensor=false&libraries=places" ></script>
+  <% else %>
+  	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places" ></script>
+  <% end %>
 
   <%= csrf_meta_tags %>
 
@@ -32,13 +35,13 @@
 							<div class="nav pull-right navbar-hcenter">
 								Welcome! <strong><%= current_user.full_name %></strong> (<%= current_user.class.name %>)
 								&nbsp;|&nbsp;
-								<i class="icon-tasks"></i>&nbsp;&nbsp;<%= link_to "Opportunities", opportunities_path %>
+								<i class="fa fa-tasks"></i>&nbsp;&nbsp;<%= link_to "Opportunities", opportunities_path %>
 								&nbsp;|&nbsp;
-								<i class="icon-user"></i>&nbsp;&nbsp;<%= link_to "My account", my_account_path %>
+								<i class="fa fa-user"></i>&nbsp;&nbsp;<%= link_to "My account", my_account_path %>
 								&nbsp;|&nbsp;
-								<i class="icon-briefcase"></i>&nbsp;&nbsp;<%= link_to "My opportunities", my_opportunities_path %>
+								<i class="fa fa-briefcase"></i>&nbsp;&nbsp;<%= link_to "My opportunities", my_opportunities_path %>
 								&nbsp;|&nbsp;
-								<i class="icon-signout"></i>&nbsp;
+								<i class="fa fa-signout"></i>&nbsp;
 								<%= link_to "Logout", destroy_user_session_path, method: :delete %>
 							</div>
 						</div>

@@ -37,7 +37,7 @@
     <br>
 
     <div><%= f.label "Files", :class => "section-header" %>
-      &nbsp;<a id="opportunity_files_help" class="help"><i  class="icon icon-question-sign"></i></a><br>
+      &nbsp;<a id="opportunity_files_help" class="help"><i  class="fa fa-question-sign"></i></a><br>
 
       <div id="uploads">  
         <%= f.fields_for :uploads do |upload| %>          
@@ -99,7 +99,7 @@
     <br>
 
     <div><%= f.label "time", :class => "section-header" %>
-      &nbsp;<a id="opportunity_time_help" class="help"><i class="icon icon-question-sign"></i></a><br>
+      &nbsp;<a id="opportunity_time_help" class="help"><i class="fa fa-question-sign"></i></a><br>
     <%= radio_button_tag(:time_type, "flexible") %>Flexible<br>
     <%= radio_button_tag(:time_type,"range") %>Range<br></div>  
   
@@ -114,7 +114,7 @@
 
       <% numOfSponsors = 1 %>
 
-      &nbsp;<a id="sponsor_help" class="help"><i class="icon icon-question-sign"></i></a><br>
+      &nbsp;<a id="sponsor_help" class="help"><i class="fa fa-question-sign"></i></a><br>
 
       <div id="sponsors">  
         <%= f.fields_for :sponsors do |sponsor| %>        

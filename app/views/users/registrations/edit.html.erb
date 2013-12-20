@@ -19,7 +19,7 @@
   <%= f.object.avatar_file_name %></div><br>
 
   <div><%= f.label "Resume", :class => "section-header" %>
-    &nbsp;<a id="resume_help" class="help"><i  class="icon icon-question-sign"></i></a><br>
+    &nbsp;<a id="resume_help" class="help"><i  class="fa fa-question-sign"></i></a><br>
     <div id="uploads">  
       <%= f.fields_for :useruploads do |upload| %>
         <% if !(@name=upload.object.avatar_file_name) %>
