@@ -20,7 +20,8 @@ class ApplicationsController < ApplicationController
 		application = current_user.applications.build(application_params)
 		if application.save
 			#attachment_params
-			UserMailer.submission_email(current_user,application,params[:attachments]).deliver
+			UserMailer.submission_email(current_user, application,params[:attachments]).deliver
+			# , params[:attachments]
 			flash[:notice] = "Connection requested! Please check your inbox!"
 			redirect_to opportunities_path
 		else

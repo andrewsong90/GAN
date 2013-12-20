@@ -21,9 +21,17 @@
 	display: inline-block;
 }
 
-/*body {
-	padding-bottom: 150px;
-}*/
+.upload_btn, .sponsor_btn {
+	cursor: default;
+}
+
+.upload_btn > a, .sponsor_btn > a {
+	color: #ffffff;
+}
+
+.upload_btn > a:hover, .sponsor_btn > a:hover {
+	text-decoration: none;
+}
 
 /* Mouse popover pointer*/
 

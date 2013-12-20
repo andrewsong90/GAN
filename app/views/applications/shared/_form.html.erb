@@ -6,10 +6,9 @@
     <div><%= f.hidden_field :opportunity_id, :value => @opportunity.id %>
 
     <br>
-    Do you have any resumes you want to attach?<br>
-    <div><%=# f.file_field :upload %></div><br>
+    Do you have any resume you want to attach?<br>
     <% @uploads.each do |upload| %>
-  		<%= check_box_tag 'attachments[]',upload.id %>&nbsp;<%= upload.avatar_file_name %><br>
+  		<%= check_box_tag 'attachments[]', upload.id %>&nbsp;<%= upload.avatar_file_name %><br>
 	  <% end %>
 
     <br>

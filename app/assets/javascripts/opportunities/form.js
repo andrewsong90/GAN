@@ -1,7 +1,12 @@
 var start_date;
 var end_date;
+var OPPORTUNITY_UPLOAD_LIMIT=3;
+var SPONSOR_LIMIT=4;
 
 $(document).ready(function(){
+
+  var opportunity_upload_count=1;
+  var sponsor_count=1;
 
   $('#opportunity_files_help').popover({
     content: "Upload documents for job descriptions (maximum of 3)"
@@ -12,8 +17,39 @@ $(document).ready(function(){
     html: true
   });
 
-  $('#uploads').on("change","input[type=file]",function(e){
-    // alert("Fired by "+e.target.id);
+  $('#sponsor_help').popover({
+    content: "Sponsors!<br>Please type in contact info for the sponsors",
+    html: true
+  });
+
+  //Limit File Upload Count
+  $('.upload_link').click(function(e){
+    if(opportunity_upload_count<OPPORTUNITY_UPLOAD_LIMIT){
+      opportunity_upload_count +=1;
+      if(opportunity_upload_count==OPPORTUNITY_UPLOAD_LIMIT){
+        $('.upload_btn').removeClass('btn-primary');
+        $('.upload_btn').css('background-color','grey');
+        $('.upload_btn > a').css('cursor','no-drop');
+      } 
+    }else{
+      e.preventDefault();
+      return false;
+    }
+  });
+
+  //Limit Sponsor Count
+  $('.sponsor_link').click(function(e){
+    if(sponsor_count<SPONSOR_LIMIT){
+      sponsor_count +=1;
+      if(sponsor_count==SPONSOR_LIMIT){
+        $('.sponsor_btn').removeClass('btn-primary');
+        $('.sponsor_btn').css('background-color','grey');
+        $('.sponsor_btn > a').css('cursor','no-drop');
+      } 
+    }else{
+      e.preventDefault();
+      return false;
+    }
   });
 
   $("#opportunity_fromtime").datepicker({

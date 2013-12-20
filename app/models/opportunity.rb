@@ -16,7 +16,9 @@ class Opportunity < ActiveRecord::Base
 	has_many :uploads
 	accepts_nested_attributes_for :uploads, :reject_if => :all_blank, :allow_destroy => true
 
-
+	# Sponsors
+	has_many :sponsors
+	accepts_nested_attributes_for :sponsors, :reject_if => :all_blank, :allow_destroy => true
 
 	# Geocoder for storing location
 	geocoded_by :location
@@ -29,7 +31,7 @@ class Opportunity < ActiveRecord::Base
 	validates_attachment_size :upload, :less_than => 1.megabytes
 
 	#Pagination
-	paginates_per 5
+	paginates_per 10
 
 	#Configuration for database search
 	include PgSearch

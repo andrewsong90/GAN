@@ -18,6 +18,9 @@
 # Ignore application configuration
 /config/application.yml
 
+#Ignore production.rb
+/config/environments/production.rb
+
 # Ignore all the attachments
 **/uploads
 **/user_uploads

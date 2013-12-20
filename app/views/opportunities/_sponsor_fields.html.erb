@@ -1,0 +1,18 @@
+<div class="nested-fields">
+	<h5><i class="icon-user"></i></h5>
+	<div><%= f.label :name %>
+		<%= f.text_field :name %>
+	</div>
+	<div><%= f.label :position %>
+		<%= f.text_field :position %>
+	</div>
+	<div><%= f.label :company %>
+		<%= f.text_field :company %>
+	</div>
+	<div><%= f.label :email %>
+		<%= f.text_field :email %>
+	</div>
+	<%= link_to_remove_association "Remove Sponsor", f %>
+</div>
+
+<br>

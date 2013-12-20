@@ -1,5 +1,5 @@
 class Upload < ActiveRecord::Base
-	has_attached_file :avatar, :styles => {:medium => "300x300>"}, :default_url => "/images/:style/missing.png",
+	has_attached_file :avatar, :default_url => "/images/:style/missing.png",
 				:url => "/opportunities/:opportunity_id/download/:id",
 				:path => ":rails_root/uploads/:class/:opportunity_id/:basename.:extension"
 

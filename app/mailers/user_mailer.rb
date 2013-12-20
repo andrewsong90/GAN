@@ -21,14 +21,22 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
   # When an application is submitted
   def submission_email(user,application,index_of_uploads)
   	@user, @application, @opportunity =user, application, application.opportunity
-    
 
-    index_of_uploads.each do |index|
-      upload=Userupload.find(index)
-      attachments << (attachments[upload.avatar_file_name] = File.open(upload.avatar.path, 'rb'){|f| f.read })
+    if index_of_uploads!=nil
+      index_of_uploads.each do |index|
+        upload=Userupload.find(index)
+        attachments << (attachments[upload.avatar_file_name] = File.open(upload.avatar.path, 'rb'){|f| f.read })
+      end
     end
+
+    bcc_recepients = [@opportunity.user.email]
+    @opportunity.sponsors.all.to_a.each do |sponsor|
+      bcc_recepients << sponsor.email
+    end
+
+    logger.debug("SPONSORS #{bcc_recepients}")
   	
-    mail(to: @user.email , bcc: @opportunity.user.email, subject:"[GAN] Application has been submitted")
+    mail(to: @user.email , bcc: bcc_recepients , subject:"[GAN] Application has been submitted")
   end
 
 end

@@ -38,24 +38,18 @@
 
     <div><%= f.label "Files", :class => "section-header" %>
       &nbsp;<a id="opportunity_files_help" class="help"><i  class="icon icon-question-sign"></i></a><br>
-      <div class="btn btn-primary">
-            <%= link_to_add_association 'Add Uploads', f, :uploads %>
-      </div>
 
-      <br><br>
-      
       <div id="uploads">  
-        <%= f.fields_for :uploads do |upload| %>
-          
+        <%= f.fields_for :uploads do |upload| %>          
           <% if !(@name=upload.object.avatar_file_name) %>
             <%= render 'upload_fields', :f => upload %>
           <% else %>
             <%= render 'edit_fields', :f => upload %>
           <% end %>
-          
-          <br>  
         <% end %>
-        
+        <div class="btn btn-primary upload_btn">
+            <%= link_to_add_association 'Add Uploads', f, :uploads, :class => "upload_link" %>
+        </div>
       </div>
     </div>
 
@@ -86,25 +80,26 @@
    <br>
   
   <%= f.text_field :location, :class => "controls", :id =>"pac-input", :placeholder => "Enter a Location" %>
-  <!-- <input id="pac-input" class="controls" type="text"
-        placeholder="Enter a location"> -->
+ <!--  <input id="pac-input" class="controls" type="text"
+        placeholder="Enter a location">
     <div id="type-selector" class="controls">
       <input type="radio" name="type" id="changetype-all" checked="checked">
-      <!-- <label for="changetype-all">All</label> -->
-<!-- 
+      <label for="changetype-all">All</label>
+
       <input type="radio" name="type" id="changetype-establishment">
       <label for="changetype-establishment">Establishments</label>
 
       <input type="radio" name="type" id="changetype-geocode">
-      <label for="changetype-geocode">Geocodes</label> -->
-    </div>
+      <label for="changetype-geocode">Geocodes</label>
+    </div> -->
 
     <div class="gmap">
       <div id="map-canvas-new"></div>
   	</div>
     <br>
+
     <div><%= f.label "time", :class => "section-header" %>
-      &nbsp;<a id="opportunity_time_help" class="help"><i  class="icon icon-question-sign"></i></a><br>
+      &nbsp;<a id="opportunity_time_help" class="help"><i class="icon icon-question-sign"></i></a><br>
     <%= radio_button_tag(:time_type, "flexible") %>Flexible<br>
     <%= radio_button_tag(:time_type,"range") %>Range<br></div>  
   
@@ -112,6 +107,24 @@
     
   	<div><%= text_field_tag 'time[]', nil, disabled: true, id: "opportunity_fromtime" %></div>
     <div><%= text_field_tag 'time[]', nil, :id => "opportunity_totime", :disabled => true %></div>  	
+
+    <br>
+    
+    <div><%= f.label "Sponsor", :class => "section-header" %>
+
+      <% numOfSponsors = 1 %>
+
+      &nbsp;<a id="sponsor_help" class="help"><i class="icon icon-question-sign"></i></a><br>
+
+      <div id="sponsors">  
+        <%= f.fields_for :sponsors do |sponsor| %>        
+          <%= render 'sponsor_fields', :f => sponsor %>
+        <% end %>
+        <div class="btn btn-primary sponsor_btn">
+            <%= link_to_add_association 'Add Sponsors', f, :sponsors, :render_options => {:locals => {:index => numOfSponsors}}, :class => "sponsor_link" %>
+        </div>
+      </div>
+    </div>
 
   <br>
 

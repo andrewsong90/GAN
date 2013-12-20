@@ -29,7 +29,7 @@ class OpportunitiesController < ApplicationController
 			send_file upload.avatar.path,
 				:filename => upload.avatar_file_name,
 				:type => upload.avatar_content_type,
-				:disposition => 'inline' # To show the pdf file in the page, change it to "inline"
+				:disposition => 'attachment' # To show the pdf file in the page, change it to "inline"
 		end				
 
 	end
@@ -50,7 +50,6 @@ class OpportunitiesController < ApplicationController
 				format.html
 				format.csv { render text: @opportunities.to_csv }
 			end
-		
 	end
 
 	# Shows opportunities created and applied by current user
@@ -69,7 +68,8 @@ class OpportunitiesController < ApplicationController
 	# Show opportunity
 	def show
 		@opportunity = Opportunity.find(params[:id])
-		@uploads= @opportunity.uploads.all.to_a
+		@uploads = @opportunity.uploads.all.to_a
+		@sponsors = @opportunity.sponsors.all.to_a
 		@skills=@opportunity.skills
 		@time=@opportunity.opportunity_times
 
@@ -81,6 +81,8 @@ class OpportunitiesController < ApplicationController
 	def new
 		@opportunity=Opportunity.new
 		@opportunity.uploads.build
+		@opportunity.sponsors.build
+
 		@skills=Skill.all
 
 		respond_to do |format|
@@ -97,8 +99,6 @@ class OpportunitiesController < ApplicationController
 	end
 
 	def create
-	
-		logger.debug("OPPORTUITY #{opportunity_params}")
 		opportunity=current_user.opportunities.build(opportunity_params[:opportunity])
 
 		if opportunity.save
@@ -150,7 +150,7 @@ class OpportunitiesController < ApplicationController
 
 	#Strong parameters for opportunities
 	def opportunity_params
-		params.permit(:time_type,:time => [],opportunity: [:title,:location,:description,:job_type,:company,:upload, :latitude, :longitude, uploads_attributes: [:id, :avatar, :_destroy]])
+		params.permit(:time_type,:time => [],opportunity: [:title,:location,:description,:job_type,:company,:upload, :latitude, :longitude, sponsors_attributes: [:id,:name, :position, :company,:email, :_destroy], uploads_attributes: [:id, :avatar, :_destroy]])
 	end
 
 	#Strong parameters for skills
