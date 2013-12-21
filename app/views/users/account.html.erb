@@ -25,14 +25,22 @@
 	class of <%= current_user.classyear %><br><br>
 <% end %>
 
-<% if @uploads != nil %>
+<% if @uploads.length != 0 %>
 	<span class="section-header"><i class="fa fa-book"></i>&nbsp;Resume</span><br>
 	<% @uploads.each do |u| %>
 		<div>
-			&nbsp;&nbsp;
-			<i class="icon-hand-right"></i>&nbsp;<%= u.avatar_file_name%> &nbsp;
-			<%= link_to "Download",  u.avatar.url %>
+			<span class="indent"/>
+			<i class="fa fa-check"></i>&nbsp;<%= u.avatar_file_name%> &nbsp;
+
+			<%= link_to user_attachment_download_path(:user_id=>current_user.id, :id => u.id, :type => "display"), :class =>"btn btn-success", :target =>"_blank" do %>
+				<i class="fa fa-desktop"></i>&nbsp;View
+			<% end %>
+			<%= link_to user_attachment_download_path(:user_id=>current_user.id, :id => u.id, :type => "download"), :class =>"btn btn-primary", :target =>"_blank" do %>
+				<i class="fa fa-download"></i>&nbsp;Download
+			<% end %>
+
 		</div>
+		<br>
 	<% end %>
 <% end %>
 <br>
@@ -40,6 +48,4 @@
 
 <br><br>
 <%= link_to "Edit Account", edit_user_registration_path, :class => "btn btn-info" %>
-<br><br>
-Do you want to invite non-alum to this GAN platform?&nbsp; 
-<%= link_to "Invite", new_user_invitation_path, :class => "btn" %>
+<br>

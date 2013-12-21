@@ -30,6 +30,12 @@ class ApplicationsController < ApplicationController
 		end
 	end
 
+	def show
+		@application=Application.find(params[:id])
+		@applicant=@application.user
+		@opportunity=@application.opportunity
+	end
+
 	private
 
 	def application_params

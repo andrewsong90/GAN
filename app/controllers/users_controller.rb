@@ -17,6 +17,13 @@ class UsersController < ApplicationController
 
 	# Download user's resumes
 	def download
+
+		if params[:type]=="display"
+			mode = 'inline'
+		else
+			mode = 'attachment'
+		end
+
 		uploads=current_user.useruploads
 		if uploads == nil
 			flash[:error]= "No attachement exists!"
@@ -26,7 +33,7 @@ class UsersController < ApplicationController
 			send_file upload.avatar.path,
 				:filename => upload.avatar_file_name,
 				:type => upload.avatar_content_type,
-				:disposition => 'attachment' # To show the pdf file in the page, change it to "inline"
+				:disposition => mode # To show the pdf file in the page, change it to "inline"
 		end
 	end
 

@@ -5,7 +5,7 @@ var SPONSOR_LIMIT=4;
 
 $(document).ready(function(){
 
-  var opportunity_upload_count=1;
+  var opportunity_upload_count=0;
   var sponsor_count=1;
 
   $('#opportunity_files_help').popover({
@@ -28,7 +28,7 @@ $(document).ready(function(){
       opportunity_upload_count +=1;
       if(opportunity_upload_count==OPPORTUNITY_UPLOAD_LIMIT){
         $('.upload_btn').removeClass('btn-primary');
-        $('.upload_btn').css('background-color','grey');
+        $('.upload_btn').addClass('btn-warning');
         $('.upload_btn > a').css('cursor','no-drop');
       } 
     }else{
@@ -37,13 +37,23 @@ $(document).ready(function(){
     }
   });
 
+  $('.container').on("click",".remove_upload_link",function(){
+    if(opportunity_upload_count==OPPORTUNITY_UPLOAD_LIMIT){
+      $('.upload_btn > a').css('cursor','pointer');
+      $('.upload_btn').removeClass('btn-warning');
+      $('.upload_btn').addClass('btn-primary');
+    }
+    opportunity_upload_count-=1;
+  });
+
+
   //Limit Sponsor Count
   $('.sponsor_link').click(function(e){
     if(sponsor_count<SPONSOR_LIMIT){
       sponsor_count +=1;
       if(sponsor_count==SPONSOR_LIMIT){
         $('.sponsor_btn').removeClass('btn-primary');
-        $('.sponsor_btn').css('background-color','grey');
+        $('.sponsor_btn').addClass('btn-warning');
         $('.sponsor_btn > a').css('cursor','no-drop');
       } 
     }else{
@@ -51,6 +61,17 @@ $(document).ready(function(){
       return false;
     }
   });
+
+  $('.container').on("click",".remove_sponsor_link",function(){
+    if(sponsor_count==SPONSOR_LIMIT){
+      $('.sponsor_btn > a').css('cursor','pointer');
+      $('.sponsor_btn').removeClass('btn-warning');
+      $('.sponsor_btn').addClass('btn-primary');
+    }
+    sponsor_count-=1;
+  });
+
+
 
   $("#opportunity_fromtime").datepicker({
       onSelect: function(dateText, inst){

@@ -17,6 +17,10 @@
 	height: 140px;
 }
 
+.indent{
+	margin-left: 20px;
+}
+
 .custom-form {
 	display: inline-block;
 }
@@ -33,6 +37,9 @@
 	text-decoration: none;
 }
 
+.file_display{
+	min-width: 200px;
+}
 /* Mouse popover pointer*/
 
 .help{

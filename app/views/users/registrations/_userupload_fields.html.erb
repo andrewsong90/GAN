@@ -1,10 +1,16 @@
-<div class="fileinput fileinput-new" data-provides="fileinput">
-  <span class="btn btn-default btn-file">
-  	<span class="fileinput-new">Select file</span>
-  	<span class="fileinput-exists">Change</span>
-	<%= f.file_field :avatar %>
-	</span>
-  <span class="fileinput-filename"></span>
-  <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+<div class="nested-fields">
+	<div>
+	<div class="fileinput fileinput-new" data-provides="fileinput">
+	  <span class="btn btn-default btn-file">
+	  	<span class="fileinput-new">Select file</span>
+	  	<span class="fileinput-exists">Change</span>
+		<%= f.file_field :avatar %>
+	  </span> 
+	  <span class="fileinput-filename"></span>
+	</div>
+
+    <%= link_to_remove_association "remove", f, :class => "remove_upload_link" %>
+    </div>
 </div>
-<br>
+
+

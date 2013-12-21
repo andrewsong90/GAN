@@ -1,14 +1,27 @@
-<h2>Welcome Admin</h2>
 
-<h3> Import Users in CSV format </h3>
+
+<h2>Administration</h2>
+
+<h5> View all users</h5>
+<%= link_to "View All", admin_users_path %>
+
+<h5> View all applications</h5>
+<%= link_to "View All", admin_applications_path %>
+
+<h5> Import Users in CSV format </h5>
 <%= form_tag import_users_path, multipart: true do %>
 	<%= file_field_tag :file %>
 	<%= submit_tag "Import" %>
 <% end %>
 
+<h5> Send invitations</h5>
+<%= link_to "Invite", new_user_invitation_path, :class => "btn" %>
+
 <br>
 
-<h3>Export Opportunities</h3>
+<h2>Reports</h2>
+
+<h5>Export Opportunities</h5>
 <p>
 	Download:
 	<%= link_to "CSV", opportunities_path(format: "csv") %>

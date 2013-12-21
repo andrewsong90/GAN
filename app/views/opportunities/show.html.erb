@@ -26,17 +26,17 @@
 <br><br>
 
 <p class="section-header"><i class="fa fa-user"></i>&nbsp;Type</p>
-<div><%= @opportunity.job_type %></div><br>
+<div><span class="indent"/><%= @opportunity.job_type %></div><br>
 
 <p class="section-header"><i class="fa fa-book"></i>&nbsp;Skills & Expertise</p>
 <% @skills.each do |skill| %>
-	<div><i class="icon-ok"></i>&nbsp;<%= skill.skill %></div>
+	<div><span class="indent"/><i class="fa fa-check"></i>&nbsp;<%= skill.skill %></div>
 <% end %>
 
 <br>
 
 <p class="section-header"><i class="fa fa-location-arrow"></i>&nbsp;Location</p>
-<div><%= @opportunity.location %></div><br>
+<div><span class="indent"/><%= @opportunity.location %></div><br>
 
 <div class="gmap">
 	<div id="map-canvas-show"></div>
@@ -45,26 +45,37 @@
 <br>
 
 <p class="section-header"><i class="fa fa-tasks"></i>&nbsp;Description</p>
-<div><%= @opportunity.description %></div>
+<div><span class="indent"/><%= @opportunity.description %></div>
 
 
-<% if @uploads != nil %>
+<% if @uploads.length != 0 %>
 	<h5>For more details, please refer to the attached files</h5> 
 	<% @uploads.each do |u| %>
-		<div>&nbsp;&nbsp;<i class="fa fa-upload"></i>&nbsp;<%= u.avatar_file_name %>&nbsp;
-			<%= link_to "Download",  u.avatar.url %>
+		<div>
+			<span class="indent"></span><i class="fa fa-check"></i>
+			&nbsp;<span class="file_display"><%= u.avatar_file_name %></span>
+
+			&nbsp;
+			
+			<%= link_to download_path(:id=>@opportunity.id, :upload_id => u.id, :type => "display"), :class =>"btn btn-success", :target =>"_blank" do %>
+				<i class="fa fa-desktop"></i>&nbsp;View
+			<% end %>
+			<%= link_to download_path(:id=>@opportunity.id, :upload_id => u.id, :type => "download"), :class =>"btn btn-primary", :target =>"_blank" do %>
+				<i class="fa fa-download"></i>&nbsp;Download
+			<% end %>
 		</div>
+		<br>
 	<% end %>
 <% end %>
 <br><br>
 
 
-<p class="section-header"><i class="fa fa-time"></i>&nbsp;Time</p>
+<p class="section-header"><i class="fa fa-calendar"></i>&nbsp;Time</p>
 <% if @time.first.is_flexible? %>
-	<div><strong>Flexible</strong>&nbsp; Please make appointment on indivdual basis!</div><br>
+	<div><span class="indent"/><strong>Flexible</strong>&nbsp; Please make appointment on indivdual basis!</div><br>
 <% else %>
-	<div><strong>From</strong>&nbsp;<%= @time.first.date.to_time.strftime('%b. %e, %Y (%a)') %></div><br>
-	<div><strong>To</strong>&nbsp;<%= @time.second.date.to_time.strftime('%b. %e, %Y (%a)') %></div><br>
+	<div><span class="indent"/><strong>From</strong>&nbsp;<%= @time.first.date.to_time.strftime('%b. %e, %Y (%a)') %></div><br>
+	<div><span class="indent"/><strong>To</strong>&nbsp;<%= @time.second.date.to_time.strftime('%b. %e, %Y (%a)') %></div><br>
 <% end %>
 
 
@@ -73,7 +84,7 @@
 <br><br>
 <p class="section-header">This opportunity was offered by</p>
 
-<p><i class="fa fa-user"></i>&nbsp;<%= owner.full_name %></p>
+<p><span class="indent"/><i class="fa fa-user"></i>&nbsp;<%= owner.full_name %></p>
 
 <% if owner.is_alum? %>
 	<p><i class="fa fa-briefcase"></i>&nbsp;Class of <%= owner.classyear%></p>
@@ -84,7 +95,7 @@
 <% if @sponsors.length != 0 %>
 	<p class="section-header"><i class="fa fa-group"></i>&nbsp;Sponsors</p><br>
 	<% @sponsors.each do |sponsor| %>
-		&nbsp;&nbsp;&nbsp;<i class="fa fa-user"></i>&nbsp;<strong><%= sponsor.name %></strong> / <%= sponsor.position %> / <%= sponsor.company %><br>
+		<span class="indent"/><i class="fa fa-user"></i>&nbsp;<strong><%= sponsor.name %></strong> / <%= sponsor.position %> / <%= sponsor.company %><br>
 	<% end %>
 <% end %>
 

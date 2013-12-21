@@ -1,0 +1,29 @@
+<h3>View Applications</h3>
+
+<div>
+	<table class="table table-striped">
+		<tr>
+			<th>ID</th>
+			<th>Opportunity ID</th>
+			<th>Opportunity</th>
+			<th>Sent by</th>
+			<th>Sent to</th>
+			<th>Sent Date</th>
+			<th></th>
+		</tr>
+
+		<% @applications.each do |f| %>
+			<% opportunity = f.opportunity %>
+			<tr>
+				<td><%= f.id %></td>
+				<td><%= opportunity.id %></td>
+				<td><%= opportunity.title %></td>
+				<td><%= f.user.full_name %></td>
+				<td><%= opportunity.user.full_name %></td>
+				<td><%= f.created_at.strftime('%b. %e, %Y') %></td>
+				<td><%= link_to "View", opportunity_application_path(opportunity,f) %></td>
+			</tr>
+		<% end %>	
+	</table>
+</div>
+<br>

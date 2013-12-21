@@ -2,6 +2,10 @@ GAN::Application.routes.draw do
   
   devise_for :admins
 
+  get "admin/users" => "admins#view_all_users", as: :admin_users
+  get "admin/applications" => "admins#view_all_applications", as: :admin_applications
+  get "admin/users/:id" => "users#account", as: :user_account
+
   resources :opportunities do
     resources :applications
   end
@@ -36,6 +40,7 @@ GAN::Application.routes.draw do
   post '/import' => "userdbs#import", as: :import_users
 
   get '/opportunities/:id/download/:upload_id', :controller => 'opportunities', :action =>'download', as: :download
+  get '/opportunities/:id/view/:upload_id' => "opportunities#view", as: :view
   get '/users/:user_id/download/:id' => 'users#download', as: :user_attachment_download
 
 

@@ -1,0 +1,26 @@
+<h3>View Users</h3>
+
+<div>
+	<table class="table table-striped">
+		<tr>
+			<th>Status</th>
+			<th>Name</th>
+			<th>Type</th>
+			<th>E-mail</th>
+			<th>Updated Date</th>
+			<th></th>
+		</tr>
+
+		<% @users.each do |f| %>
+			<tr>
+				<td></td>
+				<td><%= f.full_name %></td>
+				<td><%= f.type %></td>
+				<td><%= f.email %></td>
+				<td><%= f.updated_at.strftime('%b. %e, %Y') %></td>
+				<td><%=# link_to "View", user_account_path(f), :class => "btn btn-success" %></td>
+			</tr>
+		<% end %>	
+	</table>
+</div>
+<br>

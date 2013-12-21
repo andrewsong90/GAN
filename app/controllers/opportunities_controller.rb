@@ -17,8 +17,15 @@ class OpportunitiesController < ApplicationController
 	def contact
 	end
 
-	# Downloading uplodaded file from the opportunity
+	# Downloading or viewing uplodaded file from the opportunity
 	def download
+
+		if params[:type]=="display"
+			mode = 'inline'
+		else
+			mode = 'attachment'
+		end
+
 		@opportunity=Opportunity.find(params[:id])
 		uploads=@opportunity.uploads
 		if uploads == nil
@@ -29,7 +36,7 @@ class OpportunitiesController < ApplicationController
 			send_file upload.avatar.path,
 				:filename => upload.avatar_file_name,
 				:type => upload.avatar_content_type,
-				:disposition => 'attachment' # To show the pdf file in the page, change it to "inline"
+				:disposition => mode # To show the pdf file in the page, change it to "inline"
 		end				
 
 	end

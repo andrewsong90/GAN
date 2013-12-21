@@ -4,11 +4,11 @@
 	<p>
 		<%= text_field_tag :query, params[:query], :placeholder => "Enter Keyword" %>
 		<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-			<i class="icon-search"></i>
+			<i class="fa fa-search"></i>
 		<% end %>
 		<span class="pull-right">
 			<%= link_to new_opportunity_path, :class => "btn btn-success" do %>
-				<i class="icon-pencil"></i>&nbsp;Post
+				<i class="fa fa-pencil"></i>&nbsp;Post
 			<% end %>
 		</span>
 	</p>
