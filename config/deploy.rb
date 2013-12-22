@@ -9,6 +9,8 @@ set :keep_releases, 5
 
 set :deploy_to, "/home/gannacademy/webapps/gann"
 
+set :shared_children, shared_children+%w{uploads user_uploads}
+
 set :default_stage, "production"
 
 set :default_environment, {
