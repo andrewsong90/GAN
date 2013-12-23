@@ -1,6 +1,6 @@
 <h3 class="header">
-	<%= current_user.full_name%>
-	<% if current_user.is_alum? %>
+	<%= @user.full_name%>
+	<% if @user.is_alum? %>
 		<span class="label label-primary">Alum</span>	
 	<% else %>
 		<span class="label label-info">Friend</span>	
@@ -10,19 +10,19 @@
 
 
 <br>
-<%= image_tag current_user.avatar.url(:medium), :class=>"box_radius" %>
+<%= image_tag @user.avatar.url(:medium), :class=>"box_radius" %>
 <br><br>
 
 
 <span class="section-header"><i class="fa fa-envelope"></i></span>&nbsp;&nbsp;
-<%= current_user.email %><br><br>
+<%= @user.email %><br><br>
 
 <span class="section-header"><i class="fa fa-phone"></i></span>&nbsp;&nbsp;
-<%= current_user.phone %><br><br>
+<%= @user.phone %><br><br>
 
 <% if alum_signed_in? %>
 	<span class="section-header"><i class="fa fa-briefcase"></i></span>&nbsp;&nbsp;
-	class of <%= current_user.classyear %><br><br>
+	class of <%= @user.classyear %><br><br>
 <% end %>
 
 <% if @uploads.length != 0 %>
@@ -32,10 +32,10 @@
 			<span class="indent"/>
 			<i class="fa fa-check"></i>&nbsp;<%= u.avatar_file_name%> &nbsp;
 
-			<%= link_to user_attachment_download_path(:user_id=>current_user.id, :id => u.id, :type => "display"), :class =>"btn btn-success", :target =>"_blank" do %>
+			<%= link_to user_attachment_download_path(:user_id=>@user.id, :id => u.id, :type => "display"), :class =>"btn btn-success", :target =>"_blank" do %>
 				<i class="fa fa-desktop"></i>&nbsp;View
 			<% end %>
-			<%= link_to user_attachment_download_path(:user_id=>current_user.id, :id => u.id, :type => "download"), :class =>"btn btn-primary", :target =>"_blank" do %>
+			<%= link_to user_attachment_download_path(:user_id=>@user.id, :id => u.id, :type => "download"), :class =>"btn btn-primary", :target =>"_blank" do %>
 				<i class="fa fa-download"></i>&nbsp;Download
 			<% end %>
 
@@ -44,6 +44,10 @@
 	<% end %>
 <% end %>
 <br>
+
+<span class="section-header"><i class="fa fa-edit"></i></span>&nbsp;&nbsp;
+last updated at:  <%= @user.updated_at.strftime('%b. %e, %Y') %><br><br>
+
 
 
 <br><br>

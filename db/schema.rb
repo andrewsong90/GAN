@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131220043815) do
+ActiveRecord::Schema.define(version: 20131223204309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20131220043815) do
     t.datetime "upload_updated_at"
     t.float    "latitude"
     t.float    "longitude"
+    t.boolean  "active"
   end
 
   create_table "opportunity_skills", force: true do |t|
@@ -121,6 +122,14 @@ ActiveRecord::Schema.define(version: 20131220043815) do
     t.string   "types"
     t.string   "date"
     t.integer  "opportunity_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "posts", force: true do |t|
+    t.integer  "admin_id"
+    t.string   "title"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -207,6 +216,7 @@ ActiveRecord::Schema.define(version: 20131220043815) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
+    t.boolean  "locked"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

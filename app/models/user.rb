@@ -43,6 +43,11 @@ class User < ActiveRecord::Base
     return false
   end
 
+  # If the user is blocked from the site
+  def is_locked?
+    locked
+  end
+
   # Returns the full name of the user
   def full_name
   	"#{self.fname} #{self.lname}"
@@ -71,6 +76,15 @@ class User < ActiveRecord::Base
     else
       !password.nil? || !password_confirmation.nil?
     end
+  end
+
+  # Override Devise/authenticatable.rb
+  def update_without_password(params,*options)
+    params.delete(:password)
+    params.delete(:password_confirmation)
+
+    result = update_attributes(params)
+    result
   end
 
 end

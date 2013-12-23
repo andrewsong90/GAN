@@ -3,6 +3,7 @@
 <div>
 	<table class="table table-striped">
 		<tr>
+			<th>id</th>
 			<th>Status</th>
 			<th>Name</th>
 			<th>Type</th>
@@ -13,12 +14,17 @@
 
 		<% @users.each do |f| %>
 			<tr>
-				<td></td>
+				<td><%= f.id %></td>
+				<td>
+					<% if f.locked %>
+						<span class="label label-warning">Locked</span>
+					<% end %>
+				</td>
 				<td><%= f.full_name %></td>
 				<td><%= f.type %></td>
 				<td><%= f.email %></td>
 				<td><%= f.updated_at.strftime('%b. %e, %Y') %></td>
-				<td><%=# link_to "View", user_account_path(f), :class => "btn btn-success" %></td>
+				<td><%= link_to "Profile", admins_user_path(:id => f.id), :class => "btn btn-info" %> </td>
 			</tr>
 		<% end %>	
 	</table>

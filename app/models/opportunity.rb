@@ -31,12 +31,38 @@ class Opportunity < ActiveRecord::Base
 	validates_attachment_size :upload, :less_than => 1.megabytes
 
 	#Pagination
-	paginates_per 10
+	paginates_per 15
 
 	#Configuration for database search
 	include PgSearch
-	pg_search_scope :search, against: [:title, :description]
+	pg_search_scope :search_opportunity, 
+					:against => [:title, :description],
+					:using => {
+						:tsearch => {:prefix => true}
+					}
 
+	pg_search_scope :search_provider,
+					:associated_against => {:user => :fname}
+
+	pg_search_scope :search, lambda {|query, *args| return { :against => args, :query => query}}
+
+	pg_search_scope :search_title,
+					:against => [:title],
+					:using => {
+						:tsearch => {:prefix => true}
+					}
+
+	pg_search_scope :search_description,
+					:against => [:description],
+					:using => {
+						:tsearch => {:prefix => true}
+					}
+
+
+
+	def is_active?
+		active
+	end
 
 	# Create opportunity. Removed from the controller for clarity purpose
 	def self.create_opportunity(user_id,params)
@@ -53,11 +79,16 @@ class Opportunity < ActiveRecord::Base
 	end
 
 	#Database Search
-	def self.text_search(query)
-		if query.present?
-			search(query)
+	def self.text_search(params)
+		if params[:query].present? && params[:provider].present?
+			# search_title(params[:query]).search_description(params[:query]).reorder("created_at DESC")
+			search_opportunity(params[:query]).search_provider(params[:provider]).reorder("created_at DESC")
+		elsif params[:query].present?
+			search_opportunity(params[:query])
+		elsif params[:provider].present?
+			search_provider(params[:provider])
 		else
-			scoped
+			all
 		end
 	end
 

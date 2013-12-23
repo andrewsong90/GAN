@@ -1,0 +1,14 @@
+<%= form_for @post, :as => :post, :url => admins_posts_path do |f| %>
+
+	<span class="section-header">Title</><br>
+	<%= f.text_field :title %>
+
+	<br>	
+	
+	<span class="section-header">Content</><br>
+	<%= f.text_area :content, :class => "span6", :rows => "6", :placeholder => "Enter Content here"%>
+
+	<br>
+
+	<%= f.submit "Post", :class => "btn btn-primary" %>
+<% end %>

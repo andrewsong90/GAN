@@ -18,6 +18,10 @@
 			<span class="label label-success">Connected</span>
 		<% end %>
 
+		<% if !@opportunity.is_active? %>
+			<span class="label label-warning">Inactive</span>
+		<% end %>
+
 	</h1>
 </div>
 

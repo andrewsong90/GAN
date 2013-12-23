@@ -6,13 +6,16 @@ class UsersController < ApplicationController
 		
 	end
 
-	#new User session
-	def sign_in
+	# Personal account. Administrator can look at all accounts as of now (Subject to change)
+	def account
 		
-	end
+		if admin_signed_in?
+			@user=User.find(params[:user_id])
+		else
+			@user=current_user
+		end	
 
-	def account	
-		@uploads=current_user.useruploads.all.to_a
+		@uploads=@user.useruploads.all.to_a
 	end
 
 	# Download user's resumes
@@ -33,7 +36,7 @@ class UsersController < ApplicationController
 			send_file upload.avatar.path,
 				:filename => upload.avatar_file_name,
 				:type => upload.avatar_content_type,
-				:disposition => mode # To show the pdf file in the page, change it to "inline"
+				:disposition => mode
 		end
 	end
 

@@ -1,11 +1,26 @@
-<h3>Welcome to GAN</h3><br>
+<div class="header"><h2>Welcome to GAN</h2></div>
 
+<br>
+
+<h3><i class="fa fa-comment"></i>&nbsp;Announcement</h3>
+	<h4><span class="indent"/><%= @post.title %></h4>
+	<span class="indent italics">by <%= @post.admin.full_name %></span><br><br>
+	<span class="indent" /><span class="indent" /><%= @post.content %>
+
+	<br><br><br>
+
+<h3><i class="fa fa-archive"></i>&nbsp;Opportunities</h3>
 <%= form_tag opportunities_path, method: :get do %>
 	<p>
-		<%= text_field_tag :query, params[:query], :placeholder => "Enter Keyword" %>
+		<span class="section-header">
+			<i class="fa fa-pencil"></i>&nbsp;<%= text_field_tag :query, params[:query], :placeholder => "Enter Keyword" %>&nbsp;	
+			<i class="fa fa-user"></i>&nbsp;<%= text_field_tag :provider, params[:provider], :placeholder => "Enter Provider" %> 
+		</span>
+
 		<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-			<i class="fa fa-search"></i>
+			<i class="fa fa-search">&nbsp;Search</i>
 		<% end %>
+
 		<span class="pull-right">
 			<%= link_to new_opportunity_path, :class => "btn btn-success" do %>
 				<i class="fa fa-pencil"></i>&nbsp;Post

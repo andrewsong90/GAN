@@ -42,6 +42,7 @@ class OpportunitiesController < ApplicationController
 	end
 
 	def index
+		@post=Post.last
 		if friend_signed_in?
 			opportunities = Opportunity.text_search(params[:query])
 			filtered_opportunities = opportunities.select { |opportunity| opportunity.user.id == current_user.id }
@@ -49,7 +50,8 @@ class OpportunitiesController < ApplicationController
 			#TODO: Manually set the page limit?
 			@opportunities = Kaminari.paginate_array(filtered_opportunities).page(params[:page]).per(5)
 		else
-			@opportunities = Opportunity.text_search(params[:query]).page params[:page]
+			@opportunities = Opportunity.text_search(params).page params[:page]
+			# @opportunities = Opportunity.search_opportunity(params[:query]).page params[:page]
 		end
 		
 			#Render CSV and html view
@@ -65,7 +67,7 @@ class OpportunitiesController < ApplicationController
 		#@created_opportunities = Kaminari.paginate_array(created_opportunities).page(params[:page]).per(5)
 		if alum_signed_in?
 			applications = current_user.applications.all
-			@applied_opportunities=[]
+			@applied_opportunities=[]	
 			applications.each do |app|
 				@applied_opportunities.append(Opportunity.find(app.opportunity_id))
 			end
@@ -157,7 +159,7 @@ class OpportunitiesController < ApplicationController
 
 	#Strong parameters for opportunities
 	def opportunity_params
-		params.permit(:time_type,:time => [],opportunity: [:title,:location,:description,:job_type,:company,:upload, :latitude, :longitude, sponsors_attributes: [:id,:name, :position, :company,:email, :_destroy], uploads_attributes: [:id, :avatar, :_destroy]])
+		params.permit(:time_type, :time => [],opportunity: [:active, :title,:location,:description,:job_type,:company,:upload, :latitude, :longitude, sponsors_attributes: [:id,:name, :position, :company,:email, :_destroy], uploads_attributes: [:id, :avatar, :_destroy]])
 	end
 
 	#Strong parameters for skills

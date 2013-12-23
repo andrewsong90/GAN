@@ -1,0 +1,62 @@
+<% content_for :head do %>
+  <title>GAN Opportunities</title>
+  <%= javascript_include_tag "users/registration" %>
+<% end %>
+
+<h2>Edit Profile</h2>
+
+<br>
+
+<%= form_for @user, :as => :user, :url => admins_user_path(@user), :method => :patch do |f| %>
+
+  <div><%= f.label "Profile picture", :class => "section-header" %><br>
+  <%= f.file_field :avatar %>
+  <%= f.object.avatar_file_name %></div><br>
+
+
+  <% if false %>
+    <div><%= f.label "Resume", :class => "section-header" %>
+      &nbsp;<a id="resume_help" class="help"><i  class="fa fa-question-sign"></i></a><br>
+      <div id="uploads">  
+        <%= f.fields_for :useruploads do |upload| %>
+          <% if !(@name=upload.object.avatar_file_name) %>
+            <%= render 'userupload_fields', :f => upload %>
+          <% else %>
+            <%= render 'edit_userupload_fields', :f => upload %>
+          <% end %>
+        <% end %>
+      
+        <div class="btn btn-primary upload_btn">
+          <%= link_to_add_association 'Add Uploads', f, :useruploads, :class=>"upload_link" %>
+        </div>
+        
+      </div>
+    </div>
+  <% end %>
+
+  <br>
+  <div><%= f.label :Phone, :class => "section-header" %><br>
+    <%= f.text_field :phone, :id => "phone", :placeholder => "XXX-XXX-XXXX" %></div> 
+  <br>
+
+
+
+  <div><%= f.label :password, :class=>"section-header" %> <br><i>(leave blank if you don't want to change it)</i><br />
+  <%= f.password_field :password, :autocomplete => "off" %></div>
+
+  <div><%= f.label :password_confirmation, :class=>"section-header" %><br>
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.label :current_password, :class=>"section-header" %><br> <i>(we need your current password to confirm your changes)</i><br />
+  <%= f.password_field :current_password %></div>
+
+  <div><span class = "section-header"><i class="fa fa-lock"></i>&nbsp;Lock</span><br>
+    <%= f.radio_button :locked, false, :checked => true %>&nbsp;unlock
+    <br>
+    <%= f.radio_button :locked, true %>&nbsp;lock
+  </div>
+
+  <br>
+
+  <div><%= f.submit "Update", :class =>"btn btn-primary" %></div>
+<% end %>
