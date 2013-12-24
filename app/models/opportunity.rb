@@ -10,7 +10,7 @@ class Opportunity < ActiveRecord::Base
 	has_many :applications, dependent: :destroy
 
 	# Paperclip attachment configuration. Custom path for the uploaded files to ensure security (instead of making these public)
-	has_attached_file :upload, :styles => {:medium => "300x300>"}, :default_url => "/images/:style/missing.png"
+	has_attached_file :upload, :styles => {:medium => "300x300>", :thumb => "150x150>"}, :default_url => "/images/opportunity/:style/missing.png"
 
 	# Multiple uploads
 	has_many :uploads
@@ -31,7 +31,7 @@ class Opportunity < ActiveRecord::Base
 	validates_attachment_size :upload, :less_than => 1.megabytes
 
 	#Pagination
-	paginates_per 15
+	paginates_per 10
 
 	#Configuration for database search
 	include PgSearch

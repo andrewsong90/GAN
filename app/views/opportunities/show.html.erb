@@ -25,6 +25,22 @@
 	</h1>
 </div>
 
+<% if can_apply?(@opportunity) %>
+	<%= link_to new_opportunity_application_path(@opportunity), :class =>"btn btn-info" do %>
+		<i class="fa fa-mail-forward"></i>&nbsp;Connect
+	<% end %>
+<% end %>
+
+<% if current_user.is_owner?(@opportunity) %>
+	<div class="align-right">
+		<%= link_to edit_opportunity_path(@opportunity), :class =>"btn btn-success" do %>
+			<i class="fa fa-edit"></i>&nbsp;Edit
+		<% end %>
+	</div>
+<% end %>
+<div class="clear"></div>
+
+
 <%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius" %><br>
 
 <br><br>
@@ -87,12 +103,20 @@
 
 <br><br>
 <p class="section-header">This opportunity was offered by</p>
+<br>
+<div>
+	<div class="align-left"><%= image_tag owner.avatar.url(:thumb), :class=>"box_radius" %></div>
+	<div class="align-left indent">
+		<h4><i class="fa fa-user"></i>&nbsp;<%= owner.full_name %></h4>
+		<% if owner.is_alum? %>
+			<h4><i class="fa fa-briefcase"></i>&nbsp;Class of <%= owner.classyear %></h4>
+		<% end %>
+	</div>
+	<div class="clear"></div>
+</div>
 
-<p><span class="indent"/><i class="fa fa-user"></i>&nbsp;<%= owner.full_name %></p>
+<br>
 
-<% if owner.is_alum? %>
-	<p><span class="indent"/><i class="fa fa-briefcase"></i>&nbsp;Class of <%= owner.classyear%></p>
-<% end %>
 
 <br>
 
@@ -105,12 +129,4 @@
 
 <br>
 
-<% if can_apply?(@opportunity) %>
-	<%= link_to "Connect", new_opportunity_application_path(@opportunity), :class =>"btn btn-info" %>
-<% end %>
 
-<%= link_to "Back", opportunities_path, :class =>"btn btn-info" %>
-
-<% if current_user.is_owner?(@opportunity) %>
-	<%= link_to "Edit", edit_opportunity_path(@opportunity), :class =>"btn btn-info" %>
-<% end %>

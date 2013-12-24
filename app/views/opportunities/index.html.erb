@@ -30,6 +30,28 @@
 
 <% end %>
 
+<% @opportunities.each do |f| %>
+	<div class="well box_radius">
+		<div class="align-left">
+			<%= image_tag f.upload.url(:thumb), :class =>"box_radius" %>
+		</div>
+		<div class="align-left indent">
+			<h4><%= f.title %>&nbsp;<small><%= f.company %></small></h4>
+			<i class="fa fa-map-marker"></i>&nbsp;<%= f.location %><br>
+			<i class="fa fa-calendar"></i>&nbsp;<%= f.created_at.strftime('%b. %e, %Y') %><br><br>	
+			<span class="italics"><strong>Offered by</strong></span>&nbsp;<%= f.user.full_name %>
+		</div>
+		<div class="align-right">
+			<% if can_apply?(f) %>
+				<%= link_to "View & Connect", opportunity_path(f), :class => "btn btn-info" %>
+			<% else %>
+				<%= link_to "View", opportunity_path(f), :class => "btn btn-success" %>
+			<% end %>
+		</div>
+		<div class="clear"></div>
+	</div>
+<% end %>
+
 <div>
 	<table class="table table-striped">
 		<tr>
@@ -59,6 +81,7 @@
 		<% end %>	
 	</table>
 </div>
+
 <br>
 
 <div class="pull-right">

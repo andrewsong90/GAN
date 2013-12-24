@@ -8,6 +8,18 @@
 	padding-bottom: 190px;
 }
 
+.clear{
+	clear: both;
+}
+
+.align-left{
+	float: left;
+}
+
+.align-right{
+	float: right;
+}
+
 .footer_bar{
 	position: absolute;
 	left: 0;
