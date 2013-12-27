@@ -11,6 +11,9 @@
 <h5> View all applications</h5>
 <%= link_to "View All", admin_applications_path %>
 
+<h5> View Alum list </h5>
+<%= link_to "View Alum", alum_list_path %>
+
 <h5> Import Users in CSV format </h5>
 <%= form_tag import_users_path, multipart: true do %>
 	<%= file_field_tag :file %>

@@ -3,9 +3,25 @@
 	<%= javascript_include_tag "opportunities/show" %>
 <% end %>
 
+<% if can_apply?(@opportunity) %>
+	<div class="align-right">
+		<%= link_to new_opportunity_application_path(@opportunity), :class =>"btn btn-info" do %>
+			<i class="fa fa-mail-forward"></i>&nbsp;Connect
+		<% end %>
+	</div>
+<% end %>
+
+<% if current_user.is_owner?(@opportunity) %>
+	<div class="align-right">
+		<%= link_to edit_opportunity_path(@opportunity), :class =>"btn btn-success" do %>
+			<i class="fa fa-edit"></i>&nbsp;Edit
+		<% end %>
+	</div>
+<% end %>
+<div class="clear"></div>
+
 <br>
 
-<div class="page-header">
 	<h1>
 		<%= @opportunity.title %> 
 		<small> <%= @opportunity.company %></small>
@@ -23,44 +39,23 @@
 		<% end %>
 
 	</h1>
-</div>
-
-<% if can_apply?(@opportunity) %>
-	<%= link_to new_opportunity_application_path(@opportunity), :class =>"btn btn-info" do %>
-		<i class="fa fa-mail-forward"></i>&nbsp;Connect
-	<% end %>
-<% end %>
-
-<% if current_user.is_owner?(@opportunity) %>
-	<div class="align-right">
-		<%= link_to edit_opportunity_path(@opportunity), :class =>"btn btn-success" do %>
-			<i class="fa fa-edit"></i>&nbsp;Edit
-		<% end %>
-	</div>
-<% end %>
-<div class="clear"></div>
 
 
-<%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius" %><br>
+<h2><small><span class="italics"><%= @opportunity.job_type %></span></small></h2>
+
+<br>
+
+<div class="row">
+	<div class="span6">
+		<%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius" %><br>
 
 <br><br>
 
-<p class="section-header"><i class="fa fa-user"></i>&nbsp;Type</p>
-<div><span class="indent"/><%= @opportunity.job_type %></div><br>
 
 <p class="section-header"><i class="fa fa-book"></i>&nbsp;Skills & Expertise</p>
 <% @skills.each do |skill| %>
 	<div><span class="indent"/><i class="fa fa-check"></i>&nbsp;<%= skill.skill %></div>
 <% end %>
-
-<br>
-
-<p class="section-header"><i class="fa fa-location-arrow"></i>&nbsp;Location</p>
-<div><span class="indent"/><%= @opportunity.location %></div><br>
-
-<div class="gmap">
-	<div id="map-canvas-show"></div>
-</div>
 
 <br>
 
@@ -87,6 +82,19 @@
 		<br>
 	<% end %>
 <% end %>
+
+<br>
+
+<p class="section-header"><i class="fa fa-location-arrow"></i>&nbsp;Location</p>
+<div><span class="indent"/><%= @opportunity.location %></div><br>
+
+<div class="gmap">
+	<div id="map-canvas-show"></div>
+</div>
+
+<br>
+
+
 <br><br>
 
 
@@ -97,35 +105,35 @@
 	<div><span class="indent"/><strong>From</strong>&nbsp;<%= @time.first.date.to_time.strftime('%b. %e, %Y (%a)') %></div><br>
 	<div><span class="indent"/><strong>To</strong>&nbsp;<%= @time.second.date.to_time.strftime('%b. %e, %Y (%a)') %></div><br>
 <% end %>
-
-
-<% owner = @opportunity.user %>
-
-<br><br>
-<p class="section-header">This opportunity was offered by</p>
-<br>
-<div>
-	<div class="align-left"><%= image_tag owner.avatar.url(:thumb), :class=>"box_radius" %></div>
-	<div class="align-left indent">
-		<h4><i class="fa fa-user"></i>&nbsp;<%= owner.full_name %></h4>
-		<% if owner.is_alum? %>
-			<h4><i class="fa fa-briefcase"></i>&nbsp;Class of <%= owner.classyear %></h4>
-		<% end %>
 	</div>
-	<div class="clear"></div>
+
+	<div class="span3">
+		<% owner = @opportunity.user %>
+		<div class="well">
+		<p class="section-header"><%= owner.full_name %></p>
+		<br>
+		<div>
+			<div><%= image_tag owner.avatar.url(:thumb), :class=>"box_radius" %></div>
+			<div class="indent">
+				<% if owner.is_alum? %>
+					<h5>Class of <%= owner.classyear %></h5>
+				<% end %>
+			</div>
+		</div>
+		<%= link_to "View profile", user_path(:id => owner.id), :class => "pull-right" %>
+
+		<br><br>
+
+		<% if @sponsors.length != 0 %>
+			<p class="section-header"><i class="fa fa-group"></i>&nbsp;Sponsors</p><br>
+			<% @sponsors.each do |sponsor| %>
+				<span class="indent"/><i class="fa fa-check"></i>&nbsp;<strong><%= sponsor.name %></strong><br>
+				<span class="indent"/><%= sponsor.position %> @ <%= sponsor.company %><br>
+			<% end %>
+		<% end %>
+		</div>
+	</div>
 </div>
-
-<br>
-
-
-<br>
-
-<% if @sponsors.length != 0 %>
-	<p class="section-header"><i class="fa fa-group"></i>&nbsp;Sponsors</p><br>
-	<% @sponsors.each do |sponsor| %>
-		<span class="indent"/><i class="fa fa-user"></i>&nbsp;<strong><%= sponsor.name %></strong> / <%= sponsor.position %> / <%= sponsor.company %><br>
-	<% end %>
-<% end %>
 
 <br>
 

@@ -1,9 +1,20 @@
+<div class="pull-right">
+	<%= link_to new_opportunity_path, :class => "btn btn-success" do %>
+		<i class="fa fa-pencil"></i>&nbsp;Create
+	<% end %>
+</div>
 
-<% if alum_signed_in? %>
-<h3>Opportunities applied for</h3>
+<br><br>
 
-<div>
-	<table class="table table-striped">
+<ul class="nav nav-tabs">
+	<li><a href="#applied" data-toggle="tab">Applied</a></li>
+	<li><a href="#created" data-toggle="tab">Created</a></li>
+</ul>
+
+<div class="tab-content">
+	<div class="tab-pane fade in active" id="applied">
+		<h4>Applied Opportunities</h4>
+		<table class="table table-striped">
 		<tr>
 			<th>Title</th>
 			<th>Company</th>
@@ -22,14 +33,10 @@
 			</tr>
 		<% end %>	
 	</table>
-</div>
-<% end %>
-<br>
-
-<h3>Opportunities created</h3>
-
-<div>
-	<table class="table table-striped">
+	</div>
+	<div class="tab-pane fade" id="created">
+		<h4>Created Opportunities</h4>
+		<table class="table table-striped">
 		<tr>
 			<th>Title</th>
 			<th>Company</th>
@@ -48,7 +55,9 @@
 			</tr>
 		<% end %>	
 	</table>
+	</div>
 </div>
+
 <br>
 
 <div class="pull-right">

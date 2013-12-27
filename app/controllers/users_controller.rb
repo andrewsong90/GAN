@@ -7,10 +7,10 @@ class UsersController < ApplicationController
 	end
 
 	# Personal account. Administrator can look at all accounts as of now (Subject to change)
-	def account
+	def show
 		
-		if admin_signed_in?
-			@user=User.find(params[:user_id])
+		if params[:id]!=nil
+			@user=User.find(params[:id])
 		else
 			@user=current_user
 		end	

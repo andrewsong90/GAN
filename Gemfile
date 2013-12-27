@@ -50,6 +50,10 @@ gem 'less-rails'
 
 gem "devise_invitable"
 
+# WYSIWYG Editor
+#gem 'mercury-rails'
+
+
 #Geocoder
 gem 'geocoder'
 

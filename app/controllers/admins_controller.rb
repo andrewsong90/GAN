@@ -9,6 +9,10 @@ class AdminsController < ApplicationController
 		@users=User.all.to_a
 	end
 
+	def view_alum_list
+		@alum=Userdb.all.to_a	
+	end
+
 	def view_all_applications
 		@applications=Application.all.to_a
 	end

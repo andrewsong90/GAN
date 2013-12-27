@@ -8,6 +8,13 @@
 	padding-bottom: 190px;
 }
 
+
+/* To be changed for media queries */
+.container{
+	width: 900px;
+}
+
+
 .clear{
 	clear: both;
 }
@@ -29,6 +36,10 @@
 	height: 140px;
 }
 
+a:hover {
+	text-decoration: none;
+}
+
 .indent{
 	margin-left: 20px;
 }
@@ -45,9 +56,9 @@
 	color: #ffffff;
 }
 
-.upload_btn > a:hover, .sponsor_btn > a:hover {
+/*.upload_btn > a:hover, .sponsor_btn > a:hover {
 	text-decoration: none;
-}
+}*/
 
 .file_display{
 	min-width: 200px;
@@ -68,9 +79,9 @@
 
 /* Override rest of the bootstrap*/
 .box_shadow{
-	-moz-box-shadow: 5px 5px 5px 1px #000000;
-	-webkit-box-shadow: 5px 5px 5px 1px #000000;
-	box-shadow: 5px 5px 5px 1px #000000;
+	-moz-box-shadow: 3px 3px 3px 1px #000000;
+	-webkit-box-shadow: 3px 3px 3px 1px #000000;
+	box-shadow: 3px 3px 3px 1px #000000;
 }
 
 .box_radius{
@@ -114,7 +125,6 @@
 
 .navbar .nav > li > a:hover{
 	color: #992135;
-	text-decoration: underline;
 }
 
 .navbar .nav > li > a, .navbar .nav > li > a:hover{
@@ -185,8 +195,8 @@
 
 
 .gmap {
-	height: 350px;
-	width: 600px;
+	height: 300px;
+	width: 500px;
 }
 .controls {
         margin-top: 16px;

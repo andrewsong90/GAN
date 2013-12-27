@@ -1,18 +1,17 @@
 <div class="page-header text-align-center">
   <h1>
-    Welcome to Gann Alumni Network
+    Welcome to Gann Alumni Network<br>
     <small>Connect with other alumni</small>
   </h1>
 </div>
 
 <div class="row">
-  <div class="span4 offset1">
+  <div class="span3 offset1">
     <img src = <%= image_path("gann.jpg") %> class="box_radius" alt="gann"/>
   </div>
 
-  <%= devise_error_messages! %>
 
-  <div class="span3 offset2">
+  <div class="span3 offset1">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
       <div><i class="fa fa-envelope"></i>&nbsp;<%= f.label :email, :class => "section-header" %>
       <%= f.email_field :email, :autofocus => true %></div>

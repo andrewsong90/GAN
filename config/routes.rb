@@ -6,6 +6,7 @@ GAN::Application.routes.draw do
   get "admins/applications" => "admins#view_all_applications", as: :admin_applications
   # get "admins/users/:id" => "users#account", as: :user_account
   get "admins/invitations" => "admins#invitations", as: :invitations
+  get "admins/alum" => "admins#view_alum_list", as: :alum_list
   get "/admins/main" => 'admins#main', as: :admin_main
 
 
@@ -20,10 +21,6 @@ GAN::Application.routes.draw do
   
   # get '/' => 'users/sessions#new', as: :root
   get '/opportunities/new/upload' => "opportunities#upload", as: :new_upload
-
-  # devise_scope :admin do
-  #   resources :users
-  # end
 
   devise_scope :user do
     get '/friend/register' => 'users/registrations#new', :type => 'Friend', as: :new_friend_registration
@@ -54,6 +51,7 @@ GAN::Application.routes.draw do
   get '/opportunities/:id/download/:upload_id', :controller => 'opportunities', :action =>'download', as: :download
   get '/opportunities/:id/view/:upload_id' => "opportunities#view", as: :view
   get '/users/:user_id/download/:id' => 'users#download', as: :user_attachment_download
+  get 'users/:id' => 'users#show', as: :user
 
 
 
