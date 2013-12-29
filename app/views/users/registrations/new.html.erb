@@ -1,34 +1,51 @@
-  <h2>Register as Alum for GAN</h2><br>
-  <h3>Step 1: Alum Authentication</h3>
-  <p>
-    To ensure the confidentiality of the Gann community,<br> 
-    we ask users to provide a parent's email address and graduation year.<br>
-  </p>
-
-<br>
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-
-  <div><%= f.label :email, :class => "section-header" %><br>
-  <%= f.email_field :email, :autofocus => true %>
-  </div>
-
-
-  <div><%= f.label "First Name", :class => "section-header" %><br>
-  <%= f.text_field :fname %></div>
-
-  <div><%= f.label "Last Name", :class => "section-header" %><br>
-  <%= f.text_field :lname %></div>
-
-  <br>
-
-    <div><%= f.label "Parent Email", :class => "section-header" %><br>
-    <%= f.email_field :parent_email %></div>  
-
-  	<div><%= f.label "Class Year", :class => "section-header" %><br>
-  	 <%= f.number_field :classyear %></div>
-
-  <%= f.hidden_field :type, :value => @type %>
-
-  <div><%= f.submit "Sign up", :class => "btn btn-info" %></div>
+<% content_for :head do %>
+  <title>GAN Opportunities</title>
+  <%= javascript_include_tag "users/registration" %>
 <% end %>
 
+<div class="container">
+  <div class="text-align-center">
+    <h2>Register for Gann Alumni Networks</h2>
+  </div>
+  
+  <br>
+  
+  <div>
+    <h3>Step 1: Authentication</h3>
+    
+
+    <br>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+
+      <div><%= f.label :email, :class => "section-header" %><br>
+      <%= f.email_field :email, :autofocus => true %>
+      </div>
+
+
+      <div><%= f.label "First Name", :class => "section-header" %><br>
+      <%= f.text_field :fname %></div>
+
+      <div><%= f.label "Last Name", :class => "section-header" %><br>
+      <%= f.text_field :lname %></div>
+
+      <div><%= f.label "Gann graduation class", :class => "section-header" %><br>
+      <%= f.number_field :classyear %></div>
+
+      <br>
+      <p>
+        We want to register you quickly!<br>
+        Please input your parent's email address so we can check our records.<br>
+      </p>
+
+      <div><%= f.label "Parent Email", :class => "section-header" %>
+      &nbsp;<a id="registration_parent_email_help" class="help"><i class="fa fa-question-circle"></i></a><br>  
+      <%= f.email_field :parent_email %></div>  
+
+      <%= f.hidden_field :type, :value => @type %>
+      
+      <br>
+
+      <div><%= f.submit "Sign up", :class => "btn btn-primary" %></div>
+    <% end %>
+  </div>
+</div>

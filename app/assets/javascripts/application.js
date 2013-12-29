@@ -19,6 +19,7 @@
 //= require twitter/bootstrap
 //= require cocoon
 //= require jasny-bootstrap
+//= require tinymce
 
 //Disable turbolinks for now
 

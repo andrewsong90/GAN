@@ -15,6 +15,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 gem 'devise'
+#Passing data to JavaScript
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -25,18 +26,18 @@ gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+#Passing data to JavaScript
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 gem 'figaro'
 
+gem 'tinymce-rails', :git => "git://github.com/spohlenz/tinymce-rails.git", :branch => "tinymce-4"
+
 # For attaching pictures
 gem 'paperclip'
 
-# Jquery file uploader
-gem 'jquery-fileupload-rails'
-
-# Jquery UI
+# Jquery UIgon
 gem 'jquery-ui-rails'
 
 #For deploying to the server
@@ -49,9 +50,6 @@ gem 'pg_search'
 gem 'less-rails'
 
 gem "devise_invitable"
-
-# WYSIWYG Editor
-#gem 'mercury-rails'
 
 
 #Geocoder

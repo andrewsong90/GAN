@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 			@user=current_user
 		end	
 
+		@skills=@user.skills
 		@uploads=@user.useruploads.all.to_a
 	end
 

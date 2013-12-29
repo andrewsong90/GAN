@@ -29,7 +29,7 @@ class OpportunitiesController < ApplicationController
 		@opportunity=Opportunity.find(params[:id])
 		uploads=@opportunity.uploads
 		if uploads == nil
-			flash[:error]= "No attachement exists!"
+			flash[:error]= "No attachment exists!"
 			redirect_to opportunity_path(@opportunity)
 		else
 			upload=uploads.find(params[:upload_id])
@@ -45,12 +45,17 @@ class OpportunitiesController < ApplicationController
 		@post=Post.last
 		if friend_signed_in?
 			opportunities = Opportunity.text_search(params[:query])
-			filtered_opportunities = opportunities.select { |opportunity| opportunity.user.id == current_user.id }
+			# filtered_opportunities = opportunities.select { |opportunity| opportunity.user.id == current_user.id }
 			
 			#TODO: Manually set the page limit?
 			@opportunities = Kaminari.paginate_array(filtered_opportunities).page(params[:page]).per(5)
 		else
-			@opportunities = Opportunity.text_search(params).page params[:page]
+			# opportunities = Opportunity.text_search(params).page params[:page]
+			opportunities=Opportunity.text_search(params)
+			logger.debug("Before FILTRED #{opportunities}")
+			filtered_opportunities = Opportunity.type_search(opportunities,params[:job_type])
+			logger.debug("Filtered #{filtered_opportunities}")
+			@opportunities = Kaminari.paginate_array(filtered_opportunities).page(params[:page]).per(10)
 			# @opportunities = Opportunity.search_opportunity(params[:query]).page params[:page]
 		end
 		
@@ -91,8 +96,7 @@ class OpportunitiesController < ApplicationController
 		@opportunity=Opportunity.new
 		@opportunity.uploads.build
 		@opportunity.sponsors.build
-
-		@skills=Skill.all
+		build_unpicked_skills
 
 		respond_to do |format|
 			format.html
@@ -112,10 +116,9 @@ class OpportunitiesController < ApplicationController
 
 		if opportunity.save
 
-			# permitted_params=skill_params
-			skill_params[:skills].each do |skill|
-				opportunity.opportunity_skills.create(:skill_id => skill)
-			end
+			# skill_params[:skills].each do |skill|
+			# 	opportunity.opportunity_skills.create(:skill_id => skill)
+			# end
 
 			# Create time objects
 			OpportunityTime.createTime(opportunity.id, opportunity_params)
@@ -131,7 +134,7 @@ class OpportunitiesController < ApplicationController
 
 	def edit
 		@opportunity = Opportunity.find(params[:id])	
-		@skills=Skill.all
+		build_unpicked_skills
 
 		if current_user.is_owner?(@opportunity)
 			respond_to do |format|
@@ -157,9 +160,17 @@ class OpportunitiesController < ApplicationController
 
 	private
 
+	def build_unpicked_skills
+		(Skill.all-@opportunity.skills).each do |skill|
+			@opportunity.opportunity_skills.build(:skill => skill)
+		end
+		@opportunity.opportunity_skills.sort_by! {|os| os.skill.id }
+	end
+
+
 	#Strong parameters for opportunities
 	def opportunity_params
-		params.permit(:time_type, :time => [],opportunity: [:active, :title,:location,:description,:job_type,:company,:upload, :latitude, :longitude, sponsors_attributes: [:id,:name, :position, :company,:email, :_destroy], uploads_attributes: [:id, :avatar, :_destroy]])
+		params.permit(:time_type, :time => [], opportunity: [:active, :title,:location,:description,:job_type,:company,:upload, :latitude, :longitude, sponsors_attributes: [:id,:name, :position, :company,:email, :_destroy], uploads_attributes: [:id, :avatar, :_destroy], opportunity_skills_attributes: [:id, :skill_id, :_destroy]])
 	end
 
 	#Strong parameters for skills

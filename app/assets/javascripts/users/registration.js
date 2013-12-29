@@ -13,6 +13,10 @@ $(document).ready(function(){
 		html: true
 	});
 
+	$("#registration_parent_email_help").popover({
+		content: "Input either of your parent's email addresses from the time you were a Gann student."
+	});
+
 	//Limit File Upload Count
   $('.upload_link').click(function(e){
     if(user_file_count<USER_FILE_LIMIT){

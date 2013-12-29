@@ -1,7 +1,8 @@
 class Opportunity < ActiveRecord::Base
 
-	has_many :opportunity_skills
-	has_many :skills, :through => :opportunity_skills, dependent: :destroy
+	has_many :opportunity_skills, dependent: :destroy
+	has_many :skills, :through => :opportunity_skills
+	accepts_nested_attributes_for :opportunity_skills, :allow_destroy => true
 
 	# Association with opportunity timea
 	has_many :opportunity_times
@@ -10,7 +11,7 @@ class Opportunity < ActiveRecord::Base
 	has_many :applications, dependent: :destroy
 
 	# Paperclip attachment configuration. Custom path for the uploaded files to ensure security (instead of making these public)
-	has_attached_file :upload, :styles => {:medium => "300x300>", :thumb => "150x150>"}, :default_url => "/images/opportunity/:style/missing.png"
+	has_attached_file :upload, :styles => {:medium => "200x200>", :thumb => "120x120>"}, :default_url => "/images/opportunity/:style/missing.png"
 
 	# Multiple uploads
 	has_many :uploads
@@ -20,6 +21,8 @@ class Opportunity < ActiveRecord::Base
 	has_many :sponsors
 	accepts_nested_attributes_for :sponsors, :reject_if => :all_blank, :allow_destroy => true
 
+	has_many :favorite_opportunities, :dependent => :destroy
+	
 	# Geocoder for storing location
 	geocoded_by :location
 	after_validation :geocode
@@ -89,6 +92,17 @@ class Opportunity < ActiveRecord::Base
 			search_provider(params[:provider])
 		else
 			all
+		end
+	end
+
+
+	def self.type_search (opportunities, type_id)
+		if type_id != "" && type_id != nil
+			type=Jobtype.where(:id => type_id).name
+			filtered_opportunities = opportunities.select {|opportunity| opportunity.job_type == type }
+			filtered_opportunities
+		else
+			opportunities
 		end
 	end
 

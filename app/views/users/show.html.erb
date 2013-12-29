@@ -1,55 +1,75 @@
-<h3 class="header">
-	<%= @user.full_name%>
-	<% if @user.is_alum? %>
-		<span class="label label-primary">Alum</span>	
-	<% else %>
-		<span class="label label-info">Friend</span>	
+<div class="container">
+	
+	<h3 class="header">
+		<%= @user.full_name%>
+		<% if @user.is_alum? %>
+			<span class="label label-primary">Alum</span>	
+		<% else %>
+			<span class="label label-info">Friend</span>	
+		<% end %>
+	</h3>
+	<div class="align-left account_left">
+	<br>
+	<%= image_tag @user.avatar.url(:medium), :class=>"box_radius" %>
+	<br><br>
+
+
+	<span class="section-header"><i class="fa fa-envelope"></i></span>&nbsp;&nbsp;
+	<%= @user.email %><br><br>
+
+	<span class="section-header"><i class="fa fa-phone"></i></span>&nbsp;&nbsp;
+	<%= @user.phone %><br><br>
+
+	<% if alum_signed_in? %>
+		<span class="section-header"><i class="fa fa-briefcase"></i></span>&nbsp;&nbsp;
+		class of <%= @user.classyear %><br><br>
 	<% end %>
-</h3>
 
+	<% if @uploads.length != 0 %>
+		<span class="section-header"><i class="fa fa-book"></i>&nbsp;Resume</span><br>
+		<% @uploads.each do |u| %>
+			<div>
+				<span class="indent"/>
+				<i class="fa fa-check"></i>&nbsp;<%= u.avatar_file_name%> &nbsp;
 
+				<%= link_to user_attachment_download_path(:user_id=>@user.id, :id => u.id, :type => "display"), :class =>"btn btn-success", :target =>"_blank" do %>
+					<i class="fa fa-desktop"></i>&nbsp;View
+				<% end %>
+				<%= link_to user_attachment_download_path(:user_id=>@user.id, :id => u.id, :type => "download"), :class =>"btn btn-primary", :target =>"_blank" do %>
+					<i class="fa fa-download"></i>&nbsp;Download
+				<% end %>
 
-<br>
-<%= image_tag @user.avatar.url(:medium), :class=>"box_radius" %>
-<br><br>
+			</div>
+			<br>
+		<% end %>
+	<% end %>
+	<br>
 
+	<span class="section-header"><i class="fa fa-edit"></i></span>&nbsp;&nbsp;
+	last updated at:  <%= @user.updated_at.strftime('%b. %e, %Y') %><br><br>
 
-<span class="section-header"><i class="fa fa-envelope"></i></span>&nbsp;&nbsp;
-<%= @user.email %><br><br>
+	
+	</div>
 
-<span class="section-header"><i class="fa fa-phone"></i></span>&nbsp;&nbsp;
-<%= @user.phone %><br><br>
-
-<% if alum_signed_in? %>
-	<span class="section-header"><i class="fa fa-briefcase"></i></span>&nbsp;&nbsp;
-	class of <%= @user.classyear %><br><br>
-<% end %>
-
-<% if @uploads.length != 0 %>
-	<span class="section-header"><i class="fa fa-book"></i>&nbsp;Resume</span><br>
-	<% @uploads.each do |u| %>
-		<div>
-			<span class="indent"/>
-			<i class="fa fa-check"></i>&nbsp;<%= u.avatar_file_name%> &nbsp;
-
-			<%= link_to user_attachment_download_path(:user_id=>@user.id, :id => u.id, :type => "display"), :class =>"btn btn-success", :target =>"_blank" do %>
-				<i class="fa fa-desktop"></i>&nbsp;View
-			<% end %>
-			<%= link_to user_attachment_download_path(:user_id=>@user.id, :id => u.id, :type => "download"), :class =>"btn btn-primary", :target =>"_blank" do %>
-				<i class="fa fa-download"></i>&nbsp;Download
-			<% end %>
-
+	<div class="divider"></div>
+	
+	<div class="align-left account_right">
+		<span class="section-header">&nbsp;Skills & Interests</span><br>
+		<% @skills.each do |skill| %>
+			<div><span class="indent"/><i class="fa fa-check"></i>&nbsp;<%= skill.skill %></div>
+		<% end %>		
+	
+		<br><br>
+		<div class="align-right">
+			<%= link_to "Edit Account", edit_user_registration_path, :class => "btn btn-info" %>
 		</div>
+		<div class="clear"></div>
 		<br>
-	<% end %>
-<% end %>
-<br>
-
-<span class="section-header"><i class="fa fa-edit"></i></span>&nbsp;&nbsp;
-last updated at:  <%= @user.updated_at.strftime('%b. %e, %Y') %><br><br>
+	</div>
+	<div class="clear"></div>
 
 
 
-<br><br>
-<%= link_to "Edit Account", edit_user_registration_path, :class => "btn btn-info" %>
-<br>
+
+	
+</div>

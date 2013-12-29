@@ -25,13 +25,14 @@
     <br>
  	  
     <div><%= f.label "Type", :class => "section-header" %><br>
-  	<%= f.collection_select :job_type, Type.all, :name, :name, prompt: true %></div>
+  	<%= f.collection_select :job_type, Jobtype.all, :name, :name, prompt: true %></div>
 
     <br>
 
   	<div><%= f.label "Job Description", :class => "section-header" %><br>
-  	<%= f.text_area :description, :class => "span6", :rows => "6", :placeholder => "Enter Job Description here" %></div>
-    
+  	<%= f.text_area :description, :class => "tinymce span7", :rows => "6", :placeholder => "Enter Job Description here" %></div>
+    <%= tinymce %>
+
     <br>
 
     <div><%= f.label "Files", :class => "section-header" %>
@@ -51,28 +52,34 @@
       </div>
     </div>
 
-  <br><br>
+    <br><br>
 
-    <div><%= f.label "Skills", :class => "section-header" %><br>
-    <% counter = 0 %> 
+   
+    <span class="section-header">Skills</span><br>
+
+    <% counter = 0 %>
+
     <table>
-      <% @skills.each do |s|%>
-        <% if counter % 3 == 0%>
+      <%= f.fields_for :opportunity_skills do |ff| %>
+        <% if counter % 3 == 0 %>
           <tr>
         <% end %>
-       
-        <td><%= check_box_tag 'skills[]', s.id %><%= s.skill %></td>
-          
-        <!-- Line break-->
+        
+        <td class="form-inline">
+          <%= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1' %>&nbsp;
+          <span> <%= ff.object.skill.skill %> </span>
+          <%= ff.hidden_field :skill_id %>
+        </td>
+
         <% if ((counter +=1) % 3) == 0 %>
           </tr>
         <% end %>
 
       <% end %>
     </table>
-    </div>
+   
+   <br>
 
-    <br>
 	 <div><%= f.label "Location", :class => "section-header" %></div>
 
    <br>

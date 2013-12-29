@@ -1,3 +1,26 @@
+$grey_color: #e5e5e9;
+
+/*$blue_color: #122f45;*/
+$blue_color: #336699;
+$container_width: 900px;
+$container_side_padding: 15px;
+
+$opportunities_index_left_container_width: 630px;
+$opportunities_index_container_margin_right: 30px;
+
+@mixin box-padding{
+	padding-left: $container_side_padding;
+	padding-right: $container_side_padding;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+@mixin box_shadow{
+	-moz-box-shadow: 1px 1px 1px 1px #000000;
+	-webkit-box-shadow: 1px 1px 1px 1px #000000;
+	box-shadow: 1px 1px 1px 1px #000000;
+}
+
 /* Whole html page*/
 #holder{
 	min-height: 100%;
@@ -5,15 +28,64 @@
 }
 
 #body{
+
 	padding-bottom: 190px;
 }
 
+body{
+	background-color: #ffffff;
+}
+
+/* Container settings */
+.super-container{
+	width: $container_width + 2 * $container_side_padding;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.well{
+	@include box_shadow;
+}
 
 /* To be changed for media queries */
 .container{
-	width: 900px;
+	position: relative;
+	width: $container_width;
+	background-color: $grey_color;
+	@include box-padding;
+	@include box_shadow;
 }
 
+.opportunities_index_left_container{
+	width: $opportunities_index_left_container_width;
+	margin-right: $opportunities_index_container_margin_right;
+	background-color: $grey_color;
+	@include box-padding;
+	@include box_shadow;
+}
+
+.opportunities_index_right_container{
+	width: $container_width - $opportunities_index_left_container_width - $opportunities_index_container_margin_right - 2 * $container_side_padding;
+	background-color: $grey_color;
+	@include box-padding;
+	@include box_shadow;
+}
+
+.account_left{
+	width: 450px;
+}
+
+.account_right{
+	width: 440px;
+}
+
+.divider{
+	position: absolute;
+	top: 6%;
+	left: 460px;
+	bottom: 6%;
+	border-left: 2px solid #a7b0ad ;
+}
 
 .clear{
 	clear: both;
@@ -44,6 +116,11 @@ a:hover {
 	margin-left: 20px;
 }
 
+
+.select_box{
+	width: 120px;
+}
+
 .custom-form {
 	display: inline-block;
 }
@@ -55,10 +132,6 @@ a:hover {
 .upload_btn > a, .sponsor_btn > a {
 	color: #ffffff;
 }
-
-/*.upload_btn > a:hover, .sponsor_btn > a:hover {
-	text-decoration: none;
-}*/
 
 .file_display{
 	min-width: 200px;
@@ -73,16 +146,16 @@ a:hover {
 	color: #ffffff;
 }
 
+.navyfont{
+	color: $blue_color;
+}
+
 .width50{
 	width: 300px;
 }
 
 /* Override rest of the bootstrap*/
-.box_shadow{
-	-moz-box-shadow: 3px 3px 3px 1px #000000;
-	-webkit-box-shadow: 3px 3px 3px 1px #000000;
-	box-shadow: 3px 3px 3px 1px #000000;
-}
+
 
 .box_radius{
 	-moz-border-radius: 10px;
@@ -91,14 +164,10 @@ a:hover {
 }
 
 .box_padding{
-	padding-left: 35px;
-	padding-right: 15px;
-	padding-top: 30px;
-	padding-bottom: 60px;
-}
-
-.sky_background{
-	background-color: #edecec;
+	padding-left: $container_side_padding;
+	padding-right: $container_side_padding;
+	padding-top: 20px;
+	padding-bottom: 40px;
 }
 
 .alert{
@@ -111,6 +180,9 @@ a:hover {
 	height:110px;
 }
 
+input[type="checkbox"] {
+	margin: -5px 0px 0px;
+}
 
 /* Override bootstrap to customize navbar*/
 
@@ -197,7 +269,11 @@ a:hover {
 .gmap {
 	height: 300px;
 	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	@include box_shadow;
 }
+
 .controls {
         margin-top: 16px;
         border: 1px solid transparent;

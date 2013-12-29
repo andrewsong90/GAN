@@ -1,10 +1,20 @@
 module OpportunitiesHelper
 
-	def add_asset_link(name) 
-		link_to_function(name,nil) do |page|
-			page.alert("Hello world!")
-			# page.insert_html :bottom, :assets, :partial => 'opportunities/shared/upload', :object => Upload.new
+	def short_location(location)
+		temp=location.split(/,/)
+		if temp.length > 3
+			short_location=temp[temp.length-3..temp.length].join(",")
+		else
+			short_location=location
 		end
+
+		short_location
+	end
+
+	def google_map_query(location)
+		query=location.split(/ +/).join('+')
+		query_link="http://map.google.com/?q="+query+"&z=15"
+		query_link
 	end
 
 end

@@ -10,6 +10,11 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
 	 mail(to: @user.email, subject:"[GAN] Welcome to the GAN - Gann Alumni Networks!!!")	
   end
 
+  def contact_email(contact)
+    @contact=contact
+    mail(to: "andrewsong90@gmail.com", subject:"[GAN] #{@contact.title}")
+  end
+
   def opportunity_email(user)
   end
 

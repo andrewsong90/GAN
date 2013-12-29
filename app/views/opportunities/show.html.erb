@@ -1,29 +1,18 @@
 <% content_for :head do %>
 	<title>GAN Opportunities</title>
+	<%= include_gon %>
 	<%= javascript_include_tag "opportunities/show" %>
 <% end %>
 
-<% if can_apply?(@opportunity) %>
-	<div class="align-right">
-		<%= link_to new_opportunity_application_path(@opportunity), :class =>"btn btn-info" do %>
-			<i class="fa fa-mail-forward"></i>&nbsp;Connect
-		<% end %>
-	</div>
-<% end %>
-
-<% if current_user.is_owner?(@opportunity) %>
-	<div class="align-right">
-		<%= link_to edit_opportunity_path(@opportunity), :class =>"btn btn-success" do %>
-			<i class="fa fa-edit"></i>&nbsp;Edit
-		<% end %>
-	</div>
-<% end %>
-<div class="clear"></div>
-
 <br>
-
+<div class="container">
+	<div class="align-left">
+	<%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius" %>
+	</div>
+	<div class="align-left indent">
 	<h1>
 		<%= @opportunity.title %> 
+		<br>
 		<small> <%= @opportunity.company %></small>
 		
 		<% if can_apply? (@opportunity) %>
@@ -41,100 +30,139 @@
 	</h1>
 
 
-<h2><small><span class="italics"><%= @opportunity.job_type %></span></small></h2>
+	<h2><small><span class="italics"><%= @opportunity.job_type %></span></small></h2>
+	</div>
 
-<br>
-
-<div class="row">
-	<div class="span6">
-		<%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius" %><br>
-
-<br><br>
-
-
-<p class="section-header"><i class="fa fa-book"></i>&nbsp;Skills & Expertise</p>
-<% @skills.each do |skill| %>
-	<div><span class="indent"/><i class="fa fa-check"></i>&nbsp;<%= skill.skill %></div>
-<% end %>
-
-<br>
-
-<p class="section-header"><i class="fa fa-tasks"></i>&nbsp;Description</p>
-<div><span class="indent"/><%= @opportunity.description %></div>
-
-
-<% if @uploads.length != 0 %>
-	<h5>For more details, please refer to the attached files</h5> 
-	<% @uploads.each do |u| %>
-		<div>
-			<span class="indent"></span><i class="fa fa-check"></i>
-			&nbsp;<span class="file_display"><%= u.avatar_file_name %></span>
-
-			&nbsp;
-			
-			<%= link_to download_path(:id=>@opportunity.id, :upload_id => u.id, :type => "display"), :class =>"btn btn-success", :target =>"_blank" do %>
-				<i class="fa fa-desktop"></i>&nbsp;View
-			<% end %>
-			<%= link_to download_path(:id=>@opportunity.id, :upload_id => u.id, :type => "download"), :class =>"btn btn-primary", :target =>"_blank" do %>
-				<i class="fa fa-download"></i>&nbsp;Download
+	<% if can_apply?(@opportunity) %>
+		<div class="align-right">
+			<%= link_to new_opportunity_application_path(@opportunity), :class =>"btn btn-info" do %>
+				<i class="fa fa-mail-forward"></i>&nbsp;Connect
 			<% end %>
 		</div>
-		<br>
 	<% end %>
-<% end %>
 
-<br>
-
-<p class="section-header"><i class="fa fa-location-arrow"></i>&nbsp;Location</p>
-<div><span class="indent"/><%= @opportunity.location %></div><br>
-
-<div class="gmap">
-	<div id="map-canvas-show"></div>
+	<% if current_user.is_owner?(@opportunity) %>
+		<div class="align-right">
+			<%= link_to edit_opportunity_path(@opportunity), :class =>"btn btn-success" do %>
+				<i class="fa fa-edit"></i>&nbsp;Edit
+			<% end %>
+		</div>
+	<% end %>
+<div class="clear"></div>
 </div>
 
 <br>
 
+	<div class="align-left">
 
-<br><br>
-
-
-<p class="section-header"><i class="fa fa-calendar"></i>&nbsp;Time</p>
-<% if @time.first.is_flexible? %>
-	<div><span class="indent"/><strong>Flexible</strong>&nbsp; Please make appointment on indivdual basis!</div><br>
-<% else %>
-	<div><span class="indent"/><strong>From</strong>&nbsp;<%= @time.first.date.to_time.strftime('%b. %e, %Y (%a)') %></div><br>
-	<div><span class="indent"/><strong>To</strong>&nbsp;<%= @time.second.date.to_time.strftime('%b. %e, %Y (%a)') %></div><br>
-<% end %>
-	</div>
-
-	<div class="span3">
-		<% owner = @opportunity.user %>
-		<div class="well">
-		<p class="section-header"><%= owner.full_name %></p>
-		<br>
-		<div>
-			<div><%= image_tag owner.avatar.url(:thumb), :class=>"box_radius" %></div>
-			<div class="indent">
-				<% if owner.is_alum? %>
-					<h5>Class of <%= owner.classyear %></h5>
-				<% end %>
-			</div>
-		</div>
-		<%= link_to "View profile", user_path(:id => owner.id), :class => "pull-right" %>
+	<div class="opportunities_index_left_container">
+		<p class="section-header"><i class="fa fa-tasks"></i>&nbsp;Description</p>
+		<div><span class="indent"/><%= @opportunity.description.html_safe %></div>
 
 		<br><br>
 
-		<% if @sponsors.length != 0 %>
-			<p class="section-header"><i class="fa fa-group"></i>&nbsp;Sponsors</p><br>
-			<% @sponsors.each do |sponsor| %>
-				<span class="indent"/><i class="fa fa-check"></i>&nbsp;<strong><%= sponsor.name %></strong><br>
-				<span class="indent"/><%= sponsor.position %> @ <%= sponsor.company %><br>
-			<% end %>
-		<% end %>
-		</div>
-	</div>
-</div>
+		<% if @uploads.length != 0 %>
+			<h5>For more details, please refer to the attached files</h5> 
+			<div class="align-right">
+			<% @uploads.each do |u| %>
+				<div>
+					<i class="fa fa-check"></i>
+					&nbsp;<span class="file_display"><%= u.avatar_file_name %></span>
 
+					&nbsp;
+					
+					<%= link_to download_path(:id=>@opportunity.id, :upload_id => u.id, :type => "display"), :class =>"btn btn-success", :target =>"_blank" do %>
+						<i class="fa fa-desktop"></i>&nbsp;View
+					<% end %>
+					<%= link_to download_path(:id=>@opportunity.id, :upload_id => u.id, :type => "download"), :class =>"btn btn-primary", :target =>"_blank" do %>
+						<i class="fa fa-download"></i>&nbsp;Download
+					<% end %>
+				</div>
+				<br>
+			<% end %>
+			</div>
+			<div class="clear"></div>
+		<% end %>
+
+		<br>
+
+	</div>
+
+	<br>
+	
+	<div class="opportunities_index_left_container">
+
+		<p class="section-header"><i class="fa fa-calendar"></i>&nbsp;Dates</p>
+		<% if @time.first.is_flexible? %>
+			<div><span class="indent"/><strong>Flexible</strong></div><br>
+		<% else %>
+			<span><span class="indent"/><strong>From</strong>&nbsp;<%= @time.first.date.to_time.strftime('%b. %e, %Y (%a)') %></span>
+			&nbsp;
+			<span><span class="indent"/><strong>To</strong>&nbsp;<%= @time.second.date.to_time.strftime('%b. %e, %Y (%a)') %></span><br>
+		<% end %>
+
+		<p class="section-header"><i class="fa fa-book"></i>&nbsp;Skills & Expertise</p>
+		<% @skills.each do |skill| %>
+			<div><span class="indent"/><i class="fa fa-check"></i>&nbsp;<%= skill.skill %></div>
+		<% end %>
+
+		<br>
+		
+		
+
+		<p class="section-header"><i class="fa fa-location-arrow"></i>&nbsp;Location</p>
+		<div>
+			<span class="indent"/>
+			<%= @opportunity.location %>&nbsp;
+			<a href=<%= google_map_query(@opportunity.location) %> target="_blank">map link</a>
+		</div>
+
+		<br>
+
+		<div class="gmap">
+			<div id="map-canvas-show"></div>
+		</div>
+
+		<br>
+
+
+		<br><br>
+		
+	</div>
+
+	</div>
+
+	<div class="opportunities_index_right_container align-left">
+		<% owner = @opportunity.user %>
+
+			<p class="section-header text-align-center">
+				<span class="italics navyfont">Opportunity poster</span><br><br>
+				<%= owner.full_name %>
+			</p>
+			<br>
+			<div>
+				<div><%= image_tag owner.avatar.url(:thumb), :class=>"box_radius" %></div>
+				<div class="indent">
+					<% if owner.is_alum? %>
+						<h5>Class of <%= owner.classyear %></h5>
+					<% end %>
+				</div>
+			</div>
+			<%= link_to "View profile", user_path(:id => owner.id), :class => "pull-right" %>
+
+			<br><br>
+
+			<% if @sponsors.length != 0 %>
+				<p class="section-header"><i class="fa fa-group"></i>&nbsp;Sponsors</p><br>
+				<% @sponsors.each do |sponsor| %>
+					<span class="indent"/><i class="fa fa-check"></i>&nbsp;<strong><%= sponsor.name %></strong><br>
+					<span class="indent"/><%= sponsor.position %> @ <%= sponsor.company %><br>
+				<% end %>
+			<% end %>
+
+	</div>
+
+	<div class="clear"></div>
 <br>
 
 

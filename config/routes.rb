@@ -15,6 +15,9 @@ GAN::Application.routes.draw do
     resources :posts
   end
 
+  get "/contacts/new" => "contacts#new", as: :new_contact
+  post "/contacts" => "contacts#create"
+
   resources :opportunities do
     resources :applications
   end

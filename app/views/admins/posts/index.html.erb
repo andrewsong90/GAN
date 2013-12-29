@@ -1,0 +1,17 @@
+<div class="container">
+	<table class="table table-striped">
+		<tr>
+			<th>Title</th>
+			<th>Created at</th>
+			<th></th>
+		</tr>
+
+		<% @posts.each do |f| %>
+			<tr>
+				<td><%= f.title %></td>
+				<td><%= f.created_at.strftime('%b. %e, %Y (%a)') %></td>
+				<td><%= link_to "View", admins_post_path(f), :class => "btn btn-success" %></td>
+			</tr>
+		<% end %>	
+	</table>
+</div>

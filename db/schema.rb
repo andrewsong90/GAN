@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131223204309) do
+ActiveRecord::Schema.define(version: 20131229062406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,20 @@ ActiveRecord::Schema.define(version: 20131223204309) do
     t.datetime "upload_updated_at"
   end
 
+  create_table "contacts", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.string   "from_email"
+    t.text     "content"
+  end
+
   create_table "customers", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "favorite_opportunities", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -91,6 +104,12 @@ ActiveRecord::Schema.define(version: 20131223204309) do
 
   add_index "friends", ["email"], name: "index_friends_on_email", unique: true, using: :btree
   add_index "friends", ["reset_password_token"], name: "index_friends_on_reset_password_token", unique: true, using: :btree
+
+  create_table "jobtypes", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "opportunities", force: true do |t|
     t.integer  "user_id"
@@ -148,12 +167,6 @@ ActiveRecord::Schema.define(version: 20131223204309) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
-  end
-
-  create_table "types", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "uploads", force: true do |t|

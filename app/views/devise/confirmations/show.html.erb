@@ -12,7 +12,6 @@
 
 <%= form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {:method => 'patch', :id => "confirmation_form", :multipart => 'true'} do |f| %>
 	<fieldset>
-		<legend>Account activation <%= resource.full_name %></legend>
 
   <div><%= f.label :Photo, :class => "section-header" %><br>
     <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -39,7 +38,27 @@
 	<div><%= f.label :Phone, :class => "section-header" %><br>
   	<%= f.text_field :phone, :id => "phone", :placeholder => "XXX-XXX-XXXX" %></div> 
 
-  	<%= check_box_tag :license %>&nbsp;I agree to the terms of agreement&nbsp;
+  <div><%= f.label "Skills", :class => "section-header" %><br>
+    <% counter = 0 %> 
+    <table>
+      <% @skills.each do |s|%>
+        <% if counter % 3 == 0%>
+          <tr>
+        <% end %>
+       
+        <td><%= check_box_tag 'skills[]', s.id %><%= s.skill %></td>
+          
+        <!-- Line break-->
+        <% if ((counter +=1) % 3) == 0 %>
+          </tr>
+        <% end %>
+
+      <% end %>
+    </table>
+  </div>
+
+
+  	<%= check_box_tag :license %>&nbsp;I agree to the terms of use&nbsp;
   	<a class="btn btn-primary" id="licenseButton">View</a>
   	
   	<br>

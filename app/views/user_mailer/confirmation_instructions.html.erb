@@ -1,6 +1,6 @@
-<!-- Is there a better way?-->
-<h3>Welcome to GAN!, <%= User.find_by_email(@email).full_name %>  </h3>
+<h4><%= User.find_by_email(@email).fname %> </h4>
+Welcome to the Gann Alumni network<br>
 
-<p>Please confirm your account email by clicking this link.</p>
+<p>Please confirm your account by clicking this link.</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @token) %></p>

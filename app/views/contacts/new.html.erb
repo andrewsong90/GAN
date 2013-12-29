@@ -1,0 +1,27 @@
+<div class="container">
+<%= form_for(@contact) do |f| %>
+	<h3>Contact us!</h3>
+	
+	<p>
+		Do you have problems? Please contact us by filling out the form below.<br>
+		Be sure to leave your contact info, so we can get back to you!
+	</p>
+	<br>
+	<span class="section-header">Email</span><br>
+	<%= f.text_field :from_email %>
+
+	<br><br>
+
+	<span class="section-header">Subject</span><br>
+	<%= f.text_field :title %>
+
+	<br><br>
+
+	<span class="section-header">Content</span><br>
+	<%= f.text_area :content, :class =>"offset1 span6" %>
+
+	<br><br>
+
+	<%= f.submit "Submit", :class => "btn btn-primary" %>
+<% end %>
+</div>

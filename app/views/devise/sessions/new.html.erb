@@ -1,51 +1,51 @@
-<div class="page-header text-align-center">
-  <h1>
-    Welcome to Gann Alumni Network<br>
-    <small>Connect with other alumni</small>
-  </h1>
-</div>
-
-<div class="row">
-  <div class="span3 offset1">
-    <img src = <%= image_path("gann.jpg") %> class="box_radius" alt="gann"/>
+<div class="container">
+  <div class="page-header text-align-center">
+    <h1>
+      Welcome to Gann Alumni Network<br>
+    </h1>
   </div>
 
+  <div class="row">
+    <div class="span3 offset1">
+      <img src = <%= image_path("gann.jpg") %> class="box_radius" alt="gann"/>
+    </div>
 
-  <div class="span3 offset1">
-    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-      <div><i class="fa fa-envelope"></i>&nbsp;<%= f.label :email, :class => "section-header" %>
-      <%= f.email_field :email, :autofocus => true %></div>
 
-      <div><i class="fa fa-key"></i>&nbsp;<%= f.label :password, :class => "section-header" %>
-      <%= f.password_field :password %></div>
+    <div class="span3 offset1">
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+        <div><i class="fa fa-envelope"></i>&nbsp;<%= f.label :email, :class => "section-header" %>
+        <%= f.email_field :email, :autofocus => true %></div>
 
-      <% if devise_mapping.rememberable? -%>
-        <div><%= f.check_box :remember_me, :class=>"custom-form" %> <%= f.label :remember_me, :class=>"custom-form" %>
-        </div>
+        <div><i class="fa fa-key"></i>&nbsp;<%= f.label :password, :class => "section-header" %>
+        <%= f.password_field :password %></div>
+
+        <% if devise_mapping.rememberable? -%>
+          <div><%= f.check_box :remember_me, :class=>"custom-form" %> <%= f.label :remember_me, :class=>"custom-form" %>
+          </div>
+        <% end -%>
+
+        <br>
+        	<div>
+        		<%= f.submit "Sign in", :class =>"btn btn-info" %> 
+        		<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+        			<%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+      		<% end -%>
+      	</div>
+      <% end %>
+
+      <strong>Here for the first time?</strong>
+
+
+
+      <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+        <%= link_to "Register", new_alum_registration_path %>
       <% end -%>
 
       <br>
-      	<div>
-      		<%= f.submit "Sign in", :class =>"btn btn-info" %> 
-      		<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-      			<%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-    		<% end -%>
-    	</div>
-    <% end %>
 
-    <strong>Here for the first time?</strong>
+      <strong>Having trouble?</strong> <%= link_to "Contact us", new_contact_path %><br>
+      
 
-
-
-    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-      <%= link_to "Register", new_alum_registration_path %>
-    <% end -%>
-
-    <br><br>
-
-    <strong>Having trouble? Contact us</strong><br>
-    <i class="fa fa-phone"></i>&nbsp; 617-123-4567 (Office of Alumni)<br>
-    <i class="fa fa-envelope"></i>&nbsp; admin@gannacademy.org
-
+    </div>
   </div>
 </div>

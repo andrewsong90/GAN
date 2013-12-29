@@ -12,6 +12,11 @@ class ConfirmationsController < Devise::ConfirmationsController
 				#Update rest of the Information
 				@confirmable.update_attributes(:avatar => params[:user][:avatar],:phone => params[:user][:phone])
 				if @confirmable.valid?
+
+					configure_permitted_params[:skills].each do |skill|
+						@confirmable.user_skills.create(:skill_id => skill)
+					end
+
 					do_confirm
 				else
 					do_show
@@ -49,7 +54,7 @@ class ConfirmationsController < Devise::ConfirmationsController
 	protected
 
 	def configure_permitted_params
-		params.require(:user).permit(:avatar,:phone)
+		params.require(:user).permit(:avatar,:phone, :address, :skills => [])
 	end
 
 	def with_unconfirmed_confirmable
@@ -65,8 +70,7 @@ class ConfirmationsController < Devise::ConfirmationsController
 		@confirmation_token = params[:confirmation_token]
 		@requires_password = true
 		self.resource = @confirmable
-		logger.debug("DO SHOW")
-		logger.debug("PARAMS #{params[:confirmation_token]}")
+
 		render 'devise/confirmations/show'
 	end
 

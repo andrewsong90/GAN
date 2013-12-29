@@ -3,15 +3,17 @@
 	<%= javascript_include_tag "opportunities/form" %>
 <% end %>
 
-<h2 class="header">New Opportunity</h2>
+<div class="container">
+	<h2 class="header">New Opportunity</h2>
 
-<br>
+	<br>
 
-<%= form_for @opportunity, :html => { :multipart => true } do |f| %>
-	
-	<%= f.hidden_field :active, :value => true %>
+	<%= form_for @opportunity, :html => { :multipart => true } do |f| %>
+		
+		<%= f.hidden_field :active, :value => true %>
 
-	<%= render "form", :f => f %>
-	
-	<%= f.submit "Post opportunity", :class => "btn btn-primary" %>
-<% end %>
+		<%= render "form", :f => f %>
+		
+		<%= f.submit "Post opportunity", :class => "btn btn-primary" %>
+	<% end %>
+</div>

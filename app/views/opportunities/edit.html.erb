@@ -3,21 +3,23 @@
 	<%= javascript_include_tag "opportunities/form" %>
 <% end %>
 
-<h2>Edit Opportunity</h2>
-
-<br>
-
-<%= form_for @opportunity, :html => { :multipart => true } do |f| %>
-	
-	<div><span class="section-header">Status</span><br>
-		<span class="indent"/>
-		<%= f.radio_button :active, true %>&nbsp;Active &nbsp;
-		<%= f.radio_button :active, false %>&nbsp;Inactive
-	</div>
+<div class="container">
+	<h2>Edit Opportunity</h2>
 
 	<br>
 
-	<%= render "form", :f => f %>
-	
-	<%= f.submit "Edit", :class => "btn btn-primary" %>
-<% end %>
+	<%= form_for @opportunity, :html => { :multipart => true } do |f| %>
+		
+		<div><span class="section-header">Status</span><br>
+			<span class="indent"/>
+			<%= f.radio_button :active, true %>&nbsp;Active &nbsp;
+			<%= f.radio_button :active, false %>&nbsp;Inactive
+		</div>
+
+		<br>
+
+		<%= render "form", :f => f %>
+		
+		<%= f.submit "Edit", :class => "btn btn-primary" %>
+	<% end %>
+</div>

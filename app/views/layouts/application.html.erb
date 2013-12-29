@@ -2,7 +2,8 @@
 <html>
 <head>
   <title>GAN</title>
-  <%= include_gon %>
+  
+  
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" =>true %>
 
@@ -24,12 +25,15 @@
 		<% if user_signed_in? %>
 			<div class="navbar">
 				<div class="navbar-inner">
-					<div class="container whitefont">
-						<a href=<%= home_path %> class="brand">GAN</a>
+					<div class="whitefont">
+						<a href=<%= home_path %> class="brand">
+							Gann Alumni Networks
+							<!-- <img src = <%#= image_path("gann_seal.jpg") %> alt="GAN"> -->
+						</a>
 						<div class="nav-collapse">
 							<ul class="nav">
 								<li><a href='<%= about_path %>' class="whitefont">About</a></li>
-								<li><a href="<%= contact_path %>">Contact</a></li>
+								<li><a href="<%= new_contact_path %>">Contact</a></li>
 							</ul>
 
 							<div class="nav pull-right navbar-hcenter">
@@ -37,7 +41,7 @@
 								&nbsp;|&nbsp;
 								<i class="fa fa-tasks"></i>&nbsp;&nbsp;<%= link_to "Opportunities", opportunities_path %>
 								&nbsp;|&nbsp;
-								<i class="fa fa-user"></i>&nbsp;&nbsp;<%= link_to "My account", account_path %>
+								<i class="fa fa-user"></i>&nbsp;&nbsp;<%= link_to "My account", user_path(:id => current_user.id) %>
 								&nbsp;|&nbsp;
 								<i class="fa fa-briefcase"></i>&nbsp;&nbsp;<%= link_to "My opportunities", my_opportunities_path %>
 								&nbsp;|&nbsp;
@@ -59,11 +63,11 @@
 				<%= msg %>
 			</div>
 		<% end%>
-
-		<div class="container box_shadow box_radius box_padding sky_background">
-			
+		
+		<div class="super-container">
 			<%= yield %>
 		</div>
+	
 	</div>
 
 	<% if user_signed_in? %>

@@ -19,7 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 		#database authentication success!
 
 			# Clear the session if previous authentication failed.
-			session[:previous]=nil
+			session[:previous] = nil
 
 			build_resource(sign_up_params)
 			resource.type=params[:user][:type]
@@ -45,7 +45,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	end
 
 	def edit
-		current_user.useruploads.build
+		
+		@user=current_user
+		
+		@user.useruploads.build
+		build_unpicked_skills
+		# current_user.user_skills.build
+		@skills=Skill.all
 		super
 	end
 
@@ -73,8 +79,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 	protected
 
+	def build_unpicked_skills
+		(Skill.all-@user.skills).each do |skill|
+			@user.user_skills.build(:skill => skill)
+		end
+		@user.user_skills.sort_by! {|us| us.skill.id }
+	end
+
 	def after_update_path_for(resource)
-		account_path
+		user_path(:id => current_user.id)
 	end
 
 	def registration_permitted_params
@@ -86,7 +99,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	end
 
 	def update_permitted_params
-		devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :current_password, :phone, :avatar, :fname,:lname, useruploads_attributes: [:id, :avatar, :_destroy])}
+		devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :current_password, :phone, :avatar, :fname,:lname, useruploads_attributes: [:id, :avatar, :_destroy], user_skills_attributes: [:id, :skill_id, :_destroy])}
 	end
 
 	def skill_params

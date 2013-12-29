@@ -1,3 +1,5 @@
-<%= @post.title %>
-<br>
-<%= @post.content %>
+<div class="container">
+	<%= @post.title %>
+	<br><br>
+	<%= @post.content.html_safe %>
+</div>

@@ -2,6 +2,10 @@ class Admins::PostsController < ApplicationController
 
 	before_filter :authenticate_admin, :except => [:show,:index]
 	
+	def index
+		@posts=Post.all.order("created_at DESC")	
+	end
+
 	def new
 		@post=Post.new
 	end
