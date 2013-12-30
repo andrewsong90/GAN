@@ -14,7 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.ui.datepicker
-//= require rails.validations
+// require rails.validations
 //= require twitter/bootstrap
 //= require cocoon
 //= require opportunities/index
