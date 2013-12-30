@@ -51,6 +51,9 @@ GAN::Application.routes.draw do
   #Path for importing CSV files
   post '/import' => "userdbs#import", as: :import_users
 
+  get '/opportunities/add_to_favorites/:id' => "opportunities#add_to_favorites", as: :new_favorite_opportunity
+  post '/opportunities/remove_from_favorites/:id' => "opportunities#remove_from_favorites"
+
   get '/opportunities/:id/download/:upload_id', :controller => 'opportunities', :action =>'download', as: :download
   get '/opportunities/:id/view/:upload_id' => "opportunities#view", as: :view
   get '/users/:user_id/download/:id' => 'users#download', as: :user_attachment_download

@@ -51,6 +51,7 @@ gem 'less-rails'
 
 gem "devise_invitable"
 
+gem 'client_side_validations', github: "bcardarella/client_side_validations", :branch => "4-0-beta"
 
 #Geocoder
 gem 'geocoder'

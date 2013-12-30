@@ -39,7 +39,8 @@ class Opportunity < ActiveRecord::Base
 	#Configuration for database search
 	include PgSearch
 	pg_search_scope :search_opportunity, 
-					:against => [:title, :description],
+					:against => [:title, :description, :location, :company],
+					:associated_against => {:user => [:fname, :lname]},
 					:using => {
 						:tsearch => {:prefix => true}
 					}
@@ -62,9 +63,14 @@ class Opportunity < ActiveRecord::Base
 					}
 
 
-
+	# Check if the opportunity is currently active
 	def is_active?
 		active
+	end
+
+	# Check if the opportunity is among the user's favorite opportunities
+	def is_favorite? (user_id)
+		self.favorite_opportunities.find_by user_id: user_id
 	end
 
 	# Create opportunity. Removed from the controller for clarity purpose
@@ -95,10 +101,11 @@ class Opportunity < ActiveRecord::Base
 		end
 	end
 
-
+	# Search opportunities by types
 	def self.type_search (opportunities, type_id)
 		if type_id != "" && type_id != nil
-			type=Jobtype.where(:id => type_id).name
+			type=Jobtype.where(:id => type_id).first.name
+			logger.debug("JOB TYPE #{type}")
 			filtered_opportunities = opportunities.select {|opportunity| opportunity.job_type == type }
 			filtered_opportunities
 		else

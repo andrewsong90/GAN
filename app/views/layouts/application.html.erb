@@ -28,12 +28,12 @@
 					<div class="whitefont">
 						<a href=<%= home_path %> class="brand">
 							Gann Alumni Networks
-							<!-- <img src = <%#= image_path("gann_seal.jpg") %> alt="GAN"> -->
+							 <!-- <img src = <%#= image_path("gann_seal.jpg") %> alt="GAN"> -->
 						</a>
 						<div class="nav-collapse">
 							<ul class="nav">
-								<li><a href='<%= about_path %>' class="whitefont">About</a></li>
-								<li><a href="<%= new_contact_path %>">Contact</a></li>
+								<li><a href='<%= about_path %>' class="whitefont trebuchet">About</a></li>
+								<li><a href="<%= new_contact_path %>" class="whitefont trebuchet">Contact</a></li>
 							</ul>
 
 							<div class="nav pull-right navbar-hcenter">
@@ -60,6 +60,7 @@
 		<% flash.each do |name,msg| %>
 			<div class="alert alert-<%= name == :notice ? "success" : "error" %>">
 				<a class="close" data-dismiss="alert">x</a>
+				<%= name %>
 				<%= msg %>
 			</div>
 		<% end%>

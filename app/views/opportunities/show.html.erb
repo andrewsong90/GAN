@@ -39,6 +39,7 @@
 				<i class="fa fa-mail-forward"></i>&nbsp;Connect
 			<% end %>
 		</div>
+		<div class="clear"></div>
 	<% end %>
 
 	<% if current_user.is_owner?(@opportunity) %>
@@ -47,8 +48,25 @@
 				<i class="fa fa-edit"></i>&nbsp;Edit
 			<% end %>
 		</div>
+		<div class="clear"></div>
+	<% else %>
+		<div class="align-right">
+			<% if @opportunity.is_favorite?(current_user.id) %>
+				<button class="remove_favorite_btn btn btn-success btn-labeled" id="<%= @opportunity.id %>">
+					<span class="btn-label"><i class="fa fa-check"></i></span>
+						Saved
+				</button>
+			<% else %>
+				<button class="add_favorite_btn btn btn-primary btn-labeled" id="<%= @opportunity.id %>">
+					<span class="btn-label"><i class="fa fa-plus"></i></span>
+						Save
+				</button>
+			<% end %>
+
+		</div>
+		<div class="clear"></div>
 	<% end %>
-<div class="clear"></div>
+
 </div>
 
 <br>

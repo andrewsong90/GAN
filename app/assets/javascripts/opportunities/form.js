@@ -8,14 +8,24 @@ $(document).ready(function(){
   var opportunity_upload_count=0;
   var sponsor_count=1;
 
+  window.ClientSideValidations.callbacks.form.fail = function(form,eventData){
+    console.log("FAILED!");
+  }
+
   $('#opportunity_files_help').popover({
-    content: "Upload documents for job descriptions (maximum of 3)"
+    content: "Upload documents for supplementary descriptions (maximum of 3)<br>These will be both downloadable and viewable.",
+    html: true
   });
 
   $('#opportunity_time_help').popover({
     content: "You have two options!<br><strong>Flexible:</strong> Make appointments later on<br><strong>Range:</strong> Select the available range for dates",
     html: true
   });
+
+  $('#opportunity_skills_help').popover({
+    content:"Please select at least one of the following fields",
+    html: true
+  })
 
   $('#sponsor_help').popover({
     content: "Sponsors!<br>Please type in contact info for the sponsors",

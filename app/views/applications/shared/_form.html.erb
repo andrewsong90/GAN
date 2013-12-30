@@ -1,20 +1,47 @@
 <%= form_for([@opportunity, @application], :html => { :multipart => true, :id => "fileupload" }) do |f| %>
 
-  	<div><%= f.label "Send message to #{@opportunity.user.full_name}", :class => "section-header" %><br>
-  	<%= f.text_area :message, :rows => "6", :class => "span6" %></div>
+  	<div><span class="section-header">Send message to <%= @opportunity.user.full_name %></span>
+
+    <br><br>
+  	
+    <%= f.text_area :message, :rows => "6", :class => "span6" %></div>
 
     <div><%= f.hidden_field :opportunity_id, :value => @opportunity.id %>
 
     <br>
-    Do you have any resume you want to attach?<br>
+    <strong>Do you have any resume you want to attach?</strong>&nbsp;
+      <a id="application_file_help" class="help"><i class="fa fa-question-circle"></i></a>
+
+    <br>
+    <br>
     <% @uploads.each do |upload| %>
   		<%= check_box_tag 'attachments[]', upload.id %>&nbsp;<%= upload.avatar_file_name %><br>
 	  <% end %>
 
     <br>
 
+    <div>
+      <div class="fileinput fileinput-new" data-provides="fileinput">
+        <span class="btn btn-default btn-file">
+          <span class="fileinput-new">Select file</span>
+          <span class="fileinput-exists">Change</span>
+          <%= f.file_field :upload %>
+        </span> 
+        <span class="fileinput-filename"></span>
+      </div>
 
-        <%= f.submit "Connect", :class => "btn" %>
+      <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+    </div>
+
+    <br>
+
+
+    <div class="align-right">
+        <%= f.submit "Connect", :class => "btn btn-primary" %>
+    </div>
+
+    <div class="clear"></div>
+    
     </div>
 
   <% end %>

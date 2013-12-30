@@ -11,6 +11,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 	def create
 		#If database authentiation fails
+		logger.debug("TRUE #{params[:user][:type] == "Alum"}")
+		logger.debug("TRUE #{!Userdb.compare_alum_db(params)}")
 		if params[:user][:type] == "Alum" && !Userdb.compare_alum_db(params)
 				flash[:error] = "Our database does not have your record. Please try again!"
 				session[:previous]=params[:user]
@@ -39,7 +41,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	      		end
 	    	else
 	    		flash[:error] = "Wrong information"
-	      		redirect_to :back
+	      		render 'new'
 	    	end
     	end
 	end

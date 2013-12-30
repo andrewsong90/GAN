@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => {:medium => "300x300>", :thumb => "130x130>"}, :default_url => "/images/user/:style/missing.png"
 
   # Validation
-  validates_presence_of :email, :message =>"E-mail cannot be blank"
+  validates_presence_of :fname, :message =>"Cannot be blank"
+  validates_presence_of :lname, :message =>"Cannot be blank"
+  validates_presence_of :classyear, :message => "Cannot be blank"
 
   has_many :opportunities
   has_many :applications
@@ -22,6 +24,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :useruploads, :reject_if => :all_blank, :allow_destroy => true
 
   has_many :favorite_opportunities, :dependent => :destroy
+  has_many :favorites, :through => :favorite_opportunities, :source => :opportunity
   
   # Check if the user created the opportunity
   def is_owner? (opportunity)

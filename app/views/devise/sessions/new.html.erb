@@ -12,6 +12,7 @@
 
 
     <div class="span3 offset1">
+      <%= devise_error_messages! %>
       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
         <div><i class="fa fa-envelope"></i>&nbsp;<%= f.label :email, :class => "section-header" %>
         <%= f.email_field :email, :autofocus => true %></div>

@@ -3,6 +3,7 @@
 		<tr>
 			<th>Title</th>
 			<th>Created at</th>
+			<th>Posted by</th>
 			<th></th>
 		</tr>
 
@@ -10,6 +11,7 @@
 			<tr>
 				<td><%= f.title %></td>
 				<td><%= f.created_at.strftime('%b. %e, %Y (%a)') %></td>
+				<td></td>
 				<td><%= link_to "View", admins_post_path(f), :class => "btn btn-success" %></td>
 			</tr>
 		<% end %>	

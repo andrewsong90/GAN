@@ -47,15 +47,14 @@ class OpportunitiesController < ApplicationController
 			opportunities = Opportunity.text_search(params[:query])
 			# filtered_opportunities = opportunities.select { |opportunity| opportunity.user.id == current_user.id }
 			
-			#TODO: Manually set the page limit?
-			@opportunities = Kaminari.paginate_array(filtered_opportunities).page(params[:page]).per(5)
+			# @opportunities = Kaminari.paginate_array(filtered_opportunities).page(params[:page]).per(5)
+			@opportunities=opportunities
 		else
 			# opportunities = Opportunity.text_search(params).page params[:page]
-			opportunities=Opportunity.text_search(params)
-			logger.debug("Before FILTRED #{opportunities}")
+			opportunities=Opportunity.text_search(params).order("created_at DESC").to_a
 			filtered_opportunities = Opportunity.type_search(opportunities,params[:job_type])
-			logger.debug("Filtered #{filtered_opportunities}")
-			@opportunities = Kaminari.paginate_array(filtered_opportunities).page(params[:page]).per(10)
+			# @opportunities = Kaminari.paginate_array(filtered_opportunities).page(params[:page]).per(10)
+			@opportunities = filtered_opportunities
 			# @opportunities = Opportunity.search_opportunity(params[:query]).page params[:page]
 		end
 		
@@ -76,6 +75,8 @@ class OpportunitiesController < ApplicationController
 			applications.each do |app|
 				@applied_opportunities.append(Opportunity.find(app.opportunity_id))
 			end
+
+			@favorites = current_user.favorites
 		end
 	end
 
@@ -111,15 +112,29 @@ class OpportunitiesController < ApplicationController
 		end
 	end
 
+	# Save the opportunities to the favorite list (AJAX)
+	def add_to_favorites
+		opportunity=Opportunity.find(params[:id])
+		temp=opportunity.favorite_opportunities.first_or_create!(:user_id => current_user.id)
+
+		respond_to do |format|
+			format.json {render :json => {:message => "success"}}
+		end
+	end
+
+	# Delete opportunities from favorite list (AJAX)
+	def remove_from_favorites
+		current_user.favorites.delete(params[:id])
+	
+		respond_to do |format|
+			format.json {render :json => {:message => "success"}}
+		end
+	end
+
 	def create
 		opportunity=current_user.opportunities.build(opportunity_params[:opportunity])
 
 		if opportunity.save
-
-			# skill_params[:skills].each do |skill|
-			# 	opportunity.opportunity_skills.create(:skill_id => skill)
-			# end
-
 			# Create time objects
 			OpportunityTime.createTime(opportunity.id, opportunity_params)
 			

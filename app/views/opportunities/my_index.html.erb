@@ -1,65 +1,41 @@
-<div class="pull-right">
-	<%= link_to new_opportunity_path, :class => "btn btn-success" do %>
-		<i class="fa fa-pencil"></i>&nbsp;Create
-	<% end %>
-</div>
+<div class="container">
 
-<br><br>
-
-<ul class="nav nav-tabs">
-	<li><a href="#applied" data-toggle="tab">Applied</a></li>
-	<li><a href="#created" data-toggle="tab">Created</a></li>
-</ul>
-
-<div class="tab-content">
-	<div class="tab-pane fade in active" id="applied">
-		<h4>Applied Opportunities</h4>
-		<table class="table table-striped">
-		<tr>
-			<th>Title</th>
-			<th>Company</th>
-			<th>Type</th>
-			<th>Location</th>
-			<th></th>
-		</tr>
-
-		<% @applied_opportunities.each do |f| %>
-			<tr>
-				<td><%= f.title %></td>
-				<td><%= f.company %></td>
-				<td><%= f.job_type %></td>
-				<td><%= f.location %></td>
-				<td><%= link_to "View", opportunity_path(f), :class => "btn btn-success" %></td>
-			</tr>
-		<% end %>	
-	</table>
+	<div class="pull-right">
+		<%= link_to new_opportunity_path, :class => "btn btn-success" do %>
+			<i class="fa fa-pencil"></i>&nbsp;Create
+		<% end %>
 	</div>
-	<div class="tab-pane fade" id="created">
-		<h4>Created Opportunities</h4>
-		<table class="table table-striped">
-		<tr>
-			<th>Title</th>
-			<th>Company</th>
-			<th>Type</th>
-			<th>Location</th>
-			<th></th>
-		</tr>
 
-		<% @created_opportunities.each do |f| %>
-			<tr>
-				<td><%= f.title %></td>
-				<td><%= f.company %></td>
-				<td><%= f.job_type %></td>
-				<td><%= f.location %></td>
-				<td><%= link_to "View", opportunity_path(f), :class => "btn btn-success" %></td>
-			</tr>
-		<% end %>	
-	</table>
+	<br><br>
+
+	<ul class="nav nav-tabs">
+		<li><a href="#favorites" data-toggle="tab">Favorite</a></li>
+		<li><a href="#applied" data-toggle="tab">Applied</a></li>
+		<li><a href="#created" data-toggle="tab">Created</a></li>
+	</ul>
+
+	<div class="tab-content">
+		<div class="tab-pane fade" id="applied">
+			<h4>Applied Opportunities</h4>
+			
+			<%= render :partial => "table_index", :locals => {:opportunities => @applied_opportunities} %>
+			
+		</div>
+
+		<div class="tab-pane fade" id="created">
+			<h4>Created Opportunities</h4>
+			<%= render :partial => "table_index", :locals => {:opportunities => @created_opportunities} %>
+		</div>
+
+		<div class="tab-pane fade in active" id="favorites">
+			<h4>Favorite Opportunities</h4>
+			<%= render :partial => "table_index", :locals => {:opportunities => @favorites} %>
+		</div>
 	</div>
-</div>
 
-<br>
+	<br>
 
-<div class="pull-right">
-	<%= paginate @created_opportunities, :theme => 'twitter-bootstrap', :window => 2 %>
+	<div class="pull-right">
+		<%= paginate @created_opportunities, :theme => 'twitter-bootstrap', :window => 2 %>
+	</div>
 </div>

@@ -27,6 +27,10 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
   def submission_email(user,application,index_of_uploads)
   	@user, @application, @opportunity =user, application, application.opportunity
 
+    if @application.upload!= nil
+      attachments << (attachments[@application.upload_file_name] = File.open(@application.upload.path, 'rb'){|f| f.read })
+    end
+
     if index_of_uploads!=nil
       index_of_uploads.each do |index|
         upload=Userupload.find(index)
@@ -42,6 +46,10 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
     logger.debug("SPONSORS #{bcc_recepients}")
   	
     mail(to: @user.email , bcc: bcc_recepients , subject:"[GAN] Application has been submitted")
+
+    logger.debug("SENT!")
+    @application.upload.destroy
+    @application.upload = nil
   end
 
 end

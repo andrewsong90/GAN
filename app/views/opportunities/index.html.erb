@@ -27,10 +27,10 @@
 
 	<%= form_tag opportunities_path, method: :get, :class => "form-inline" do %>
 		<p>
-			<%= select_tag "job_type", options_from_collection_for_select(Jobtype.all, :id, :name), :class=>"select_box",:prompt => "Type" %>
-			<span class="section-header">
+			<%= select_tag "job_type", options_from_collection_for_select(Jobtype.all, :id, :name, params[:job_type]), :class=>"select_box",:prompt => "" %>
+			<span class="section-header">	
 
-					<%= text_field_tag :query, params[:query], :placeholder => "Enter keyword, company, or opportunity provider", :class => "span4 form-control" %>
+					<%= text_field_tag :query, params[:query], :placeholder => "Enter keyword, company, location, or provider", :class => "span4 form-control" %>
 				
 				<!-- TODO: Edit block -->
 				<% if false %>
@@ -45,9 +45,12 @@
 
 			<% if false %>
 			<span class="pull-right">
-				<%= link_to new_opportunity_path, :class => "btn btn-success" do %>
-					<i class="fa fa-pencil"></i>&nbsp;Create
+
+				<%= link_to new_opportunity_path, :class => "btn btn-success btn-labeled" do %>
+					<span class="btn-label"><i class="fa fa-pencil"></i></span>
+					Create
 				<% end %>
+
 			</span>
 			<% end %>
 
@@ -71,11 +74,33 @@
 				<span class="italics">Offered by</span>&nbsp;&nbsp;<%= f.user.full_name %>
 			</div>
 			<div class="align-right">
-				<% if can_apply?(f) %>
-					<%= link_to "View & Connect", opportunity_path(f), :class => "btn btn-info" %>
-				<% else %>
-					<%= link_to "View", opportunity_path(f), :class => "btn btn-success" %>
-				<% end %>
+				<div class="align-right">
+					<% if can_apply?(f) %>
+						<%= link_to "View & Connect", opportunity_path(f), :class => "btn btn-info" %>
+					<% else %>
+						<%= link_to "View", opportunity_path(f), :class => "btn btn-success" %>
+					<% end %>
+				</div>
+				<div class="clear"></div>
+
+				<br>
+
+				<div class="align-right">
+					<% if f.is_favorite?(current_user.id) %>
+						<button class="remove_favorite_btn btn btn-success btn-labeled" id="<%= f.id %>">
+							<span class="btn-label"><i class="fa fa-check"></i></span>
+								Saved
+						</button>
+					<% else %>
+						<button class="add_favorite_btn btn btn-primary btn-labeled" id="<%= f.id %>">
+							<span class="btn-label"><i class="fa fa-plus"></i></span>
+								Save
+						</button>
+					<% end %>
+
+				</div>
+				<div class="clear"></div>
+
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -83,9 +108,15 @@
 
 	<br>
 
+
+<% if false %>
 	<div class="pull-right">
 		<%= paginate @opportunities, :theme => 'twitter-bootstrap', :window => 2 %>
 	</div>
+<% end %>
+
+
+
 </div>
 
 <div class="opportunities_index_right_container box_shadow box_padding align-left">

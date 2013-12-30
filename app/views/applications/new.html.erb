@@ -1,19 +1,31 @@
-<h2>Make Connection</h2>
+<% content_for :head do %>
+	<title>New Application</title>
+	<%= javascript_include_tag "applications/new" %>
+<% end %>
+
+<div class="container">
+
+	<h3 class="navyfont">Make Connection</h3>
+
+	<div class="align-left">
+		<%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius" %>
+	</div>
+	
+	<div class="align-left indent">
+		<h1>
+			<%= @opportunity.title %> 
+			<br>
+			<small> <%= @opportunity.company %></small>
+
+		</h1>
+	</div>
+	<div class="clear"></div>
+</div>
 
 <br>
 
+<div class="container">
 
-<%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius" %>
+	<%= render 'applications/shared/form' %>
 
-<br><br>
-
-<p class="section-header">Title</p>
-<div><%= @opportunity.title %></div><br>
-<p class="section-header">Company</p>
-<div><%= @opportunity.company %></div><br>
-<p class="section-header">Type</p>
-<div><%= @opportunity.job_type %></div><br>
-<br>
-
-<%= render 'applications/shared/form' %>
-
+</div>

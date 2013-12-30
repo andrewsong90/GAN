@@ -1,6 +1,8 @@
+   <div class="row">
+    <div class="offset1 span3">
     <div><%= f.label "Logo", :class => "section-header" %><br>
       <div class="fileinput fileinput-new" data-provides="fileinput">
-        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 250px; height: 250px;"></div>
+        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 200px;"></div>
         <div>
           <span class="btn btn-default btn-file">
             <span class="fileinput-new">Select image</span>
@@ -12,22 +14,25 @@
       </div>
     </div>
 
+    </div>
     <br>
 
-  	<div><%= f.label "Title", :class => "section-header" %><br>
-  	<%= f.text_field :title %></div>
-    
-    <br>
-  	
-    <div><%= f.label "Company", :class => "section-header" %><br>
-  	<%= f.text_field :company %></div>
-    
-    <br>
- 	  
-    <div><%= f.label "Type", :class => "section-header" %><br>
-  	<%= f.collection_select :job_type, Jobtype.all, :name, :name, prompt: true %></div>
-
-    <br>
+    <div class="span5">
+    	<div><%= f.label "Title", :class => "section-header" %><br>
+    	<%= f.text_field :title %></div>
+      
+      <br>
+    	
+      <div><%= f.label "Company", :class => "section-header" %><br>
+    	<%= f.text_field :company %></div>
+      
+      <br>
+   	  
+      <div><%= f.label "Type", :class => "section-header" %><br>
+    	<%= f.collection_select :job_type, Jobtype.all, :name, :name, prompt: true %></div>
+    </div>
+  </div>
+    <br><br><br>
 
   	<div><%= f.label "Job Description", :class => "section-header" %><br>
   	<%= f.text_area :description, :class => "tinymce span7", :rows => "6", :placeholder => "Enter Job Description here" %></div>
@@ -36,7 +41,7 @@
     <br>
 
     <div><%= f.label "Files", :class => "section-header" %>
-      &nbsp;<a id="opportunity_files_help" class="help"><i  class="fa fa-question-sign"></i></a><br>
+      &nbsp;<a id="opportunity_files_help" class="help"><i  class="fa fa-question-circle"></i></a><br>
 
       <div id="uploads">  
         <%= f.fields_for :uploads do |upload| %>          
@@ -55,7 +60,10 @@
     <br><br>
 
    
-    <span class="section-header">Skills</span><br>
+    <span class="section-header">Skills</span>
+    &nbsp;<a id="opportunity_skills_help" class="help"><i  class="fa fa-question-circle"></i></a>
+
+    <br>
 
     <% counter = 0 %>
 
@@ -104,8 +112,8 @@
     <br>
 
     <div><%= f.label "time", :class => "section-header" %>
-      &nbsp;<a id="opportunity_time_help" class="help"><i class="fa fa-question-sign"></i></a><br>
-    <%= radio_button_tag(:time_type, "flexible") %>Flexible<br>
+      &nbsp;<a id="opportunity_time_help" class="help"><i class="fa fa-question-circle"></i></a><br>
+    <%= radio_button_tag(:time_type, "flexible", :checked => true) %>Flexible<br>
     <%= radio_button_tag(:time_type,"range") %>Range<br></div>  
   
     <br>
@@ -120,7 +128,7 @@
 
       <% numOfSponsors = 1 %>
 
-      &nbsp;<a id="sponsor_help" class="help"><i class="fa fa-question-sign"></i></a><br>
+      &nbsp;<a id="sponsor_help" class="help"><i class="fa fa-question-circle"></i></a><br>
 
       <div id="sponsors">  
         <%= f.fields_for :sponsors do |sponsor| %>        

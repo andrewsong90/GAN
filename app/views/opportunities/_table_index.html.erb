@@ -1,0 +1,19 @@
+<table class="table table-striped">
+				<tr>
+					<th>Title</th>
+					<th>Company</th>
+					<th>Type</th>
+					<th>Location</th>
+					<th></th>
+				</tr>
+
+				<% opportunities.each do |f| %>
+					<tr>
+						<td><%= f.title %></td>
+						<td><%= f.company %></td>
+						<td><%= f.job_type %></td>
+						<td><%= short_location(f.location) %></td>
+						<td><%= link_to "View", opportunity_path(f), :class => "btn btn-success" %></td>
+					</tr>
+				<% end %>	
+			</table>

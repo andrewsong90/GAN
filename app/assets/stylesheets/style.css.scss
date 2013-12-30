@@ -189,8 +189,6 @@ input[type="checkbox"] {
 
 .navbar .brand{
 	text-shadow: none;
-	font-weight: 700;
-	font-family: Georgia;
 	font-size: 30px;
 	color: #ffffff;
 }
@@ -228,13 +226,27 @@ input[type="checkbox"] {
 	border-bottom-left-radius: 13px;
 }
 
+/* Error message */
+.field_with_errors {
+	display: inline;
+
+	label {
+		display: inline;
+	}
+}
+
+.field_with_errors .message {
+	color: #D00;
+	padding-left: 5px;
+	font-size: 13px;
+}
 
 
 /*Fonts configuration*/
 
 .section-header{
 	font-weight: 700;
-	font-family: Georgia;
+	font-family: "Trebuchet MS";
 	font-size: 18px;
 	display: inline-block;
 }
