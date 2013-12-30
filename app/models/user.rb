@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
   # Validation
   validates_presence_of :fname, :message =>"can't be blank"
   validates_presence_of :lname, :message =>"can't be blank"
-  validates_presence_of :classyear, :message => "can't be blank"
+  validates_presence_of :classyear, :message => "can't be blank", if: :is_alum?
+  validates_presence_of :parent_email, :message => "can't be blank", if: :is_alum?
 
   validate :check_alum_record
 
@@ -42,7 +43,7 @@ class User < ActiveRecord::Base
   end
 
   def is_alum?
-    self.type == "Alum"
+    type == "Alum"
   end
 
   # Check if the user applied to the opportunity

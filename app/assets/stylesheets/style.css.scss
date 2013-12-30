@@ -188,18 +188,16 @@ input[type="checkbox"] {
 
 
 .navbar .brand{
+	font-family: 'Alegreya Sans', sans-serif; 
 	text-shadow: none;
 	font-size: 30px;
 	color: #ffffff;
 }
 
-.navbar .nav > li > a:hover{
-	color: #992135;
-}
-
 .navbar .nav > li > a, .navbar .nav > li > a:hover{
 	font-size: 18px;
 	color: #ffffff;
+	text-shadow: none;
 }
 
 .nav > a{

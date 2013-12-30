@@ -8,30 +8,35 @@
 
 	<br><br>
 
-	<ul class="nav nav-tabs">
-		<li><a href="#favorites" data-toggle="tab">Favorite</a></li>
-		<li><a href="#applied" data-toggle="tab">Applied</a></li>
-		<li><a href="#created" data-toggle="tab">Created</a></li>
-	</ul>
+	<% if alum_signed_in? %>
+		<ul class="nav nav-tabs">
+			<li><a href="#favorites" data-toggle="tab">Favorite</a></li>
+			<li><a href="#applied" data-toggle="tab">Applied</a></li>
+			<li><a href="#created" data-toggle="tab">Created</a></li>
+		</ul>
 
-	<div class="tab-content">
-		<div class="tab-pane fade" id="applied">
-			<h4>Applied Opportunities</h4>
-			
-			<%= render :partial => "table_index", :locals => {:opportunities => @applied_opportunities} %>
-			
-		</div>
+		<div class="tab-content">
+			<div class="tab-pane fade" id="applied">
+				<h4>Applied Opportunities</h4>
+				
+				<%= render :partial => "table_index", :locals => {:opportunities => @applied_opportunities} %>
+				
+			</div>
 
-		<div class="tab-pane fade" id="created">
-			<h4>Created Opportunities</h4>
-			<%= render :partial => "table_index", :locals => {:opportunities => @created_opportunities} %>
-		</div>
+			<div class="tab-pane fade" id="created">
+				<h4>Created Opportunities</h4>
+				<%= render :partial => "table_index", :locals => {:opportunities => @created_opportunities} %>
+			</div>
 
-		<div class="tab-pane fade in active" id="favorites">
-			<h4>Favorite Opportunities</h4>
-			<%= render :partial => "table_index", :locals => {:opportunities => @favorites} %>
+			<div class="tab-pane fade in active" id="favorites">
+				<h4>Favorite Opportunities</h4>
+				<%= render :partial => "table_index", :locals => {:opportunities => @favorites} %>
+			</div>
 		</div>
-	</div>
+	<% else %>
+		<h4>Created Opportunities</h4>
+				<%= render :partial => "table_index", :locals => {:opportunities => @created_opportunities} %>
+	<% end %>
 
 	<br>
 

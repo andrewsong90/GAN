@@ -1,28 +1,30 @@
-<h3>View Alum</h3>
+<div class="container">
+	<h3>View Alum</h3>
 
-<h5> Import Users in CSV format </h5>
-<%= form_tag import_users_path, multipart: true do %>
-	<%= file_field_tag :file %>
-	<%= submit_tag "Import" %>
-<% end %>
+	<h5> Import Users in CSV format </h5>
+	<%= form_tag import_users_path, multipart: true do %>
+		<%= file_field_tag :file %>
+		<%= submit_tag "Import" %>
+	<% end %>
 
-<div>
-	<table class="table table-striped">
-		<tr>
-			<th>Name</th>
-			<th>E-mail</th>
-			<th>Class year</th>
-			<th>Updated Date</th>
-		</tr>
-
-		<% @alum.each do |f| %>
+	<div>
+		<table class="table table-striped">
 			<tr>
-				<td><%= f.fname %> <%= f.lname %></td>
-				<td><%= f.parent_email %></td>
-				<td><%= f.classyear %></td>
-				<td><%= f.updated_at.strftime('%b. %e, %Y') %></td>
+				<th>Name</th>
+				<th>E-mail</th>
+				<th>Class year</th>
+				<th>Updated Date</th>
 			</tr>
-		<% end %>	
-	</table>
+
+			<% @alum.each do |f| %>
+				<tr>
+					<td><%= f.fname %> <%= f.lname %></td>
+					<td><%= f.parent_email %></td>
+					<td><%= f.classyear %></td>
+					<td><%= f.updated_at.strftime('%b. %e, %Y') %></td>
+				</tr>
+			<% end %>	
+		</table>
+	</div>
 </div>
 <br>

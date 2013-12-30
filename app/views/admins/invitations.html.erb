@@ -1,33 +1,36 @@
-<h3>View Invitations</h3>
 
-<div>
-	<table class="table table-striped">
-		<tr>
-			<th></th>
-			<th>Name</th>
-			<th>E-mail</th>
-			<th>Inviter</th>
-			<th>Invitation Sent</th>
-			<th>Invitation Accepted</th>
-		</tr>
+<div class="container">
+	<h3>View Invitations</h3>
 
-		<% @invited_users.each do |u| %>
-			<% inviter = User.find(u.invited_by_id) %>
+	<div>
+		<table class="table table-striped">
 			<tr>
-				<td>
-					<% if u.invitation_accepted_at != nil %>
-						<span class="label label-success">Accepted</span>
-					<% else %>
-						<span class="label label-warning">Not accepted</span>
-					<% end %>
-				</td>
-				<td><%= u.full_name %></td>
-				<td><%= u.email %></td>
-				<td><%= inviter.full_name %> (<%= inviter.type %>) </td>
-				<td><%= u.invitation_sent_at.strftime('%b. %e, %Y') %></td>
-				<td><%= u.invitation_accepted_at.strftime('%b. %e, %Y') %></td>
+				<th></th>
+				<th>Name</th>
+				<th>E-mail</th>
+				<th>Inviter</th>
+				<th>Invitation Sent</th>
+				<th>Invitation Accepted</th>
 			</tr>
-		<% end %>	
-	</table>
+
+			<% @invited_users.each do |u| %>
+				<% inviter = User.find(u.invited_by_id) %>
+				<tr>
+					<td>
+						<% if u.invitation_accepted_at != nil %>
+							<span class="label label-success">Accepted</span>
+						<% else %>
+							<span class="label label-warning">Not accepted</span>
+						<% end %>
+					</td>
+					<td><%= u.full_name %></td>
+					<td><%= u.email %></td>
+					<td><%= inviter.full_name %> (<%= inviter.type %>) </td>
+					<td><%= u.invitation_sent_at.strftime('%b. %e, %Y') %></td>
+					<td><%= u.invitation_accepted_at.strftime('%b. %e, %Y') %></td>
+				</tr>
+			<% end %>	
+		</table>
+	</div>
 </div>
 <br>

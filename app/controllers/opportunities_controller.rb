@@ -46,10 +46,8 @@ class OpportunitiesController < ApplicationController
 		@post=Post.last
 		if friend_signed_in?
 			opportunities = Opportunity.text_search(params).order("created_at DESC").to_a
-			logger.debug("OPPORTUNITEIS #{opportunities.length}")
 			filtered_opportunities = opportunities.select { |opportunity| opportunity.user.id == current_user.id }
-			logger.debug("F_OPPORTUNITEIS #{filtered_opportunities.length}")
-			@opportunities = Opportunity.type_search(opportunities,params[:job_type])
+			@opportunities = Opportunity.type_search(filtered_opportunities,params[:job_type])
 			# @opportunities = Kaminari.paginate_array(filtered_opportunities).page(params[:page]).per(5)
 			# @opportunities=opportunities
 		else

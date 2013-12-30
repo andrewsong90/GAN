@@ -26,3 +26,4 @@ en:
     fname: "First name"
     lname: "Last name"
     classyear: "Gann graduation class"
+    parent_email: "Parent email"
