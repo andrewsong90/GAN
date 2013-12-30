@@ -7,15 +7,19 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" =>true %>
 
-  <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans:700,400' rel='stylesheet' type='text/css'>
-
-  <%= yield :head %>
-
+ 
+  
   <% if Rails.env.production? %>
   	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEzL5mEqr8OympwOHJi96cMDZOVZMreTk&v=3.exp&sensor=false&libraries=places" ></script>
   <% else %>
   	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places" ></script>
   <% end %>
+
+  <%= yield :head %>
+
+
+  <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans:700,400' rel='stylesheet' type='text/css'>
+
 
   <%= csrf_meta_tags %>
 
