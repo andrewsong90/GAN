@@ -20,3 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+ activerecord:
+  attributes:
+   user:
+    fname: "First name"
+    lname: "Last name"
+    classyear: "Gann graduation class"

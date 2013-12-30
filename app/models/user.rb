@@ -8,9 +8,11 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => {:medium => "300x300>", :thumb => "130x130>"}, :default_url => "/images/user/:style/missing.png"
 
   # Validation
-  validates_presence_of :fname, :message =>"Cannot be blank"
-  validates_presence_of :lname, :message =>"Cannot be blank"
-  validates_presence_of :classyear, :message => "Cannot be blank"
+  validates_presence_of :fname, :message =>"can't be blank"
+  validates_presence_of :lname, :message =>"can't be blank"
+  validates_presence_of :classyear, :message => "can't be blank"
+
+  validate :check_alum_record
 
   has_many :opportunities
   has_many :applications
@@ -26,6 +28,14 @@ class User < ActiveRecord::Base
   has_many :favorite_opportunities, :dependent => :destroy
   has_many :favorites, :through => :favorite_opportunities, :source => :opportunity
   
+
+  #Validation
+  def check_alum_record
+    if !Userdb.where(:parent_email =>parent_email, :classyear => classyear).first 
+      errors.add(:base, "The combination of parent email & Gann graduation class doesn't match our database")
+    end  
+  end
+
   # Check if the user created the opportunity
   def is_owner? (opportunity)
   	opportunity.user_id == self.id

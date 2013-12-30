@@ -241,13 +241,18 @@ input[type="checkbox"] {
 	font-size: 13px;
 }
 
+/*Error message*/
+.error_messages{
+	color:#D00;
+}
 
 /*Fonts configuration*/
 
 .section-header{
-	font-weight: 700;
-	font-family: "Trebuchet MS";
-	font-size: 18px;
+	font-family: 'Alegreya Sans', sans-serif; 
+	color :$blue_color;
+	font-weight: 600;
+	font-size: 22px;
 	display: inline-block;
 }
 

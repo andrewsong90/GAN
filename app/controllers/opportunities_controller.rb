@@ -41,14 +41,17 @@ class OpportunitiesController < ApplicationController
 
 	end
 
+	# TODO: No pagination yet
 	def index
 		@post=Post.last
 		if friend_signed_in?
-			opportunities = Opportunity.text_search(params[:query])
-			# filtered_opportunities = opportunities.select { |opportunity| opportunity.user.id == current_user.id }
-			
+			opportunities = Opportunity.text_search(params).order("created_at DESC").to_a
+			logger.debug("OPPORTUNITEIS #{opportunities.length}")
+			filtered_opportunities = opportunities.select { |opportunity| opportunity.user.id == current_user.id }
+			logger.debug("F_OPPORTUNITEIS #{filtered_opportunities.length}")
+			@opportunities = Opportunity.type_search(opportunities,params[:job_type])
 			# @opportunities = Kaminari.paginate_array(filtered_opportunities).page(params[:page]).per(5)
-			@opportunities=opportunities
+			# @opportunities=opportunities
 		else
 			# opportunities = Opportunity.text_search(params).page params[:page]
 			opportunities=Opportunity.text_search(params).order("created_at DESC").to_a

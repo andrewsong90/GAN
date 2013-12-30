@@ -10,12 +10,12 @@ class ConfirmationsController < Devise::ConfirmationsController
 				@confirmable.attempt_set_password(params[:user])
 			
 				#Update rest of the Information
-				@confirmable.update_attributes(:avatar => params[:user][:avatar],:phone => params[:user][:phone])
+				# @confirmable.update_attributes(:avatar => params[:user][:avatar],:phone => params[:user][:phone])
+				@confirmable.update_attributes(configure_permitted_params)
 				if @confirmable.valid?
-
-					configure_permitted_params[:skills].each do |skill|
-						@confirmable.user_skills.create(:skill_id => skill)
-					end
+					# configure_permitted_params[:skills].each do |skill|
+					# 	@confirmable.user_skills.create(:skill_id => skill)
+					# end
 
 					do_confirm
 				else
@@ -36,13 +36,20 @@ class ConfirmationsController < Devise::ConfirmationsController
 
 	# GET /resource/confirmation?confirmation_token=abcdef
 	def show
+
 		with_unconfirmed_confirmable do 
+
+			@skills = Skill.all
+			build_unpicked_skills
+
 			if @confirmable.has_no_password?
 				do_show
 			else
 				do_confirm
 			end
 		end
+
+		
 
 		if !@confirmable.errors.empty?
 			self.resource=@confirmable
@@ -53,8 +60,15 @@ class ConfirmationsController < Devise::ConfirmationsController
 
 	protected
 
+	def build_unpicked_skills
+		(Skill.all-@confirmable.skills).each do |skill|
+			@confirmable.user_skills.build(:skill => skill)
+		end
+		@confirmable.user_skills.sort_by! {|us| us.skill.id }
+	end
+
 	def configure_permitted_params
-		params.require(:user).permit(:avatar,:phone, :address, :skills => [])
+		params.require(:user).permit(:avatar,:phone, :address, :user_skills_attributes => [:id, :skill_id, :_destroy])
 	end
 
 	def with_unconfirmed_confirmable
@@ -71,6 +85,9 @@ class ConfirmationsController < Devise::ConfirmationsController
 		@requires_password = true
 		self.resource = @confirmable
 
+		@skills = Skill.all
+		build_unpicked_skills
+		
 		render 'devise/confirmations/show'
 	end
 

@@ -13,14 +13,11 @@
   <div>
     <h3>Step 1: Authentication</h3>
     
-
-    <br>
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 
-    <%= resource %>
-    <%= resource.errors.any? %>
       <% if resource.errors.any? %>
         <div class="error_messages">
+          <h4>Some errors were found.</h4>
           <ul>
             <% resource.errors.full_messages.each do |msg| %>
               <li><%= msg %></li>
@@ -53,11 +50,15 @@
       &nbsp;<a id="registration_parent_email_help" class="help"><i class="fa fa-question-circle"></i></a><br>  
       <%= f.email_field :parent_email %></div>  
 
-      <%= f.hidden_field :type, :value => @type %>
+      <%= f.hidden_field :type, :value => "Alum" %>
       
       <br>
 
-      <div><%= f.submit "Sign up", :class => "btn btn-primary" %></div>
+      <div class="align-right">
+        <%= f.submit "Sign up", :class => "btn btn-primary" %>
+      </div>
+      <div class="clear"></div>
+
     <% end %>
   </div>
 </div>

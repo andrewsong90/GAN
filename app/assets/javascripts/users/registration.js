@@ -13,8 +13,17 @@ $(document).ready(function(){
 		html: true
 	});
 
+	$("#skill_help").popover({
+		content: "Select a few fields you are interested in or have expertise. You can always change these later.",
+		html: true
+	});
+
 	$("#registration_parent_email_help").popover({
 		content: "Input either of your parent's email addresses from the time you were a Gann student."
+	});
+
+	$("#password_help").popover({
+		content: "Password needs to be at least 6 characters"
 	});
 
 	//Limit File Upload Count

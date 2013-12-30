@@ -1,6 +1,7 @@
 <h4><%= User.find_by_email(@email).fname %> </h4>
-Welcome to the Gann Alumni network<br>
-
+Welcome to the Gann Alumni network!
+<br>
+<br>
 <p>Please confirm your account by clicking this link.</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @token) %></p>

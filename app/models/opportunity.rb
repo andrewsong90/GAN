@@ -90,7 +90,6 @@ class Opportunity < ActiveRecord::Base
 	#Database Search
 	def self.text_search(params)
 		if params[:query].present? && params[:provider].present?
-			# search_title(params[:query]).search_description(params[:query]).reorder("created_at DESC")
 			search_opportunity(params[:query]).search_provider(params[:provider]).reorder("created_at DESC")
 		elsif params[:query].present?
 			search_opportunity(params[:query])

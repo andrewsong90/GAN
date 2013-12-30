@@ -7,6 +7,8 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" =>true %>
 
+  <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans:700,400' rel='stylesheet' type='text/css'>
+
   <%= yield :head %>
 
   <% if Rails.env.production? %>
@@ -60,7 +62,6 @@
 		<% flash.each do |name,msg| %>
 			<div class="alert alert-<%= name == :notice ? "success" : "error" %>">
 				<a class="close" data-dismiss="alert">x</a>
-				<%= name %>
 				<%= msg %>
 			</div>
 		<% end%>

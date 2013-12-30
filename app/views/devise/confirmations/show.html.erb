@@ -3,70 +3,122 @@
   <%= javascript_include_tag "users/registration" %>
 <% end %>
 
-<h3>Step 2: Complete Registration</h3>
-  <p>
-    Please type in the rest of information! 
-  </p>
+<div class="container">
+  <h3>Step 2: Complete Registration</h3>
+    <p>
+      Please fill in the information below. 
+    </p>
 
-<br>
 
-<%= form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {:method => 'patch', :id => "confirmation_form", :multipart => 'true'} do |f| %>
-	<fieldset>
+  <%= form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {:method => 'patch', :id => "confirmation_form", :multipart => 'true'} do |f| %>
+  	<fieldset>
 
-  <div><%= f.label :Photo, :class => "section-header" %><br>
-    <div class="fileinput fileinput-new" data-provides="fileinput">
-      <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 250px; height: 250px;"></div>
-      <div>
-        <span class="btn btn-default btn-file">
-          <span class="fileinput-new">Select image</span>
-          <span class="fileinput-exists">Change</span>
-          <%= f.file_field :avatar %>
-        </span>
-        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-      </div>
-    </div>
-  </div>  
-
-	<% if @requires_password %>
-		<p><%= f.label :password, "Password", :class => "section-header"%><br>
-		 <%= f.password_field :password, :autofocus => true %></p>
-		 
-		<p><%= f.label :password_confirmation, "Password Confirmation ", :class => "section-header" %><br>
-		 <%= f.password_field :password_confirmation %></p>
-	<% end %>
-
-	<div><%= f.label :Phone, :class => "section-header" %><br>
-  	<%= f.text_field :phone, :id => "phone", :placeholder => "XXX-XXX-XXXX" %></div> 
-
-  <div><%= f.label "Skills", :class => "section-header" %><br>
-    <% counter = 0 %> 
-    <table>
-      <% @skills.each do |s|%>
-        <% if counter % 3 == 0%>
-          <tr>
-        <% end %>
-       
-        <td><%= check_box_tag 'skills[]', s.id %><%= s.skill %></td>
-          
-        <!-- Line break-->
-        <% if ((counter +=1) % 3) == 0 %>
-          </tr>
-        <% end %>
-
+      <% if resource.errors.any? %>
+        <div class="error_messages">
+          <h4>Some errors were found.</h4>
+          <ul>
+            <% resource.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-    </table>
-  </div>
+    
+    <br>
+
+  	<% if @requires_password %>
+  		<p><span class="section-header">Password</span>
+        &nbsp;<a id="password_help" class="help"><i  class="fa fa-question-circle"></i></a><br>
+  		 <%= f.password_field :password, :autofocus => true %></p>
+  		 
+  		<p><%= f.label :password_confirmation, "Password Confirmation ", :class => "section-header" %><br>
+  		 <%= f.password_field :password_confirmation %></p>
+  	<% end %>
+
+  	<div><%= f.label :Phone, :class => "section-header" %><br>
+    	<%= f.text_field :phone, :id => "phone", :placeholder => "XXX-XXX-XXXX" %></div> 
+
+    <br>
+
+      <span class="section-header">Skills</span>
+      &nbsp;<a id="skill_help" class="help"><i class="fa fa-question-circle"></i></a><br>
+
+      <% counter = 0 %>
+
+      <table>
+        <%= f.fields_for :user_skills do |ff| %>
+          <% if counter % 3 == 0 %>
+            <tr>
+          <% end %>
+          
+          <td class="form-inline">
+            <%= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1' %>&nbsp;
+            <span> <%= ff.object.skill.skill %> </span>
+            <%= ff.hidden_field :skill_id %>
+          </td>
+
+          <% if ((counter +=1) % 3) == 0 %>
+            </tr>
+          <% end %>
+
+        <% end %>
+      </table>
 
 
-  	<%= check_box_tag :license %>&nbsp;I agree to the terms of use&nbsp;
-  	<a class="btn btn-primary" id="licenseButton">View</a>
+  <% if false %>
+    <div><%= f.label "Skills", :class => "section-header" %><br>
+      <% counter = 0 %> 
+      <table>
+        <% @skills.each do |s|%>
+          <% if counter % 3 == 0%>
+            <tr>
+          <% end %>
+         
+          <td><%= check_box_tag 'skills[]', s.id %><%= s.skill %></td>
+            
+          <!-- Line break-->
+          <% if ((counter +=1) % 3) == 0 %>
+            </tr>
+          <% end %>
+
+        <% end %>
+      </table>
+    </div>
+    <% end %>
+
+    <br>
+
+    <div><%= f.label "Profile picture", :class => "section-header" %><br>
+      <div class="fileinput fileinput-new" data-provides="fileinput">
+        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 250px; height: 250px;"></div>
+        <div>
+          <span class="btn btn-default btn-file">
+            <span class="fileinput-new">Select image</span>
+            <span class="fileinput-exists">Change</span>
+            <%= f.file_field :avatar %>
+          </span>
+          <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+        </div>
+      </div>
+    </div>  
+
+    <br>
+
+    	<%= check_box_tag :license %>&nbsp;I agree to the terms of use&nbsp;
+    	<a class="btn btn-primary" id="licenseButton">View</a>
+    	
+    	<br>
+    	<br>
+
+  	<%= hidden_field_tag :confirmation_token,@confirmation_token %>
   	
-  	<br>
-  	<br>
-
-	<%= hidden_field_tag :confirmation_token,@confirmation_token %>
-	<p><%= f.submit "Activate", :class => "btn btn-primary" %></p>
-	</fieldset>
-<% end %>
+    <div class="align-right">
+      <%= f.submit "Activate", :class => "btn btn-primary" %>
+    </div>
+    <div class="clear"></div>
+  	
+    </fieldset>
+  <% end %>
+</div>
 
 <%= render :partial => "shared/registration" %>

@@ -3,25 +3,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	before_filter :registration_permitted_params, :only => :create
 	before_filter :update_permitted_params, :only => :update
 
-	def new
-		@type=params[:type]
-		@skills=Skill.all
-		super
-	end
-
 	def create
-		#If database authentiation fails
-		logger.debug("TRUE #{params[:user][:type] == "Alum"}")
-		logger.debug("TRUE #{!Userdb.compare_alum_db(params)}")
-		if params[:user][:type] == "Alum" && !Userdb.compare_alum_db(params)
-				flash[:error] = "Our database does not have your record. Please try again!"
-				session[:previous]=params[:user]
-				redirect_to :back
-		else
-		#database authentication success!
-
-			# Clear the session if previous authentication failed.
-			session[:previous] = nil
 
 			build_resource(sign_up_params)
 			resource.type=params[:user][:type]
@@ -40,10 +22,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	        		respond_with resource, :location => after_inactive_sign_up_path_for(resource)
 	      		end
 	    	else
-	    		flash[:error] = "Wrong information"
 	      		render 'new'
 	    	end
-    	end
+
 	end
 
 	def edit
@@ -52,7 +33,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 		
 		@user.useruploads.build
 		build_unpicked_skills
-		# current_user.user_skills.build
 		@skills=Skill.all
 		super
 	end
