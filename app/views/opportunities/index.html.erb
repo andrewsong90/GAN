@@ -1,5 +1,139 @@
 <div class="container box_shadow box_padding">
 	<div class="header">
+		<h2 class="navyfont" style="display: inline; margin-top:100px;">
+			&nbsp;Announcement</h2>
+		<div class="align-right well">
+			<span class="italics">Have any opportunity that you want to offer?</span><br><br>
+			<div class="pull-right">
+				<%= link_to new_opportunity_path, :class => "btn btn-success" do %>
+					<i class="fa fa-pencil"></i>&nbsp;Create
+				<% end %>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	
+	
+	<br>
+	<div class="well">
+		<div>
+			<h3 class="neatfont" style="display: inline;"><%= @post.title %></h3>		
+			<span class="indent italics">by <%= @post.admin.full_name %></span> at <%= @post.created_at.strftime('%b. %e, %Y') %>
+			<hr class="style-one"></hr>
+		</div>
+		<span class="indent" /><%= @post.content.html_safe %>
+	</div>
+	<div class="align-right">
+		<%= link_to "View posts", admins_posts_path, :class => "btn btn-primary" %>
+	</div>
+	<div class="clear"></div>
+</div>
+
+
+		<br>
+
+<div class="container box_shadow box_padding align-left">
+	<h2 class="navyfont">&nbsp;Opportunities</h2>
+
+
+	<%= form_tag opportunities_path, method: :get, :class => "form-inline" do %>
+		<div class="align-right">
+			<%= select_tag "job_type", options_from_collection_for_select(Jobtype.all, :id, :name, params[:job_type]), :class=>"select_box",:prompt => "Select type" %>
+			<span class="section-header">	
+
+					<%= text_field_tag :query, params[:query], :placeholder => "Enter keyword, company, location, or provider", :class => "span5 form-control" %>
+				
+				<!-- TODO: Edit block -->
+				<% if false %>
+					<i class="fa fa-user"></i>&nbsp;<%= text_field_tag :provider, params[:provider], :placeholder => "Enter Provider" %> 
+				<% end %>
+
+			</span>
+
+			<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+				<i class="fa fa-search">&nbsp;Search</i>
+			<% end %>
+		</div>
+		<div class="clear"></div>
+
+	<% end %>
+
+	<% @opportunities.each do |f| %>
+		<div class="well box_radius">
+			<div class="align-left">
+				<%= image_tag f.upload.url(:thumb), :class =>"box_radius" %>
+			</div>
+			<div class="align-left indent">
+				<h4>
+					<%= f.title %>&nbsp;<small><%= f.company %></small>
+
+					<% if can_apply?(f) %>
+						<span class="label label-important">Not Connected</span>
+					<% else %>
+						<span class="label label-success"><i class="fa fa-check"></i>&nbsp;Connected</span>
+					<% end %>
+
+					<br>
+					<small class="italics"><%= f.job_type %></small>		
+				</h4>
+				
+				<i class="fa fa-map-marker"></i>&nbsp;<%= short_location(f.location) %><br>
+				<span class="italics">Posted at</span>&nbsp;&nbsp;<%= f.created_at.strftime('%b. %e, %Y') %><br>	
+				<span class="italics">Offered by</span>&nbsp;&nbsp;<%= f.user.full_name %>
+			</div>
+			<div class="align-right">
+				<div class="align-right">
+
+					<%= link_to "View", opportunity_path(f), :class => "btn btn-success" %>
+
+				</div>
+				<div class="clear"></div>
+
+				<br>
+
+				<div class="align-right">
+					<% if f.is_favorite?(current_user.id) %>
+						<button class="remove_favorite_btn btn btn-success btn-labeled" id="<%= f.id %>">
+							<span class="btn-label"><i class="fa fa-check"></i></span>
+								Saved
+						</button>
+					<% else %>
+						<button class="add_favorite_btn btn btn-primary btn-labeled" id="<%= f.id %>">
+							<span class="btn-label"><i class="fa fa-plus"></i></span>
+								Save
+						</button>
+					<% end %>
+
+				</div>
+				<div class="clear"></div>
+
+			</div>
+			<div class="clear"></div>
+		</div>
+	<% end %>
+
+	<br>
+
+
+<% if false %>
+	<div class="pull-right">
+		<%= paginate @opportunities, :theme => 'twitter-bootstrap', :window => 2 %>
+	</div>
+<% end %>
+
+
+
+</div>
+
+<div class="clear"></div>
+
+
+<!-- First Original Design-->
+
+
+<% if false %>
+	<div class="container box_shadow box_padding">
+	<div class="header">
 				<h3 class="navyfont">&nbsp;Announcement</h3>
 			</div>
 
@@ -129,9 +263,6 @@
 </div>
 
 <div class="clear"></div>
-
-
-
-
+<% end %>
 
 

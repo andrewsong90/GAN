@@ -15,12 +15,14 @@
 		<br>
 		<small> <%= @opportunity.company %></small>
 		
+		<% if false %>
 		<% if can_apply? (@opportunity) %>
 			<span class="label label-warning">Not Connected</span>	
 		<% elsif current_user.is_owner? (@opportunity) %>
 			<span class="label label-info">Owner</span>	
 		<% else %>
 			<span class="label label-success">Connected</span>
+		<% end %>
 		<% end %>
 
 		<% if !@opportunity.is_active? %>
@@ -132,7 +134,7 @@
 		<div>
 			<span class="indent"/>
 			<%= @opportunity.location %>&nbsp;
-			<a href=<%= google_map_query(@opportunity.location) %> target="_blank">map link</a>
+			<a href=<%= google_map_query(@opportunity.location) %> target="_blank"><i class="fa fa-location-arrow"></i>&nbsp;map link</a>
 		</div>
 
 		<br>

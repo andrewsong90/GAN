@@ -1,5 +1,12 @@
 <div class="container">
-	<%= @post.title %>
-	<br><br>
-	<%= @post.content.html_safe %>
+	<div>
+		<h3 class="neatfont" style="display: inline;"><%= @post.title %></h3>		
+		<span class="indent italics">by <%= @post.admin.full_name %></span> at <%= @post.created_at.strftime('%b. %e, %Y') %>
+		<hr class="style-one"></hr>
+	</div>
+	<span class="indent" /><%= @post.content.html_safe %>
+	<div class="align-right">
+		<%= link_to "Back to list",admins_posts_path,:class => "btn btn-primary" %>
+	</div>
+	<div class="clear"></div>
 </div>
