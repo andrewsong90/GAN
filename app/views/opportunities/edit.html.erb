@@ -5,10 +5,21 @@
 
 <div class="container">
 	<h2>Edit Opportunity</h2>
-
-	<br>
+	<hr class="style-one"></hr>
 
 	<%= form_for @opportunity, :html => { :multipart => true } do |f| %>
+
+		<% if @opportunity.errors.any? %>
+	        <div class="error_messages">
+	          <h4>Some errors were found.</h4>
+	          <ul>
+	            <% @opportunity.errors.full_messages.each do |msg| %>
+	              <li><%= msg %></li>
+	            <% end %>
+	          </ul>
+	        </div>
+	     <% end %>
+
 		
 		<div><span class="section-header">Status</span><br>
 			<span class="indent"/>
@@ -19,7 +30,11 @@
 		<br>
 
 		<%= render "form", :f => f %>
-		
-		<%= f.submit "Edit", :class => "btn btn-primary" %>
+
+		<br>
+
+		<div class="align-right">
+			<%= f.submit "Edit", :class => "btn btn-primary" %>
+		</div>
 	<% end %>
 </div>

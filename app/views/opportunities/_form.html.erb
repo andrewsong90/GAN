@@ -1,8 +1,18 @@
+   <span class="required">*</span>&nbsp;These fields are required<br><br>
+
    <div class="row">
     <div class="offset1 span3">
     <div><%= f.label "Logo", :class => "section-header" %><br>
-      <div class="fileinput fileinput-new" data-provides="fileinput">
-        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 200px;"></div>
+      <% if !f.object.upload_file_name %>
+        <div class="fileinput fileinput-new" data-provides="fileinput">
+      <% else %>
+        <div class="fileinput fileinput-exists" data-provides="fileinput">
+      <% end %>
+        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 200px;">
+          <% if f.object.upload_file_name %>
+            <%= image_tag f.object.upload.url(:medium), :style =>"width: 200px;" %>  
+          <% end %>
+        </div>
         <div>
           <span class="btn btn-default btn-file">
             <span class="fileinput-new">Select image</span>
@@ -18,7 +28,7 @@
     <br>
 
     <div class="span5">
-    	<div><%= f.label "Title", :class => "section-header" %><br>
+    	<div><%= f.label "Title", :class => "section-header" %><span class="required">*</span><br>
     	<%= f.text_field :title %></div>
       
       <br>
@@ -28,7 +38,7 @@
       
       <br>
    	  
-      <div><%= f.label "Type", :class => "section-header" %><br>
+      <div><%= f.label "Type", :class => "section-header" %><span class="required">*</span><br>
     	<%= f.collection_select :job_type, Jobtype.all, :name, :name, prompt: true %></div>
     </div>
   </div>
@@ -61,10 +71,12 @@
 
    
     <span class="section-header">Skills</span>
-    &nbsp;<a id="opportunity_skills_help" class="help"><i  class="fa fa-question-circle"></i></a>
+    &nbsp;<a id="opportunity_skills_help" class="help"><i  class="fa fa-question-circle"></i></a><br>
+    <span class="italics">Under Construction</span>
 
     <br>
 
+<% if false %>
     <% counter = 0 %>
 
     <table>
@@ -85,10 +97,10 @@
 
       <% end %>
     </table>
-   
+<% end %>
    <br>
 
-	 <div><%= f.label "Location", :class => "section-header" %></div>
+	 <div><%= f.label "Location", :class => "section-header" %><span class="required">*</span></div>
 
    <br>
   
@@ -106,26 +118,28 @@
       <label for="changetype-geocode">Geocodes</label>
     </div> -->
 
-    <div class="gmap">
+    <div class="gmap" data-lat = '<%= @opportunity.latitude %>' data-long = '<%= @opportunity.longitude %>'>
       <div id="map-canvas-new"></div>
   	</div>
     <br>
 
-    <div><%= f.label "Start & End date", :class => "section-header" %>
-      &nbsp;<a id="opportunity_time_help" class="help"><i class="fa fa-question-circle"></i></a><br>
-    <%= radio_button_tag(:time_type, "flexible", :checked => true) %>Flexible<br>
-    <%= radio_button_tag(:time_type,"range") %>Range<br></div>  
-  
+    <div><%= f.label "Start & End date", :class => "section-header" %><span class="required">*</span>
+      &nbsp;<a id="opportunity_time_help" class="help"><i class="fa fa-question-circle"></i></a></div> 
+    <div class="form-inline">
+    
+    <%= radio_button_tag(:time_type,"range", :checked => true ) %>
+  	
+    <span><strong>Start date</strong>&nbsp;<%= text_field_tag 'time[]', nil, disabled: true, id: "opportunity_fromtime" %></span>
+    <span><strong>End date</strong>&nbsp;<%= text_field_tag 'time[]', nil, :id => "opportunity_totime", :disabled => true %></span>  	
+    <br>
+    <%= radio_button_tag(:time_type, "flexible", :checked => true) %>&nbsp;<strong>Flexible</strong>
+  </div>
     <br>
     
-  	<div><%= text_field_tag 'time[]', nil, disabled: true, id: "opportunity_fromtime" %></div>
-    <div><%= text_field_tag 'time[]', nil, :id => "opportunity_totime", :disabled => true %></div>  	
-
-    <br>
     
-    
-    <div><%= f.label "Sponsor", :class => "section-header" %>
-
+    <div><%= f.label "Sponsor", :class => "section-header" %><br>
+      <span class="italics">Under Construction</span>
+<% if false %>
       <% numOfSponsors = 1 %>
 
       &nbsp;<a id="sponsor_help" class="help"><i class="fa fa-question-circle"></i></a><br>
@@ -139,6 +153,7 @@
         </div>
       </div>
     </div>
+<% end %>
 
   <br>
 

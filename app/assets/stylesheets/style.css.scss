@@ -16,7 +16,7 @@ $opportunities_index_container_margin_right: 30px;
 }
 
 @mixin box_shadow{
-	-moz-box-shadow: 1px 1px 1px 1px #000000;
+	-moz-box-shadow: 1px 1px 1px 1phx #000000;
 	-webkit-box-shadow: 1px 1px 1px 1px #000000;
 	box-shadow: 1px 1px 1px 1px #000000;
 }
@@ -72,12 +72,17 @@ body{
 }
 
 .account_left{
-	width: 450px;
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: $grey_color;
+	@include box-padding;
+	@include box_shadow;
 }
 
-.account_right{
+/*.account_right{
 	width: 440px;
-}
+}*/
 
 .divider{
 	position: absolute;
@@ -148,6 +153,25 @@ a:hover {
 	background-image: -o-linear-gradient(left,#ccc,#333,#ccc);
 }
 
+.style-two {
+	height: 30px;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px 0 0 0;
+	border-radius: 20px;
+}
+
+.style-two:before{
+	display: block;
+	content: "";
+	height: 30px;
+	margin-top: -31px;
+	border-style: solid;
+	border-coor: black;
+	border-width: 0 0 1px 0;
+	border-radius: 20px;
+}
+
 /* Mouse popover pointer*/
 
 .help{
@@ -198,6 +222,13 @@ input[type="checkbox"] {
 
 /* Override bootstrap to customize navbar*/
 
+input[type="radio"]{
+	margin: -2px 0px 0px;
+}
+
+.tooltip-inner {
+	width: 350px;
+}
 
 .navbar .brand{
 	font-family: 'Alegreya Sans', sans-serif; 
@@ -249,6 +280,12 @@ input[type="checkbox"] {
 	color: #D00;
 	padding-left: 5px;
 	font-size: 13px;
+}
+
+.required {
+	color: #D00;
+	padding-left: 5px;
+	font-size: 18px;
 }
 
 /*Error message*/

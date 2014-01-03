@@ -16,12 +16,6 @@
 	<h5> View Alum list </h5>
 	<%= link_to "View Alum", alum_list_path %>
 
-	<h5> Import Users in CSV format </h5>
-	<%= form_tag import_users_path, multipart: true do %>
-		<%= file_field_tag :file %>
-		<%= submit_tag "Import" %>
-	<% end %>
-
 	<h5> Send invitations</h5>
 	<%= link_to "Invite", new_user_invitation_path, :class => "btn" %>
 

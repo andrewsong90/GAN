@@ -15,7 +15,8 @@
 	
 	
 	<br>
-	<div class="well">
+	<hr class="style-two"></hr>
+	<div style="padding-left: 20px; padding-right: 20px;">
 		<div>
 			<h3 class="neatfont" style="display: inline;"><%= @post.title %></h3>		
 			<span class="indent italics">by <%= @post.admin.full_name %></span> at <%= @post.created_at.strftime('%b. %e, %Y') %>
@@ -23,6 +24,7 @@
 		</div>
 		<span class="indent" /><%= @post.content.html_safe %>
 	</div>
+	<hr class="style-two"></hr>
 	<div class="align-right">
 		<%= link_to "View posts", admins_posts_path, :class => "btn btn-primary" %>
 	</div>
@@ -50,13 +52,21 @@
 
 			</span>
 
-			<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+			<%= button_tag(type: 'submit', class: "btn btn-primary", id: 'search') do %>
 				<i class="fa fa-search">&nbsp;Search</i>
 			<% end %>
 		</div>
 		<div class="clear"></div>
 
 	<% end %>
+
+	<!-- <div class="tooltip">
+		<div class="tooltip-inner">
+			Tooltip!
+		</div>
+		<div class="tooltip-arrow"></div>
+	</div> -->
+
 
 	<% @opportunities.each do |f| %>
 		<div class="well box_radius">
@@ -69,6 +79,8 @@
 
 					<% if can_apply?(f) %>
 						<span class="label label-important">Not Connected</span>
+					<% elsif current_user.is_owner?(f) %>
+						<span class="label label-info">Owner</span>
 					<% else %>
 						<span class="label label-success"><i class="fa fa-check"></i>&nbsp;Connected</span>
 					<% end %>

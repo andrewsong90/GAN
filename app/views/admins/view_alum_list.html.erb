@@ -10,16 +10,20 @@
 	<div>
 		<table class="table table-striped">
 			<tr>
+				<th>id</th>
 				<th>Name</th>
-				<th>E-mail</th>
+				<th>Parent e-mail #1</th>
+				<th>Parent e-mail #2</th>
 				<th>Class year</th>
 				<th>Updated Date</th>
 			</tr>
 
 			<% @alum.each do |f| %>
 				<tr>
+					<td><%= f.id %></td>
 					<td><%= f.fname %> <%= f.lname %></td>
-					<td><%= f.parent_email %></td>
+					<td><%= f.parent_email_1 %></td>
+					<td><%= f.parent_email_2 %></td>
 					<td><%= f.classyear %></td>
 					<td><%= f.updated_at.strftime('%b. %e, %Y') %></td>
 				</tr>

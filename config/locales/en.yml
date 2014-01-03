@@ -27,3 +27,9 @@ en:
     lname: "Last name"
     classyear: "Gann graduation class"
     parent_email: "Parent email"
+   contact:
+    from_email: "The email address"
+    title: "Subject"
+    content: "Description"
+   opportunity:
+    job_type: "The type"

@@ -18,6 +18,11 @@ $(document).ready(function(){
 		html: true
 	});
 
+	$('#picture_help').popover({
+		content: "Upload a picture for profile.<br> This is optional.",
+		html: true
+	});
+
 	$("#registration_parent_email_help").popover({
 		content: "Input either of your parent's email addresses from the time you were a Gann student."
 	});

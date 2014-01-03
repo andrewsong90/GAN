@@ -2,12 +2,8 @@
 <html>
 <head>
   <title>GAN</title>
-  
-  
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" =>true %>
-
- 
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
   
   <% if Rails.env.production? %>
   	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEzL5mEqr8OympwOHJi96cMDZOVZMreTk&v=3.exp&sensor=false&libraries=places" ></script>
@@ -20,14 +16,13 @@
 
   <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans:700,400' rel='stylesheet' type='text/css'>
 
-
   <%= csrf_meta_tags %>
 
 </head>
 
 
 <body>
-	<div id="holder">
+  	<div id="holder">
 		<% if user_signed_in? %>
 			<div class="navbar">
 				<div class="navbar-inner">

@@ -5,15 +5,18 @@
 
 <div class="container">
   <h3>Step 2: Complete Registration</h3>
+  <hr class="style-one"></hr>
     <p>
       Please fill in the information below. 
     </p>
 
-
   <%= form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {:method => 'patch', :id => "confirmation_form", :multipart => 'true'} do |f| %>
   	<fieldset>
 
-      <% if resource.errors.any? %>
+      
+    
+    <span class="required">*</span>&nbsp;These fields are required<br>
+    <% if resource.errors.any? %>
         <div class="error_messages">
           <h4>Some errors were found.</h4>
           <ul>
@@ -23,15 +26,13 @@
           </ul>
         </div>
       <% end %>
-    
     <br>
-
   	<% if @requires_password %>
-  		<p><span class="section-header">Password</span>
+  		<p><span class="section-header">Password<span class="required">*</span></span>
         &nbsp;<a id="password_help" class="help"><i  class="fa fa-question-circle"></i></a><br>
   		 <%= f.password_field :password, :autofocus => true %></p>
   		 
-  		<p><%= f.label :password_confirmation, "Password Confirmation ", :class => "section-header" %><br>
+  		<p><%= f.label :password_confirmation, "Password Confirmation ", :class => "section-header" %><span class="required">*</span><br>
   		 <%= f.password_field :password_confirmation %></p>
   	<% end %>
 
@@ -40,9 +41,23 @@
 
     <br>
 
+    <div>
+      <span class="section-header">Address</span><br>
+
+      <%= f.fields_for :address do |ff| %>
+        <%= ff.text_field :address_1, :placeholder => "Street address" %>
+        <%= ff.text_field :address_2, :placeholder => "Apartment, suite, unit, etc." %><br>
+        <%= ff.text_field :city, :placeholder => "City" %>
+        <%= ff.text_field :state, :placeholder => "State" %>
+        <%= ff.text_field :country, :placeholder => "Country" %>
+      <% end %>
+    </div>
+    <br>
+
       <span class="section-header">Skills</span>
       &nbsp;<a id="skill_help" class="help"><i class="fa fa-question-circle"></i></a><br>
-
+      <span class="italics">Under Construction</span>
+<% if false %>
       <% counter = 0 %>
 
       <table>
@@ -63,32 +78,14 @@
 
         <% end %>
       </table>
+<% end %>
 
 
-  <% if false %>
-    <div><%= f.label "Skills", :class => "section-header" %><br>
-      <% counter = 0 %> 
-      <table>
-        <% @skills.each do |s|%>
-          <% if counter % 3 == 0%>
-            <tr>
-          <% end %>
-         
-          <td><%= check_box_tag 'skills[]', s.id %><%= s.skill %></td>
-            
-          <!-- Line break-->
-          <% if ((counter +=1) % 3) == 0 %>
-            </tr>
-          <% end %>
+    <br><br>
 
-        <% end %>
-      </table>
-    </div>
-    <% end %>
-
-    <br>
-
-    <div><%= f.label "Profile picture", :class => "section-header" %><br>
+    <div><%= f.label "Profile picture", :class => "section-header" %>
+      &nbsp;<a id="picture_help" class="help"><i class="fa fa-question-circle"></i></a><br>
+      <br>
       <div class="fileinput fileinput-new" data-provides="fileinput">
         <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 250px; height: 250px;"></div>
         <div>

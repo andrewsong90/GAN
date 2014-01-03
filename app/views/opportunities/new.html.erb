@@ -5,20 +5,26 @@
 
 <div class="container">
 	<h2 class="header">New Opportunity</h2>
+	<hr class="style-one"></hr>
 
-	<br>
-
-	<%= form_for @opportunity,:validate => true, :html => { :multipart => true, :id => "new_opportunity_form" } do |f| %>
+	<%= form_for @opportunity, :html => { :multipart => true, :id => "new_opportunity_form" } do |f| %>
 		
-		<%= f.hidden_field :active, :value => true %>
+		<% if @opportunity.errors.any? %>
+	        <div class="error_messages">
+	          <h4>Some errors were found.</h4>
+	          <ul>
+	            <% @opportunity.errors.full_messages.each do |msg| %>
+	              <li><%= msg %></li>
+	            <% end %>
+	          </ul>
+	        </div>
+	     <% end %>
 
 		<%= render "form", :f => f %>
-		
 		<br>
-
+		<%= f.hidden_field :active, :value => true %>
 		<div class="align-right">
 			<%= f.submit "Create", :class => "btn btn-primary" %>
 		</div>
-		<div class="clear"></div>
 	<% end %>
 </div>

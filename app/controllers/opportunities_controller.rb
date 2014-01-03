@@ -100,9 +100,52 @@ class OpportunitiesController < ApplicationController
 		@opportunity.sponsors.build
 		build_unpicked_skills
 
+		gon.latitude=nil
+		gon.longitude=nil
+
 		respond_to do |format|
 			format.html
-			format.js
+		end
+	end
+
+	def create
+		@opportunity=current_user.opportunities.new(opportunity_params[:opportunity])
+		if @opportunity.save
+			# Create time objects
+			OpportunityTime.createTime(@opportunity.id, opportunity_params)
+			flash[:notice] = "Opportunity Created!"
+			redirect_to opportunities_path
+		else
+			render 'new'
+		end
+	end	
+
+	def edit
+		@opportunity = Opportunity.find(params[:id])	
+		build_unpicked_skills
+
+		gon.latitude=@opportunity.latitude
+		gon.longitude=@opportunity.longitude
+
+		if current_user.is_owner?(@opportunity)
+			respond_to do |format|
+				format.html
+			end
+		else
+			flash[:error] = "You are not the owner!"
+			redirect_to opportunity_path(@opportunity)
+		end
+	
+	end
+
+	def update
+		@opportunity = Opportunity.find(params[:id])
+		if @opportunity.update(opportunity_params[:opportunity])
+			flash[:notice]="Opportunity successfully updated"
+			redirect_to opportunity_path(@opportunity)
+		else
+			# redirect_to opportunities_path
+			render "edit"
 		end
 	end
 
@@ -129,48 +172,6 @@ class OpportunitiesController < ApplicationController
 	
 		respond_to do |format|
 			format.json {render :json => {:message => "success"}}
-		end
-	end
-
-	def create
-		opportunity=current_user.opportunities.build(opportunity_params[:opportunity])
-
-		if opportunity.save
-			# Create time objects
-			OpportunityTime.createTime(opportunity.id, opportunity_params)
-			
-			flash[:notice] = "Opportunity Created!"
-			redirect_to opportunities_path
-		else
-			flash[:notice] = "Something went Wrong!"
-			redirect_to new_opportunity_path
-		end
-
-	end
-
-	def edit
-		@opportunity = Opportunity.find(params[:id])	
-		build_unpicked_skills
-
-		if current_user.is_owner?(@opportunity)
-			respond_to do |format|
-				format.html
-			end
-		else
-			flash[:error] = "You are not the owner!"
-			redirect_to opportunity_path(@opportunity)
-		end
-	
-	end
-
-	def update
-		@opportunity = Opportunity.find(params[:id])
-		if @opportunity.update(opportunity_params[:opportunity])
-			flash[:notice]="Opportunity successfully updated"
-			redirect_to opportunity_path(@opportunity)
-		else
-			flash[:error]="Sorry, the update was not successful"
-			redirect_to edit_opportunity_path
 		end
 	end
 

@@ -1,27 +1,41 @@
 <div class="container">
 <%= form_for(@contact) do |f| %>
-	<h3>Contact us!</h3>
-	
+	<h3>Contact us</h3>
+	<hr class="style-one"></hr>
 	<p>
-		Do you have problems? Please contact us by filling out the form below.<br>
-		Be sure to leave your contact info, so we can get back to you!
+		Having any problems? Please contact us by filling out the form below.<br>
+		Be sure to leave your contact info, so we can get back to you.
 	</p>
+	<% if @contact.errors.any? %>
+        <div class="error_messages">
+          <h4>Some errors were found.</h4>
+          <ul>
+            <% @contact.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+	 <span class="required">*</span>&nbsp;These fields are required<br>
 	<br>
-	<span class="section-header">Email</span><br>
+	<span class="section-header">Email</span><span class="required">*</span><br>
 	<%= f.text_field :from_email %>
 
 	<br><br>
 
-	<span class="section-header">Subject</span><br>
+	<span class="section-header">Subject</span><span class="required">*</span><br>
 	<%= f.text_field :title %>
 
 	<br><br>
 
-	<span class="section-header">Content</span><br>
-	<%= f.text_area :content, :class =>"offset1 span6" %>
+	<span class="section-header">Description</span><span class="required">*</span><br>
+	<%= f.text_area :content, :class =>"offset1 span7", :rows => "6" %>
 
 	<br><br>
 
-	<%= f.submit "Submit", :class => "btn btn-primary" %>
+	<div class="align-right">
+		<%= f.submit "Submit", :class => "btn btn-primary" %>
+	</div>
+	<div class="clear"></div>
 <% end %>
 </div>

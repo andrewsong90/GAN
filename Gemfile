@@ -24,8 +24,7 @@ gem 'cocoon'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+
 #Passing data to JavaScript
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
@@ -56,9 +55,6 @@ gem 'geocoder'
 
 #Passing data to JavaScript
 gem 'gon'
-
-#Binding of Jquery with Turbolinks
-gem 'jquery-turbolinks'
 
 gem 'simple_form'
 

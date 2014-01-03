@@ -28,10 +28,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	end
 
 	def edit
-		
 		@user=current_user
-		
 		@user.useruploads.build
+		
+		if !@user.address
+			@user.build_address
+		end
+		
 		build_unpicked_skills
 		@skills=Skill.all
 		super
@@ -81,7 +84,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	end
 
 	def update_permitted_params
-		devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :current_password, :phone, :avatar, :fname,:lname, useruploads_attributes: [:id, :avatar, :_destroy], user_skills_attributes: [:id, :skill_id, :_destroy])}
+		devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :current_password, :phone, :avatar, :fname,:lname, useruploads_attributes: [:id, :avatar, :_destroy], user_skills_attributes: [:id, :skill_id, :_destroy], address_attributes: [:id, :address_1, :address_2, :city, :state, :country])}
 	end
 
 	def skill_params

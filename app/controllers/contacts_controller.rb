@@ -8,7 +8,8 @@ class ContactsController < ApplicationController
 		@contact=Contact.new(permitted_params)
 		if @contact.save
 			UserMailer.contact_email(@contact).deliver
-			redirect_to new_contact_path
+			flash[:notice] = "The admininstrator will contact you shortly."
+			redirect_to after_contact_path
 		else
 			render 'new'	
 		end
@@ -18,6 +19,14 @@ class ContactsController < ApplicationController
 
 	def permitted_params
 		params.require(:contact).permit(:title,:from_email,:content)
+	end
+
+	def after_contact_path
+		if user_signed_in?
+			opportunities_path
+		else
+			root_path
+		end
 	end
 
 end

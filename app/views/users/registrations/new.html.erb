@@ -13,6 +13,8 @@
   <div>
     <h3>Step 1: Authentication</h3>
     
+    <hr class="style-one"></hr>
+    
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 
       <% if resource.errors.any? %>
@@ -26,18 +28,20 @@
         </div>
       <% end %>
 
-      <div><%= f.label :email, :class => "section-header" %><br>
+      <span class="required">*</span>&nbsp;These fields are required
+      <br><br>
+      <div><%= f.label :email, :class => "section-header" %><span class="required">*</span><br>
       <%= f.email_field :email, :autofocus => true %>
       </div>
 
 
-      <div><%= f.label "First Name", :class => "section-header" %><br>
+      <div><%= f.label "First Name", :class => "section-header" %><span class="required">*</span><br>
       <%= f.text_field :fname %></div>
 
-      <div><%= f.label "Last Name", :class => "section-header" %><br>
+      <div><%= f.label "Last Name", :class => "section-header" %><span class="required">*</span><br>
       <%= f.text_field :lname %></div>
 
-      <div><%= f.label "Gann graduation class", :class => "section-header" %><br>
+      <div><%= f.label "Gann graduation class", :class => "section-header" %><span class="required">*</span><br>
       <%= f.number_field :classyear %></div>
 
       <br>
@@ -46,7 +50,7 @@
         Please input your parent's email address so we can check our records.<br>
       </p>
 
-      <div><%= f.label "Parent Email", :class => "section-header" %>
+      <div><%= f.label "Parent Email", :class => "section-header" %><span class="required">*</span>
       &nbsp;<a id="registration_parent_email_help" class="help"><i class="fa fa-question-circle"></i></a><br>  
       <%= f.email_field :parent_email %></div>  
 
@@ -58,7 +62,10 @@
         <%= f.submit "Sign up", :class => "btn btn-primary" %>
       </div>
       <div class="clear"></div>
-
+      <hr class="style-one"></hr>
+      <div class="align-right">
+        Having trouble with registration?&nbsp;<%= link_to "Contact us",new_contact_path %>
+      </div>
     <% end %>
   </div>
 </div>

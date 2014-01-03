@@ -28,8 +28,8 @@ class Opportunity < ActiveRecord::Base
 	after_validation :geocode
 
 	#Validation
-	validates_presence_of :title, :message => "Title cannot be blank"
-	validates_presence_of :company, :message => "Company cannot be blank"
+	validates_presence_of :title, :message => "cannot be blank"
+	validates_presence_of :job_type, :message => "must be selected"
 
 	validates_attachment_size :upload, :less_than => 1.megabytes
 

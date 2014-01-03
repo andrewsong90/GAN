@@ -7,7 +7,7 @@
 <br>
 <div class="container">
 	<div class="align-left">
-	<%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius" %>
+		<%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius" %>
 	</div>
 	<div class="align-left indent">
 	<h1>
@@ -139,7 +139,7 @@
 
 		<br>
 
-		<div class="gmap">
+		<div class="gmap" data-lat=<%= @opportunity.latitude %> data-long=<%= @opportunity.longitude %> >
 			<div id="map-canvas-show"></div>
 		</div>
 
@@ -155,21 +155,22 @@
 	<div class="opportunities_index_right_container align-left">
 		<% owner = @opportunity.user %>
 
-			<p class="section-header text-align-center">
-				<span class="italics navyfont">Opportunity poster</span><br><br>
-				<%= owner.full_name %>
+			<p>
+				<h4 class=" text-align-center"><span class="italics navyfont">Opportunity poster</span></h4>
+				<h4 class=" text-align-center"><%= owner.full_name %></h4>
 			</p>
 			<br>
 			<div>
-				<div><%= image_tag owner.avatar.url(:thumb), :class=>"box_radius" %></div>
+				<div style="text-align: center;">
+					<%= image_tag owner.avatar.url(:thumb), :class=>"box_radius", :style => "display: inline-block;" %>
+				</div>
 				<div class="indent">
 					<% if owner.is_alum? %>
 						<h5>Class of <%= owner.classyear %></h5>
 					<% end %>
 				</div>
 			</div>
-			<%= link_to "View profile", user_path(:id => owner.id), :class => "pull-right" %>
-
+			
 			<br><br>
 
 			<% if @sponsors.length != 0 %>

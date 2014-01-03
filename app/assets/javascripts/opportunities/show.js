@@ -7,10 +7,13 @@ $(document).ready(function(){
 
 function initialize() {
 	console.log("initialize");
-	console.log(gon.latitude);
-	console.log(gon.longitude);
+	// console.log(gon.latitude);
+	// console.log(gon.longitude);
 	
-	var coor = new google.maps.LatLng(gon.latitude,gon.longitude);
+	var latitude = $(".gmap").data('lat');
+	var longitude = $(".gmap").data('long');
+
+	var coor = new google.maps.LatLng(latitude,longitude);
 
 	var mapOptions = {
     	center: coor,

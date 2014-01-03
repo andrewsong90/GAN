@@ -42,6 +42,11 @@ $(document).ready(function(){
 	// 	add_to_favorites(e.target.id);
 	// });
 
+	// $("#search").tooltip({
+	// 	title: "Save this as one of your favorites",
+	// 	placement: "bottom"
+	// });
+
 	$(".super-container").on("click",".add_favorite_btn",function(e){
 		console.log("clicked "+e.target.id);
 		add_to_favorites(e.target.id);
