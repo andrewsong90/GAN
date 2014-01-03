@@ -11,7 +11,7 @@ class Opportunity < ActiveRecord::Base
 	has_many :applications, dependent: :destroy
 
 	# Paperclip attachment configuration. Custom path for the uploaded files to ensure security (instead of making these public)
-	has_attached_file :upload, :styles => {:medium => "200x200>", :thumb => "120x120>"}, :default_url => "/images/opportunity/:style/missing.png"
+	has_attached_file :upload, :styles => {:medium => "200x200>", :thumb => "120x120>"}, :default_url => "/images/opportunity/:style/missing.jpg"
 
 	# Multiple uploads
 	has_many :uploads

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   # Profile pictures (Paperclip)
-  has_attached_file :avatar, :styles => {:medium => "300x300>", :thumb => "130x130>"}, :default_url => "/images/user/:style/missing.png"
+  has_attached_file :avatar, :styles => {:medium => "270x270>", :thumb => "130x130>"}, :default_url => "/images/user/:style/missing.png"
 
   # Validation
   validates_presence_of :fname, :message =>"can't be blank"
