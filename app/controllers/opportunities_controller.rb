@@ -88,10 +88,6 @@ class OpportunitiesController < ApplicationController
 		@sponsors = @opportunity.sponsors.all.to_a
 		@skills=@opportunity.skills
 		@time=@opportunity.opportunity_times
-
-		# Google map coordiantes
-		gon.latitude=@opportunity.latitude
-		gon.longitude=@opportunity.longitude
 	end
 
 	def new
@@ -99,9 +95,6 @@ class OpportunitiesController < ApplicationController
 		@opportunity.uploads.build
 		@opportunity.sponsors.build
 		build_unpicked_skills
-
-		gon.latitude=nil
-		gon.longitude=nil
 
 		respond_to do |format|
 			format.html
@@ -112,7 +105,7 @@ class OpportunitiesController < ApplicationController
 		@opportunity=current_user.opportunities.new(opportunity_params[:opportunity])
 		if @opportunity.save
 			# Create time objects
-			OpportunityTime.createTime(@opportunity.id, opportunity_params)
+			OpportunityTime.createTime(@opportunity, opportunity_params)
 			flash[:notice] = "Opportunity Created!"
 			redirect_to opportunities_path
 		else
@@ -124,10 +117,7 @@ class OpportunitiesController < ApplicationController
 		@opportunity = Opportunity.find(params[:id])	
 		build_unpicked_skills
 
-		gon.latitude=@opportunity.latitude
-		gon.longitude=@opportunity.longitude
-
-		if current_user.is_owner?(@opportunity)
+		if current_user.is_owner?(@opportunity) or current_user.is_admin?
 			respond_to do |format|
 				format.html
 			end
@@ -141,10 +131,10 @@ class OpportunitiesController < ApplicationController
 	def update
 		@opportunity = Opportunity.find(params[:id])
 		if @opportunity.update(opportunity_params[:opportunity])
+			OpportunityTime.updateTime(@opportunity, opportunity_params)
 			flash[:notice]="Opportunity successfully updated"
 			redirect_to opportunity_path(@opportunity)
 		else
-			# redirect_to opportunities_path
 			render "edit"
 		end
 	end

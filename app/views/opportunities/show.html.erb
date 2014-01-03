@@ -1,6 +1,5 @@
 <% content_for :head do %>
 	<title>GAN Opportunities</title>
-	<%= include_gon %>
 	<%= javascript_include_tag "opportunities/show" %>
 <% end %>
 
@@ -44,7 +43,7 @@
 		<div class="clear"></div>
 	<% end %>
 
-	<% if current_user.is_owner?(@opportunity) %>
+	<% if current_user.is_owner?(@opportunity) || current_user.is_admin? %>
 		<div class="align-right">
 			<%= link_to edit_opportunity_path(@opportunity), :class =>"btn btn-success" do %>
 				<i class="fa fa-edit"></i>&nbsp;Edit
@@ -121,12 +120,16 @@
 			<span><span class="indent"/><strong>To</strong>&nbsp;<%= @time.second.date.to_time.strftime('%b. %e, %Y (%a)') %></span><br>
 		<% end %>
 
-		<p class="section-header"><i class="fa fa-book"></i>&nbsp;Skills & Expertise</p>
+		<br>
+
+		<p class="section-header"><i class="fa fa-book"></i>&nbsp;Skills & Expertise</p><br>
+		<span class="italics">Under Construction</span>
+<% if false %>
 		<% @skills.each do |skill| %>
 			<div><span class="indent"/><i class="fa fa-check"></i>&nbsp;<%= skill.skill %></div>
 		<% end %>
-
-		<br>
+<% end %>
+		<br><br>
 		
 		
 
@@ -164,7 +167,7 @@
 				<div style="text-align: center;">
 					<%= image_tag owner.avatar.url(:thumb), :class=>"box_radius", :style => "display: inline-block;" %>
 				</div>
-				<div class="indent">
+				<div class="text-align-center">
 					<% if owner.is_alum? %>
 						<h5>Class of <%= owner.classyear %></h5>
 					<% end %>

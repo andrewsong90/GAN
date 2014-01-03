@@ -50,6 +50,10 @@ class User < ActiveRecord::Base
     type == "Alum"
   end
 
+  def is_admin?
+    type == "Admin"
+  end
+
   # Check if the user applied to the opportunity
   def applied? (opportunity)
     applications = opportunity.applications.to_a

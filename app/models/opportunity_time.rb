@@ -8,24 +8,30 @@ class OpportunityTime < ActiveRecord::Base
 	end
 
 	# Create the OpportunityTime object
-	def self.createTime(opportunity_id,params)
+	def self.createTime(opportunity,params)
 		
 		if(params[:time_type]=="flexible")
-			t=OpportunityTime.new
-			t.opportunity_id=opportunity_id
-			t.types="flexible"
-			t.date="flexible"
+			t=opportunity.opportunity_times.build(:types => "flexible")
 			t.save
 		else
-			t_from=OpportunityTime.new
-			t_to=OpportunityTime.new
-			t_from.opportunity_id=opportunity_id
-			t_to.opportunity_id=opportunity_id
-			t_from.types, t_to.types="range", "range"
-			t_from.date=params[:time][0]
-			t_to.date=params[:time][1]
+			t_from=opportunity.opportunity_times.build(:types => "range", :date => params[:time][0])
+			t_to=opportunity.opportunity_times.build(:types => "range", :date => params[:time][1])
 			t_from.save
 			t_to.save
 		end
+	end
+
+	def self.updateTime(opportunity,params)
+		opportunity.opportunity_times.destroy_all
+		if(params[:time_type]=="flexible")	
+			t=opportunity.opportunity_times.build(:types => "flexible")
+			t.save
+		else
+			t_from=opportunity.opportunity_times.build(:types => "range", :date => params[:time][0])
+			t_to=opportunity.opportunity_times.build(:types => "range", :date => params[:time][1])
+			t_from.save
+			t_to.save
+		end
+
 	end
 end
