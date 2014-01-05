@@ -65,7 +65,7 @@
 		<% end %>
 		<br><br>
 		<span class="section-header"><i class="fa fa-edit"></i></span>&nbsp;&nbsp;
-		last updated at:  <%= @user.updated_at.strftime('%b. %e, %Y') %><br><br>
+		last updated on:  <%= @user.updated_at.strftime('%b. %e, %Y') %><br><br>
 		<div class="align-right">
 			<%= link_to "Edit Account", edit_user_registration_path, :class => "btn btn-info" %>
 		</div>
