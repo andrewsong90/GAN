@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
   validates_presence_of :classyear, :message => "can't be blank", if: :is_alum?
   validates_presence_of :parent_email, :message => "can't be blank", if: :is_alum?
 
-  validate :check_alum_record, if: :is_alum?
+  # validate :check_alum_record, if: :is_alum?
+  validate :check_alum_record_temporary, if: :is_alum?
 
   has_many :opportunities
   has_many :applications
@@ -39,6 +40,13 @@ class User < ActiveRecord::Base
     if !Userdb.where("(parent_email_1 = ? OR parent_email_2 = ?) AND classyear = ?",parent_email, parent_email, classyear).first 
       errors.add(:base, "The combination of parent email & Gann graduation class doesn't match our database")
     end  
+  end
+
+  # Succint authentication for demo
+  def check_alum_record_temporary
+     if !Userdb.where("(parent_email_1 = ? OR parent_email_2 = ?)",parent_email, parent_email).first 
+      errors.add(:base, "The combination of parent email & Gann graduation class doesn't match our database")
+    end
   end
 
   # Check if the user created the opportunity

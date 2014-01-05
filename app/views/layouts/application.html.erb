@@ -28,7 +28,7 @@
 				<div class="navbar-inner">
 					<div class="whitefont">
 						<a href=<%= home_path %> class="brand">
-							Gann Alumni Networks
+							Gann Alumni Network
 							 <!-- <img src = <%#= image_path("gann_seal.jpg") %> alt="GAN"> -->
 						</a>
 						<div class="nav-collapse">
@@ -40,7 +40,7 @@
 							<div class="nav pull-right navbar-hcenter">
 								Welcome! <strong><%= current_user.full_name %></strong> (<%= current_user.class.name %>)
 								&nbsp;|&nbsp;
-								<i class="fa fa-tasks"></i>&nbsp;&nbsp;<%= link_to "Opportunities", opportunities_path %>
+								<i class="fa fa-home"></i>&nbsp;&nbsp;<%= link_to "Opportunities", opportunities_path %>
 								&nbsp;|&nbsp;
 								<i class="fa fa-user"></i>&nbsp;&nbsp;<%= link_to "My account", user_path(:id => current_user.id) %>
 								&nbsp;|&nbsp;

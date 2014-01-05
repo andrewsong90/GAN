@@ -30,6 +30,7 @@ class Opportunity < ActiveRecord::Base
 	#Validation
 	validates_presence_of :title, :message => "cannot be blank"
 	validates_presence_of :job_type, :message => "must be selected"
+	validates_presence_of :description, :message => "cannot be blank"
 
 	validates_attachment_size :upload, :less_than => 1.megabytes
 

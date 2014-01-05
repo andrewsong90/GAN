@@ -19,7 +19,7 @@ $(document).ready(function(){
 	});
 
 	$('#picture_help').popover({
-		content: "Upload a picture for profile.<br> This is optional.",
+		content: "Upload a picture for your profile.<br> This is optional.",
 		html: true
 	});
 

@@ -1,9 +1,9 @@
 <div class="container box_shadow box_padding">
 	<div class="header">
-		<h2 class="navyfont" style="display: inline; margin-top:100px;">
+		<h2 class="brownfont neatfont" style="display: inline; margin-top:100px;">
 			&nbsp;Announcement</h2>
 		<div class="align-right well">
-			<span class="italics">Have any opportunity that you want to offer?</span><br><br>
+			<span class="italics">Have a new opportunity that you want to offer?</span><br><br>
 			<div class="pull-right">
 				<%= link_to new_opportunity_path, :class => "btn btn-success" do %>
 					<i class="fa fa-pencil"></i>&nbsp;Create
@@ -15,16 +15,17 @@
 	
 	
 	<br>
-	<hr class="style-two"></hr>
+	<hr class="style-one"></hr>
 	<div style="padding-left: 20px; padding-right: 20px;">
 		<div>
 			<h3 class="neatfont" style="display: inline;"><%= @post.title %></h3>		
-			<span class="indent italics">by <%= @post.admin.full_name %></span> at <%= @post.created_at.strftime('%b. %e, %Y') %>
-			<hr class="style-one"></hr>
+			<span class="indent italics"> at <%= @post.created_at.strftime('%b. %e, %Y') %>
 		</div>
-		<span class="indent" /><%= @post.content.html_safe %>
+		<div class="announcement-container">
+			<span class="indent" /><%= @post.content.html_safe %>
+		</div>
 	</div>
-	<hr class="style-two"></hr>
+	<hr class="style-one"></hr>
 	<div class="align-right">
 		<%= link_to "View posts", admins_posts_path, :class => "btn btn-primary" %>
 	</div>
@@ -35,7 +36,7 @@
 		<br>
 
 <div class="container box_shadow box_padding align-left">
-	<h2 class="navyfont">&nbsp;Opportunities</h2>
+	<h2 class="brownfont neatfont">&nbsp;Opportunities</h2>
 
 
 	<%= form_tag opportunities_path, method: :get, :class => "form-inline" do %>
@@ -61,16 +62,16 @@
 	<% end %>
 
 	<% @opportunities.each do |f| %>
-		<div class="well box_radius">
+		<div class="well">
 			<div class="align-left">
-				<!-- <%#= image_tag f.upload.url(:thumb), :class =>"box_radius" %> -->
+				<%= image_tag f.upload.url(:thumb), :class =>"box_radius" %>
 			</div>
 			<div class="align-left indent">
 				<h4>
 					<%= f.title %>&nbsp;<small><%= f.company %></small>
 
 					<% if can_apply?(f) %>
-						<span class="label label-important">Not Connected</span>
+						<span></span>
 					<% elsif current_user.is_owner?(f) %>
 						<span class="label label-info">Owner</span>
 					<% else %>
@@ -82,7 +83,7 @@
 				</h4>
 				
 				<i class="fa fa-map-marker"></i>&nbsp;<%= short_location(f.location) %><br>
-				<span class="italics">Posted at</span>&nbsp;&nbsp;<%= f.created_at.strftime('%b. %e, %Y') %><br>	
+				<span class="italics">Posted on</span>&nbsp;&nbsp;<%= f.created_at.strftime('%b. %e, %Y') %><br>	
 				<span class="italics">Offered by</span>&nbsp;&nbsp;<%= f.user.full_name %>
 			</div>
 			<div class="align-right">

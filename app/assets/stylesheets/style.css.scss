@@ -1,4 +1,6 @@
-$grey_color: #e5e5e9;
+
+/*$grey_color: #e5e5e9;*/
+$grey_color: #f0f0f0;
 
 /*$blue_color: #122f45;*/
 $blue_color: #336699;
@@ -42,6 +44,12 @@ body{
 	margin-right: auto;
 	margin-left: auto;
 }
+
+.announcement-container{
+	height: 200px;
+	overflow: auto;
+}
+
 
 .well{
 	@include box_shadow;
@@ -297,7 +305,6 @@ input[type="radio"]{
 
 .section-header{
 	font-family: 'Alegreya Sans', sans-serif; 
-	color :$blue_color;
 	font-weight: 600;
 	font-size: 22px;
 	display: inline-block;

@@ -30,28 +30,30 @@
 
       <span class="required">*</span>&nbsp;These fields are required
       <br><br>
-      <div><%= f.label :email, :class => "section-header" %><span class="required">*</span><br>
+      <div><%= f.label :email, :class => "field-header" %><span class="required">*</span><br>
       <%= f.email_field :email, :autofocus => true %>
       </div>
 
 
-      <div><%= f.label "First Name", :class => "section-header" %><span class="required">*</span><br>
+      <div><%= f.label "First Name", :class => "field-header" %><span class="required">*</span><br>
       <%= f.text_field :fname %></div>
 
-      <div><%= f.label "Last Name", :class => "section-header" %><span class="required">*</span><br>
+      <div><%= f.label "Last Name", :class => "field-header" %><span class="required">*</span><br>
       <%= f.text_field :lname %></div>
 
-      <div><%= f.label "Gann graduation class", :class => "section-header" %><span class="required">*</span><br>
+      <div><%= f.label "Gann graduation class", :class => "field-header" %><span class="required">*</span><br>
       <%= f.number_field :classyear %></div>
 
-      <br>
+      <br><br>
       <p>
         We want to register you quickly!<br>
-        Please input your parent's email address so we can check our records.<br>
+        Please input either of your parents' email addresses from the time you were a Gann student.<br>
+        This part of our authentication process.
       </p>
-
-      <div><%= f.label "Parent Email", :class => "section-header" %><span class="required">*</span>
-      &nbsp;<a id="registration_parent_email_help" class="help"><i class="fa fa-question-circle"></i></a><br>  
+      <br>
+      <div><%= f.label "Parent Email", :class => "field-header" %><span class="required">*</span>
+      <!-- &nbsp;<a id="registration_parent_email_help" class="help"><i class="fa fa-question-circle"></i></a>   -->
+      <br>
       <%= f.email_field :parent_email %></div>  
 
       <%= f.hidden_field :type, :value => "Alum" %>

@@ -10,11 +10,11 @@ class ConfirmationsController < Devise::ConfirmationsController
 				@confirmable.attempt_set_password(params[:user])
 			
 				#Update rest of the Information
-				# @confirmable.update_attributes(:avatar => params[:user][:avatar],:phone => params[:user][:phone])
 				@confirmable.update_attributes(configure_permitted_params)
 				if @confirmable.valid?
 					do_confirm
 				else
+					@confirmable.build_address
 					do_show
 					@confirmable.errors.clear
 				end
@@ -24,6 +24,7 @@ class ConfirmationsController < Devise::ConfirmationsController
 		end
 
 		if !@confirmable.errors.empty?
+
 			render 'devise/confirmations/new'
 		end
 

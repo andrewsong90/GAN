@@ -1,11 +1,17 @@
+<div class="container">
 <h2>Forgot your password?</h2>
-
+<hr class="style-one"></hr>
+<p>
+	Please type in your email address below.<br>
+	An instruction email on how to reset the password will be sent.
+</p>
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+  <div>
+  	<span class='section-header'>Email</span><br />
+  	<%= f.email_field :email, :autofocus => true %>
+  </div>
 
-  <div><%= f.submit "Send me reset password instructions" %></div>
+  <div><%= f.submit "Send", :class => "btn btn-primary" %></div>
 <% end %>
-
-<%= render "users/shared/links" %>
+</div>

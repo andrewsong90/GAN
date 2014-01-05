@@ -28,17 +28,34 @@
 
   <br>
 
-  <div><%= f.label "First Name", :class => "section-header" %><span class="required">*</span><br>
-  <%= f.text_field :fname %></div>
+  <div class="align-left">
+    <%= f.label "First Name", :class => "field-header" %><span class="required">*</span><br>
+    <%= f.text_field :fname %>
+  </div>
 
-  <div><%= f.label "Last Name", :class => "section-header" %><span class="required">*</span><br>
-  <%= f.text_field :lname %></div>
+  <div class="align-left" style="margin-left: 15px;">
+    <%= f.label "Last Name", :class => "field-header" %><span class="required">*</span><br>
+    <%= f.text_field :lname %>
+  </div>
 
-  <div><%= f.label :Phone, :class => "section-header" %><br>
+  <div class="clear"></div>
+
+  <div class="align-left">
+    <%= f.label :Title, :class => "field-header" %><br>
+    <%= f.text_field :title %></div> 
+
+  <div class="align-left" style="margin-left: 15px;">
+    <%= f.label :Company, :class => "field-header" %><br>
+    <%= f.text_field :company %>
+  </div> 
+  
+  <div class="clear"></div>
+
+  <div><%= f.label :Phone, :class => "field-header" %><br>
     <%= f.text_field :phone, :id => "phone", :placeholder => "XXX-XXX-XXXX" %></div> 
 
   <div>
-      <span class="section-header">Address</span><br>
+      <span class="field-header">Address</span><br>
 
       <%= f.fields_for :address do |ff| %>
         <%= ff.text_field :address_1, :placeholder => "Street address" %>
@@ -52,17 +69,17 @@
   <br>
 
   <div>
-    <span class="section-header">Password<span class="required">*</span></span>
+    <span class="field-header">Password<span class="required">*</span></span>
     &nbsp;<a id="password_help" class="help"><i  class="fa fa-question-circle"></i></a><br>
     <%= f.password_field :password %>
   </div>
 
-  <div><%= f.label "Password Confirmation", :class => "section-header" %><span class="required">*</span><br>
+  <div><%= f.label "Password Confirmation", :class => "field-header" %><span class="required">*</span><br>
   <%= f.password_field :password_confirmation %></div>
 
   <br>
 
-  <div><%= f.label "Profile picture", :class => "section-header" %>
+  <div><%= f.label "Profile picture", :class => "field-header" %>
     &nbsp;<a id="picture_help" class="help"><i class="fa fa-question-circle"></i></a>
     <br>
     <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -90,6 +107,10 @@
   </div>
   <div class="clear"></div>
 <% end %>
+<hr class="style-one"></hr>
+<div class="align-right">
+  Want more information? Contact us at (617)-111-1111 or <%= link_to "here", new_contact_path %>
+</div>
 </div>
 
 <%= render :partial => "shared/registration" %>

@@ -27,7 +27,7 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
   def submission_email(user,application,index_of_uploads)
   	@user, @application, @opportunity =user, application, application.opportunity
 
-    if @application.upload!= nil
+    if @application.upload.path!= nil
       attachments << (attachments[@application.upload_file_name] = File.open(@application.upload.path, 'rb'){|f| f.read })
     end
 
