@@ -1,5 +1,5 @@
 <div class="container">
-	<%= form_for @post, :as => :post, :url => admins_posts_path do |f| %>
+	<%= form_for @post, :as => :post, :url => admins_post_path(@post), :method => "patch" do |f| %>
 		<br>
 		<span class="section-header">Title</><br>
 		<%= f.text_field :title %>

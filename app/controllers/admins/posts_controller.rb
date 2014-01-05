@@ -25,7 +25,14 @@ class Admins::PostsController < ApplicationController
 	end
 
 	def update
-		
+		@post = Post.find(params[:id])
+		@post.update_attributes(post_params)
+		if @post.save
+			flash[:notice] = "Post successfully updated"
+			redirect_to admins_post_path(@post)
+		else
+			render 'edit'
+		end
 	end
 
 	def show
