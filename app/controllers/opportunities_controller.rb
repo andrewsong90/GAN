@@ -72,9 +72,9 @@ class OpportunitiesController < ApplicationController
 		#@created_opportunities = Kaminari.paginate_array(created_opportunities).page(params[:page]).per(5)
 		if alum_signed_in?
 			applications = current_user.applications.all
-			@applied_opportunities=[]	
+			@connected_opportunities=[]	
 			applications.each do |app|
-				@applied_opportunities.append(Opportunity.find(app.opportunity_id))
+				@connected_opportunities.append(Opportunity.find(app.opportunity_id))
 			end
 
 			@favorites = current_user.favorites
@@ -149,7 +149,7 @@ class OpportunitiesController < ApplicationController
 	# Save the opportunities to the favorite list (AJAX)
 	def add_to_favorites
 		opportunity=Opportunity.find(params[:id])
-		temp=opportunity.favorite_opportunities.first_or_create!(:user_id => current_user.id)
+		temp=current_user.favorite_opportunities.where(:opportunity_id => params[:id]).first_or_create!
 
 		respond_to do |format|
 			format.json {render :json => {:message => "success"}}

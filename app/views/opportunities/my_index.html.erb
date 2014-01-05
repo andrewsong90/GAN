@@ -11,15 +11,15 @@
 	<% if alum_signed_in? %>
 		<ul class="nav nav-tabs">
 			<li><a href="#favorites" data-toggle="tab">Favorite</a></li>
-			<li><a href="#applied" data-toggle="tab">Applied</a></li>
+			<li><a href="#connected" data-toggle="tab">Connected</a></li>
 			<li><a href="#created" data-toggle="tab">Created</a></li>
 		</ul>
 
 		<div class="tab-content">
-			<div class="tab-pane fade" id="applied">
-				<h4>Applied Opportunities</h4>
+			<div class="tab-pane fade" id="connected">
+				<h4>Connected Opportunities</h4>
 				
-				<%= render :partial => "table_index", :locals => {:opportunities => @applied_opportunities} %>
+				<%= render :partial => "table_index", :locals => {:opportunities => @connected_opportunities} %>
 				
 			</div>
 

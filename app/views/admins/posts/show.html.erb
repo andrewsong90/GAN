@@ -1,11 +1,14 @@
 <div class="container">
 	<div>
 		<h3 class="neatfont" style="display: inline;"><%= @post.title %></h3>		
-		<span class="indent italics">by <%= @post.admin.full_name %></span> at <%= @post.created_at.strftime('%b. %e, %Y') %>
+		<span class="indent"/> on <%= @post.created_at.strftime('%b. %e, %Y') %>
 		<hr class="style-one"></hr>
 	</div>
 	<span class="indent" /><%= @post.content.html_safe %>
 	<div class="align-right">
+		<% if current_user.is_admin? %>
+			<%= link_to "Edit",edit_admins_post_path(@post),:class => "btn btn-primary" %><br>
+		<% end %>
 		<%= link_to "Back to list",admins_posts_path,:class => "btn btn-primary" %>
 	</div>
 	<div class="clear"></div>

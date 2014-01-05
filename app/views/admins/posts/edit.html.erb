@@ -1,0 +1,17 @@
+<div class="container">
+	<%= form_for @post, :as => :post, :url => admins_posts_path do |f| %>
+		<br>
+		<span class="section-header">Title</><br>
+		<%= f.text_field :title %>
+
+		<br><br>	
+		
+		<span class="section-header">Content</><br>
+		
+		<%= f.text_area :content, :class => "tinymce span8", :rows => "6", :placeholder => "Enter Content here" %>
+	    <%= tinymce %>
+		<br><br>
+
+		<%= f.submit "Post", :class => "btn btn-primary" %>
+	<% end %>
+</div>

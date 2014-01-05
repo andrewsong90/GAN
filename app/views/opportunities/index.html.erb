@@ -19,7 +19,7 @@
 	<div style="padding-left: 20px; padding-right: 20px;">
 		<div>
 			<h3 class="neatfont" style="display: inline;"><%= @post.title %></h3>		
-			<span class="indent italics"> at <%= @post.created_at.strftime('%b. %e, %Y') %>
+			<span class="indent italics"> on <%= @post.created_at.strftime('%b. %e, %Y') %>
 		</div>
 		<div class="announcement-container">
 			<span class="indent" /><%= @post.content.html_safe %>
