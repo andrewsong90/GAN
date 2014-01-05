@@ -2,7 +2,7 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
  
   helper :application
   # "from" will be ignored in gmail smtp
-  default from: "admin@gann.com"
+  default from: "no-reply@gann.com"
 
   # Upon successful registration
   def welcome_email(user)
@@ -12,7 +12,7 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
 
   def contact_email(contact)
     @contact=contact
-    mail(to: "andrewsong90@gmail.com", subject:"[GAN] #{@contact.title}")
+    mail(to: @contact.from_email, bcc: "alumni@gannacademy.org", subject:"[GAN] #{@contact.title}")
   end
 
   def opportunity_email(user)
