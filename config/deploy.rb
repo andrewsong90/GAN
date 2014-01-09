@@ -1,5 +1,7 @@
-require 'delayed/recipes'
+require 'bundler/setup'
 require 'bundler/capistrano'
+require 'delayed/recipes'
+
 
 set :application, "gann"
 set :repository,  "https://github.com/andrewsong90/GAN.git"
@@ -67,7 +69,7 @@ after 'deploy:restart', 'deploy:default_vars'
 
 # after "deploy:start", "delayed_job:start"
 # after "deploy:stop", "delayed_job:stop"
-# after "deploy:restart", "delayed_job:stop", "delayed_job:start"
+after "deploy:restart", "delayed_job:stop", "delayed_job:start"
 
 
 # after "deploy", "deploy:migrate"
