@@ -1,3 +1,6 @@
+require 'delayed/recipes'
+require 'bundler/capistrano'
+
 set :application, "gann"
 set :repository,  "https://github.com/andrewsong90/GAN.git"
 set :branch, "master"
@@ -5,7 +8,7 @@ set :branch, "master"
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-require 'delayed/recipes'
+
 set :delayed_job_command, "bin/delayed_job"
 
 
@@ -19,11 +22,11 @@ set :rails_env, "production"
 
 set :default_stage, "production"
 
-# set :default_environment, {
-# 	:PATH => "#{deploy_to}/bin:$PATH",
-# 	:GEM_HOME => "#{deploy_to}/gems",
-# 	:RUBYLIB => "#{deploy_to}/lib"
-# }
+set :default_environment, {
+	:PATH => "#{deploy_to}/bin:$PATH",
+	:GEM_HOME => "#{deploy_to}/gems",
+	:RUBYLIB => "#{deploy_to}/lib"
+}
 
 role :web, "web430.webfaction.com"                          # Your HTTP server, Apache/etc
 role :app, "web430.webfaction.com"                          # This may be the same as your `Web` server
@@ -58,9 +61,11 @@ end
 
 after 'deploy:update_code', 'deploy:symlink_shared'
 
-after "deploy:start", "delayed_job:start"
-after "deploy:stop", "delayed_job:stop"
-after "deploy:restart", "delayed_job:stop", "delayed_job:start"
+after "deploy", "deploy:restart"
+
+# after "deploy:start", "delayed_job:start"
+# after "deploy:stop", "delayed_job:stop"
+# after "deploy:restart", "delayed_job:stop", "delayed_job:start"
 
 
 # after "deploy", "deploy:migrate"
