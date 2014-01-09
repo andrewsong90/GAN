@@ -23,9 +23,9 @@ set :rails_env, "production"
 set :default_stage, "production"
 
 set :default_environment, {
-	:PATH => "#{deploy_to}/bin:$PATH",
-	:GEM_HOME => "#{deploy_to}/gems",
-	:RUBYLIB => "#{deploy_to}/lib"
+	'PATH' => "#{deploy_to}/bin:$PATH",
+	'GEM_HOME' => "#{deploy_to}/gems",
+	'RUBYLIB' => "#{deploy_to}/lib"
 }
 
 role :web, "web430.webfaction.com"                          # Your HTTP server, Apache/etc
@@ -61,7 +61,7 @@ end
 
 after 'deploy:update_code', 'deploy:symlink_shared'
 
-after "deploy", "deploy:restart"
+# after "deploy", "deploy:restart"
 
 # after "deploy:start", "delayed_job:start"
 # after "deploy:stop", "delayed_job:stop"
