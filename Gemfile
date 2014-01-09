@@ -58,6 +58,11 @@ gem 'gon'
 
 gem 'simple_form'
 
+#Background Tasks
+gem 'delayed_job_active_record'
+
+gem 'daemons'
+
 #Pagination
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'

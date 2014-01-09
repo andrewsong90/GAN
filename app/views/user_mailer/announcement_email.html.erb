@@ -1,0 +1,12 @@
+<p>
+	A new announcement has just been posted:
+</p>
+
+<br><br>
+<div>
+	<h3 class="neatfont" style="display: inline;"><%= @post.title %></h3>		
+	&nbsp;&nbsp;on <%= @post.created_at.strftime('%b. %e, %Y') %>
+	<hr class="style-one"></hr>
+</div>
+<span class="indent" /><%= @post.content.html_safe %>
+<br>

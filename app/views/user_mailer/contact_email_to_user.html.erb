@@ -1,0 +1,15 @@
+<h3> Dear <%= @contact.from_email %>,</h3>
+
+<p>
+	Your inquiry has been sent to the administrator.<br>
+	The administrator will shortly be in touch with you.
+</p>
+<br>
+Below is the content of your inquiry:<br>
+<p>
+	<%= @contact.content %>
+</p>
+<br>
+Best,<br>
+
+GAN (Gann Alumni Network) support team

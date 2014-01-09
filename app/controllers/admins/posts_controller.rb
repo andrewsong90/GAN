@@ -14,6 +14,7 @@ class Admins::PostsController < ApplicationController
 		@post=Admin.find(current_user.id).posts.build(post_params)
 
 		if @post.save
+			UserMailer.delay.announcement_email(@post)
 			redirect_to admins_post_path(@post)
 		else
 			render 'new'

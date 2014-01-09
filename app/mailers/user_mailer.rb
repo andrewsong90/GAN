@@ -1,7 +1,7 @@
 class UserMailer < Devise::Mailer #ActionMailer::Base
  
   helper :application
-  # "from" will be ignored in gmail smtp
+  # "from" will be ignored in gmail smtp (in this case development)
   default from: "no-reply@gann.com"
 
   # Upon successful registration
@@ -10,9 +10,21 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
 	 mail(to: @user.email, subject:"[GAN] Welcome to the GAN - Gann Alumni Networks!!!")	
   end
 
-  def contact_email(contact)
+  def contact_email_to_user(contact)
     @contact=contact
-    mail(to: @contact.from_email, bcc: "alumni@gannacademy.org", subject:"[GAN] #{@contact.title}")
+    mail(to: @contact.from_email, subject:"[GAN] #{@contact.title}")
+  end
+
+  def contact_email_to_admin(contact)
+    @contact=contact
+    mail(to: "gannacademy01@gmail.com", subject:"[GAN] #{@contact.title}")
+  end
+
+  # Send out emails to all users when announcement is made
+  def announcement_email(post)
+    @post=post
+    users=Alum.all.map(&:email)
+    mail(to: users, subject:"[GAN Announcement] #{@post.title}")
   end
 
   def opportunity_email(user)
@@ -42,12 +54,12 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
     @opportunity.sponsors.all.to_a.each do |sponsor|
       bcc_recepients << sponsor.email
     end
-
-    logger.debug("SPONSORS #{bcc_recepients}")
   	
     mail(to: @user.email , bcc: bcc_recepients , subject:"[GAN] Application has been submitted")
 
     logger.debug("SENT!")
+    
+    # This is to destroy the attachment right away
     @application.upload.destroy
     @application.upload = nil
   end

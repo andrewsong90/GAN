@@ -4,7 +4,10 @@ $grey_color: #f0f0f0;
 
 /*$blue_color: #122f45;*/
 $blue_color: #336699;
-$container_width: 900px;
+$container_width_high: 900px;
+$container_width_medium: 650px;
+$container_width_low: 450px;
+
 $container_side_padding: 15px;
 
 $opportunities_index_left_container_width: 630px;
@@ -23,6 +26,13 @@ $opportunities_index_container_margin_right: 30px;
 	box-shadow: 1px 1px 1px 1px #000000;
 }
 
+@mixin container_basic{
+	position: relative;
+	background-color: $grey_color;
+	@include box-padding;
+	@include box_shadow;
+}
+
 /* Whole html page*/
 #holder{
 	min-height: 100%;
@@ -39,15 +49,64 @@ body{
 }
 
 /* Container settings */
-.super-container{
-	width: $container_width + 2 * $container_side_padding;
-	margin-right: auto;
-	margin-left: auto;
+
+@media all and (min-width: 1101px) {
+	.container{
+		@include container_basic;
+		width: $container_width_high;
+	}
+
+	.announcement-container{
+		height: 200px;
+		overflow: auto;
+	}
+
+
+
+	.super-container{
+		width: $container_width_high + 2 * $container_side_padding;
+		margin-right: auto;
+		margin-left: auto;
+	}
 }
 
-.announcement-container{
-	height: 200px;
-	overflow: auto;
+@media all and (max-width: 1100px) and (min-width: 751px) {
+	.container{
+		@include container_basic;
+		width: $container_width_medium;
+	}
+
+	.announcement-container{
+		height: 150px;
+		overflow: auto;
+	}
+
+
+	.super-container{
+		width: $container_width_medium + 2 * $container_side_padding;
+		margin-right: auto;
+		margin-left: auto;
+	}
+}
+
+@media all and (max-width: 750px){
+	.container{
+		@include container_basic;
+		width: $container_width_low;
+	}
+
+	.announcement-container{
+		height: 130px;
+		overflow: auto;
+	}
+
+
+
+	.super-container{
+		width: $container_width_low + 2 * $container_side_padding;
+		margin-right: auto;
+		margin-left: auto;
+	}
 }
 
 
@@ -56,13 +115,6 @@ body{
 }
 
 /* To be changed for media queries */
-.container{
-	position: relative;
-	width: $container_width;
-	background-color: $grey_color;
-	@include box-padding;
-	@include box_shadow;
-}
 
 .opportunities_index_left_container{
 	width: $opportunities_index_left_container_width;
@@ -73,13 +125,13 @@ body{
 }
 
 .opportunities_index_right_container{
-	width: $container_width - $opportunities_index_left_container_width - $opportunities_index_container_margin_right - 2 * $container_side_padding;
+	width: $container_width_high - $opportunities_index_left_container_width - $opportunities_index_container_margin_right - 2 * $container_side_padding;
 	background-color: $grey_color;
 	@include box-padding;
 	@include box_shadow;
 }
 
-.account_left{
+.account{
 	width: 500px;
 	margin-left: auto;
 	margin-right: auto;
@@ -88,17 +140,14 @@ body{
 	@include box_shadow;
 }
 
-/*.account_right{
-	width: 440px;
-}*/
 
-.divider{
+/*.divider{
 	position: absolute;
 	top: 6%;
 	left: 460px;
 	bottom: 6%;
 	border-left: 2px solid #a7b0ad ;
-}
+}*/
 
 .clear{
 	clear: both;

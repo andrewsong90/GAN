@@ -7,7 +7,8 @@ class ContactsController < ApplicationController
 	def create
 		@contact=Contact.new(permitted_params)
 		if @contact.save
-			UserMailer.contact_email(@contact).deliver
+			UserMailer.delay.contact_email_to_user(@contact)
+			UserMailer.delay.contact_email_to_admin(@contact)
 			flash[:notice] = "The admininstrator will contact you shortly."
 			redirect_to after_contact_path
 		else
