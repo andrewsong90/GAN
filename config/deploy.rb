@@ -61,6 +61,8 @@ end
 
 after 'deploy:update_code', 'deploy:symlink_shared'
 
+after 'restart', 'deploy:default_vars'
+
 # after "deploy", "deploy:restart"
 
 # after "deploy:start", "delayed_job:start"
