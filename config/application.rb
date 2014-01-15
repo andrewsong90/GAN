@@ -22,7 +22,7 @@ module GAN
 
     # Precompile additional assets.
     # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-    config.assets.precompile += %w( *.png *.jpg *.JPG *.jpeg opportunities/*.js users/*.js applications/*.js admins/*.js)
+    config.assets.precompile += %w( *.png *.jpg *.JPG *.jpeg opportunities/*.js users/*.js applications/*.js admins/*.js jquery.jumpto.js)
 
     config.assets.version = '1.0'
 
