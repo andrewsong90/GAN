@@ -1,0 +1,19 @@
+<span class="section-header">
+	Dear <%= @opportunity.user.fname %>,
+
+	<br><br>
+	You have just created the following opportunity:
+
+</span>
+<br>
+<h4><%= @opportunity.title %></h4>
+<br>
+<p>
+	<%= @opportunity.description.html_safe %>
+</p>
+
+<br>
+
+Best,<br>
+
+GAN (Gann Alumni Network) support team

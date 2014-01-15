@@ -29,6 +29,11 @@ GAN::Application.routes.draw do
     get '/friend/register' => 'users/registrations#new', :type => 'Friend', as: :new_friend_registration
     get '/alum/register' => 'users/registrations#new', :type => 'Alum', as: :new_alum_registration
     
+    get '/invitations/batch' => "users/invitations#batch_new", as: :new_batch_invite
+
+    post '/invitation' => "users/invitations#batch_invite", as: :batch_invite
+
+
     get '/' => 'users/sessions#new', as: :root
   end
 
@@ -50,6 +55,8 @@ GAN::Application.routes.draw do
 
   #Path for importing CSV files
   post '/import' => "userdbs#import", as: :import_users
+
+
 
   get '/opportunities/add_to_favorites/:id' => "opportunities#add_to_favorites", as: :new_favorite_opportunity
   post '/opportunities/remove_from_favorites/:id' => "opportunities#remove_from_favorites"

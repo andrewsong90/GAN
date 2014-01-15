@@ -1,3 +1,5 @@
+<%= render "admins/shared/head" %>
+
 <div class="container">
 	<%= form_for @post, :as => :post, :url => admins_post_path(@post), :method => "patch" do |f| %>
 		<br>

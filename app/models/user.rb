@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
   has_one :address
   accepts_nested_attributes_for :address, :reject_if => :all_blank, :allow_destroy => true
 
+  attr_reader :raw_invitation_token
+
   # Validation
   def check_alum_record
     if !Userdb.where("(parent_email_1 = ? OR parent_email_2 = ?) AND classyear = ?",parent_email, parent_email, classyear).first 
@@ -118,6 +120,31 @@ class User < ActiveRecord::Base
 
     result = update_attributes(params)
     result
+  end
+
+  # Return list of users that have corresponding skillset
+  def self.list_of_interested(skills)
+    list_of_interested=Array.new
+    
+    # logger.debug("SKILLS #{skills}, #{skills.length}")
+
+    if skills.length != 0
+      skills.each do |skill|
+        # logger.debug("SKILL #{skill}")
+        # logger.debug("SKILL USER #{skill.users}, #{skill.users.length}")
+        skill.users.each do |user|
+          # logger.debug("USER_skill #{user}")
+          if !list_of_interested.include?(user)
+            # logger.debug("NOT INCLUDED!")
+            list_of_interested.append(user)
+          end
+        end
+      end
+    end
+
+    
+    # logger.debug("LIST OF INTERESTED #{list_of_interested}")
+    list_of_interested
   end
 
 end

@@ -37,15 +37,7 @@ var remove_from_favorites = function(opportunity_id){
 
 $(document).ready(function(){
 
-	// $('.add_favorite_btn').click(function(e){
-	// 	console.log("pressed");
-	// 	add_to_favorites(e.target.id);
-	// });
-
-	// $("#search").tooltip({
-	// 	title: "Save this as one of your favorites",
-	// 	placement: "bottom"
-	// });
+	console.log($(window).scrollTop());
 
 	$(".super-container").on("click",".add_favorite_btn",function(e){
 		console.log("clicked "+e.target.id);
@@ -55,4 +47,21 @@ $(document).ready(function(){
 	$(".super-container").on("click",".remove_favorite_btn",function(e){
 		remove_from_favorites(e.target.id);
 	});
+
+	$(".super-container").jumpto({
+		firstLevel: "> h2",
+		secondLevel: false,
+		innerWrapper: ".container",
+		offset: 5,
+		animate: 1000,
+		navContainer: false,
+		anchorTopPadding: 60,
+		showTitle: "Jump to",
+		closeButton: false	
+	});
+
+	// $("select").minimalect({
+	// 	theme: "bubble"
+	// });
+
 });

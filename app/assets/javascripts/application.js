@@ -13,9 +13,23 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.datepicker
-// require rails.validations
+//= require jquery.minimalect
+//= require jquery.navgoco
 //= require twitter/bootstrap
 //= require cocoon
-//= require opportunities/index
+//= require jquery.fs.naver
+// require opportunities/index
 //= require jasny-bootstrap
 //= require tinymce
+
+$(document).ready(function(){
+
+	$(".navigation").naver({
+		maxWidth: "980px",
+		labels: {
+			closed: "Menu",
+			open: "Close"
+		},
+	});
+
+});

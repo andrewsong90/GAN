@@ -24,37 +24,30 @@
 <body>
   	<div id="holder">
 		<% if user_signed_in? %>
-			<div class="navbar">
+			<div class="navbar navbar-fixed-top">
 				<div class="navbar-inner">
 					<div class="whitefont">
 						<a href=<%= home_path %> class="brand">
 							Gann Alumni Network
 							 <!-- <img src = <%#= image_path("gann_seal.jpg") %> alt="GAN"> -->
 						</a>
-						<div class="nav-collapse">
+						<!-- <div class="nav-collapse"> -->
 							<ul class="nav">
 								<li><a href='<%= about_path %>' class="whitefont neatfont">About</a></li>
 								<li><a href="<%= new_contact_path %>" class="whitefont neatfont">Contact</a></li>
 							</ul>
 
-							<div class="nav pull-right navbar-hcenter">
-								Welcome! <strong><%= current_user.full_name %></strong> (<%= current_user.class.name %>)
-								&nbsp;|&nbsp;
-								<i class="fa fa-home"></i>&nbsp;&nbsp;<%= link_to "Opportunities", opportunities_path %>
-								&nbsp;|&nbsp;
-								<i class="fa fa-user"></i>&nbsp;&nbsp;<%= link_to "My account", user_path(:id => current_user.id) %>
-								&nbsp;|&nbsp;
-								<i class="fa fa-briefcase"></i>&nbsp;&nbsp;<%= link_to "My opportunities", my_opportunities_path %>
-								&nbsp;|&nbsp;
-								<i class="fa fa-sign-out"></i>&nbsp;
-								<%= link_to "Logout", destroy_user_session_path, method: :delete %>
-							</div>
-						</div>
+							<nav class="navigation pull-right navbar-hcenter">
+								<a class="redfont" href="<%= opportunities_path%>"><i class="fa fa-home"></i>&nbsp;&nbsp;Opportunities&nbsp;</a>
+								<a class="redfont" href="<%= my_opportunities_path %>"><i class="fa fa-briefcase"></i>&nbsp;&nbsp;My Opportunities&nbsp;</a>
+								<a class="redfont" href="<%= user_path(:id => current_user.id) %>"><i class="fa fa-user"></i>&nbsp;&nbsp;My Account&nbsp;</a>
+								<%= link_to destroy_user_session_path, :class => "redfont", method: :delete do %>
+									<i class="fa fa-sign-out"></i>&nbsp;Logout 
+								<% end %>
+							</nav>
 					</div>
 				</div>
 			</div>
-		<% else %>
-			<div class="blank_block"></div>
 		<% end %>
 
 	<div id="body">

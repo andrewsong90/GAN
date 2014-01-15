@@ -7,11 +7,17 @@ class ApplicationController < ActionController::Base
     if resource.type=="Admin"
       admin_main_path
     else
-  	   opportunities_path	
+      logger.debug("REDIRECT #{redirect_back_or_default()}")
+      redirect_back_or_default()
+  	   # opportunities_path	
     end
   end
 
   protected
+
+  def redirect_back_or_default()
+    session[:return_to] || opportunities_path
+  end
 
   #Helper method for defining the main link
   def home_path

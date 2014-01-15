@@ -1,12 +1,14 @@
 <div class="container">
+  
   <div class="page-header text-align-center">
     <h1 class="neatfont">
       Welcome to the Gann Alumni Network<br>
     </h1>
   </div>
 
-  <div class="row">
-    <div class="span3 offset1">
+  <div>
+
+    <div class="span2 offset1">
       <img src = <%= image_path("gann.jpg") %> class="box_radius" alt="gann"/>
     </div>
 
@@ -26,27 +28,59 @@
         <% end -%>
 
         <br>
-        	<div>
         		<%= f.submit "Sign in", :class =>"btn btn-primary" %> 
+
+            <div class="medium">
+              <br>
+            </div>
+
+
         		<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
         			<%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
       		<% end -%>
-      	</div>
+
+          <div class="highonly">
+
+            <strong>Here for the first time?</strong>
+              <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+              <%= link_to "Register", new_alum_registration_path %>
+            <% end -%>
+
+            <br><br>
+            <strong>Want to offer an opportunity?</strong> <%= link_to "Contact us", new_contact_path %> <br> 
+            <strong>Having trouble?</strong> <%= link_to "Contact us", new_contact_path %><br>
+          </div>
       <% end %>
+    </div>
 
+
+  </div>
+  <div class="clear"></div>
+
+  <div class="medium">
+    <div class="offset1">
       <strong>Here for the first time?</strong>
+        <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+          <%= link_to "Register", new_alum_registration_path %>
+        <% end -%>
+
+        <br>
+
+      <strong>Want to offer an opportunity?</strong> <span class="italics">or</span> <strong>Having trouble?</strong> <%= link_to "Contact us", new_contact_path %>
+    </div>
+  </div>
+</div>
 
 
-
+<% if false %>     
       <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
         <%= link_to "Register", new_alum_registration_path %>
       <% end -%>
 
       <br><br>
-      <strong>Want to offer an opportunity?</strong> <%= link_to "Contact us", new_contact_path %> <br> 
-      <strong>Having trouble?</strong> <%= link_to "Contact us", new_contact_path %><br>
       
-
-    </div>
-  </div>
-</div>
+      <div class="highonly">
+        <strong>Want to offer an opportunity?</strong> <%= link_to "Contact us", new_contact_path %> <br> 
+        <strong>Having trouble?</strong> <%= link_to "Contact us", new_contact_path %><br>
+      </div>
+<% end %>

@@ -1,0 +1,18 @@
+
+
+<ul class="sidebar well">
+	<li class="active"><a href="#">Menu</a></li>
+	<li><a href="#" class="neatfont">Administration</a>
+		<ul>
+			<li><a href="<%= new_admins_post_path%>">Create Post</a></li>
+			<li><a href="<%= admins_posts_path%>">View Posts</a></li>
+		</ul>
+	</li>
+
+	<li><a href="#" class="neatfont">Reports</a>
+		<ul>
+			<li><a href="<%= opportunities_path(format: "csv") %>">Export Opportunities</a></li>
+			<li><a href="<%= invitations_path %>">View Invitations</a></li>
+		</ul>
+	</li>
+</ul>

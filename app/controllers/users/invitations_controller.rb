@@ -2,6 +2,30 @@ class Users::InvitationsController < Devise::InvitationsController
 
 	before_filter :configure_invitations_parameters
 
+	def batch_new
+		
+	end
+
+	def batch_invite
+		list_of_users=Friend.import(params[:file])
+		list_of_users.each do |user_hash|
+			@user = User.invite!({:email => user_hash["email"],:fname => user_hash["first_name"],:lname => user_hash["last_name"]},current_user) do |user|
+				user.skip_invitation = true
+			end
+
+			@user.update_attribute :invitation_sent_at, Time.now.utc
+			@token = @user.raw_invitation_token
+			@title = params[:title]
+			@content = params[:content]
+			logger.debug("BATCH #{@token}")
+			UserMailer.delay.invite_message(@user, @token, @title, @content)
+		end
+
+		redirect_to admin_main_path
+	end
+
+
+
 	#Only Friends can sign up through invitation
 	def edit
 		resource.type = "Friend"

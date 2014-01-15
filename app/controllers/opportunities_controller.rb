@@ -1,5 +1,6 @@
 class OpportunitiesController < ApplicationController
 
+	prepend_before_filter :store_return_to
 	before_filter :authenticate_user, :except => [:about, :welcome, :contact]
 
 	def welcome		
@@ -106,8 +107,16 @@ class OpportunitiesController < ApplicationController
 		if @opportunity.save
 			# Create time objects
 			OpportunityTime.createTime(@opportunity, opportunity_params)
+			OpportunityMailer.delay.opportunity_created_email(@opportunity)
+
+			users = User.list_of_interested(@opportunity.skills)
+
+			users.each do |user|
+				OpportunityMailer.delay.opportunity_push_email(@opportunity,user)
+			end
+
 			flash[:notice] = "Opportunity Created!"
-			redirect_to opportunities_path
+			redirect_to opportunity_path(@opportunity)
 		else
 			render 'new'
 		end
@@ -166,6 +175,10 @@ class OpportunitiesController < ApplicationController
 	end
 
 	private
+
+	def store_return_to
+		session[:return_to] = request.url
+	end
 
 	def build_unpicked_skills
 		(Skill.all-@opportunity.skills).each do |skill|

@@ -1,6 +1,8 @@
 GAN::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  ENV['hostname'] = "http://gannacademy.webfactional.com"
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

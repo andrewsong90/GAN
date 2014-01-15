@@ -1,0 +1,17 @@
+<% if @content.length == 0 %>
+	This is the email default template.
+<% else %>
+	<%= @content.html_safe %>
+<% end %>
+
+Click the link below to Accept Invitation<br>
+<%= link_to "Accept Invitation", @invitation_link %>
+<br>
+<p>If you have received this by error,<br>
+please let us know at alumni@gannacademy.org</p>
+
+<br>
+
+Best,<br>
+
+GAN (Gann Alumni Network) support team

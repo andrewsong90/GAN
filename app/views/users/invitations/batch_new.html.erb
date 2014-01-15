@@ -1,0 +1,14 @@
+
+<div class="container">
+	<h5> Import Users in CSV format </h5>
+	<%= form_tag batch_invite_path, multipart: true do %>
+		
+		<%= text_field_tag :title %><br><br>
+		<%= text_area_tag :content, nil, :class => "tinymce span7", :rows => "6", :placeholder => "Enter e-mail template here" %>
+    	<%= tinymce %>
+
+    	<br>
+		<%= file_field_tag :file %>
+		<%= submit_tag "Import" %>
+	<% end %>
+</div>

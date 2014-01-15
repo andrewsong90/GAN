@@ -1,17 +1,17 @@
-
+/*#3BB69E*/
 /*$grey_color: #e5e5e9;*/
 $grey_color: #f0f0f0;
 
 /*$blue_color: #122f45;*/
 $blue_color: #336699;
-$container_width_high: 900px;
-$container_width_medium: 650px;
-$container_width_low: 450px;
+$container_width_high: 700px;
+$container_width_medium: 550px;
+$container_width_low: 400px;
 
 $container_side_padding: 15px;
 
-$opportunities_index_left_container_width: 630px;
-$opportunities_index_container_margin_right: 30px;
+$left_container_width: 490px;
+$left_container_margin_right: 20px;
 
 @mixin box-padding{
 	padding-left: $container_side_padding;
@@ -39,18 +39,25 @@ $opportunities_index_container_margin_right: 30px;
 	position: relative;
 }
 
-#body{
-
-	padding-bottom: 190px;
-}
 
 body{
+
+
 	background-color: #ffffff;
 }
 
 /* Container settings */
 
-@media all and (min-width: 1101px) {
+@media all and (min-width: 980px) {
+	
+	.highonly{
+		display: inline;
+	}
+
+	.medium{
+		display: none;
+	}
+
 	.container{
 		@include container_basic;
 		width: $container_width_high;
@@ -61,16 +68,49 @@ body{
 		overflow: auto;
 	}
 
-
-
 	.super-container{
 		width: $container_width_high + 2 * $container_side_padding;
 		margin-right: auto;
 		margin-left: auto;
 	}
+
+	.left_container{
+		width: $left_container_width;
+		margin-right: 20px;
+	}
+
+	.right_container{
+		width: $container_width_high - $left_container_width - 20 - 2 * $container_side_padding;
+	}
+
+	.span3{
+		width: 280px;
+	}
+
+	.span2{
+		width: 220px;
+	}
+
+	.offset1{
+		margin-left: 80px;
+	}
+
+	#body{
+		padding-top: 120px;
+		padding-bottom: 190px;
+	}
 }
 
-@media all and (max-width: 1100px) and (min-width: 751px) {
+@media all and (max-width: 979px) and (min-width: 751px) {
+	
+	.highonly{
+		display: none;
+	}
+
+	.medium{
+		display: inline;
+	}
+	
 	.container{
 		@include container_basic;
 		width: $container_width_medium;
@@ -87,9 +127,43 @@ body{
 		margin-right: auto;
 		margin-left: auto;
 	}
+
+	.left_container{
+		width: $container_width_medium;
+		margin-right: 0px;
+	}
+
+	.right_container{
+		width: $container_width_medium;
+	}
+
+	.span3{
+		width: 200px;
+	}
+
+	.offset1{
+		margin-left: 60px;
+	}
+
+	#body{
+		padding-top: 20px;
+		padding-bottom: 190px;
+	}
+	.span2{
+		width: 150px;
+	}
 }
 
 @media all and (max-width: 750px){
+
+	.highonly{
+		display: none;
+	}
+
+	.medium{
+		display: inline;
+	}
+
 	.container{
 		@include container_basic;
 		width: $container_width_low;
@@ -100,12 +174,28 @@ body{
 		overflow: auto;
 	}
 
-
-
 	.super-container{
 		width: $container_width_low + 2 * $container_side_padding;
 		margin-right: auto;
 		margin-left: auto;
+	}
+
+	.left_container{
+		width: $container_width_low;
+		margin-right: 0px;
+	}
+
+	.right_container{
+		width: $container_width_low;
+	}
+
+	#body{
+		padding-top: 20px;
+		padding-bottom: 190px;
+	}
+
+	.span2{
+		width: 100px;
 	}
 }
 
@@ -114,18 +204,25 @@ body{
 	@include box_shadow;
 }
 
+.sidebar{
+	width: 165px;
+	position: absolute;
+	left: -200px;
+	top: 0px;
+}
+
 /* To be changed for media queries */
 
-.opportunities_index_left_container{
-	width: $opportunities_index_left_container_width;
-	margin-right: $opportunities_index_container_margin_right;
+.left_container{
+	/*width: $opportunities_index_left_container_width;*/
+	/*margin-right: $opportunities_index_container_margin_right;*/
 	background-color: $grey_color;
 	@include box-padding;
 	@include box_shadow;
 }
 
-.opportunities_index_right_container{
-	width: $container_width_high - $opportunities_index_left_container_width - $opportunities_index_container_margin_right - 2 * $container_side_padding;
+.right_container{
+	/*width: $container_width_high - $opportunities_index_left_container_width - $opportunities_index_container_margin_right - 2 * $container_side_padding;*/
 	background-color: $grey_color;
 	@include box-padding;
 	@include box_shadow;
@@ -372,7 +469,7 @@ input[type="radio"]{
 	width: 100%;
 	height: 100%;
 	margin: 0;
-	padding: 0;
+	/*padding: 0;*/
 }
 
 
@@ -387,8 +484,8 @@ input[type="radio"]{
 
 
 .gmap {
-	height: 300px;
-	width: 550px;
+	height: 270px;
+	width: 450px;
 	margin-left: auto;
 	margin-right: auto;
 	@include box_shadow;

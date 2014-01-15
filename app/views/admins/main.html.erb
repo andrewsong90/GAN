@@ -1,5 +1,8 @@
-
+<%= render "admins/shared/head" %>
+ 
 <div class="container">
+	<%= render "admins/shared/nav" %>
+
 	<h2>Administration</h2>
 
 	<h5>Post</h5>
@@ -18,6 +21,10 @@
 
 	<h5> Send invitations</h5>
 	<%= link_to "Invite", new_user_invitation_path, :class => "btn" %>
+
+	<br>
+	<h5> Send batch invitations</h5>
+	<%= link_to "Batch Invite", new_batch_invite_path, :class => "btn" %>
 
 	<br>
 

@@ -75,7 +75,7 @@
 
 	<div class="align-left">
 
-	<div class="opportunities_index_left_container">
+	<div class="left_container">
 		<p class="section-header"><i class="fa fa-tasks"></i>&nbsp;&nbsp;Description</p>
 		<div><span class="indent"/><%= @opportunity.description.html_safe %></div>
 
@@ -110,7 +110,7 @@
 
 	<br>
 	
-	<div class="opportunities_index_left_container">
+	<div class="left_container">
 
 		<p class="section-header"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Dates</p>
 		<% if @time.first.is_flexible? %>
@@ -124,12 +124,11 @@
 		<br>
 
 		<p class="section-header"><i class="fa fa-book"></i>&nbsp;&nbsp;Skills & Expertise</p><br>
-		<span class="italics">Under Construction</span>
-<% if false %>
+
 		<% @skills.each do |skill| %>
 			<div><span class="indent"/><i class="fa fa-check"></i>&nbsp;<%= skill.skill %></div>
 		<% end %>
-<% end %>
+
 		<br><br>
 		
 		
@@ -156,38 +155,80 @@
 
 	</div>
 
-	<div class="opportunities_index_right_container align-left">
-		<% owner = @opportunity.user %>
+	<div class="highonly">
+		<div class="right_container align-left">
+			<% owner = @opportunity.user %>
 
-			<p>
-				<h4 class=" text-align-center"><span class="italics navyfont">Opportunity provider</span></h4>
-				<h4 class=" text-align-center"><%= owner.full_name %></h4>
-			</p>
-			<br>
-			<div>
-				<div style="text-align: center;">
-					<%= image_tag owner.avatar.url(:thumb), :class=>"box_radius", :style => "display: inline-block;" %>
+				<p>
+					<div class="section-header">Provider</div>
+				</p>
+				<br>
+				<div>
+					<div style="text-align: center;">
+						<%= image_tag owner.avatar.url(:thumb), :class=>"box_radius", :style => "display: inline-block;" %>
+					</div>
+					<br>
+					<h4 class=" text-align-center"><%= owner.full_name %></h4>
+					<div class="text-align-center">
+						<% if owner.is_alum? %>
+							<h5>Class of <%= owner.classyear %></h5>
+						<% end %>
+					</div>
 				</div>
-				<div class="text-align-center">
-					<% if owner.is_alum? %>
-						<h5>Class of <%= owner.classyear %></h5>
+
+				<% if @sponsors.length != 0 %>
+					
+									<br><br>
+					<p class="section-header"><i class="fa fa-group"></i>&nbsp;Sponsors</p><br>
+					<% @sponsors.each do |sponsor| %>
+						<span class="indent"/><i class="fa fa-check"></i>&nbsp;<strong><%= sponsor.name %></strong><br>
+						<span class="indent"/><%= sponsor.position %> @ <%= sponsor.company %><br>
 					<% end %>
-				</div>
-			</div>
-			
-			<br><br>
-
-			<% if @sponsors.length != 0 %>
-				<p class="section-header"><i class="fa fa-group"></i>&nbsp;Sponsors</p><br>
-				<% @sponsors.each do |sponsor| %>
-					<span class="indent"/><i class="fa fa-check"></i>&nbsp;<strong><%= sponsor.name %></strong><br>
-					<span class="indent"/><%= sponsor.position %> @ <%= sponsor.company %><br>
 				<% end %>
-			<% end %>
 
+		</div>
 	</div>
 
 	<div class="clear"></div>
+
+	<div class="medium">
+
+	<br><br>
+		<div class="container">
+			<% owner = @opportunity.user %>
+			
+			<div class="section-header">
+				Opportunity provider
+			</div>
+			<br><br>
+			<div>
+				<div class="align-left">
+					<%= image_tag owner.avatar.url(:thumb), :class=>"box_radius", :style => "display: inline-block;" %>
+				</div>
+
+				<div class="align-left indent">
+					<h4 class=" text-align-center"><%= owner.full_name %></h4>
+					<% if owner.is_alum? %>
+							<h5>Class of <%= owner.classyear %></h5>
+						<% end %>
+				</div>
+				<div class="clear"></div>
+			</div>
+				
+				
+<% if false %>
+<br><br>
+				<% if @sponsors.length != 0 %>
+					<p class="section-header"><i class="fa fa-group"></i>&nbsp;Sponsors</p><br>
+					<% @sponsors.each do |sponsor| %>
+						<span class="indent"/><i class="fa fa-check"></i>&nbsp;<strong><%= sponsor.name %></strong><br>
+						<span class="indent"/><%= sponsor.position %> @ <%= sponsor.company %><br>
+					<% end %>
+				<% end %>
+<% end %>
+
+		</div>
+	</div>
 <br>
 
 

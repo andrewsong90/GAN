@@ -20,6 +20,14 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
     mail(to: "gannacademy01@gmail.com", subject:"[GAN] #{@contact.title}")
   end
 
+  def invite_message(user, token, title, content)
+    @user = user
+    @title = title
+    @content = content
+    @invitation_link = accept_user_invitation_url(:invitation_token => token)
+    mail(to: @user.email, subject: @title)
+  end
+
   # Send out emails to all users when announcement is made
   def announcement_email(post)
     @post=post
