@@ -17,7 +17,7 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
 
   def contact_email_to_admin(contact)
     @contact=contact
-    mail(to: "gannacademy01@gmail.com", subject:"[GAN] #{@contact.title}")
+    mail(to: "alumni@gannacademy.org", subject:"[GAN] #{@contact.title}")
   end
 
   def invite_message(user, token, title, content)

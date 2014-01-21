@@ -47,7 +47,7 @@
 
 	<%= form_tag opportunities_path, method: :get, :class => "form-inline" do %>
 		<div class="align-right">
-			<%= select_tag "job_type", options_from_collection_for_select(Jobtype.all, :id, :name, params[:job_type]), :multiple=>true, :class=>"select_box",:prompt => "Select type" %>
+			<%= select_tag "job_type", options_from_collection_for_select(Jobtype.all, :id, :name, params[:job_type]), :class=>"select_box",:prompt => "Select type" %>
 			<span class="section-header">	
 
 					<%= text_field_tag :query, params[:query], :placeholder => "Enter keyword, company, location, or provider", :class => "span5 form-control" %>

@@ -31,6 +31,6 @@
 # Jobtype.where(:name => "Paid Intern").first.update_attribute(:name, "Internship")
 # Jobtype.where(:name => "Unpaid Intern").first.update_attribute(:name, "Informational Interview")
 
-Jobtype.create(:name, "Volunteer")
+Jobtype.create(:name => "Volunteer")
 
 # admin=User.where(:email => "admin@gannacademy.org", :type => "Admin").first_or_create!(:password => "111111", :confirmed_at => Time.now)
