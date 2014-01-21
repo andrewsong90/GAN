@@ -1,0 +1,10 @@
+# pack-refs with: peeled 
+02d975569e6f00bc6379b05f467bb30deb244e9d refs/heads/master
+b398df1b434d56e20d1c2ae65fa0715cb6bf16e5 refs/heads/tinymce-4
+291e558958ca8c045f8e67657c5f161f85a3d476 refs/tags/3.5.8.3
+41caef2c731ab4cf85a0ed980195d6159bbfb77d refs/tags/4.0
+43ef46e603243ea976aaa6defdcc0fe6bc003184 refs/tags/4.0.1
+8cbad627bbacded8b46f411c980ba6cde478b0bf refs/tags/4.0.10
+4a4d0ea551171c279eafe3002dff52a462a45b66 refs/tags/4.0.11
+b398df1b434d56e20d1c2ae65fa0715cb6bf16e5 refs/tags/4.0.12
+40c16b849d2c227a664613c6838c2b3eb61be664 refs/tags/4.0.2
