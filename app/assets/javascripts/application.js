@@ -15,6 +15,7 @@
 //= require jquery.ui.datepicker
 //= require jquery.minimalect
 //= require jquery.navgoco
+//= require jquery.cookie
 //= require twitter/bootstrap
 //= require cocoon
 //= require jquery.fs.naver

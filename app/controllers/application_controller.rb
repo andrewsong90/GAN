@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.type=="Admin"
-      admin_main_path
+      admins_posts_path
     else
       logger.debug("REDIRECT #{redirect_back_or_default()}")
       redirect_back_or_default()
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   def home_path
     if user_signed_in?
       if admin_signed_in?
-        admin_main_path
+        admins_posts_path
       else #If Alum or friend
         opportunities_path
       end

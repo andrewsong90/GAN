@@ -1,6 +1,31 @@
-<h3>View Users</h3>
 
-<div>
+<%= render "admins/shared/head" %>
+
+<div class="large_container">
+
+	<%= render "admins/shared/nav" %>
+
+	<h3>View Users</h3>
+	<hr class="style-one"></hr>
+	<br>
+	<%= form_tag admins_users_path, method: :get, :class => "form-inline" do %>
+			<div class="align-right">
+				<span class="section-header">	
+					<%= text_field_tag :query, params[:query], :placeholder => "Enter name or type", :class => "span3 form-control" %>
+				</span>
+
+				<%= button_tag(type: 'submit', class: "btn btn-primary", id: 'search') do %>
+					<i class="fa fa-search">&nbsp;Search</i>
+				<% end %>
+			</div>
+			<div class="clear"></div>
+
+		<% end %>
+
+	<div>
+
+	<br>
+
 	<table class="table table-striped">
 		<tr>
 			<th>id</th>
@@ -30,3 +55,4 @@
 	</table>
 </div>
 <br>
+</div>

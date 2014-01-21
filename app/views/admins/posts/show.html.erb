@@ -1,6 +1,10 @@
 <%= render "admins/shared/head" %>
 
 <div class="container">
+	<% if admin_signed_in? %>
+		<%= render "admins/shared/nav" %>
+	<% end %>
+
 	<div>
 		<h3 class="neatfont" style="display: inline;"><%= @post.title %></h3>		
 		&nbsp;&nbsp;on <%= @post.created_at.strftime('%b. %e, %Y') %>

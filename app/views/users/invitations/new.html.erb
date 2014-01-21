@@ -1,4 +1,12 @@
+<% if admin_signed_in? %>
+	<%= render "admins/shared/head" %>
+<% end %>
+
 <div class="container">
+
+	<% if admin_signed_in? %>
+		<%= render "admins/shared/nav" %>
+	<% end %>
 <h2><%= t "devise.invitations.new.header" %></h2>
 
 <h5>Invite non-alum to use the GAN service!<br>
@@ -8,9 +16,12 @@ Type the email address of a person whom you want to send the invitation to</h5>
   <%= devise_error_messages! %>
 
 <% resource.class.invite_key_fields.each do |field| -%>
-  <%= f.input field %>
+  <%= f.input field, :class =>"section-header" %>
 <% end -%>
 
-<%= f.submit t("devise.invitations.new.submit_button") %>
+<div class="pull-right">
+	<%= f.submit t("devise.invitations.new.submit_button"), :class => "btn btn-primary" %>
+</div>
+
 <% end %>
 </div>

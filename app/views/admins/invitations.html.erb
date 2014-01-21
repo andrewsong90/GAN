@@ -1,6 +1,6 @@
 <%= render "admins/shared/head" %>
 
-<div class="container">
+<div class="large_container">
 
 	<%= render "admins/shared/nav" %>
 	<h3>View Invitations</h3>
@@ -30,7 +30,11 @@
 					<td><%= u.email %></td>
 					<td><%= inviter.full_name %> (<%= inviter.type %>) </td>
 					<td><%= u.invitation_sent_at.strftime('%b. %e, %Y') %></td>
-					<td><%= u.invitation_accepted_at.strftime('%b. %e, %Y') %></td>
+					<% if u.invitation_accepted_at %>
+						<td><%= u.invitation_accepted_at.strftime('%b. %e, %Y') %></td>
+					<% else %>
+						<td></td>
+					<% end %>
 				</tr>
 			<% end %>	
 		</table>

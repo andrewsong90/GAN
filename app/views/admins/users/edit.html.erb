@@ -3,8 +3,9 @@
   <%= javascript_include_tag "users/registration" %>
 <% end %>
 
+<div class="container">
 <h2>Edit Profile</h2>
-
+<hr class="style-one"></hr>
 <br>
 
 <%= form_for @user, :as => :user, :url => admins_user_path(@user), :method => :patch do |f| %>
@@ -39,17 +40,6 @@
     <%= f.text_field :phone, :id => "phone", :placeholder => "XXX-XXX-XXXX" %></div> 
   <br>
 
-
-
-  <div><%= f.label :password, :class=>"section-header" %> <br><i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
-
-  <div><%= f.label :password_confirmation, :class=>"section-header" %><br>
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.label :current_password, :class=>"section-header" %><br> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
-
   <div><span class = "section-header"><i class="fa fa-lock"></i>&nbsp;Lock</span><br>
     <%= f.radio_button :locked, false, :checked => true %>&nbsp;unlock
     <br>
@@ -58,5 +48,15 @@
 
   <br>
 
-  <div><%= f.submit "Update", :class =>"btn btn-primary" %></div>
+  <div><span class = "section-header">Invitation limit</span>
+    &nbsp;<a id="invitation_help" class="help"><i  class="fa fa-question-circle"></i></a>
+    <br>
+    <%= f.number_field :invitation_limit %>
+  </div>
+  <br>
+
+  <div class="pull-right">
+    <div><%= f.submit "Update", :class =>"btn btn-primary" %></div>
+  </div>
 <% end %>
+</div>

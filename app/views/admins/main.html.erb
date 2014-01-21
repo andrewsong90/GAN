@@ -5,36 +5,11 @@
 
 	<h2>Administration</h2>
 
-	<h5>Post</h5>
-	<%= link_to "Create Post", new_admins_post_path %>
-	<br>
-	<%= link_to "View all posts", admins_posts_path %>
-
-	<h5> View all users</h5>
-	<%= link_to "View All", admins_users_path %>
-
 	<h5> View all applications</h5>
 	<%= link_to "View All", admin_applications_path %>
-
-	<h5> View Alum list </h5>
-	<%= link_to "View Alum", alum_list_path %>
-
-	<h5> Send invitations</h5>
-	<%= link_to "Invite", new_user_invitation_path, :class => "btn" %>
-
-	<br>
-	<h5> Send batch invitations</h5>
-	<%= link_to "Batch Invite", new_batch_invite_path, :class => "btn" %>
-
 	<br>
 
 	<h2>Reports</h2>
-
-	<h5>Export Opportunities</h5>
-	<p>
-		Download:
-		<%= link_to "CSV", opportunities_path(format: "csv") %>
-	</p>
 
 	<br>
 

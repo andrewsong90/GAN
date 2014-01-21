@@ -39,8 +39,10 @@
 
 							<nav class="navigation pull-right navbar-hcenter">
 								<a class="redfont" href="<%= opportunities_path%>"><i class="fa fa-home"></i>&nbsp;&nbsp;Opportunities&nbsp;</a>
-								<a class="redfont" href="<%= my_opportunities_path %>"><i class="fa fa-briefcase"></i>&nbsp;&nbsp;My Opportunities&nbsp;</a>
-								<a class="redfont" href="<%= user_path(:id => current_user.id) %>"><i class="fa fa-user"></i>&nbsp;&nbsp;My Account&nbsp;</a>
+								<% if !admin_signed_in? %>
+									<a class="redfont" href="<%= my_opportunities_path %>"><i class="fa fa-briefcase"></i>&nbsp;&nbsp;My Opportunities&nbsp;</a>
+									<a class="redfont" href="<%= user_path(:id => current_user.id) %>"><i class="fa fa-user"></i>&nbsp;&nbsp;My Account&nbsp;</a>
+								<% end %>
 								<%= link_to destroy_user_session_path, :class => "redfont", method: :delete do %>
 									<i class="fa fa-sign-out"></i>&nbsp;Logout 
 								<% end %>

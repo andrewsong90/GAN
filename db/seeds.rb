@@ -26,15 +26,11 @@
 # Skill.where(:skill => "Security/Protective Services").first_or_create!
 
 
-# Type.where(:name => "Full-Time").first_or_create!
-# Type.where(:name => "Part-Time").first_or_create!
-# Type.where(:name => "Paid Intern").first_or_create!
-# Type.where(:name => "Unpaid Intern").first_or_create!
-# Type.where(:name => "Mentorship").first_or_create!
+# Jobtype.where(:name => "Full-Time").first.update_attribute(:name, "Full-time job")
+# Jobtype.where(:name => "Part-Time").first.update_attribute(:name, "Part-time job")
+# Jobtype.where(:name => "Paid Intern").first.update_attribute(:name, "Internship")
+# Jobtype.where(:name => "Unpaid Intern").first.update_attribute(:name, "Informational Interview")
 
-Jobtype.where(:name => "Full-Time").first.update_attribute(:name, "Full-time job")
-Jobtype.where(:name => "Part-Time").first.update_attribute(:name, "Part-time job")
-Jobtype.where(:name => "Paid Intern").first.update_attribute(:name, "Internship")
-Jobtype.where(:name => "Unpaid Intern").first.update_attribute(:name, "Informational Interview")
+Jobtype.create(:name, "Volunteer")
 
 # admin=User.where(:email => "admin@gannacademy.org", :type => "Admin").first_or_create!(:password => "111111", :confirmed_at => Time.now)

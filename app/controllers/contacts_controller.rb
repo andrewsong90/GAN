@@ -6,7 +6,7 @@ class ContactsController < ApplicationController
 
 	def create
 		@contact=Contact.new(permitted_params)
-		if @contact.save
+		if verify_recaptcha(:model => @contact, :message => "Captcha error!") && @contact.save
 			UserMailer.delay.contact_email_to_user(@contact)
 			UserMailer.delay.contact_email_to_admin(@contact)
 			flash[:notice] = "The admininstrator will contact you shortly."

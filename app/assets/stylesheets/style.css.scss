@@ -199,6 +199,10 @@ body{
 	}
 }
 
+.large_container{
+	@include container_basic;
+	width: 900px;
+}
 
 .well{
 	@include box_shadow;
@@ -382,6 +386,10 @@ input[type="radio"]{
 
 .tooltip-inner {
 	width: 350px;
+}
+
+.navbar-fixed-top .navbar-inner{
+	padding-left: 25px;	
 }
 
 .navbar .brand{

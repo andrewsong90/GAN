@@ -17,7 +17,6 @@ class Users::InvitationsController < Devise::InvitationsController
 			@token = @user.raw_invitation_token
 			@title = params[:title]
 			@content = params[:content]
-			logger.debug("BATCH #{@token}")
 			UserMailer.delay.invite_message(@user, @token, @title, @content)
 		end
 

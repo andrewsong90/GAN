@@ -1,14 +1,31 @@
+<%= render "admins/shared/head" %>
 
 <div class="container">
-	<h5> Import Users in CSV format </h5>
+	<h3>Custom Invite</h3>
+	<hr class="style-one"></hr>
+	<%= render "admins/shared/nav" %>
+	<p>
+		You will be able to send invitations to multiple users with a custom template.<br>
+		Import <span class="italics">.csv</span> file with "first_name", "last_name", and "email" columns.
+	</p>
+	<br>
+
 	<%= form_tag batch_invite_path, multipart: true do %>
-		
+		<span class="section-header">List of Users</span><br>
+		<%= file_field_tag :file %>
+
+		<br><br>
+
+		<span class="section-header">Title</span><br>
 		<%= text_field_tag :title %><br><br>
+		<span class="section-header">Content</span><br>
 		<%= text_area_tag :content, nil, :class => "tinymce span7", :rows => "6", :placeholder => "Enter e-mail template here" %>
     	<%= tinymce %>
 
-    	<br>
-		<%= file_field_tag :file %>
-		<%= submit_tag "Import" %>
+    	<br><br>
+		
+		<div class="pull-right">
+			<%= submit_tag "Send invitations", :class => "btn btn-primary" %>
+		</div>
 	<% end %>
 </div>

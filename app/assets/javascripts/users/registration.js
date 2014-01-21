@@ -8,6 +8,11 @@ $(document).ready(function(){
 		$("#licenseModal").modal('show');	
 	});
 
+	$("#invitation_help").popover({
+		content: "- If invitation limit is nil, there is no limit for invitations, users can send unlimited invitations.<br>- If invitation limit is 0, users can't send invitations by default.<br>- If invitation limit n > 0, users can send n invitations.",
+		html: true
+	});
+
 	$("#resume_help").popover({
 		content: "Please upload your resumes or CVs! (maximum of 3)",
 		html: true

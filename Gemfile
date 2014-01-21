@@ -24,14 +24,20 @@ gem 'cocoon'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+# Simple Captcha
+gem 'simple_captcha', :git => "git://github.com/galetahub/simple-captcha.git"
 
 #Passing data to JavaScript
+
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 gem 'figaro'
 
+# WYSIWYG editor
 gem 'tinymce-rails', :git => "git://github.com/spohlenz/tinymce-rails.git", :branch => "tinymce-4"
+
+gem 'recaptcha', :require => "recaptcha/rails"
 
 # For attaching pictures
 gem 'paperclip'

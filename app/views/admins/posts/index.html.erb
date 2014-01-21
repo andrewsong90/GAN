@@ -1,8 +1,13 @@
 <%= render "admins/shared/head" %>
 
 <div class="container">
-	<h2 class="header">List of Announcements</h2>
 
+	<% if admin_signed_in? %>
+		<%= render "admins/shared/nav" %>
+	<% end %>
+	
+	<h2 class="header">Announcements</h2>
+	<hr class="style-one"></hr>
 	<br>
 
 	<table class="table table-striped">

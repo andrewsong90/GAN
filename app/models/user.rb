@@ -37,6 +37,16 @@ class User < ActiveRecord::Base
 
   attr_reader :raw_invitation_token
 
+  #Configuration for database search
+  include PgSearch
+  pg_search_scope :search_user, 
+          :against => [:type, :fname, :lname],
+          :using => {
+            :tsearch => {:prefix => true}
+          }
+
+
+
   # Validation
   def check_alum_record
     if !Userdb.where("(parent_email_1 = ? OR parent_email_2 = ?) AND classyear = ?",parent_email, parent_email, classyear).first 
@@ -50,6 +60,16 @@ class User < ActiveRecord::Base
       errors.add(:base, "The combination of parent email & Gann graduation class doesn't match our database")
     end
   end
+
+  #Database Search
+  def self.user_search(query)
+    if query.present?
+      search_user(query)
+    else
+      all
+    end
+  end
+
 
   # Check if the user created the opportunity
   def is_owner? (opportunity)
@@ -142,9 +162,18 @@ class User < ActiveRecord::Base
       end
     end
 
-    
-    # logger.debug("LIST OF INTERESTED #{list_of_interested}")
     list_of_interested
+  end
+
+  #Export to CSV
+  def self.to_csv
+    CSV.generate do |csv|
+      features = ["id","type","fname","lname","classyear","email","phone","parent_email","sign_in_count","invitation_limit"]
+      csv << features
+      all.each do |user|
+        csv << user.attributes.slice(*features).values
+      end
+    end
   end
 
 end

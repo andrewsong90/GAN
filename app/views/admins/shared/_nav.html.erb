@@ -6,12 +6,19 @@
 		<ul>
 			<li><a href="<%= new_admins_post_path%>">Create Post</a></li>
 			<li><a href="<%= admins_posts_path%>">View Posts</a></li>
+			<li><a href="<%= new_user_invitation_path %>">Simple Invite</a></li>
+			<li><a href="<%= new_batch_invite_path %>">Custom Invite</a></li>
 		</ul>
 	</li>
 
 	<li><a href="#" class="neatfont">Reports</a>
 		<ul>
 			<li><a href="<%= opportunities_path(format: "csv") %>">Export Opportunities</a></li>
+			<li><a href="<%= admins_users_path(format: "csv") %>">Export Users</a></li>
+			<li><a href="<%= invitations_path %>">Past Invitations</a></li>
+			<li><a href="<%= admin_applications_path %>">View Connections</a></li>
+			<li><a href="<%= admins_users_path %>">View Users</a></li>
+			<li><a href="<%= alum_list_path %>">View Alums</a></li>
 			<li><a href="<%= invitations_path %>">View Invitations</a></li>
 		</ul>
 	</li>

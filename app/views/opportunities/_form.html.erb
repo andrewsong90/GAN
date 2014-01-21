@@ -1,47 +1,50 @@
    <span class="required">*</span>&nbsp;These fields are required<br><br>
 
-   <div class="row">
-    <div class="offset1 span3">
-    <div><%= f.label "Logo", :class => "section-header" %><br>
-      <% if !f.object.upload_file_name %>
-        <div class="fileinput fileinput-new" data-provides="fileinput">
-      <% else %>
-        <div class="fileinput fileinput-exists" data-provides="fileinput">
-      <% end %>
-        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 200px;">
-          <% if f.object.upload_file_name %>
-            <%= image_tag f.object.upload.url(:medium), :style =>"width: 200px;" %>  
+   <div>    
+      <div class="offset1 align-left">
+        <div><%= f.label "Opportunity logo", :class => "section-header" %><br>
+          <% if !f.object.upload_file_name %>
+            <div class="fileinput fileinput-new" data-provides="fileinput">
+          <% else %>
+            <div class="fileinput fileinput-exists" data-provides="fileinput">
           <% end %>
-        </div>
-        <div>
-          <span class="btn btn-default btn-file">
-            <span class="fileinput-new">Select image</span>
-            <span class="fileinput-exists">Change</span>
-            <%= f.file_field :upload %>
-          </span>
-          <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 200px;">
+              <% if f.object.upload_file_name %>
+                <%= image_tag f.object.upload.url(:medium), :style =>"width: 200px;" %>  
+              <% end %>
+            </div>
+            <div>
+              <span class="btn btn-default btn-file">
+                <span class="fileinput-new">Select image</span>
+                <span class="fileinput-exists">Change</span>
+                <%= f.file_field :upload %>
+              </span>
+              <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    </div>
-    <br>
+      <br>
 
-    <div class="span5">
-    	<div><%= f.label "Title", :class => "section-header" %><span class="required">*</span><br>
-    	<%= f.text_field :title %></div>
-      
-      <br>
-    	
-      <div><%= f.label "Company", :class => "section-header" %><br>
-    	<%= f.text_field :company %></div>
-      
-      <br>
-   	  
-      <div><%= f.label "Type", :class => "section-header" %><span class="required">*</span><br>
-    	<%= f.collection_select :job_type, Jobtype.all, :name, :name, prompt: true %></div>
+      <div class="offset1 align-left">
+      	<div><%= f.label "Title", :class => "section-header" %><span class="required">*</span><br>
+      	<%= f.text_field :title %></div>
+        
+        <br>
+      	
+        <div><%= f.label "Company", :class => "section-header" %><br>
+      	<%= f.text_field :company %></div>
+        
+        <br>
+     	  
+        <div><%= f.label "Type", :class => "section-header" %><span class="required">*</span><br>
+      	<%= f.collection_select :job_type, Jobtype.all, :name, :name, prompt: true %></div>
+      </div>
+
+      <div class="clear"></div>
     </div>
-  </div>
+    
     <br><br><br>
 
   	<div><%= f.label "Job Description", :class => "section-header" %><span class="required">*</span><br>

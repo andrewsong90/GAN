@@ -33,7 +33,11 @@
 	<%= f.text_area :content, :class =>"offset1 span7", :rows => "6" %>
 
 	<br><br>
-
+	<div class="align-right">
+		<%= recaptcha_tags %>
+	</div>
+	<div class="clear"></div>
+	<br><br>
 	<div class="align-right">
 		<%= f.submit "Submit", :class => "btn btn-primary" %>
 	</div>

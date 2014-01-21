@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/galetahub/simple-captcha.git
+  revision: 3557b78feb5fa2624efce065ff77dd4775a8256f
+  specs:
+    simple_captcha (0.1.5)
+
+GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: f634e07d9c567e8e46abf95355514956121923d5
   specs:
@@ -158,6 +164,7 @@ GEM
     rake (10.1.1)
     rdoc (3.12.2)
       json (~> 1.4)
+    recaptcha (0.3.6)
     ref (1.0.5)
     sass (3.2.13)
     sass-rails (4.0.1)
@@ -220,8 +227,10 @@ DEPENDENCIES
   pg (~> 0.15.1)
   pg_search
   rails (= 4.0.1)
+  recaptcha
   sass-rails (~> 4.0.0)
   sdoc
+  simple_captcha!
   simple_form
   therubyracer
   tinymce-rails!

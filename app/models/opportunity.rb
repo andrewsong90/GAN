@@ -78,7 +78,6 @@ class Opportunity < ActiveRecord::Base
 	def self.create_opportunity(user_id,params)
 		o=Opportunity.new
 		o.user_id=user_id
-		logger.debug("PARAMS, #{params}")
 		o.title=params["opportunity"][:title]
 		o.location=params[:opportunity][:location]
 		o.description=params[:opportunity][:description]
@@ -102,11 +101,13 @@ class Opportunity < ActiveRecord::Base
 	end
 
 	# Search opportunities by types
-	def self.type_search (opportunities, type_id)
-		if type_id != "" && type_id != nil
-			type=Jobtype.where(:id => type_id).first.name
-			logger.debug("JOB TYPE #{type}")
-			filtered_opportunities = opportunities.select {|opportunity| opportunity.job_type == type }
+	def self.type_search (opportunities, type_ids)
+		if  type_ids != nil and type_ids.length != 0
+			filtered_opportunities=Array.new
+			type_ids.each do |type_id|
+				type=Jobtype.where(:id => type_id).first.name
+				filtered_opportunities.append(opportunities.select {|opportunity| opportunity.job_type == type })
+			end
 			filtered_opportunities
 		else
 			opportunities
@@ -116,9 +117,25 @@ class Opportunity < ActiveRecord::Base
 	#Export to CSV
 	def self.to_csv
 		CSV.generate do |csv|
-			csv << column_names
+			features=["id","activ","title","company","job_type","description","location","created on","updated on","provider","provider id"]
+			csv << features
 			all.each do |opportunity|
-				csv << opportunity.attributes.values_at(*column_names)
+				
+				# Appending rows to csv files
+				row=Array.new
+				row.append(opportunity.id)
+				row.append(opportunity.active)
+				row.append(opportunity.title)
+				row.append(opportunity.company)
+				row.append(opportunity.job_type)
+				row.append(ActionView::Base.full_sanitizer.sanitize(opportunity.description))
+				row.append(opportunity.location)
+				row.append(opportunity.created_at)
+				row.append(opportunity.updated_at)
+				row.append(opportunity.user.full_name)
+				row.append(opportunity.user.id)
+				
+				csv << row
 			end
 		end
 	end

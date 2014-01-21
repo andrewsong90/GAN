@@ -1,3 +1,7 @@
+<%= render "admins/shared/head" %>
+
+<div class="account">
+	<%= render "admins/shared/nav" %>
 <h3 class="header">
 	<%= @user.full_name%>
 	<% if @user.is_alum? %>
@@ -17,16 +21,21 @@
 	<span class="section-header"><i class="fa fa-lock"></i>&nbsp;Locked</span>
 <% end %><br><br>
 
-<span class="section-header"><i class="fa fa-envelope"></i></span>&nbsp;&nbsp;
+<span class="section-header">Email:&nbsp;</span>
 <%= @user.email %><br><br>
 
-<span class="section-header"><i class="fa fa-phone"></i></span>&nbsp;&nbsp;
-<%= @user.phone %><br><br>
+<% if @user.phone!=nil and !@user.phone.empty? %>
+	<span class="section-header">Phone:&nbsp;</span>
+	<%= @user.phone %><br><br>
+<% end %>
 
-<% if alum_signed_in? %>
+<% if @user.is_alum? %>
 	<span class="section-header"><i class="fa fa-briefcase"></i></span>&nbsp;&nbsp;
 	class of <%= @user.classyear %><br><br>
 <% end %>
+
+	<span class="section-header">Invitation limit:</span>&nbsp;
+	<%= @user.invitation_limit %><br><br>
 
 <!-- TODO: Allow access to uploads? -->
 <% if false %>
@@ -57,6 +66,9 @@ last updated at:  <%= @user.updated_at.strftime('%b. %e, %Y') %><br><br>
 
 
 <br><br>
-<%= link_to "Back to List", admins_users_path, :class => "btn btn-primary" %>
-<%= link_to "Edit Account", edit_admins_user_path(@user), :class => "btn btn-primary" %>
-<br>
+<div class="pull-right">
+	<%= link_to "Back to List", admins_users_path, :class => "btn btn-primary" %>
+	<%= link_to "Edit Account", edit_admins_user_path(@user), :class => "btn btn-primary" %>
+</div>
+<br><br>
+</div>

@@ -1,6 +1,9 @@
 <%= render "admins/shared/head" %>
 
 <div class="container">
+
+	<%= render "admins/shared/nav" %>
+
 	<%= form_for @post, :as => :post, :url => admins_posts_path do |f| %>
 		<br>
 		<span class="section-header">Title</><br>
