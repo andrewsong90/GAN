@@ -6,10 +6,10 @@
 <br>
 <div class="container">
 	<div class="align-left">
-		<%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius" %>
+		<%= image_tag @opportunity.upload.url(:medium), :class=>"box_radius", :style => "width: 150px;" %>
 	</div>
 	<div class="align-left indent">
-		<h1>
+		<h3>
 			<%= @opportunity.title %> 
 			<br>
 			<small> <%= @opportunity.company %></small>
@@ -28,7 +28,7 @@
 				<span class="label label-warning">Inactive</span>
 			<% end %>
 
-		</h1>
+		</h3>
 
 
 		<h2><small><span class="italics"><%= @opportunity.job_type %></span></small></h2>
@@ -176,15 +176,6 @@
 					</div>
 				</div>
 
-				<% if @sponsors.length != 0 %>
-					
-									<br><br>
-					<p class="section-header"><i class="fa fa-group"></i>&nbsp;Sponsors</p><br>
-					<% @sponsors.each do |sponsor| %>
-						<span class="indent"/><i class="fa fa-check"></i>&nbsp;<strong><%= sponsor.name %></strong><br>
-						<span class="indent"/><%= sponsor.position %> @ <%= sponsor.company %><br>
-					<% end %>
-				<% end %>
 
 		</div>
 	</div>

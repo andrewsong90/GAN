@@ -14,7 +14,7 @@ $(document).ready(function(){
   });
 
   $('#opportunity_time_help').popover({
-    content: "You have two options!<br><strong>Flexible:</strong> Make appointments later on<br><strong>Range:</strong> Select the available range for dates",
+    content: "You have two options!<br><strong>Flexible:</strong> Start & end dates can be mutually agreed upon.<br><strong>Range:</strong> Select the available range for dates",
     html: true
   });
 
@@ -24,7 +24,12 @@ $(document).ready(function(){
   });
 
   $('#sponsor_help').popover({
-    content: "Sponsors!<br>Please type in contact info for the sponsors",
+    content: "Please input the name of your organization's contact person with the Gann Academy",
+    html: true
+  });
+
+  $('#additional_contact').popover({
+    content:"Fill in the email address of someone else who should receive inquiries from alumni",
     html: true
   });
 

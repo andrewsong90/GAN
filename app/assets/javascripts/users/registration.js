@@ -2,6 +2,15 @@ var USER_FILE_LIMIT=3;
 
 $(document).ready(function(){
 
+	// if(bowser.msie && bowser.version <= 8){
+	// 	$('#detection').appendTo($("body"));
+	// }
+
+	if(bowser.msie && bowser.version <= 8){
+		$(".modal").appendTo($("body"));
+		$('#detection').modal();
+	}
+
 	var user_file_count=0;
 	//License agreement pop-up window
 	$("a#licenseButton").click(function(e){

@@ -42,7 +42,6 @@ class OpportunitiesController < ApplicationController
 
 	end
 
-	# TODO: No pagination yet
 	def index
 		@post=Post.last
 		@itemsPerPage=5

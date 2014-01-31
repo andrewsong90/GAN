@@ -12,9 +12,10 @@ class User < ActiveRecord::Base
   validates_presence_of :lname, :message =>"can't be blank"
   validates_presence_of :classyear, :message => "can't be blank", if: :is_alum?
   validates_presence_of :parent_email, :message => "can't be blank", if: :is_alum?
+  validates :password, confirmation: true
 
   # validate :check_alum_record, if: :is_alum?
-  validate :check_alum_record_temporary, if: :is_alum?
+  validate :check_alum_record, if: :is_alum?
 
   has_many :opportunities
   has_many :applications

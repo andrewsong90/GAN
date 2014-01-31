@@ -64,7 +64,7 @@ body{
 	}
 
 	.announcement-container{
-		height: 200px;
+		height: 160px;
 		overflow: auto;
 	}
 
@@ -117,7 +117,7 @@ body{
 	}
 
 	.announcement-container{
-		height: 150px;
+		height: 130px;
 		overflow: auto;
 	}
 
@@ -382,8 +382,8 @@ a:hover {
 .box_padding{
 	padding-left: $container_side_padding;
 	padding-right: $container_side_padding;
-	padding-top: 20px;
-	padding-bottom: 40px;
+	padding-top: 10px;
+	padding-bottom: 15px;
 }
 
 .alert{

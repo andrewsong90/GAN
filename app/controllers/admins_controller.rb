@@ -17,6 +17,12 @@ class AdminsController < ApplicationController
 		@applications=Application.all.to_a
 	end
 
+	def export_applications
+		respond_to do |format|
+			format.csv { render text: Application.all.to_csv }
+		end
+	end
+
 	def invitations
 		users=User.all.to_a
 		@invited_users = users.select {|user| user.invitation_sent_at != nil }

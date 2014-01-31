@@ -5,10 +5,15 @@
 
 	<%= render "admins/shared/nav" %>
 
-	<h3>View Users</h3>
+	<h3>Manage Users</h3>
 	<hr class="style-one"></hr>
 	<br>
 	<%= form_tag admins_users_path, method: :get, :class => "form-inline" do %>
+			<div class="align-right">
+				<span class="italics">Export users in CSV format</span>&nbsp;&nbsp;<%= link_to "Export users", admins_users_path(format: "csv"), :class =>"btn btn-primary" %>
+			</div>
+			<div class="clear"></div>
+			<br>
 			<div class="align-right">
 				<span class="section-header">	
 					<%= text_field_tag :query, params[:query], :placeholder => "Enter name or type", :class => "span3 form-control" %>

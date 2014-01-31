@@ -5,7 +5,12 @@
 	<%= render "admins/shared/nav" %>
 
 	<h3>View Applications</h3>
-
+	<hr class="style-one"></hr>
+	<div class="pull-right">
+		<span class="italics">Export applications</span>&nbsp;&nbsp;<%= link_to "Export", export_applications_path(format: "csv"), :class=> "btn btn-primary" %>
+	</div>
+	<div class="clear"></div>
+	<br>
 	<div>
 		<table class="table table-striped">
 			<tr>

@@ -1,14 +1,28 @@
 class Admins::UsersController < ApplicationController
 	
 	before_filter :update_permitted_params, :only => :update
+
 	def index
-		@users = User.user_search(params[:query]).order('fname').to_a
+		@users = User.user_search(params[:query]).order('updated_at DESC').to_a
 
 		respond_to do |format|
 			format.html
 			format.csv { render text: User.all.to_csv }
 		end
 
+	end
+
+	def new
+		@user = User.new
+	end
+
+	def create
+		@user = User.new(user_params)
+		if @user.save
+			redirect_to admins_posts_path, :notice => "Administrator successfully created"
+		else
+			redirect_to admins_new_user_path
+		end
 	end
 
 	def edit
@@ -45,6 +59,10 @@ class Admins::UsersController < ApplicationController
 
 	def needs_password?(user, params)
 		params[:user][:password].present?
+	end
+
+	def user_params
+		params.require(:user).permit(:fname, :lname, :email, :password, :password_confirmation, :type, :confirmed_at, :invitation_limit)
 	end
 
 	def update_permitted_params

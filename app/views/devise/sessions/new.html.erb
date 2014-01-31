@@ -1,3 +1,8 @@
+<% content_for :head do %>
+  <title>GAN Opportunities</title>
+  <%= javascript_include_tag "users/registration" %>
+<% end %>
+
 <div class="container">
   
   <div class="page-header text-align-center">
@@ -71,16 +76,4 @@
   </div>
 </div>
 
-
-<% if false %>     
-      <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-        <%= link_to "Register", new_alum_registration_path %>
-      <% end -%>
-
-      <br><br>
-      
-      <div class="highonly">
-        <strong>Want to offer an opportunity?</strong> <%= link_to "Contact us", new_contact_path %> <br> 
-        <strong>Having trouble?</strong> <%= link_to "Contact us", new_contact_path %><br>
-      </div>
-<% end %>
+<%= render :partial => "shared/registration" %>

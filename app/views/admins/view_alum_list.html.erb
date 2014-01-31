@@ -6,6 +6,10 @@
 	<h3>View Alum</h3>
 	<hr class="style-one"></hr>
 
+	<p>
+		Import the Alum list in '.csv' format.<br> The CSV file must have following column names: "id", "fname", "lname", "classyear", "parent_email_1", and "parent_email_2". The "id" must be a unique value, or the original record will be overwritten by a new record with the same id.
+	</p>
+
 	<h5> Import Users in CSV format </h5>
 	<%= form_tag import_users_path, multipart: true do %>
 		<%= file_field_tag :file %>

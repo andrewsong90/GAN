@@ -1,0 +1,23 @@
+<div class="container">
+	<h3>New Administrator</h3>
+	<%= form_for @user, :url => '/admins/users', :method => 'post' do |f| %>
+		<%= f.hidden_field :type, :value => "Admin" %>
+		<%= f.hidden_field :confirmed_at, :value => Time.now %>
+		<%= f.hidden_field :invitation_limit, :value => 9999 %>
+		<div><%= f.label "Email", :class => "section-header" %><br>
+			<%= f.text_field :email %></div><br>
+		<div><%= f.label "First Name", :class => "section-header" %><br>
+			<%= f.text_field :fname %></div><br>
+		<div><%= f.label "Last Name", :class => "section-header" %><br>
+			<%= f.text_field :lname %></div><br>
+		<div><%= f.label "Password", :class => "section-header" %><br>
+			<%= f.password_field :password %></div><br>
+		<div><%= f.label "Password Confirmation", :class => "section-header" %><br>
+			<%= f.password_field :password_confirmation %></div><br>
+
+		<div class="pull-right">
+			<%= f.submit "Create", :class => "btn btn-primary" %>
+		</div>
+		<div class="clear"></div>
+	<% end %>	
+</div>

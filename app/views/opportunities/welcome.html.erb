@@ -1,8 +1,15 @@
 <div class="container">
-<h3 class="neatfont">Hello! Welcome to GAN</h3>
-
-<i class="fa fa-check"></i> If you have a new opportunity that you like to offer, click on the following button
-<%= link_to "Create", new_opportunity_path, :class=>"btn btn-success" %><br><br>
-<i class="fa fa-check"></i> If you would like to explore the platform first, press the following button
-<%= link_to "Next", opportunities_path, :class => "btn btn-primary" %>
+	<h3 class="neatfont">Hello! Welcome to GAN</h3>
+	<br>
+	<div class="pull-right">
+		<i class="fa fa-check"></i> If you have a new opportunity that you like to offer, click on the following button
+		<%= link_to "Create", new_opportunity_path, :class=>"btn btn-success" %>
+	</div>
+	<div class="clear"></div>
+	<br>
+	<div class="pull-right">
+		<i class="fa fa-check"></i> If you would like to explore the platform first, press the following button
+		<%= link_to "Next", opportunities_path, :class => "btn btn-primary" %>
+	</div>
+	<div class="clear"></div>
 </div>

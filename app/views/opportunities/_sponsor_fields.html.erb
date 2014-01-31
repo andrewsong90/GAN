@@ -1,18 +1,14 @@
 <div class="nested-fields">
-	<h5><i class="fa fa-user"></i></h5>
-	<div><%= f.label :name %>
-		<%= f.text_field :name %>
+	<div>
+		<%= f.text_field :name, :value => current_user.full_name %>
 	</div>
-	<div><%= f.label :position %>
-		<%= f.text_field :position %>
-	</div>
-	<div><%= f.label :company %>
-		<%= f.text_field :company %>
-	</div>
-	<div><%= f.label :email %>
+	<br>
+	<div><%= f.label "Additional Contact Info", :class => "section-header" %>
+      &nbsp;<a id="additional_contact" class="help"><i class="fa fa-question-circle"></i></a><br>
+
+	<div>
 		<%= f.text_field :email %>
 	</div>
-	<%= link_to_remove_association "Remove Sponsor", f, :class => "remove_sponsor_link" %>
 </div>
 
 <br>

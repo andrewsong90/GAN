@@ -13,10 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.datepicker
-//= require jquery.minimalect
 //= require jquery.navgoco
 //= require jquery.cookie
 //= require twitter/bootstrap
+//= require bowser
 //= require cocoon
 //= require jquery.fs.naver
 // require opportunities/index

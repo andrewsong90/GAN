@@ -2,13 +2,13 @@ GAN::Application.routes.draw do
   
   devise_for :admins
 
-  # get "admins/users" => "admins#view_all_users", as: :admin_users
   get "admins/applications" => "admins#view_all_applications", as: :admin_applications
-  # get "admins/users/:id" => "users#account", as: :user_account
+  get 'admins/applications/export' => "admins#export_applications", as: :export_applications
+  get 'admins/users/new' => "admins/users#new", as: :admins_new_user
+  post 'admins/users' => "admins/users#create"
+
   get "admins/invitations" => "admins#invitations", as: :invitations
   get "admins/alum" => "admins#view_alum_list", as: :alum_list
-  # get "/admins/main" => 'admins#main', as: :admin_main
-
 
   namespace :admins do
     resources :users

@@ -60,12 +60,12 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
 
     bcc_recepients = [@opportunity.user.email]
     @opportunity.sponsors.all.to_a.each do |sponsor|
-      bcc_recepients << sponsor.email
+      if !sponsor.email.nil? and sponsor.email.length > 0
+        bcc_recepients << sponsor.email
+      end
     end
   	
     mail(to: @user.email , bcc: bcc_recepients , subject:"[GAN] Application has been submitted")
-
-    logger.debug("SENT!")
     
     # This is to destroy the attachment right away
     @application.upload.destroy
