@@ -19,7 +19,7 @@ class Application < ActiveRecord::Base
 			row.append(application.user.full_name)
 			row.append(application.opportunity.user.id)
 			row.append(application.opportunity.user.full_name)
-			row.append(opportunity.created_at)
+			row.append(application.created_at)
 			row.append(application.message)
 
 			csv << row
