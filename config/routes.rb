@@ -7,7 +7,7 @@ GAN::Application.routes.draw do
   # get "admins/users/:id" => "users#account", as: :user_account
   get "admins/invitations" => "admins#invitations", as: :invitations
   get "admins/alum" => "admins#view_alum_list", as: :alum_list
-  get "/admins/main" => 'admins#main', as: :admin_main
+  # get "/admins/main" => 'admins#main', as: :admin_main
 
 
   namespace :admins do
@@ -22,7 +22,7 @@ GAN::Application.routes.draw do
     resources :applications
   end
   
-  # get '/' => 'users/sessions#new', as: :root
+  get '/welcome' => "opportunities#welcome", as: :welcome
   get '/opportunities/new/upload' => "opportunities#upload", as: :new_upload
 
   devise_scope :user do

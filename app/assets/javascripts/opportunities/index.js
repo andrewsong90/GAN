@@ -37,7 +37,8 @@ var remove_from_favorites = function(opportunity_id){
 
 $(document).ready(function(){
 
-	console.log($(window).scrollTop());
+	$('#numOfOpportunities').html($('#opportunities').find('.well').length);
+
 
 	$(".super-container").on("click",".add_favorite_btn",function(e){
 		console.log("clicked "+e.target.id);
@@ -60,8 +61,19 @@ $(document).ready(function(){
 		closeButton: false	
 	});
 
-	// $("select").minimalect({
-	// 	theme: "bubble"
-	// });
+	$("#more").click(function(e){
+		e.preventDefault();
+		var url = $('.pagination .next a').attr('href');
+		$.ajax({
+			url: url,
+			dataType: "script",
+			success: function(){
+				$('#numOfOpportunities').html($('#opportunities').find('.well').length);
+			}
+		})
+		
+	});
+
+	$("#more").tooltip();
 
 });

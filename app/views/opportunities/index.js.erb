@@ -1,0 +1,7 @@
+$('#opportunities').append("<%=j render 'opportunities/opportunities' %>");
+<% if @opportunities.next_page %>
+	$(".pagination").replaceWith('<%=j paginate @opportunities %>');
+<% else %>
+	$('#more').remove();
+	$('.pagination').remove();
+<% end %>

@@ -6,10 +6,10 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     if resource.type=="Admin"
       admins_posts_path
+    elsif resource.type=="Friend" and resource.sign_in_count == 1
+      welcome_path
     else
-      logger.debug("REDIRECT #{redirect_back_or_default()}")
       redirect_back_or_default()
-  	   # opportunities_path	
     end
   end
 
@@ -72,5 +72,5 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :alum_signed_in?, :can_apply?, :home_path
+  helper_method :alum_signed_in?, :can_apply?, :home_path, :friend_signed_in?
 end

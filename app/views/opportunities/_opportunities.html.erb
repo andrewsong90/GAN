@@ -1,0 +1,55 @@
+<% @opportunities.each do |f| %>
+			<div class="well">
+				<div class="align-left">
+					<%= image_tag f.upload.url(:thumb), :class =>"box_radius" %>
+				</div>
+				<div class="align-left indent">
+					<h4>
+						<%= f.title %>&nbsp;<small><%= f.company %></small>
+
+						<% if can_apply?(f) %>
+							<span></span>
+						<% elsif current_user.is_owner?(f) %>
+							<span class="label label-info">Owner</span>
+						<% else %>
+							<span class="label label-success"><i class="fa fa-check"></i>&nbsp;Connected</span>
+						<% end %>
+
+						<br>
+						<small class="italics"><%= f.job_type %></small>		
+					</h4>
+					
+					<i class="fa fa-map-marker"></i>&nbsp;<%= short_location(f.location) %><br>
+					<span class="italics">Posted on</span>&nbsp;&nbsp;<%= f.created_at.strftime('%b. %e, %Y') %><br>	
+					<span class="italics">Offered by</span>&nbsp;&nbsp;<%= f.user.full_name %>
+				</div>
+				<div class="align-right">
+					<div class="align-right">
+
+						<%= link_to "View", opportunity_path(f), :class => "btn btn-success" %>
+
+					</div>
+					<div class="clear"></div>
+
+					<br>
+
+					<div class="align-right">
+						<% if f.is_favorite?(current_user.id) %>
+							<button class="remove_favorite_btn btn btn-success btn-labeled" id="<%= f.id %>">
+								<span class="btn-label"><i class="fa fa-check"></i></span>
+									Saved
+							</button>
+						<% else %>
+							<button class="add_favorite_btn btn btn-primary btn-labeled" id="<%= f.id %>">
+								<span class="btn-label"><i class="fa fa-plus"></i></span>
+									Save
+							</button>
+						<% end %>
+
+					</div>
+					<div class="clear"></div>
+
+				</div>
+				<div class="clear"></div>
+			</div>
+<% end %>

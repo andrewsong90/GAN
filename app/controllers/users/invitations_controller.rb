@@ -20,7 +20,7 @@ class Users::InvitationsController < Devise::InvitationsController
 			UserMailer.delay.invite_message(@user, @token, @title, @content)
 		end
 
-		redirect_to admin_main_path
+		redirect_to admins_posts_path
 	end
 
 

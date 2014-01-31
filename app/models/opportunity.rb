@@ -46,10 +46,8 @@ class Opportunity < ActiveRecord::Base
 						:tsearch => {:prefix => true}
 					}
 
-	pg_search_scope :search_provider,
-					:associated_against => {:user => :fname}
-
-	pg_search_scope :search, lambda {|query, *args| return { :against => args, :query => query}}
+	pg_search_scope :search_jobtype,
+					:against => [:job_type]
 
 	pg_search_scope :search_title,
 					:against => [:title],
@@ -89,14 +87,19 @@ class Opportunity < ActiveRecord::Base
 
 	#Database Search
 	def self.text_search(params)
-		if params[:query].present? && params[:provider].present?
-			search_opportunity(params[:query]).search_provider(params[:provider]).reorder("created_at DESC")
-		elsif params[:query].present?
-			search_opportunity(params[:query])
-		elsif params[:provider].present?
-			search_provider(params[:provider])
+		if params[:query].present?
+			if params[:job_type].present?
+				search_jobtype(params[:job_type]).search_opportunity(params[:query]).reorder("created_at DESC")
+			else
+				search_opportunity(params[:query])
+			end
+			# search_opportunity(params[:query])#.reorder("created_at DESC")
 		else
-			all
+			if params[:job_type].present?
+				search_jobtype(params[:job_type])
+			else
+				all
+			end
 		end
 	end
 

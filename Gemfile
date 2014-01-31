@@ -25,7 +25,7 @@ gem 'cocoon'
 gem 'jquery-rails'
 
 # Simple Captcha
-gem 'simple_captcha', :git => "git://github.com/galetahub/simple-captcha.git"
+#gem 'simple_captcha', :git => "git://github.com/galetahub/simple-captcha.git"
 
 #Passing data to JavaScript
 
@@ -56,13 +56,12 @@ gem 'less-rails'
 
 gem "devise_invitable"
 
+gem 'simple_form'
+
 #Geocoder
 gem 'geocoder'
 
-#Passing data to JavaScript
-gem 'gon'
-
-gem 'simple_form'
+gem 'browser'
 
 #Background Tasks
 gem 'delayed_job_active_record'

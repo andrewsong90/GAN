@@ -208,6 +208,28 @@ body{
 	@include box_shadow;
 }
 
+.more{
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+
+	font-weight: 600;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 20px;
+	color: $blue_color;
+	cursor: pointer; 
+	width: 200px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
 .sidebar{
 	width: 165px;
 	position: absolute;

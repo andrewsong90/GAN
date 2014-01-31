@@ -33,6 +33,7 @@
 			<th>Name</th>
 			<th>Type</th>
 			<th>E-mail</th>
+			<th>Invitation count</th>
 			<th>Updated Date</th>
 			<th></th>
 		</tr>
@@ -48,6 +49,7 @@
 				<td><%= f.full_name %></td>
 				<td><%= f.type %></td>
 				<td><%= f.email %></td>
+				<td><%= f.invitation_limit %></td>
 				<td><%= f.updated_at.strftime('%b. %e, %Y') %></td>
 				<td><%= link_to "Profile", admins_user_path(:id => f.id), :class => "btn btn-info" %> </td>
 			</tr>

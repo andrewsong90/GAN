@@ -37,14 +37,15 @@
 								<li><a href="<%= new_contact_path %>" class="whitefont neatfont">Contact</a></li>
 							</ul>
 
-							<nav class="navigation pull-right navbar-hcenter">
-								<a class="redfont" href="<%= opportunities_path%>"><i class="fa fa-home"></i>&nbsp;&nbsp;Opportunities&nbsp;</a>
+							<nav class="navigation pull-right navbar-hcenter neatfont" style="font-size: 18px;">
+								Welcome, <%= current_user.full_name %>&nbsp;&nbsp;&nbsp;&nbsp;
+								<a class="redfont" href="<%= opportunities_path%>"><i class="fa fa-home"></i>&nbsp;&nbsp;Opportunities&nbsp;&nbsp;</a>
 								<% if !admin_signed_in? %>
-									<a class="redfont" href="<%= my_opportunities_path %>"><i class="fa fa-briefcase"></i>&nbsp;&nbsp;My Opportunities&nbsp;</a>
-									<a class="redfont" href="<%= user_path(:id => current_user.id) %>"><i class="fa fa-user"></i>&nbsp;&nbsp;My Account&nbsp;</a>
+									<a class="redfont" href="<%= my_opportunities_path %>"><i class="fa fa-briefcase"></i>&nbsp;&nbsp;My Opportunities&nbsp;&nbsp;</a>
+									<a class="redfont" href="<%= user_path(:id => current_user.id) %>"><i class="fa fa-user"></i>&nbsp;&nbsp;My Account&nbsp;&nbsp;</a>
 								<% end %>
 								<%= link_to destroy_user_session_path, :class => "redfont", method: :delete do %>
-									<i class="fa fa-sign-out"></i>&nbsp;Logout 
+									<i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout&nbsp; 
 								<% end %>
 							</nav>
 					</div>
@@ -68,7 +69,10 @@
 
 	<% if user_signed_in? %>
 		<div class="footer_bar"><br>
-			<!-- <p class="whitefont text-align-center"> Best viewed in Firefox and Chrome </p> -->
+			<% if browser.modern? %>
+				<%= browser.version %>
+				You are using a modern browser
+			<% end %>
 		</div>
 	<% end %>
 

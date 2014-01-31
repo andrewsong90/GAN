@@ -150,12 +150,8 @@ class User < ActiveRecord::Base
 
     if skills.length != 0
       skills.each do |skill|
-        # logger.debug("SKILL #{skill}")
-        # logger.debug("SKILL USER #{skill.users}, #{skill.users.length}")
         skill.users.each do |user|
-          # logger.debug("USER_skill #{user}")
           if !list_of_interested.include?(user)
-            # logger.debug("NOT INCLUDED!")
             list_of_interested.append(user)
           end
         end

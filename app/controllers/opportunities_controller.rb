@@ -45,23 +45,21 @@ class OpportunitiesController < ApplicationController
 	# TODO: No pagination yet
 	def index
 		@post=Post.last
+		@itemsPerPage=5
 		if friend_signed_in?
 			opportunities = Opportunity.text_search(params).order("created_at DESC").to_a
 			filtered_opportunities = opportunities.select { |opportunity| opportunity.user.id == current_user.id }
 			@opportunities = Opportunity.type_search(filtered_opportunities,params[:job_type])
-			# @opportunities = Kaminari.paginate_array(filtered_opportunities).page(params[:page]).per(5)
-			# @opportunities=opportunities
 		else
 			# opportunities = Opportunity.text_search(params).page params[:page]
-			opportunities=Opportunity.text_search(params).order("created_at DESC").to_a
-			filtered_opportunities = Opportunity.type_search(opportunities,params[:job_type])
-			# @opportunities = Kaminari.paginate_array(filtered_opportunities).page(params[:page]).per(10)
-			@opportunities = filtered_opportunities
-			# @opportunities = Opportunity.search_opportunity(params[:query]).page params[:page]
+			@opportunities=Opportunity.text_search(params).order("created_at DESC")
+			#filtered_opportunities = Opportunity.type_search(opportunities,params[:job_type])
+			@opportunities = Kaminari.paginate_array(@opportunities).page(params[:page]).per(@itemsPerPage)
 		end
 		
 			#Render CSV and html view
 			respond_to do |format|
+				format.js
 				format.html
 				format.csv { render text: Opportunity.all.to_csv }
 			end

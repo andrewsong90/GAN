@@ -2,6 +2,13 @@ class ApplicationsController < ApplicationController
 
 	before_filter :authenticate_user
 
+
+	def index
+		respond_to do |format|
+			format.csv { render text: Application.all.to_csv }
+		end
+	end
+
 	# Create a new Application
 	def new
 		
