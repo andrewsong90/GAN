@@ -33,13 +33,13 @@ Skill.where(:skill => "Quality Assurance/Safety").first_or_create!
 Skill.where(:skill => "Sales/Retail/Business Development").first_or_create!
 Skill.where(:skill => "Other").first_or_create!
 
-# Jobtype.where(:name => "Full-Time").first.update_attribute(:name, "Full-time job")
-# Jobtype.where(:name => "Part-Time").first.update_attribute(:name, "Part-time job")
-# Jobtype.where(:name => "Paid Intern").first.update_attribute(:name, "Internship")
-# Jobtype.where(:name => "Unpaid Intern").first.update_attribute(:name, "Informational Interview")
+EduLevel.where(:education => "Current High School Student").first_or_create!
+EduLevel.where(:education => "High School Graduate").first_or_create!
+EduLevel.where(:education => "Current College Undergraduate").first_or_create!
+EduLevel.where(:education => "College Graduate").first_or_create!
 
-#Jobtype.create(:name => "Volunteer")
+Opportunity.update_all(:edu_level => "College Graduate")
 
 # admin=User.where(:email => "admin@gannacademy.org", :type => "Admin").first_or_create!(:password => "111111", :confirmed_at => Time.now, :invitation_limit => nil)
-User.where(:email => "admin@gannacademy.org", :type => "Admin").first.update!(:fname => "Susan", :lname => "Rubin", :parent_email =>"be@gmail.com", :password => "111111", :confirmed_at => Time.now, :invitation_limit => 9999)
-User.where(:email => "admin2@gannacademy.org", :type => "Admin").first.update!(:fname => "Chris", :lname => "Russo", :password => "111111", :confirmed_at => Time.now, :invitation_limit => 9999)
+# User.where(:email => "admin@gannacademy.org", :type => "Admin").first.update!(:fname => "Susan", :lname => "Rubin", :parent_email =>"be@gmail.com", :password => "111111", :confirmed_at => Time.now, :invitation_limit => 9999)
+# User.where(:email => "admin2@gannacademy.org", :type => "Admin").first.update!(:fname => "Chris", :lname => "Russo", :password => "111111", :confirmed_at => Time.now, :invitation_limit => 9999)

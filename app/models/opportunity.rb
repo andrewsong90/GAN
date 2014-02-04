@@ -49,6 +49,9 @@ class Opportunity < ActiveRecord::Base
 	pg_search_scope :search_jobtype,
 					:against => [:job_type]
 
+	pg_search_scope :search_edulevel,
+					:against => [:edu_level]
+
 	pg_search_scope :search_title,
 					:against => [:title],
 					:using => {
@@ -89,16 +92,33 @@ class Opportunity < ActiveRecord::Base
 	def self.text_search(params)
 		if params[:query].present?
 			if params[:job_type].present?
-				search_jobtype(params[:job_type]).search_opportunity(params[:query]).reorder("created_at DESC")
+				if params[:edu_level].present?
+					search_jobtype(params[:job_type]).search_edulevel(params[:edu_level]).search_opportunity(params[:query]).reorder("created_at DESC")
+				else
+					search_jobtype(params[:job_type]).search_opportunity(params[:query]).reorder("created_at DESC")
+				end
+				
 			else
-				search_opportunity(params[:query])
+				if params[:edu_level].present?
+					search_edulevel(params[:edu_level]).search_opportunity(params[:query]).reorder("created_at DESC")
+				else
+					search_opportunity(params[:query])
+				end
 			end
-			# search_opportunity(params[:query])#.reorder("created_at DESC")
 		else
 			if params[:job_type].present?
-				search_jobtype(params[:job_type])
+				if params[:edu_level].present?
+					search_jobtype(params[:job_type]).search_edulevel(params[:edu_level]).reorder("created_at DESC")
+				else
+					search_jobtype(params[:job_type])
+				end
 			else
-				all
+				if params[:edu_level].present?
+					search_edulevel(params[:edu_level])
+				else
+					all
+				end
+				
 			end
 		end
 	end

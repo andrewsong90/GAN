@@ -59,7 +59,13 @@ class OpportunitiesController < ApplicationController
 			#Render CSV and html view
 			respond_to do |format|
 				format.js
-				format.html
+
+				if friend_signed_in?
+					format.html { 'friends_index'}
+				else
+					format.html { 'index'}
+				end
+				
 				format.csv { render text: Opportunity.all.to_csv }
 			end
 	end
@@ -187,7 +193,7 @@ class OpportunitiesController < ApplicationController
 
 	#Strong parameters for opportunities
 	def opportunity_params
-		params.permit(:time_type, :time => [], opportunity: [:active, :title,:location,:description,:job_type,:company,:upload, :latitude, :longitude, sponsors_attributes: [:id,:name, :position, :company,:email, :_destroy], uploads_attributes: [:id, :avatar, :_destroy], opportunity_skills_attributes: [:id, :skill_id, :_destroy]])
+		params.permit(:time_type, :time => [], opportunity: [:edu_level, :active, :title,:location,:description,:job_type,:company,:upload, :latitude, :longitude, sponsors_attributes: [:id,:name, :position, :company,:email, :_destroy], uploads_attributes: [:id, :avatar, :_destroy], opportunity_skills_attributes: [:id, :skill_id, :_destroy]])
 	end
 
 	#Strong parameters for skills

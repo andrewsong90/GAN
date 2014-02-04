@@ -40,20 +40,24 @@
      	  
         <div><%= f.label "Type", :class => "section-header" %><span class="required">*</span><br>
       	<%= f.collection_select :job_type, Jobtype.all, :name, :name, prompt: true %></div>
-      </div>
 
+         <br>
+         
+        <div><%= f.label "Minimum Education Level", :class => "section-header" %><span class="required">*</span><br>
+        <%= f.collection_select :edu_level, EduLevel.all, :education, :education, prompt: true %></div>
+      </div>
       <div class="clear"></div>
     </div>
     
-    <br><br><br>
+    <br><br>
 
-  	<div><%= f.label "Job Description", :class => "section-header" %><span class="required">*</span><br>
+  	<div><%= f.label "Opportunity Description", :class => "section-header" %><span class="required">*</span><br>
   	<%= f.text_area :description, :class => "tinymce span7", :rows => "6", :placeholder => "Enter Job Description here" %></div>
     <%= tinymce %>
 
     <br>
 
-    <div><%= f.label "Supplementary Descriptions", :class => "section-header" %>
+    <div><%= f.label "Supplementary Information (upload)", :class => "section-header" %>
       &nbsp;<a id="opportunity_files_help" class="help"><i  class="fa fa-question-circle"></i></a><br>
 
       <div id="uploads">  

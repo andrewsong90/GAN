@@ -1,6 +1,6 @@
 var start_date;
 var end_date;
-var OPPORTUNITY_UPLOAD_LIMIT=3;
+var OPPORTUNITY_UPLOAD_LIMIT=2;
 var SPONSOR_LIMIT=4;
 
 $(document).ready(function(){
@@ -116,12 +116,10 @@ $(document).ready(function(){
 });
 
 function simple(){
-  console.log("Simple");
   return 0;
 }
 
 function RangeEnd(end){
-  console.log("RANGEEND")
   if (end==undefined)
     return null;
   else
@@ -130,7 +128,6 @@ function RangeEnd(end){
 }
 
 function RangeStart(start){
-  console.log("RANGESTART")
   if (start==undefined)
     return null;
   else
@@ -233,5 +230,3 @@ function initialize() {
   setupClickListener('changetype-establishment', ['establishment']);
   setupClickListener('changetype-geocode', ['geocode']);
 }
-
-// google.maps.event.addDomListener(window,'load',initialize);

@@ -21,6 +21,8 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
   end
 
   def invite_message(user, token, title, content)
+    attachments.inline['gann_banner.png']=File.read("#{Rails.root.to_s}/app/assets/images/gann_banner.png")
+
     @user = user
     @title = title
     @content = content
