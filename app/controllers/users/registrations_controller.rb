@@ -66,7 +66,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 		(Skill.all-@user.skills).each do |skill|
 			@user.user_skills.build(:skill => skill)
 		end
-		@user.user_skills.sort_by! {|us| us.skill.id }
+		@user.user_skills.sort_by! {|us| us.skill.skill }
 	end
 
 	def after_update_path_for(resource)

@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  after_validation :update_alum_record
+  after_create :update_alum_record
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
