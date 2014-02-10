@@ -53,6 +53,27 @@ class OpportunitiesController < ApplicationController
 		end
 	end
 
+	# This is the opportunities page for Alum and Admins
+	def home
+		@itemsPerPage=5	
+		@opportunities=Opportunity.text_search(params).order("created_at DESC")
+		@opportunities = Kaminari.paginate_array(@opportunities).page(params[:page]).per(@itemsPerPage)
+		
+		logger.debug("OPPORTUNITIES #{@opportunities.size()}")
+	
+		respond_to do |format|
+			format.js
+			format.html { render 'index.html.erb'}				
+			format.csv { render text: Opportunity.all.to_csv }
+		end
+	end
+
+	# This is the opportunities page for Friends
+	def friend_home
+		render "opportunities/friends_index.html.erb"
+	end
+
+
 	# Shows opportunities created and applied by current user
 	def my_index
 		@created_opportunities = current_user.opportunities.page params[:page]
@@ -188,23 +209,7 @@ class OpportunitiesController < ApplicationController
 		params.permit(:skills => [])
 	end
 	
-	# This is the opportunities page for Alum and Admins
-	def home
-		@opportunities=Opportunity.text_search(params).order("created_at DESC")
-		@opportunities = Kaminari.paginate_array(@opportunities).page(params[:page]).per(@itemsPerPage)
-		@itemsPerPage=5	
-	
-		respond_to do |format|
-			format.js
-			format.html { render 'index.html.erb'}				
-			format.csv { render text: Opportunity.all.to_csv }
-		end
-	end
 
-	# This is the opportunities page for Friends
-	def friend_home
-		render "opportunities/friends_index.html.erb"
-	end
 
 
 

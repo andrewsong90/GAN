@@ -49,21 +49,22 @@ $(document).ready(function(){
 		remove_from_favorites(e.target.id);
 	});
 
-	$(".super-container").jumpto({
-		firstLevel: "> h2",
-		secondLevel: false,
-		innerWrapper: ".container",
-		offset: 5,
-		animate: 1000,
-		navContainer: false,
-		anchorTopPadding: 60,
-		showTitle: "Jump to",
-		closeButton: false	
-	});
+	// $(".super-container").jumpto({
+	// 	firstLevel: "> h2",
+	// 	secondLevel: false,
+	// 	innerWrapper: ".container",
+	// 	offset: 5,
+	// 	animate: 1000,
+	// 	navContainer: false,
+	// 	anchorTopPadding: 60,
+	// 	showTitle: "Jump to",
+	// 	closeButton: false	
+	// });
 
 	$("#more").click(function(e){
 		e.preventDefault();
 		var url = $('.pagination .next a').attr('href');
+		console.log(url);
 		$.ajax({
 			url: url,
 			dataType: "script",
