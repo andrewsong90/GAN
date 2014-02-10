@@ -3,17 +3,11 @@
 	<%= javascript_include_tag "opportunities/index" %>
 <% end %>
 
+<% content_for :title, "Main" %>
+
 <div class="container box_shadow box_padding">
 		<h2 class="brownfont neatfont" style="display: inline; margin-top:100px;">
-			&nbsp;Announcement!!</h2>
-		<div class="align-right well" style="padding-top:12px; padding-bottom: 8px; margin-bottom: 15px;">
-			<span class="italics">Have a new opportunity that you want to offer?</span><br>
-			<div class="pull-right" style="margin-top: 10px;">
-				<%= link_to new_opportunity_path, :class => "btn btn-success" do %>
-					<i class="fa fa-pencil"></i>&nbsp;Create
-				<% end %>
-			</div>
-		</div>
+			&nbsp;News</h2>
 		<div class="clear"></div>
 
 	
@@ -30,13 +24,65 @@
 	</div>
 	<hr class="style-one" style="margin: 10px 0px;"></hr>
 	<div class="align-right">
-		<%= link_to "View posts", admins_posts_path, :class => "btn btn-primary" %>
+		<%= link_to "View Posts", admins_posts_path, :class => "btn btn-primary" %>
 	</div>
 	<div class="clear"></div>
 </div>
 
+<br>
+
+<div class="container box_shadow box_padding">
+	<h2 class="brownfont neatfont" style="display: inline; margin-top:100px;">
+		&nbsp;Create Opportunity</h2>
+	<div class="clear"></div>
+	<span class="italics">Do you have any opportunities that you would like to offer?<br>
+		Start by selecting <strong>job type</strong> and <strong>minimum education level</strong> for the new opportunity</span>
+
+	<br><br>
+	<%= form_tag new_opportunity_path, method: :get do %>
+		<div class="pull-left">
+		<span class="section-header">Type&nbsp;</span><br>
+			<%= select_tag "job_type", options_from_collection_for_select(Jobtype.all, :name, :name, params[:job_type]), :class=>"select_box",:prompt => "Select type" %>
+		</div>
+
+		<div class="pull-left" style="margin-left: 20px;">
+			<span class="section-header">Minimum Education Level&nbsp;</span><br>
+			<%= select_tag "edu_level", options_from_collection_for_select(EduLevel.all, :education, :education, params[:edu_level]),:prompt => "Select education level" %>
+		</div>
+		
+		<div class="clear"></div>
+		<br>
+
+		<div class="align-right">
+			<%= button_tag(type: 'submit', class: "btn btn-success") do %>
+				<i class="fa fa-check">&nbsp;Continue</i>
+			<% end %>
+		</div>
+		<div class="clear"></div>
+	<% end %>
+</div>
 
 <br>
 
+<div class="container box_shadow box_padding">
+	<h2 class="brownfont neatfont" style="display: inline; margin-top:100px;">
+		&nbsp;Invitations</h2>
+	<div class="clear"></div>
+	
+	<span class="italics">Do you want to invite others to the platform?</span>
+
+	<br><br>
+
+	<div class="pull-right">
+		<% if current_user.has_invitations_left? %>
+			You have <%= current_user.invitation_limit %> invitations left. &nbsp;
+			<%= link_to "Invite", new_user_invitation_path, :class => "btn btn-success" %>
+		<% else %>
+			You do not have any invitations left. Please contact the administrator. &nbsp;
+			<%= link_to "Contact", new_contact_path, :class => "btn btn-warning" %>
+		<% end %>
+	</div>
+	<div class="clear"></div>
+</div>
 
 <div class="clear"></div>

@@ -6,8 +6,8 @@ class Users::InvitationsController < Devise::InvitationsController
 		new_user_invitation_path
 	end
 
+	# Page for sending out custom template invites
 	def batch_new
-		
 	end
 
 	def batch_invite
@@ -26,8 +26,6 @@ class Users::InvitationsController < Devise::InvitationsController
 
 		redirect_to admins_posts_path
 	end
-
-
 
 	#Only Friends can sign up through invitation
 	def edit

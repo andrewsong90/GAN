@@ -42,32 +42,15 @@ class OpportunitiesController < ApplicationController
 
 	end
 
+	#This is the main page that all of the users see after login.
 	def index
-		@post=Post.last
-		@itemsPerPage=5
-		if friend_signed_in?
-			opportunities = Opportunity.text_search(params).order("created_at DESC").to_a
-			filtered_opportunities = opportunities.select { |opportunity| opportunity.user.id == current_user.id }
-			@opportunities = Opportunity.type_search(filtered_opportunities,params[:job_type])
-		else
-			# opportunities = Opportunity.text_search(params).page params[:page]
-			@opportunities=Opportunity.text_search(params).order("created_at DESC")
-			#filtered_opportunities = Opportunity.type_search(opportunities,params[:job_type])
-			@opportunities = Kaminari.paginate_array(@opportunities).page(params[:page]).per(@itemsPerPage)
-		end
-		
-			#Render CSV and html view
-			respond_to do |format|
-				format.js
 
-				if friend_signed_in?
-					format.html { 'friends_index'}
-				else
-					format.html { 'index'}
-				end
-				
-				format.csv { render text: Opportunity.all.to_csv }
-			end
+		@post=Post.last
+		if friend_signed_in?
+			friend_home	
+		else
+			home
+		end
 	end
 
 	# Shows opportunities created and applied by current user
@@ -95,6 +78,11 @@ class OpportunitiesController < ApplicationController
 	end
 
 	def new
+		if params[:job_type]
+			logger.debug("JOBBB #{params[:job_type]}")
+		else
+			logger.debug("NOOPE #{params[:job_type]}")
+		end
 		@opportunity=Opportunity.new
 		@opportunity.uploads.build
 		@opportunity.sponsors.build
@@ -190,7 +178,6 @@ class OpportunitiesController < ApplicationController
 		@opportunity.opportunity_skills.sort_by! {|os| os.skill.id }
 	end
 
-
 	#Strong parameters for opportunities
 	def opportunity_params
 		params.permit(:time_type, :time => [], opportunity: [:edu_level, :active, :title,:location,:description,:job_type,:company,:upload, :latitude, :longitude, sponsors_attributes: [:id,:name, :position, :company,:email, :_destroy], uploads_attributes: [:id, :avatar, :_destroy], opportunity_skills_attributes: [:id, :skill_id, :_destroy]])
@@ -201,4 +188,25 @@ class OpportunitiesController < ApplicationController
 		params.permit(:skills => [])
 	end
 	
+	# This is the opportunities page for Alum and Admins
+	def home
+		@opportunities=Opportunity.text_search(params).order("created_at DESC")
+		@opportunities = Kaminari.paginate_array(@opportunities).page(params[:page]).per(@itemsPerPage)
+		@itemsPerPage=5	
+	
+		respond_to do |format|
+			format.js
+			format.html { render 'index.html.erb'}				
+			format.csv { render text: Opportunity.all.to_csv }
+		end
+	end
+
+	# This is the opportunities page for Friends
+	def friend_home
+		render "opportunities/friends_index.html.erb"
+	end
+
+
+
+
 end

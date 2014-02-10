@@ -4,7 +4,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	before_filter :update_permitted_params, :only => :update
 
 	def create
-
 			build_resource(sign_up_params)
 			resource.type=params[:user][:type]
 
@@ -24,7 +23,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	    	else
 	      		render 'new'
 	    	end
-
 	end
 
 	def edit

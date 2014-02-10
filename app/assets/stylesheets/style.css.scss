@@ -1,6 +1,7 @@
 /*#3BB69E*/
 /*$grey_color: #e5e5e9;*/
-$grey_color: #f0f0f0;
+$grey_color: #ffffff;
+$white_color: #f0f0f0;
 
 /*$blue_color: #122f45;*/
 $blue_color: #336699;
@@ -41,9 +42,7 @@ $left_container_margin_right: 20px;
 
 
 body{
-
-
-	background-color: #ffffff;
+	background-color: $white_color;
 }
 
 /* Container settings */
@@ -58,13 +57,17 @@ body{
 		display: none;
 	}
 
+	.lowonly{
+		display: none;
+	}
+
 	.container{
 		@include container_basic;
 		width: $container_width_high;
 	}
 
 	.announcement-container{
-		height: 160px;
+		height: 140px;
 		overflow: auto;
 	}
 
@@ -110,6 +113,10 @@ body{
 	.medium{
 		display: inline;
 	}
+
+	.lowonly{
+		display: none;
+	}
 	
 	.container{
 		@include container_basic;
@@ -117,7 +124,7 @@ body{
 	}
 
 	.announcement-container{
-		height: 130px;
+		height: 110px;
 		overflow: auto;
 	}
 
@@ -164,13 +171,17 @@ body{
 		display: inline;
 	}
 
+	.lowonly{
+		display: inline;
+	}
+
 	.container{
 		@include container_basic;
 		width: $container_width_low;
 	}
 
 	.announcement-container{
-		height: 130px;
+		height: 100px;
 		overflow: auto;
 	}
 
@@ -492,6 +503,32 @@ input[type="radio"]{
 
 .italics{
 	font-style: italic;
+}
+
+.welcome_image{
+	position: relative;
+}
+
+.welcome_text{
+	padding-right: 10px;
+	padding-left: 10px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-color: #000000;
+	color: #ffffff;
+	opacity: 0.85;
+}
+
+.welcome_title{
+	position: absolute;
+	padding-left: 10px;
+	padding-right: 10px;
+	top:0;
+	left:0;
+	opacity: 0.85;
+	background-color: #000000;
+	color: #ffffff;
 }
 
 /* Google Map API */

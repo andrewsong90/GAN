@@ -1,7 +1,8 @@
 <% content_for :head do %>
-	<title>New Opportunities</title>
 	<%= javascript_include_tag "opportunities/form" %>
 <% end %>
+
+<% content_for :title, "New Opportunity" %>
 
 <div class="container">
 	<h2 class="header">New Opportunity</h2>
@@ -20,6 +21,7 @@
 	        </div>
 	     <% end %>
 
+	    <!-- Rendering actual template for new opportunity -->
 		<%= render "form", :f => f %>
 		<br>
 		<%= f.hidden_field :active, :value => true %>

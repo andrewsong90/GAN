@@ -1,13 +1,14 @@
 <%= render "admins/shared/head" %>
+<% content_for :title, "Manage connections" %>
 
 <div class="large_container">
 
 	<%= render "admins/shared/nav" %>
 
-	<h3>View Applications</h3>
+	<h3>Manage Connections</h3>
 	<hr class="style-one"></hr>
 	<div class="pull-right">
-		<span class="italics">Export applications</span>&nbsp;&nbsp;<%= link_to "Export", export_applications_path(format: "csv"), :class=> "btn btn-primary" %>
+		<span class="italics">Export connections</span>&nbsp;&nbsp;<%= link_to "Export", export_applications_path(format: "csv"), :class=> "btn btn-primary" %>
 	</div>
 	<div class="clear"></div>
 	<br>

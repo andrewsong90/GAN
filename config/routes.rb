@@ -15,8 +15,10 @@ GAN::Application.routes.draw do
     resources :posts
   end
 
+  #contacts
   get "/contacts/new" => "contacts#new", as: :new_contact
   post "/contacts" => "contacts#create"
+  get '/about' => 'opportunities#about', as: :about
 
   resources :opportunities do
     resources :applications
@@ -25,14 +27,14 @@ GAN::Application.routes.draw do
   get '/welcome' => "opportunities#welcome", as: :welcome
   get '/opportunities/new/upload' => "opportunities#upload", as: :new_upload
 
+  devise_for :users, :controllers => {:registrations => 'users/registrations', :confirmations => "confirmations", :invitations => "users/invitations", :sessions => "users/sessions"}
+
   devise_scope :user do
     get '/friend/register' => 'users/registrations#new', :type => 'Friend', as: :new_friend_registration
     get '/alum/register' => 'users/registrations#new', :type => 'Alum', as: :new_alum_registration
     
     get '/invitations/batch' => "users/invitations#batch_new", as: :new_batch_invite
-
     post '/invitation' => "users/invitations#batch_invite", as: :batch_invite
-
 
     get '/' => 'users/sessions#new', as: :root
   end
@@ -41,20 +43,15 @@ GAN::Application.routes.draw do
     patch '/users/confirmation' => 'confirmations#update', :via => :patch, :as => :update_user_confirmation
   end
   
-  devise_for :users, :controllers => {:registrations => 'users/registrations', :confirmations => "confirmations", :invitations => "users/invitations", :sessions => "users/sessions"}
   
-  get '/contact' => 'opportunities#contact', as: :contact
-  get '/about' => 'opportunities#about', as: :about
-  
-  get '/account' => 'users#account', as: :account
   get '/my_opportunities' => 'opportunities#my_index', as: :my_opportunities
-#  get '/users/signup' => 'users#sign_up', as: :new_user_signup
 
   #The main page after sign in
   get "/main" => 'opportunities#main', as: :main
 
   #Path for importing CSV files
   post '/import' => "userdbs#import", as: :import_users
+
 
 
 

@@ -1,0 +1,15 @@
+<!-- Template for rendering skillset -->
+
+  <% if @counter % 2 == 0 %>
+    <tr>
+  <% end %>
+        
+  <td class="form-inline" >
+    <%= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1' %>&nbsp;
+    <span style="margin-right: 30px;"> <%= ff.object.skill.skill %> </span>
+    <%= ff.hidden_field :skill_id %>
+  </td>
+
+  <% if ((@counter +=1) % 2) == 0 %>
+    </tr>
+  <% end %>

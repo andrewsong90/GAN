@@ -1,5 +1,7 @@
 <%= render "admins/shared/head" %>
 
+<% content_for :title, "View Alum" %>
+
 <div class="large_container">
 
 	<%= render "admins/shared/nav" %>
@@ -19,6 +21,7 @@
 	<div>
 		<table class="table table-striped">
 			<tr>
+				<th></th>
 				<th>id</th>
 				<th>Name</th>
 				<th>Parent e-mail #1</th>
@@ -29,6 +32,13 @@
 
 			<% @alum.each do |f| %>
 				<tr>
+					<td>
+						<% if f.registered %>
+							<span class="label label-success">Registered</span>	
+						<% else %>
+							<span class="label label-warning">Not registered</span>
+						<% end %>
+					</td>
 					<td><%= f.id %></td>
 					<td><%= f.fname %> <%= f.lname %></td>
 					<td><%= f.parent_email_1 %></td>

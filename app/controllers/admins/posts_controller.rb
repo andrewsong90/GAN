@@ -40,6 +40,17 @@ class Admins::PostsController < ApplicationController
 		@post=Post.find(params[:id])
 	end
 
+	def destroy
+		@post=Post.find(params[:id])
+		if @post.destroy
+			flash[:notice] = "Post successfully deleted"
+			redirect_to admins_posts_path
+		else
+			flash[:error] = "Post could not be deleted"
+			redirect_to admins_post_path(@post)
+		end
+	end
+
 	private
 
 	def post_params

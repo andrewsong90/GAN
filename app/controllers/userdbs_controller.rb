@@ -4,6 +4,6 @@ class UserdbsController < ApplicationController
 	def import
 		Userdb.import(params[:file])
 		flash[:notice] = "CSV file successfully uploaded!"
-		redirect_to admin_main_path
+		redirect_to admins_posts_path
 	end
 end

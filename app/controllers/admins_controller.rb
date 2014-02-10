@@ -26,6 +26,11 @@ class AdminsController < ApplicationController
 	def invitations
 		users=User.all.to_a
 		@invited_users = users.select {|user| user.invitation_sent_at != nil }
+
+		respond_to do |format|
+			format.html
+			format.csv { render text: Opportunity.invitation_to_csv }
+		end
 	end
 
 	def create_new_user

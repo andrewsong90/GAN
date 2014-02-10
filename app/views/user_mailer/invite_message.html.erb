@@ -3,6 +3,7 @@
 <% if @content.length == 0 %>
 	This is the email default template.
 <% else %>
+	Dear <%= @user.full_name %>,<br><br>
 	<%= @content.html_safe %>
 <% end %>
 

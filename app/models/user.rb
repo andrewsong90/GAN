@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+  after_validation :update_alum_record
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
@@ -55,11 +58,10 @@ class User < ActiveRecord::Base
     end  
   end
 
-  # Succint authentication for demo
-  def check_alum_record_temporary
-     if !Userdb.where("(parent_email_1 = ? OR parent_email_2 = ?)",parent_email, parent_email).first 
-      errors.add(:base, "The combination of parent email & Gann graduation class doesn't match our database")
-    end
+  def update_alum_record
+    alum=Userdb.where("(parent_email_1 = ? OR parent_email_2 = ?) AND classyear = ? AND registered=?",parent_email, parent_email, classyear, false).first  
+    alum.update_attributes(:registered => true)
+    alum.save
   end
 
   #Database Search
@@ -165,10 +167,20 @@ class User < ActiveRecord::Base
   #Export to CSV
   def self.to_csv
     CSV.generate do |csv|
-      features = ["id","type","fname","lname","classyear","email","phone","parent_email","sign_in_count","invitation_limit"]
-      csv << features
+      features = ["id","type","fname","lname","classyear","email","title","company","phone","sign_in_count","last_sign_in_at","invitation_limit", "updated_at", "created_at"]
+      features_with_address = features+["address_1","address_2","city","state","country","zipcode"]
+      csv << features_with_address
       all.each do |user|
-        csv << user.attributes.slice(*features).values
+        row = user.attributes.slice(*features).values
+        if user.address
+          row.append(user.address.address_1)
+          row.append(user.address.address_2)
+          row.append(user.address.city)
+          row.append(user.address.state)
+          row.append(user.address.country)
+          row.append(user.address.zipcode)
+        end
+        csv << row
       end
     end
   end

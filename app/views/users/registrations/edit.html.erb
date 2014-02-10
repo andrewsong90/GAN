@@ -1,7 +1,7 @@
 <% content_for :head do %>
-  <title>GAN Opportunities</title>
   <%= javascript_include_tag "users/registration" %>
 <% end %>
+<% content_for :title, "Edit Profile" %>
 
 <div class="container">
   <h2>Edit Profile</h2>
@@ -10,51 +10,64 @@
 
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
 
-    <div><%= f.label "Profile picture", :class => "section-header" %><br>
-    <% if !f.object.avatar_file_name %>
-        <div class="fileinput fileinput-new" data-provides="fileinput">
-      <% else %>
-        <div class="fileinput fileinput-exists" data-provides="fileinput">
-      <% end %>
-        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 200px;">
-          <% if f.object.avatar_file_name %>
-            <%= image_tag f.object.avatar.url(:medium), :style =>"width: 200px;" %>  
-          <% end %>
-        </div>
-        <div>
-          <span class="btn btn-default btn-file">
-            <span class="fileinput-new">Select image</span>
-            <span class="fileinput-exists">Change</span>
-            <%= f.file_field :avatar %>
-          </span>
-          <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-        </div>
-      </div>
-    </div>
-
-    <br>
-
-    <div><%= f.label "Resume", :class => "section-header" %>
-      &nbsp;<a id="resume_help" class="help"><i  class="fa fa-question-sign"></i></a><br>
-      <div id="uploads">  
-        <%= f.fields_for :useruploads do |upload| %>
-          <% if !(@name=upload.object.avatar_file_name) %>
-            <%= render 'userupload_fields', :f => upload %>
-          <% else %>
-            <%= render 'edit_userupload_fields', :f => upload %>
-          <% end %>
+    <div class="pull-left">
+      <div><%= f.label "Profile picture", :class => "section-header" %><br>
+      <% if !f.object.avatar_file_name %>
+          <div class="fileinput fileinput-new" data-provides="fileinput">
+        <% else %>
+          <div class="fileinput fileinput-exists" data-provides="fileinput">
         <% end %>
-      
-        <div class="btn btn-primary upload_btn">
-          <%= link_to_add_association 'Add Uploads', f, :useruploads, :class=>"upload_link" %>
+          <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 200px;">
+            <% if f.object.avatar_file_name %>
+              <%= image_tag f.object.avatar.url(:medium), :style =>"width: 200px;" %>  
+            <% end %>
+          </div>
+          <div>
+            <span class="btn btn-default btn-file">
+              <span class="fileinput-new">Select image</span>
+              <span class="fileinput-exists">Change</span>
+              <%= f.file_field :avatar %>
+            </span>
+            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+          </div>
         </div>
-        
       </div>
     </div>
 
-    <br>
-    <div><%= f.label :Phone, :class => "section-header" %><br>
+    <div class="pull-left" style="margin-left: 50px;">
+      <br>
+      <div><%= f.label :Phone, :class => "section-header" %><br>
       <%= f.text_field :phone, :id => "phone", :placeholder => "XXX-XXX-XXXX" %></div> 
+      <div><%= f.label :Company, :class => "section-header" %><br>
+      <%= f.text_field :company %></div>
+      <div><%= f.label :Title, :class => "section-header" %><br>
+      <%= f.text_field :title %></div>
+    </div>
+
+    <div class="clear"></div>
+
+    <% if alum_signed_in? %>
+      <div><%= f.label "Resume", :class => "section-header" %>
+        &nbsp;<a id="resume_help" class="help"><i  class="fa fa-question-sign"></i></a><br>
+        <div id="uploads">  
+          <%= f.fields_for :useruploads do |upload| %>
+            <% if !(@name=upload.object.avatar_file_name) %>
+              <%= render 'userupload_fields', :f => upload %>
+            <% else %>
+              <%= render 'edit_userupload_fields', :f => upload %>
+            <% end %>
+          <% end %>
+        
+          <div class="btn btn-primary upload_btn">
+            <%= link_to_add_association 'Add Uploads', f, :useruploads, :class=>"upload_link" %>
+          </div>
+          
+        </div>
+      </div>
+    <% end %>
+
+    <br>
+
 
     <br>
 
@@ -63,39 +76,29 @@
 
       <%= f.fields_for :address do |ff| %>
         <%= ff.text_field :address_1, :placeholder => "Street address" %>
-        <%= ff.text_field :address_2, :placeholder => "Apartment, suite, unit, etc." %><br>
-        <%= ff.text_field :city, :placeholder => "City" %>
+        <%= ff.text_field :address_2, :placeholder => "Apartment, suite, unit, etc." %>
+        <%= ff.text_field :city, :placeholder => "City" %><br>
         <%= ff.text_field :state, :placeholder => "State" %>
         <%= ff.text_field :country, :placeholder => "Country" %>
+        <%= ff.text_field :zipcode, :placeholder => "Zipcode" %>
       <% end %>
     </div>
     <br>
 
-    <span class="section-header">Skills</span><br>
-    <span class="italics">Under Construction</span><br>
-
-    <% counter = 0 %>
-
-    <table>
-      <%= f.fields_for :user_skills do |ff| %>
-        <% if counter % 3 == 0 %>
-          <tr>
-        <% end %>
-        
-        <td class="form-inline">
-          <%= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1' %>&nbsp;
-          <span> <%= ff.object.skill.skill %> </span>
-          <%= ff.hidden_field :skill_id %>
-        </td>
-
-        <% if ((counter +=1) % 3) == 0 %>
-          </tr>
-        <% end %>
-
-      <% end %>
-    </table>
+    <% if alum_signed_in? %>
+      <span class="section-header">Skills</span><br>
+      <% @counter = 0 %>
+      <table>
+        <%= f.fields_for :user_skills do |ff| %>
+          <%= render 'shared/skills', :ff => ff %>
+        <% end %>  
+      </table>
+    <% end %>
 
     <br>
+
+    <div><%= f.label :current_password, :class=>"section-header" %><br> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password %></div>
 
     <div><%= f.label :password, :class=>"section-header" %> <br><i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, :autocomplete => "off" %></div>
@@ -103,8 +106,6 @@
     <div><%= f.label :password_confirmation, :class=>"section-header" %><br>
     <%= f.password_field :password_confirmation %></div>
 
-    <div><%= f.label :current_password, :class=>"section-header" %><br> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password %></div>
 
     <div class="align-right">
       <%= f.submit "Update", :class =>"btn btn-primary" %>

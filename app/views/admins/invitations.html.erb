@@ -1,10 +1,19 @@
 <%= render "admins/shared/head" %>
+<% content_for :title, "Invitations" %>
 
 <div class="large_container">
 
 	<%= render "admins/shared/nav" %>
 	<h3>View Invitations</h3>
 	<hr class="style-one"></hr>
+	
+	<div class="pull-right">
+		<span class="italics">Export Invitations</span>&nbsp;<%=link_to "Export", invitations_path(format: 'csv'), :class => "btn btn-primary" %>
+	</div>
+	<div class="clear"></div>
+	
+	<br>
+
 	<div>
 		<table class="table table-striped">
 			<tr>

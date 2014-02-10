@@ -1,15 +1,29 @@
-<div class="container">
-	<h3 class="neatfont">Hello! Welcome to Gann Alumni Network</h3>
+<% content_for :title, "Welcome" %>
+
+	
+	<br>
+	<div class="welcome_image">
+		<%= image_tag image_path("welcome.jpg") %>
+		<div class="welcome_title">
+			<h2 class="neatfont">Welcome to Gann Alumni Network</h2>
+		</div>
+		<div class="welcome_text">
+			<h3 class="neatfont">Are you ready to contribute an opportunity?</h3>
+			<div class="pull-right">
+				<h4>Yes, I am ready!&nbsp;
+				<%= link_to "Create Opportunity", new_opportunity_path, :class=>"btn btn-success" %></h4>	
+			</div>
+			<div class="clear"></div>
+			
+			<div class="pull-right">
+				<h4>I am not ready!&nbsp;
+				<%= link_to "Take me to the website", opportunities_path, :class => "btn btn-primary" %></h4>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+
 	<br>
 	<div class="pull-right">
-		<i class="fa fa-check"></i> If you have a new opportunity that you like to offer, click on the following button
-		<%= link_to "Create", new_opportunity_path, :class=>"btn btn-success" %>
 	</div>
 	<div class="clear"></div>
-	<br>
-	<div class="pull-right">
-		<i class="fa fa-check"></i> If you would like to explore the platform first, press the following button
-		<%= link_to "Next", opportunities_path, :class => "btn btn-primary" %>
-	</div>
-	<div class="clear"></div>
-</div>

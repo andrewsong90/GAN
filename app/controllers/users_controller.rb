@@ -2,21 +2,22 @@ class UsersController < ApplicationController
 
 	before_filter :authenticate_user, :only => [:account, :download]
 
-	def sign_up
-		
-	end
-
 	# Personal account. Administrator can look at all accounts as of now (Subject to change)
 	def show
-		
-		if params[:id]!=nil
-			@user=User.find(params[:id])
-		else
+		if ((user=User.find(params[:id]))==current_user)
 			@user=current_user
-		end	
+			@skills=@user.skills
+			@uploads=@user.useruploads.all.to_a
+		#If administrator, he has the access to every account
+		elsif admin_signed_in?
+			@user = User.find(params[:id])
+			@skills=@user.skills
+			@uploads=@user.useruploads.all.to_a
 
-		@skills=@user.skills
-		@uploads=@user.useruploads.all.to_a
+		else
+			flash[:error] = "You do not have access to the page"
+			redirect_to opportunities_path
+		end
 	end
 
 	# Download user's resumes

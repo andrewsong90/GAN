@@ -1,3 +1,4 @@
+<% content_for :title, "News" %>
 <%= render "admins/shared/head" %>
 
 <div class="container">
@@ -15,6 +16,7 @@
 	<div class="align-right">
 		<% if current_user.is_admin? %>
 			<%= link_to "Edit",edit_admins_post_path(@post),:class => "btn btn-primary" %>&nbsp;
+			<%= link_to "Delete", admins_post_path(@post), :method => 'delete', :class => "btn btn-success", :confirm => "Are you sure?" %>
 		<% end %>
 		<%= link_to "Back to list",admins_posts_path,:class => "btn btn-primary" %>
 	</div>

@@ -3,8 +3,7 @@ class ApplicationsController < ApplicationController
 	before_filter :authenticate_user
 
 	# Create a new Application
-	def new
-		
+	def new	
 		@opportunity = Opportunity.find(params[:opportunity_id])
 		
 		if can_apply?(@opportunity)

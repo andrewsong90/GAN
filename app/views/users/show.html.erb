@@ -1,3 +1,5 @@
+<% content_for :title, "My Account" %>
+
 <div class="account">
 	<h3 class="header">
 		<%= @user.full_name%>
@@ -5,8 +7,16 @@
 			<span class="label label-success">Alum</span>	
 		<% else %>
 			<span class="label label-info">Friend</span>	
-		<% end %>
-	</h3>
+		<% end %></h3>
+		<h2 style="margin-top: 0px;">
+			<small>
+				<%= @user.title %> 
+				<% if @user.company %>
+					at <%= @user.company %>
+				<% end %>
+			</small>
+		</h2>
+	
 	
 	<br>
 	<div class="text-align-center">
@@ -51,11 +61,12 @@
 		<br>
 	<% end %>
 	
-
+	<% if alum_signed_in? %>
 		<span class="section-header">&nbsp;Skills & Interests</span><br>
 		<% @skills.each do |skill| %>
 			<div><span class="indent"/><i class="fa fa-check"></i>&nbsp;<%= skill.skill %></div>
 		<% end %>		
+	<% end %>
 
 		<br>
 
@@ -67,7 +78,7 @@
 		<% end %>
 		<br><br>
 		<span class="section-header"><i class="fa fa-edit"></i></span>&nbsp;&nbsp;
-		last updated on:  <%= @user.updated_at.strftime('%b. %e, %Y') %><br><br>
+		Last updated on:  <%= @user.updated_at.strftime('%b. %e, %Y') %><br><br>
 		<div class="pull-right">
 			<% if @user.has_invitations_left? %>
 				<div class="pull-right">

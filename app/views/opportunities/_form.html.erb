@@ -1,5 +1,6 @@
    <span class="required">*</span>&nbsp;These fields are required<br><br>
 
+
    <div>    
       <div class="offset1 align-left">
         <div><%= f.label "Company logo", :class => "section-header" %><br>
@@ -37,14 +38,13 @@
       	<%= f.text_field :company %></div>
         
         <br>
-     	  
         <div><%= f.label "Type", :class => "section-header" %><span class="required">*</span><br>
-      	<%= f.collection_select :job_type, Jobtype.all, :name, :name, prompt: true %></div>
+      	<%= f.collection_select :job_type, Jobtype.all, :name, :name, prompt: true, :selected => params[:job_type] %></div>
 
          <br>
          
         <div><%= f.label "Minimum Education Level", :class => "section-header" %><span class="required">*</span><br>
-        <%= f.collection_select :edu_level, EduLevel.all, :education, :education, prompt: true %></div>
+        <%= f.collection_select :edu_level, EduLevel.all, :education, :education, prompt: true, :selected => params[:edu_level] %></div>
       </div>
       <div class="clear"></div>
     </div>
@@ -81,27 +81,11 @@
     &nbsp;<a id="opportunity_skills_help" class="help"><i  class="fa fa-question-circle"></i></a><br>
 
     <br>
-
-
-    <% counter = 0 %>
-
+    <% @counter = 0 %>
     <table>
       <%= f.fields_for :opportunity_skills do |ff| %>
-        <% if counter % 2 == 0 %>
-          <tr>
-        <% end %>
-        
-        <td class="form-inline" >
-          <%= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1' %>&nbsp;
-          <span style="margin-right: 30px;"> <%= ff.object.skill.skill %> </span>
-          <%= ff.hidden_field :skill_id %>
-        </td>
-
-        <% if ((counter +=1) % 2) == 0 %>
-          </tr>
-        <% end %>
-
-      <% end %>
+        <%= render 'shared/skills', :ff => ff %>
+      <% end %>  
     </table>
 
    <br>

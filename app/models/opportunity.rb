@@ -30,6 +30,7 @@ class Opportunity < ActiveRecord::Base
 	#Validation
 	validates_presence_of :title, :message => "cannot be blank"
 	validates_presence_of :job_type, :message => "must be selected"
+	validates_presence_of :edu_level, :message => "must be selected"
 	validates_presence_of :description, :message => "cannot be blank"
 
 	validates_attachment_size :upload, :less_than => 1.megabytes
@@ -140,7 +141,7 @@ class Opportunity < ActiveRecord::Base
 	#Export to CSV
 	def self.to_csv
 		CSV.generate do |csv|
-			features=["id","activ","title","company","job_type","description","location","created on","updated on","provider","provider id"]
+			features=["id","active","title","company","job_type","description","location","created on","updated on","provider","provider id","Number of Connections"]
 			csv << features
 			all.each do |opportunity|
 				
@@ -157,10 +158,39 @@ class Opportunity < ActiveRecord::Base
 				row.append(opportunity.updated_at)
 				row.append(opportunity.user.full_name)
 				row.append(opportunity.user.id)
-				
+				row.append(opportunity.applications.size())
+
 				csv << row
 			end
 		end
 	end
 	
+	def self.invitation_to_csv
+
+		users=User.all.to_a
+		invited_users = users.select {|user| user.invitation_sent_at != nil }
+
+		CSV.generate do |csv|
+			features=["Name","email","inviter id","inviter name","invitation sent","invitation accepted"]
+			csv << features
+			invited_users.each do |invited|
+				
+				inviter = User.find(invited.invited_by_id)
+				
+				row=Array.new
+				row.append(invited.full_name)
+				row.append(invited.email)
+				row.append(inviter.id)
+				row.append(inviter.full_name)
+				row.append(invited.invitation_sent_at.strftime('%b. %e, %Y'))
+				if invited.invitation_accepted_at
+					row.append(invited.invitation_accepted_at.strftime("%b. %e, %Y"))
+				else
+					row.append("")
+				end
+				csv << row
+			end
+		end
+	end
+
 end

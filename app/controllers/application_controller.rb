@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     if resource.type=="Admin"
       admins_posts_path
-    elsif resource.type=="Friend" and resource.sign_in_count == 1
+    elsif resource.type=="Friend" and resource.opportunities.size() == 0
       welcome_path
     else
       redirect_back_or_default()
