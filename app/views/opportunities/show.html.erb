@@ -109,9 +109,13 @@
 		<% if @time.first.is_flexible? %>
 			<div><span class="indent"/><strong>Flexible</strong></div><br>
 		<% else %>
-			<span><span class="indent"/><strong>From</strong>&nbsp;<%= @time.first.date.to_time.strftime('%b. %e, %Y (%a)') %></span>
-			&nbsp;
-			<span><span class="indent"/><strong>To</strong>&nbsp;<%= @time.second.date.to_time.strftime('%b. %e, %Y (%a)') %></span><br>
+			<% if !@time.first.date.empty? %>
+				<span><span class="indent"/><strong>From</strong>&nbsp;<%= @time.first.date.to_time.strftime('%b. %e, %Y (%a)') %></span>&nbsp;
+			<% end %>
+
+			<% if !@time.second.date.empty? %>
+				<span><span class="indent"/><strong>To</strong>&nbsp;<%= @time.second.date.to_time.strftime('%b. %e, %Y (%a)') %></span><br>&nbsp;
+			<% end %>
 		<% end %>
 
 		<br>

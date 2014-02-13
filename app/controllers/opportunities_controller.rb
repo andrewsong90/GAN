@@ -99,11 +99,6 @@ class OpportunitiesController < ApplicationController
 	end
 
 	def new
-		if params[:job_type]
-			logger.debug("JOBBB #{params[:job_type]}")
-		else
-			logger.debug("NOOPE #{params[:job_type]}")
-		end
 		@opportunity=Opportunity.new
 		@opportunity.uploads.build
 		@opportunity.sponsors.build
