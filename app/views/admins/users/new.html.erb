@@ -1,4 +1,6 @@
+<%= render "admins/shared/head" %>
 <div class="container">
+	<%= render "admins/shared/nav" %>
 	<h3>New Administrator</h3>
 	<%= form_for @user, :url => '/admins/users', :method => 'post' do |f| %>
 		<%= f.hidden_field :type, :value => "Admin" %>

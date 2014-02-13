@@ -6,21 +6,28 @@ class Users::InvitationsController < Devise::InvitationsController
 		new_user_invitation_path
 	end
 
+	def new
+		@user=User.new
+	end
 
 	# Change this tomorrow morning
 	def create
-		@user = User.invite!({:email => params[:user][:email], :fname => params[:user][:fname], :lname => params[:user][:lname]},current_user) do |user|
-			user.skip_invitation = true
+		if !(@user=User.new(:email => params[:email], :fname => params[:fname], :lname => params[:lname])).valid?
+			render 'new'
+		else
+			@user = User.invite!({:email => params[:email], :fname => params[:fname], :lname => params[:lname]},current_user) do |user|
+				user.skip_invitation = true
+			end
+
+			@user.update_attribute :invitation_sent_at, Time.now.utc
+			@token = @user.raw_invitation_token
+			@title = params[:title]
+			@content = params[:content]
+			UserMailer.delay.invite_message(@user, @token, @title, @content)
+			
+			flash[:notice] = "The email was sent to the invitee"
+			redirect_to new_user_invitation_path
 		end
-
-		logger.debug("USER #{@user.email} #{@user.full_name}")
-
-		@user.update_attribute :invitation_sent_at, Time.now.utc
-		@token = @user.raw_invitation_token
-		@title = params[:title]
-		@content = params[:content]
-		UserMailer.delay.invite_message(@user, @token, @title, @content)
-		
 	end
 
 	# Page for sending out custom template invites

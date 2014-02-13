@@ -6,16 +6,19 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
 
   # Upon successful registration
   def welcome_email(user)
-	 @user=user
-	 mail(to: @user.email, subject:"[GAN] Welcome to the GAN - Gann Alumni Networks!!!")	
+    attachments.inline['gann_banner.png']=File.read("#{Rails.root.to_s}/app/assets/images/gann_banner.png")
+	  @user=user
+	   mail(to: @user.email, subject:"[GAN] Welcome to the GAN - Gann Alumni Networks!!!")	
   end
 
   def contact_email_to_user(contact)
+    attachments.inline['gann_banner.png']=File.read("#{Rails.root.to_s}/app/assets/images/gann_banner.png")
     @contact=contact
     mail(to: @contact.from_email, subject:"[GAN] #{@contact.title}")
   end
 
   def contact_email_to_admin(contact)
+    attachments.inline['gann_banner.png']=File.read("#{Rails.root.to_s}/app/assets/images/gann_banner.png")
     @contact=contact
     mail(to: "alumni@gannacademy.org", subject:"[GAN] #{@contact.title}")
   end
@@ -32,21 +35,25 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
 
   # Send out emails to all users when announcement is made
   def announcement_email(post)
+    attachments.inline['gann_banner.png']=File.read("#{Rails.root.to_s}/app/assets/images/gann_banner.png")
     @post=post
     users=Alum.all.map(&:email)
     mail(to: users, subject:"[GAN Announcement] #{@post.title}")
   end
 
   def opportunity_email(user)
+    attachments.inline['gann_banner.png']=File.read("#{Rails.root.to_s}/app/assets/images/gann_banner.png")
   end
 
   def confirmation_instructions(record,token,opts={})
+    attachments.inline['gann_banner.png']=File.read("#{Rails.root.to_s}/app/assets/images/gann_banner.png")
     opts[:subject]="[GAN] Confirm GAN account"
     super
   end
 
   # When an application is submitted
   def submission_email(user,application,index_of_uploads)
+    attachments.inline['gann_banner.png']=File.read("#{Rails.root.to_s}/app/assets/images/gann_banner.png")
   	@user, @application, @opportunity =user, application, application.opportunity
 
     if @application.upload.path!= nil

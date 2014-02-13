@@ -36,6 +36,9 @@
 
     <div class="pull-left" style="margin-left: 50px;">
       <br>
+      <div><%= f.label :email, :class => "section-header" %><br>
+      <%= f.text_field :email %>
+      </div>
       <div><%= f.label :Phone, :class => "section-header" %><br>
       <%= f.text_field :phone, :id => "phone", :placeholder => "XXX-XXX-XXXX" %></div> 
       <div><%= f.label :Company, :class => "section-header" %><br>

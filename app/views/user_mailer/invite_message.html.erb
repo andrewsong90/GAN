@@ -3,18 +3,20 @@
 <% if @content.length == 0 %>
 	This is the email default template.
 <% else %>
-	Dear <%= @user.full_name %>,<br><br>
+	<h3>Dear <%= @user.full_name %>,</h3>
 	<%= @content.html_safe %>
 <% end %>
 
-Click the link below to Accept Invitation<br>
-<%= link_to "Accept Invitation", @invitation_link %>
-<br>
-<p>If you have received this by error,<br>
-please let us know at alumni@gannacademy.org</p>
+<br><br><br>
 
-<br>
+<span style="font-size: 16px;">
+	<%= link_to "Accept Invitation", @invitation_link %>
+	<br>
+	<p>This email is only available for two weeks from the issued date.</p><br>
+	<p>If you have received this by error,<br>
+	please let us know at alumni@gannacademy.org</p>
 
-Best,<br>
+	<br>
 
-GAN (Gann Alumni Network) support team
+	<strong>Best, the Gann Alumni Network Support Team</strong>
+</span> 

@@ -1,5 +1,6 @@
 class Admins::UsersController < ApplicationController
 	
+	before_filter :authenticate_admin
 	before_filter :update_permitted_params, :only => :update
 
 	def index
@@ -9,7 +10,6 @@ class Admins::UsersController < ApplicationController
 			format.html
 			format.csv { render text: User.all.to_csv }
 		end
-
 	end
 
 	def new
@@ -53,7 +53,16 @@ class Admins::UsersController < ApplicationController
 
 	end
 
-
+	def destroy
+		@user=User.find(params[:id])
+		if @user.destroy
+			flash[:notice] = "User successfully deleted"
+			redirect_to admins_users_path
+		else
+			flash[:error] = "User could not be deleted"
+			redirect_to admins_user_path(@user)
+		end
+	end
 
 	private
 

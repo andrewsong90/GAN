@@ -44,7 +44,6 @@ class OpportunitiesController < ApplicationController
 
 	#This is the main page that all of the users see after login.
 	def index
-
 		@post=Post.last
 		if friend_signed_in?
 			friend_home	
@@ -58,8 +57,6 @@ class OpportunitiesController < ApplicationController
 		@itemsPerPage=5	
 		@opportunities=Opportunity.text_search(params).order("created_at DESC")
 		@opportunities = Kaminari.paginate_array(@opportunities).page(params[:page]).per(@itemsPerPage)
-		
-		logger.debug("OPPORTUNITIES #{@opportunities.size()}")
 	
 		respond_to do |format|
 			format.js

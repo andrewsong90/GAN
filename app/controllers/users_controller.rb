@@ -13,7 +13,6 @@ class UsersController < ApplicationController
 			@user = User.find(params[:id])
 			@skills=@user.skills
 			@uploads=@user.useruploads.all.to_a
-
 		else
 			flash[:error] = "You do not have access to the page"
 			redirect_to opportunities_path

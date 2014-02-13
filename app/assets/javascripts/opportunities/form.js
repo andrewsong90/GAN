@@ -1,6 +1,6 @@
 var start_date;
 var end_date;
-var OPPORTUNITY_UPLOAD_LIMIT=2;
+var OPPORTUNITY_UPLOAD_LIMIT=1;
 var SPONSOR_LIMIT=4;
 
 $(document).ready(function(){
@@ -9,7 +9,7 @@ $(document).ready(function(){
   var sponsor_count=1;
 
   $('#opportunity_files_help').popover({
-    content: "Upload documents for supplementary descriptions (maximum of 3)<br>These will be both downloadable and viewable.",
+    content: "Upload documents for supplementary descriptions (maximum of 2)<br>These will be both downloadable and viewable.",
     html: true
   });
 

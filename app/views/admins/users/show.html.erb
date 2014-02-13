@@ -68,6 +68,7 @@ last updated at:  <%= @user.updated_at.strftime('%b. %e, %Y') %><br><br>
 <br><br>
 <div class="pull-right">
 	<%= link_to "Back to List", admins_users_path, :class => "btn btn-primary" %>
+	<%= link_to "Delete", admins_user_path(@user), :method => 'delete', :class => "btn btn-warning", :confirm => "Are you sure?" %>
 	<%= link_to "Edit Account", edit_admins_user_path(@user), :class => "btn btn-primary" %>
 </div>
 <br><br>

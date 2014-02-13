@@ -2,38 +2,60 @@
 	<%= render "admins/shared/head" %>
 <% end %>
 
+<% content_for :title, "Send Invitation" %>
+
 <div class="container">
 
-	<% if admin_signed_in? %>
-		<%= render "admins/shared/nav" %>
-	<% end %>
-<h2><%= t "devise.invitations.new.header" %></h2>
+  	<% if admin_signed_in? %>
+  		<%= render "admins/shared/nav" %>
+  	<% end %>
 
-<h5>Invite non-alum to use the GAN service!<br>
-Type the email address of a person whom you want to send the invitation to</h5>
+    <h2><%= t "devise.invitations.new.header" %></h2>
+    <hr class="style-one"></hr>
 
-<%= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
-  <%= devise_error_messages! %>
+    <% if @user.errors.any? %>
+       <div class="error_messages">
+        <h4>Some errors were found.</h4>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
-  <div class='section-header'>Email<br>
-  <%=f.text_field :email %></div>
+  <h5>Invite non-alum to use the GAN service!<br>
+  Please fill in all the necessary information below. By default, the heading with "Dear Friend" will be attached to the content below.</h5>
 
-  <div class='section-header'>Title<br>
-  <%=f.text_field :title %></div>
+  <%= form_tag user_invitation_path, :html => {:method => :post} do %>
+    <span class="required">*</span>&nbsp;These fields are required<br><br>
+    <% title = "[GAN] Gann Alumni Network Invitation" %>
+    <% message = "<span style='font-size: 16px;'>Thank you for registering for the Gann Alumni Network, an innovative initiative to help our alumni find jobs and advance their careers.<br><br> Please click the link below to accept our invitation to become a friend (and provide opportunities for full- and part-time jobs, internships, mentorships, informational interviews and volunteer opportunities).</span>" %>
 
-  <div class='section-header'>Content<br>
-  <%=f.text_field :content %></div>
+    
+      <div class='section-header'>Email<span class="required">*</span><br>
+      <%= text_field_tag :email %></div>
 
-<div class="pull-right">
-	<%= f.submit t("devise.invitations.new.submit_button"), :class => "btn btn-primary" %>
+      <br>
+      <div class='section-header'>First Name<span class="required">*</span><br>
+      <%= text_field_tag :fname %></div>
+
+      <div class='section-header'>Last Name<span class="required">*</span><br>
+      <%= text_field_tag :lname %></div>
+
+      <br>
+
+      <div class="section-header">Title<br>
+      <%= text_field_tag :title, title, :style =>"width: 350px;" %></div><br><br>
+      
+      <span class="section-header">Content</span><br>
+      <%= text_area_tag :content, message, :class => "tinymce span7", :rows => "6" %>
+        <%= tinymce %>
+
+        <br><br>
+      
+      <div class="pull-right">
+        <%= submit_tag "Send invitations", :class => "btn btn-primary" %>
+      </div>
+  <% end %>
 </div>
-
-<% end %>
-</div>
-
-
-<% if false %>
-	<% resource.class.invite_key_fields.each do |field| -%>
-  <%= f.input field, :class =>"section-header" %>
-<% end -%>
-<% end %>
