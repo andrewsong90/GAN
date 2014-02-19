@@ -54,32 +54,17 @@
     </div>
     <br>
 
-      <span class="section-header">Skills</span>
+      <span class="section-header">Functions and Domains</span>
       &nbsp;<a id="skill_help" class="help"><i class="fa fa-question-circle"></i></a><br>
-      <span class="italics">Under Construction</span>
-
-      <% counter = 0 %>
-
+      <span>Indicate which domains and functions you would like to experience via your preferred opportunity</span>
+      <br><br>
+      
+      <% @counter = 0 %>
       <table>
         <%= f.fields_for :user_skills do |ff| %>
-          <% if counter % 3 == 0 %>
-            <tr>
-          <% end %>
-          
-          <td class="form-inline">
-            <%= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1' %>&nbsp;
-            <span> <%= ff.object.skill.skill %> </span>
-            <%= ff.hidden_field :skill_id %>
-          </td>
-
-          <% if ((counter +=1) % 3) == 0 %>
-            </tr>
-          <% end %>
-
-        <% end %>
+          <%= render 'shared/skills', :ff => ff %>
+        <% end %>  
       </table>
-
-
 
     <br><br>
 

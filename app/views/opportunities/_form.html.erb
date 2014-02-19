@@ -69,7 +69,7 @@
           <% end %>
         <% end %>
         <div class="btn btn-primary upload_btn">
-            <%= link_to_add_association 'Add More Files', f, :uploads, :class => "upload_link" %>
+            <%= link_to_add_association 'Upload another file', f, :uploads, :class => "upload_link" %>
         </div>
       </div>
     </div>
@@ -77,9 +77,11 @@
     <br><br>
 
    
-    <span class="section-header">Skills</span>
-    &nbsp;<a id="opportunity_skills_help" class="help"><i  class="fa fa-question-circle"></i></a><br>
-
+    <span class="section-header">Professional Functions and Domains</span>
+    <br>
+    <span>Use this section to indicate the domains and functions represented by this opportunity.<br>
+      You may choose multiple options.</span>
+    <br>
     <br>
     <% @counter = 0 %>
     <table>
@@ -100,7 +102,7 @@
     <div class="gmap" data-lat = '<%= @opportunity.latitude %>' data-long = '<%= @opportunity.longitude %>'>
       <div id="map-canvas-new"></div>
   	</div>
-    <br>
+    <br><br>
 
     <div><%= f.label "Start & End dates", :class => "section-header" %><span class="required">*</span>
       &nbsp;<a id="opportunity_time_help" class="help"><i class="fa fa-question-circle"></i></a></div> 
@@ -112,26 +114,5 @@
     <span><strong>End date</strong>&nbsp;<%= text_field_tag 'time[]', nil, :id => "opportunity_totime", :disabled => true %></span>  	
     
   </div>
-    <br>
-    
-    
-    <div><%= f.label "Sponsor", :class => "section-header" %><span class="required">*</span>
-      &nbsp;<a id="sponsor_help" class="help"><i class="fa fa-question-circle"></i></a><br>
+  <br><br>
 
-      <div id="sponsors">  
-        <%= f.fields_for :sponsors do |sponsor| %>        
-          <%= render 'sponsor_fields', :f => sponsor %>
-        <% end %>
-      </div>
-    </div>
-
-
-  <br>
-
-	
-<% if false %>
-      <% numOfSponsors = 1 %>
-        <div class="btn btn-primary sponsor_btn">
-            <%= link_to_add_association 'Add Sponsors', f, :sponsors, :render_options => {:locals => {:index => numOfSponsors}}, :class => "sponsor_link" %>
-        </div>
-<% end %>

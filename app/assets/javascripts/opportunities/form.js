@@ -19,7 +19,7 @@ $(document).ready(function(){
   });
 
   $('#opportunity_skills_help').popover({
-    content:"Please select at least one of the following fields",
+    content:"You may choose multiple options",
     html: true
   });
 
@@ -58,38 +58,12 @@ $(document).ready(function(){
   });
 
 
-  //Limit Sponsor Count
-  $('.sponsor_link').click(function(e){
-    if(sponsor_count<SPONSOR_LIMIT){
-      sponsor_count +=1;
-      if(sponsor_count==SPONSOR_LIMIT){
-        $('.sponsor_btn').removeClass('btn-primary');
-        $('.sponsor_btn').addClass('btn-warning');
-        $('.sponsor_btn > a').css('cursor','no-drop');
-      } 
-    }else{
-      e.preventDefault();
-      return false;
-    }
-  });
-
-  $('.container').on("click",".remove_sponsor_link",function(){
-    if(sponsor_count==SPONSOR_LIMIT){
-      $('.sponsor_btn > a').css('cursor','pointer');
-      $('.sponsor_btn').removeClass('btn-warning');
-      $('.sponsor_btn').addClass('btn-primary');
-    }
-    sponsor_count-=1;
-  });
-
-
 
   $("#opportunity_fromtime").datepicker({
       onSelect: function(dateText, inst){
         start_date = new Date($(this).val());
       },
-      dateFormat: "yy-mm-dd",
-      maxDate: RangeEnd(end_date)
+      dateFormat: "yy-mm-dd"
     });
 
   $("#opportunity_totime").datepicker({
@@ -101,7 +75,6 @@ $(document).ready(function(){
     });
 
   $("input[name=time_type]:radio").change(function(){
-    console.log("CHANGED");
     if($("#time_type_range").prop("checked")){
       $("#opportunity_fromtime").prop("disabled",false);
       $("#opportunity_totime").prop("disabled",false);
@@ -119,35 +92,19 @@ function simple(){
   return 0;
 }
 
-function RangeEnd(end){
-  if (end==undefined)
-    return null;
-  else
-    end_date =end;
-    return end_date;
-}
-
-function RangeStart(start){
-  if (start==undefined)
-    return null;
-  else
-    start_date = start;
-    console.log("Startdate"+start_date+" "+start);
-    return start_date;
-}
 
 function initialize() {
   
   var latitude=$(".gmap").data('lat');
   var longitude=$(".gmap").data('long');
 
-  console.log(latitude);
-  console.log(longitude);
-
   if(latitude=='' && longitude == ''){
     latitude = 42.359184;
     longitude = -71.093544;
   }
+
+  console.log(latitude);
+  console.log(longitude);
 
   var coordinate = new google.maps.LatLng(latitude, longitude)
 
