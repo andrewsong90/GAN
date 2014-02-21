@@ -12,7 +12,7 @@
 	</div>
 	<div class="align-left indent">
 		<h3>
-			<%= @opportunity.title %> 
+			<%= @opportunity.title %>
 			<br>
 			<small> <%= @opportunity.company %></small>
 			
@@ -38,11 +38,21 @@
 	
 
 	<% if current_user.is_owner?(@opportunity) || current_user.is_admin? %>
+		
+		<% if current_user.is_admin? %>
+			<div class="align-right" style="margin-left: 10px;">
+
+				<%= link_to "Delete", opportunity_path(@opportunity),:method => 'delete', :class =>"btn btn-warning", :confirm => "Are you sure?" %>
+			</div>
+		<% end %>
+
 		<div class="align-right">
 			<%= link_to edit_opportunity_path(@opportunity), :class =>"btn btn-success" do %>
 				<i class="fa fa-edit"></i>&nbsp;Edit
 			<% end %>
 		</div>
+
+		
 		<div class="clear"></div>
 	<% else %>
 		<div class="align-right">
@@ -69,6 +79,8 @@
 	<div class="align-left">
 
 	<div class="left_container">
+		<p class="section-header"><i class="fa fa-check"></i>&nbsp;&nbsp;id</p>&nbsp; <%= @opportunity.id %>
+		<br>
 		<p class="section-header"><i class="fa fa-tasks"></i>&nbsp;&nbsp;Description</p>
 		<div><span class="indent"/><%= @opportunity.description.html_safe %></div>
 

@@ -85,7 +85,7 @@ $(document).ready(function(){
   }); 
 
   initialize();
-
+  console.log("hello");
 });
 
 function simple(){
@@ -99,12 +99,9 @@ function initialize() {
   var longitude=$(".gmap").data('long');
 
   if(latitude=='' && longitude == ''){
-    latitude = 42.359184;
-    longitude = -71.093544;
+    latitude = 42.394658;
+    longitude = -71.216648;
   }
-
-  console.log(latitude);
-  console.log(longitude);
 
   var coordinate = new google.maps.LatLng(latitude, longitude)
 
@@ -112,6 +109,7 @@ function initialize() {
     center: coordinate,
     zoom: 14
   };
+
   var map = new google.maps.Map(document.getElementById('map-canvas-new'),
     mapOptions);
 
@@ -125,13 +123,23 @@ function initialize() {
   var autocomplete = new google.maps.places.Autocomplete(input);
   autocomplete.bindTo('bounds', map);
 
-  var infowindow = new google.maps.InfoWindow();
+  var desc="<h4>Gann Academy</h4>333 Forest Street, Waltham, MA";
+
+  var infowindow = new google.maps.InfoWindow({
+    content: desc 
+  });
+
   var marker = new google.maps.Marker({
     map: map,
     position: coordinate,
     draggable: true,
     animation: google.maps.Animation.DROP,
+    title: 'Gann Academy'
 
+  });
+
+  google.maps.event.addListener(marker,'click',function(){
+    infowindow.open(map, marker);
   });
 
   google.maps.event.addListener(autocomplete, 'place_changed', function() {

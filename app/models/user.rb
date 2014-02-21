@@ -83,6 +83,10 @@ class User < ActiveRecord::Base
     type == "Alum"
   end
 
+  def is_friend?
+    type == "Friend"
+  end
+
   def is_admin?
     type == "Admin"
   end

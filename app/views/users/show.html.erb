@@ -5,8 +5,10 @@
 		<%= @user.full_name%>
 		<% if @user.is_alum? %>
 			<span class="label label-success">Alum</span>	
+		<% elsif @user.is_admin? %>
+			<span class="label label-info">Admin</span>	
 		<% else %>
-			<span class="label label-info">Friend</span>	
+			<span class="label label-info">Friend</span>
 		<% end %></h3>
 		<h2 style="margin-top: 0px;">
 			<small>
@@ -89,13 +91,3 @@
 		<div class="clear"></div>
 	
 </div>
-
-<% if false %>
-	<% if @user.has_invitations_left? %>
-				<div class="pull-right">
-					<span class="italics">Want to invite others to the platform?</span>&nbsp;<%= link_to "Invite", new_user_invitation_path, :class => "btn btn-success" %>
-				</div>
-			<% end %>
-			
-			<br><br>
-<% end %>

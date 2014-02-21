@@ -15,7 +15,7 @@ class Users::InvitationsController < Devise::InvitationsController
 		if !(@user=User.new(:email => params[:email], :fname => params[:fname], :lname => params[:lname])).valid?
 			render 'new'
 		else
-			@user = User.invite!({:email => params[:email], :fname => params[:fname], :lname => params[:lname]},current_user) do |user|
+			@user = User.invite!({:email => params[:email], :fname => params[:fname], :lname => params[:lname], :sponsor_email => params[:email], :sponsor_fname => params[:fname], :sponsor_lname => params[:lname]},current_user) do |user|
 				user.skip_invitation = true
 			end
 
@@ -37,7 +37,7 @@ class Users::InvitationsController < Devise::InvitationsController
 	def batch_invite
 		list_of_users=Friend.import(params[:file])
 		list_of_users.each do |user_hash|
-			@user = User.invite!({:email => user_hash["email"],:fname => user_hash["first_name"],:lname => user_hash["last_name"]},current_user) do |user|
+			@user = User.invite!({:email => user_hash["email"],:fname => user_hash["first_name"],:lname => user_hash["last_name"], :sponsor_email => user_hash["email"], :sponsor_fname => user_hash["fname"], :sponsor_lname => user_hash["lname"]},current_user) do |user|
 				user.skip_invitation = true
 			end
 
@@ -77,7 +77,7 @@ class Users::InvitationsController < Devise::InvitationsController
 
 	def configure_invitations_parameters
 		devise_parameter_sanitizer.for(:accept_invitation) do |u|
-			u.permit(:fname, :lname, :password, :password_confirmation, :invitation_token, :type, :avatar, :phone, :title, :company, address_attributes: [:id, :address_1, :address_2, :city, :state, :country, :_destroy])
+			u.permit(:email, :fname, :lname, :password, :password_confirmation, :invitation_token, :type, :avatar, :phone, :title, :company, address_attributes: [:id, :address_1, :address_2, :city, :state, :country, :_destroy])
 		end
 	end
 end

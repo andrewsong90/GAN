@@ -2,13 +2,16 @@
 <br>
 
 <h3> Dear Admin,</h3>
+<p style="font-size: 16px;">
+	<strong><%= @contact.from_email %></strong> contacted you on 
+	<span style="font-style: italics;"><strong><%= @category %></strong></span>
+	<br>
+	<br>
+	<p>
+		<%= @contact.content %>
+	</p>
+	<br>
+	Best,<br>
 
-<strong><%= @contact.from_email %></strong> contacted you:<br>
-<br>
-<p>
-	<%= @contact.content %>
+	GAN (Gann Alumni Network) support team
 </p>
-<br>
-Best,<br>
-
-GAN (Gann Alumni Network) support team

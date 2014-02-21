@@ -3,8 +3,10 @@
 	<%= javascript_include_tag "opportunities/form" %>
 <% end %>
 
+<% content_for :title, "Edit Opportunity" %>
+
 <div class="container">
-	<h2>Edit Opportunity</h2>
+	<h2>Edit Opportunity <small>( id: <%=@opportunity.id %> )</small></h2>
 	<hr class="style-one"></hr>
 
 	<%= form_for @opportunity, :html => { :multipart => true } do |f| %>
@@ -22,6 +24,8 @@
 
 		
 		<div><span class="section-header">Status</span><br>
+			<span>If you want to delete the opportunity, please contact administrator, indicating the id of the opportunity.</span>
+			<br><br>
 			<span class="indent"/>
 			<%= f.radio_button :active, true %>&nbsp;Active &nbsp;
 			<%= f.radio_button :active, false %>&nbsp;Inactive

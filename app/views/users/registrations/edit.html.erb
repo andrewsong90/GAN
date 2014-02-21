@@ -6,10 +6,11 @@
 <div class="container">
   <h2>Edit Account</h2>
   <hr class="style-one"></hr>
-  <br>
+
 
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-
+    <span class="required">*</span>&nbsp;These fields are required
+    <br><br>
     <div class="pull-left">
       <div><%= f.label "Profile picture", :class => "section-header" %><br>
       <% if !f.object.avatar_file_name %>
@@ -35,16 +36,38 @@
     </div>
 
     <div class="pull-left" style="margin-left: 50px;">
+
+      <% if resource.is_friend? %>
+        <br>
+        Your sponsor is <strong><%= resource.sponsor_fname %> <%= resource.sponsor_lname %></strong> at <strong><%= resource.email %></strong>
+        <br>
+      <% end %>
       <br>
-      <div><%= f.label :email, :class => "section-header" %><br>
+      <div><%= f.label :email, :class => "section-header" %><span class="required">*</span><br>
       <%= f.text_field :email %>
+      </div>
+      <div><%= f.label :fname, :class => "section-header" %><span class="required">*</span><br>
+      <%= f.text_field :fname %>
+      </div>
+      <div><%= f.label :lname, :class => "section-header" %><span class="required">*</span><br>
+      <%= f.text_field :lname %>
       </div>
       <div><%= f.label :Phone, :class => "section-header" %><br>
       <%= f.text_field :phone, :id => "phone", :placeholder => "XXX-XXX-XXXX" %></div> 
-      <div><%= f.label :Company, :class => "section-header" %><br>
-      <%= f.text_field :company %></div>
-      <div><%= f.label :Title, :class => "section-header" %><br>
-      <%= f.text_field :title %></div>
+    </div>
+
+    <div class="clear"></div>
+
+    <br>
+
+    <div class="pull-left">
+      <%= f.label :Company, :class => "section-header" %><br>
+      <%= f.text_field :company %>
+    </div>
+
+    <div class="pull-left" style="margin-left: 20px;">
+      <%= f.label :Title, :class => "section-header" %><br>
+      <%= f.text_field :title %>
     </div>
 
     <div class="clear"></div>

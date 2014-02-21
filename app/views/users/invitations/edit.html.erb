@@ -46,6 +46,16 @@
 
   <br>
 
+  <span>
+    This email was originally sent to <strong><%= resource.sponsor_fname %> <%= resource.sponsor_lname %></strong> at <strong><%= resource.sponsor_email %></strong><br>
+    If you are not the person, please change the email, first name, and last name field below.
+  </span>
+  <br><br>
+  <div>
+    <%= f.label "Email", :class => 'field-header' %><span class="required">*</span><br>
+    <%= f.text_field :email %>
+  </div>
+
   <div class="align-left">
     <%= f.label "First Name", :class => "field-header" %><span class="required">*</span><br>
     <%= f.text_field :fname %>
@@ -96,7 +106,7 @@
   <%= f.password_field :password_confirmation %></div>
 
   <br>
-
+<% if false %>
   <div><%= f.label "Profile picture", :class => "field-header" %>
     &nbsp;<a id="picture_help" class="help"><i class="fa fa-question-circle"></i></a>
     <br>
@@ -112,6 +122,7 @@
       </div>
     </div>
   </div>
+<% end %>
 
   <br>
 

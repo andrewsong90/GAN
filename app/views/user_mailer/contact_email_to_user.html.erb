@@ -3,16 +3,18 @@
 
 <h3> Dear <%= @contact.from_email %>,</h3>
 
-<p>
-	Your inquiry has been sent to the administrator.<br>
-	The administrator will shortly be in touch with you.
-</p>
-<br>
-Below is the content of your inquiry:<br>
-<p>
-	<%= @contact.content %>
-</p>
-<br>
-Best,<br>
+<p style="font-size: 16px;">
+	<p>
+		Your inquiry has been sent to the administrator.<br>
+		The administrator will shortly be in touch with you.
+	</p>
+	<br>
+	Below is the content of your inquiry on <span style="font-style: italics;"><strong><%= @category %></strong></span>:<br>
+	<p>
+		<%= @contact.content %>
+	</p>
+	<br>
+	Best,<br>
 
-GAN (Gann Alumni Network) support team
+	GAN (Gann Alumni Network) support team
+</p>

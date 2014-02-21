@@ -39,12 +39,12 @@
         
         <br>
         <div><%= f.label "Type", :class => "section-header" %><span class="required">*</span><br>
-      	<%= f.collection_select :job_type, Jobtype.all, :name, :name, prompt: true, :selected => params[:job_type] %></div>
+      	<%= f.collection_select :job_type, Jobtype.all, :name, :name, prompt: true, :selected => (params[:job_type] || @opportunity.job_type) %></div>
 
          <br>
          
         <div><%= f.label "Minimum Education Level", :class => "section-header" %><span class="required">*</span><br>
-        <%= f.collection_select :edu_level, EduLevel.all, :education, :education, prompt: true, :selected => params[:edu_level] %></div>
+        <%= f.collection_select :edu_level, EduLevel.all, :education, :education, prompt: true, :selected => (params[:edu_level] || @opportunity.edu_level) %></div>
       </div>
       <div class="clear"></div>
     </div>
@@ -97,11 +97,15 @@
    <br>
   
   <%= f.text_field :location, :class => "controls", :id =>"pac-input", :placeholder => "Enter a Location" %>
+ 
 
 
     <div class="gmap" data-lat = '<%= @opportunity.latitude %>' data-long = '<%= @opportunity.longitude %>'>
       <div id="map-canvas-new"></div>
   	</div>
+
+
+    
     <br><br>
 
     <div><%= f.label "Start & End dates", :class => "section-header" %><span class="required">*</span>

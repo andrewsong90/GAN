@@ -98,7 +98,9 @@ class OpportunitiesController < ApplicationController
 	def new
 		@opportunity=Opportunity.new
 		@opportunity.uploads.build
-		@opportunity.sponsors.build
+		
+		# @opportunity.sponsors.build
+		
 		build_unpicked_skills
 
 		respond_to do |format|
@@ -122,6 +124,7 @@ class OpportunitiesController < ApplicationController
 			flash[:notice] = "Opportunity Created!"
 			redirect_to opportunity_path(@opportunity)
 		else
+			build_unpicked_skills
 			render 'new'
 		end
 	end	
@@ -148,7 +151,19 @@ class OpportunitiesController < ApplicationController
 			flash[:notice]="Opportunity successfully updated"
 			redirect_to opportunity_path(@opportunity)
 		else
+			build_unpicked_skills
 			render "edit"
+		end
+	end
+
+	def destroy
+		@opportunity=Opportunity.find(params[:id])
+		if @opportunity.destroy
+			flash[:notice]="Opportunity id: #{params[:id]} has successfully been deleted"
+			redirect_to opportunities_path
+		else
+			flash[:error]="The opportunity could not be deleted"
+			redirect_to edit_opportunity_path(@opportunity)
 		end
 	end
 
@@ -184,6 +199,7 @@ class OpportunitiesController < ApplicationController
 		session[:return_to] = request.url
 	end
 
+	#Renders checkboxes for skills
 	def build_unpicked_skills
 		(Skill.all-@opportunity.skills).each do |skill|
 			@opportunity.opportunity_skills.build(:skill => skill)

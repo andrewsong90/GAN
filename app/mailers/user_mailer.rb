@@ -11,16 +11,20 @@ class UserMailer < Devise::Mailer #ActionMailer::Base
 	   mail(to: @user.email, subject:"[GAN] Welcome to the GAN - Gann Alumni Networks!!!")	
   end
 
-  def contact_email_to_user(contact)
+  def contact_email_to_user(contact, category)
     attachments.inline['gann_banner.png']=File.read("#{Rails.root.to_s}/app/assets/images/gann_banner.png")
     @contact=contact
+    @category=category
+    logger.debug("Inside #{@category}")
     mail(to: @contact.from_email, subject:"[GAN] #{@contact.title}")
   end
 
-  def contact_email_to_admin(contact)
+  def contact_email_to_admin(contact, category)
     attachments.inline['gann_banner.png']=File.read("#{Rails.root.to_s}/app/assets/images/gann_banner.png")
     @contact=contact
-    mail(to: "alumni@gannacademy.org", subject:"[GAN] #{@contact.title}")
+    @category=category
+    logger.debug("Inside2 #{@category}")
+    mail(to: "andrewsong90@gmail.com", subject:"[GAN contact] #{@contact.title}")
   end
 
   def invite_message(user, token, title, content)

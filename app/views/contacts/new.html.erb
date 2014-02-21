@@ -26,12 +26,19 @@
 
 	<br><br>
 
+	<span class="section-header">Category</span><span class="required">*</span><br>
+	<%= select_tag :category, options_for_select(@categories) %>
+
+	<br><br>
+
 	<span class="section-header">Subject</span><span class="required">*</span><br>
 	<%= f.text_field :title %>
 
 	<br><br>
 
 	<span class="section-header">Description</span><span class="required">*</span><br>
+	<span>Please tell us more what you wanted to contact about</span>
+	<br><br>
 	<%= f.text_area :content, :class =>"offset1 span7", :rows => "6" %>
 
 	<br><br>

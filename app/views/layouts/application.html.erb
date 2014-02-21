@@ -38,8 +38,10 @@
 
 							<nav class="navigation pull-right navbar-hcenter neatfont" style="font-size: 18px;">
 								Welcome, <%= current_user.full_name %>&nbsp;&nbsp;&nbsp;&nbsp;
-								<% if !friend_signed_in? %>
-									<a class="redfont" href="<%= opportunities_path%>"><i class="fa fa-home"></i>&nbsp;&nbsp;Opportunities&nbsp;&nbsp;</a>
+								<% if friend_signed_in? %>
+									<a class="redfont" href="<%= home_path%>"><i class="fa fa-home"></i>&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+								<% else %>
+									<a class="redfont" href="<%= opportunities_path %>"><i class="fa fa-home"></i>&nbsp;&nbsp;Opportunities&nbsp;&nbsp;</a>
 								<% end %>
 								
 								<% if !admin_signed_in? %>

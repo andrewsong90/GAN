@@ -6,8 +6,10 @@
 	<%= @user.full_name%>
 	<% if @user.is_alum? %>
 		<span class="label label-primary">Alum</span>	
+	<% elsif @user.is_admin? %>
+		<span class="label label-info">Admin</span>	
 	<% else %>
-		<span class="label label-info">Friend</span>	
+		<span class="label label-info">Friend</span>
 	<% end %>
 </h3>
 
@@ -37,31 +39,10 @@
 	<span class="section-header">Invitation limit:</span>&nbsp;
 	<%= @user.invitation_limit %><br><br>
 
-<!-- TODO: Allow access to uploads? -->
-<% if false %>
-	<% if @uploads.length != 0 %>
-		<span class="section-header"><i class="fa fa-book"></i>&nbsp;Resume</span><br>
-		<% @uploads.each do |u| %>
-			<div>
-				<span class="indent"/>
-				<i class="fa fa-check"></i>&nbsp;<%= u.avatar_file_name%> &nbsp;
-
-				<%= link_to user_attachment_download_path(:user_id=>@user.id, :id => u.id, :type => "display"), :class =>"btn btn-success", :target =>"_blank" do %>
-					<i class="fa fa-desktop"></i>&nbsp;View
-				<% end %>
-				<%= link_to user_attachment_download_path(:user_id=>@user.id, :id => u.id, :type => "download"), :class =>"btn btn-primary", :target =>"_blank" do %>
-					<i class="fa fa-download"></i>&nbsp;Download
-				<% end %>
-
-			</div>
-			<br>
-		<% end %>
-	<% end %>
-<% end %>
 <br>
 
 <span class="section-header"><i class="fa fa-edit"></i></span>&nbsp;&nbsp;
-last updated at:  <%= @user.updated_at.strftime('%b. %e, %Y') %><br><br>
+Last updated on:  <%= @user.updated_at.strftime('%b. %e, %Y') %><br><br>
 
 
 

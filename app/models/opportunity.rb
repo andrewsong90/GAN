@@ -5,7 +5,7 @@ class Opportunity < ActiveRecord::Base
 	accepts_nested_attributes_for :opportunity_skills, :allow_destroy => true
 
 	# Association with opportunity timea
-	has_many :opportunity_times
+	has_many :opportunity_times, dependent: :destroy
 
 	belongs_to :user
 	has_many :applications, dependent: :destroy
