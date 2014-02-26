@@ -35,7 +35,7 @@ role :app, "web430.webfaction.com"                          # This may be the sa
 role :db,  "web430.webfaction.com", :primary => true # This is where Rails migrations will run
 
 set :user, "gannacademy"
-set :scm_username, "helpdesk@gannacademy.org"
+set :scm_username, "gannacademy"
 set :use_sudo, false
 default_run_options[:pty] = true
 
