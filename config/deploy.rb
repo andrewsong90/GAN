@@ -4,7 +4,8 @@ require 'delayed/recipes'
 
 
 set :application, "gann"
-set :repository,  "https://github.com/gannacademy/GANProject.git"
+set :repository,  "https://github.com/andrewsong90/GAN.git"
+# set :repository,  "https://github.com/gannacademy/GANProject.git"
 set :branch, "master"
 
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
@@ -35,7 +36,7 @@ role :app, "web430.webfaction.com"                          # This may be the sa
 role :db,  "web430.webfaction.com", :primary => true # This is where Rails migrations will run
 
 set :user, "gannacademy"
-set :scm_username, "gannacademy"
+set :scm_username, "andrewsong90"
 set :use_sudo, false
 default_run_options[:pty] = true
 
