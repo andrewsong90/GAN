@@ -6,7 +6,7 @@
 <% content_for :title, "Edit Opportunity" %>
 
 <div class="container">
-	<h2>Edit Opportunity <small>( id: <%=@opportunity.id %> )</small></h2>
+	<h2>Edit Opportunity <small>( ID: <%=@opportunity.id %> )</small></h2>
 	<hr class="style-one"></hr>
 
 	<%= form_for @opportunity, :html => { :multipart => true } do |f| %>
@@ -22,8 +22,10 @@
 	        </div>
 	     <% end %>
 
+	    <span class="required">*</span>&nbsp;These fields are required<br><br>
 		
 		<div><span class="section-header">Status</span><br>
+			<span>Mark the opportunity as Active to display it. Mark the opportunity as Inactive to maintain it in the database but not display it.</span><br>
 			<span>If you want to delete the opportunity, please contact administrator, indicating the id of the opportunity.</span>
 			<br><br>
 			<span class="indent"/>

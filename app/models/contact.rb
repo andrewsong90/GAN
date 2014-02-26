@@ -6,8 +6,11 @@ class Contact < ActiveRecord::Base
 
 	def self.categories
 		categories=Array.new
-		categories.append('Feedback about the platform')
+		categories.append('Feedback about the site')
+		categories.append('Difficulties loggin in')
+		categories.append('Difficulties navigating within the site')
 		categories.append('Inviting others')
+		categories.append('Other')
 		categories
 	end
 end

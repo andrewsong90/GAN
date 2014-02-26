@@ -21,7 +21,7 @@
 	        </div>
 	     <% end %>
 
-	    <!-- Rendering actual template for new opportunity -->
+	    <span class="required">*</span>&nbsp;These fields are required<br><br>
 		<%= render "form", :f => f %>
 		<br>
 		<%= f.hidden_field :active, :value => true %>

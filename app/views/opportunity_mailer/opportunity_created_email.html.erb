@@ -1,3 +1,6 @@
+<%= image_tag attachments['gann_banner.png'].url %>
+<br>
+
 <span class="section-header">
 	Dear <%= @opportunity.user.fname %>,
 
@@ -6,7 +9,7 @@
 
 </span>
 <br>
-<h4><%= @opportunity.title %></h4>
+<h3><%= @opportunity.title %></h3>
 <br>
 <p>
 	<%= @opportunity.description.html_safe %>

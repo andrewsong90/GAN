@@ -4,7 +4,7 @@ require 'delayed/recipes'
 
 
 set :application, "gann"
-set :repository,  "https://github.com/andrewsong90/GAN.git"
+set :repository,  "https://github.com/gannacademy/GANProject.git"
 set :branch, "master"
 
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names

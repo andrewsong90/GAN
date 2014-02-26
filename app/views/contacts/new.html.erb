@@ -21,10 +21,19 @@
       <% end %>
 	 <span class="required">*</span>&nbsp;These fields are required<br>
 	<br>
-	<span class="section-header">Your Email</span><span class="required">*</span><br>
-	<%= f.text_field :from_email %>
 
-	<br><br>
+	<% if !user_signed_in? %>
+
+		<span class="section-header">Your Name</span><span class="required">*</span><br>
+		<%= f.text_field :name %>	
+
+		<br><br>
+
+		<span class="section-header">Your Email</span><span class="required">*</span><br>
+		<%= f.text_field :from_email %>
+
+		<br><br>
+	<% end %>
 
 	<span class="section-header">Category</span><span class="required">*</span><br>
 	<%= select_tag :category, options_for_select(@categories) %>

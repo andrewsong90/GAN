@@ -79,7 +79,7 @@
 	<div class="align-left">
 
 	<div class="left_container">
-		<p class="section-header"><i class="fa fa-check"></i>&nbsp;&nbsp;id</p>&nbsp; <%= @opportunity.id %>
+		<p class="section-header">ID</p>&nbsp; <%= @opportunity.id %>
 		<br>
 		<p class="section-header"><i class="fa fa-tasks"></i>&nbsp;&nbsp;Description</p>
 		<div><span class="indent"/><%= @opportunity.description.html_safe %></div>
@@ -132,7 +132,7 @@
 
 		<br>
 
-		<p class="section-header"><i class="fa fa-book"></i>&nbsp;&nbsp;Functions and Domains</p><br>
+		<p class="section-header"><i class="fa fa-book"></i>&nbsp;&nbsp;Professional Functions and Domains</p><br>
 
 		<% @skills.each do |skill| %>
 			<div><span class="indent"/><i class="fa fa-check"></i>&nbsp;<%= skill.skill %></div>

@@ -1,7 +1,4 @@
-   <span class="required">*</span>&nbsp;These fields are required<br><br>
-
-
-   <div>    
+      <div>    
       <div class="offset1 align-left">
         <div><%= f.label "Company logo", :class => "section-header" %><br>
           <% if !f.object.upload_file_name %>
@@ -83,6 +80,7 @@
       You may choose multiple options.</span>
     <br>
     <br>
+    
     <% @counter = 0 %>
     <table>
       <%= f.fields_for :opportunity_skills do |ff| %>

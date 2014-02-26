@@ -6,12 +6,16 @@ class ContactsController < ApplicationController
 	end
 
 	def create
+
 		@contact=Contact.new(permitted_params)
+
+		if user_signed_in?
+			@contact.name=current_user.full_name
+			@contact.from_email=current_user.email
+		end
+		
 		@category=params[:category]
-		logger.debug("Coooontact #{@category}")
 		if verify_recaptcha(:model => @contact, :message => "Captcha error!") && @contact.save
-			logger.debug(@category)
-			logger.debug(@contact)
 			UserMailer.delay.contact_email_to_user(@contact, @category)
 			UserMailer.delay.contact_email_to_admin(@contact, @category)
 			flash[:notice] = "The admininstrator will contact you shortly."
@@ -24,7 +28,7 @@ class ContactsController < ApplicationController
 	private
 
 	def permitted_params
-		params.require(:contact).permit(:title,:from_email,:content)
+		params.require(:contact).permit(:title,:from_email,:content,:name)
 	end
 
 	def after_contact_path

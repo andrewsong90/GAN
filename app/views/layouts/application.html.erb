@@ -30,7 +30,6 @@
 						<a href=<%= home_path %> class="brand">
 							Gann Alumni Network
 						</a>
-						<!-- <div class="nav-collapse"> -->
 							<ul class="nav">
 								<li><a href='<%= about_path %>' class="whitefont neatfont">About</a></li>
 								<li><a href="<%= new_contact_path %>" class="whitefont neatfont">Contact</a></li>
@@ -46,8 +45,9 @@
 								
 								<% if !admin_signed_in? %>
 									<a class="redfont" href="<%= my_opportunities_path %>"><i class="fa fa-briefcase"></i>&nbsp;&nbsp;My Opportunities&nbsp;&nbsp;</a>
-									<a class="redfont" href="<%= user_path(:id => current_user.id) %>"><i class="fa fa-user"></i>&nbsp;&nbsp;My Account&nbsp;&nbsp;</a>
 								<% end %>
+									<a class="redfont" href="<%= user_path(:id => current_user.id) %>"><i class="fa fa-user"></i>&nbsp;&nbsp;My Account&nbsp;&nbsp;</a>
+								
 								
 								<%= link_to destroy_user_session_path, :class => "redfont", method: :delete do %>
 									<i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout&nbsp; 

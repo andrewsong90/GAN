@@ -39,7 +39,6 @@ class OpportunitiesController < ApplicationController
 				:type => upload.avatar_content_type,
 				:disposition => mode # To show the pdf file in the page, change it to "inline"
 		end				
-
 	end
 
 	#This is the main page that all of the users see after login.
@@ -88,11 +87,21 @@ class OpportunitiesController < ApplicationController
 
 	# Show opportunity
 	def show
-		@opportunity = Opportunity.find(params[:id])
-		@uploads = @opportunity.uploads.all.to_a
-		@sponsors = @opportunity.sponsors.all.to_a
-		@skills=@opportunity.skills
-		@time=@opportunity.opportunity_times
+		if (@opportunity = Opportunity.find(params[:id])).is_active?
+			@uploads = @opportunity.uploads.all.to_a
+			@sponsors = @opportunity.sponsors.all.to_a
+			@skills=@opportunity.skills
+			@time=@opportunity.opportunity_times
+
+			respond_to do |format|
+				format.html
+			end
+		else
+			flash[:error] = "The Opportunity is currently inactive"
+			redirect_to opportunities_path
+		end
+		
+		
 	end
 
 	def new
@@ -201,10 +210,11 @@ class OpportunitiesController < ApplicationController
 
 	#Renders checkboxes for skills
 	def build_unpicked_skills
-		(Skill.all-@opportunity.skills).each do |skill|
+		sorted=Skill.sort_alpha(Skill.all-@opportunity.skills)
+		sorted.each do |skill|
 			@opportunity.opportunity_skills.build(:skill => skill)
 		end
-		@opportunity.opportunity_skills.sort_by! {|os| os.skill.id }
+		# @opportunity.opportunity_skills.sort_by! {|os| os.skill.id }
 	end
 
 	#Strong parameters for opportunities

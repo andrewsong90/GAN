@@ -13,8 +13,10 @@
 		<h2 style="margin-top: 0px;">
 			<small>
 				<%= @user.title %> 
-				<% if !@user.company.empty? %>
-					at <%= @user.company %>
+				<% if @user.company %>
+					<% if !@user.company.empty? %>
+						at <%= @user.company %>
+					<% end %>
 				<% end %>
 			</small>
 		</h2>
